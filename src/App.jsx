@@ -1,9 +1,3 @@
-import React from 'react'
+const App = () => <h1>Gist List JS-16 Day</h1>
 
-export default function App() {
-  return (
-    <div>
-      <h1>Gift-List JS-16 Day</h1>
-    </div>
-  )
-}
+export default App
