@@ -1,3 +1,9 @@
-const App = () => <h1>Gist List JS-16 Day</h1>
+import Input from './components/UI/InputField'
+
+const App = () => (
+   <>
+      <Input />
+   </>
+)
 
 export default App
