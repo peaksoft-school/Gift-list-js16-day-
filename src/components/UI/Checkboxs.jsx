@@ -1,24 +1,21 @@
-import { Box, styled } from '@mui/material'
-
 import Checkbox from '@mui/material/Checkbox'
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
-
-export default function Checkboxs({children}) {
+export default function Checkboxs({
+   label,
+   onChange,
+   control,
+   disabled,
+   checked,
+}) {
    return (
-      <Box>
-         {children}
-         <Checkbox />
-         <Checkbox color="secondary" />
-         <Checkbox {...label} defaultChecked color="secondary" />
-         <Checkbox />
-      </Box>
+      <>
+         <Checkbox
+            label={label}
+            onChange={onChange}
+            control={control}
+            disabled={disabled}
+            checked={checked}
+         />
+      </>
    )
 }
-
-// const CustomCheckbox = styled(Checkbox)({
-
-//       borderRadius: '5px',
-//       border: '2px solid red',
-
-// })
