@@ -1,3 +1,12 @@
-const App = () => <h1>Gist List JS-16 Day</h1>
+import Buttons from "./components/UI/Buttons"
+
+
+const App = () => {
+  return (
+    <div>
+        <Buttons/>
+    </div>
+  )
+}
 
 export default App
