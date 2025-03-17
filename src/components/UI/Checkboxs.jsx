@@ -6,6 +6,9 @@ export default function Checkboxs({
    control,
    disabled,
    checked,
+   color,
+   size,
+   ...props
 }) {
    return (
       <>
@@ -15,6 +18,9 @@ export default function Checkboxs({
             control={control}
             disabled={disabled}
             checked={checked}
+            color={color}
+            size={size}
+            {...props}
          />
       </>
    )
