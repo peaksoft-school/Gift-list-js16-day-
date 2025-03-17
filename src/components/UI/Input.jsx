@@ -10,6 +10,7 @@ const Input = ({
    error,
    disabled,
    rest,
+   variant,
 }) => {
    return (
       <div>
@@ -23,6 +24,8 @@ const Input = ({
             error={error}
             disabled={disabled}
             rest={rest}
+            variant={variant}
+            sx={{ width: '250px' }}
          />
       </div>
    )
