@@ -1,12 +1,18 @@
-import ThemesSetup from "./components/UI/ThemesSetup"
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import { Button, Typography, useTheme } from '@mui/material'
 
 const App = () => {
-  return (
-    <div>
-        <ThemesSetup/>
-    </div>
-  )
+   const theme = useTheme()
+
+   return (
+      <div style={{ padding: '20px' }}>
+         <Typography variant="h1" style={{ color: theme.palette.linear.main }}>
+            Hello Themes!
+         </Typography>
+
+         <AccountCircleIcon />
+      </div>
+   )
 }
 
 export default App
