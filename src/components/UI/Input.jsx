@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material'
+import { styled, TextField } from '@mui/material'
 
 const Input = ({
    type,
@@ -14,7 +14,8 @@ const Input = ({
 }) => {
    return (
       <div>
-         <TextField
+         <label for="">Название праздника</label>
+         <StyledTextField
             label={label}
             type={type}
             placeholder={placeholder}
@@ -25,10 +26,29 @@ const Input = ({
             disabled={disabled}
             rest={rest}
             variant={variant}
-            sx={{ width: '250px' }}
          />
       </div>
    )
 }
 
 export default Input
+
+const StyledTextField = styled(TextField)((props) => ({
+   width: '250px',
+   margin: '10px ',
+
+   '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+         borderColor: props.error ? 'red' : 'gray',
+      },
+      '&:hover fieldset': {
+         borderColor: props.error ? 'darkred' : 'black',
+      },
+      '&.Mui-focused fieldset': {
+         borderColor: props.error ? 'red' : 'blue',
+      },
+   },
+   '& .MuiInputLabel-root': {
+      color: props.error ? 'red' : 'inherit',
+   },
+}))
