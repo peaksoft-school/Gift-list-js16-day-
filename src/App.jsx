@@ -1,18 +1,3 @@
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import {  Typography, useTheme } from '@mui/material'
-
-const App = () => {
-   const theme = useTheme()
-
-   return (
-      <div style={{ padding: '20px' }}>
-         <Typography variant="h1" style={{ color: theme.palette.secondary.main }}>
-            Hello Themes!
-         </Typography>
-
-         <AccountCircleIcon />
-      </div>
-   )
-}
+const App = () => <h1>Gift List JS-16</h1>
 
 export default App
