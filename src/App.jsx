@@ -1,5 +1,5 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import { Button, Typography, useTheme } from '@mui/material'
+import {  Typography, useTheme } from '@mui/material'
 
 const App = () => {
    const theme = useTheme()
