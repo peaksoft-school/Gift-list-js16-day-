@@ -2,7 +2,7 @@ import SideBar from './components/UI/SideBar'
 
 const App = () => (
    <div>
-      <SideBar />
+      <SideBar role="USER" />
    </div>
 )
 

@@ -1,4 +1,4 @@
-import { Button,  styled } from '@mui/material'
+import { Button, styled } from '@mui/material'
 import React from 'react'
 import UsersIcon from '../../assets/icon/users.svg'
 import TapeIcon from '../../assets/icon/tape.svg'
@@ -6,10 +6,10 @@ import ListIcon from '../../assets/icon/list.svg'
 import GiftIcon from '../../assets/icon/gifts.svg'
 import HolydaysIcon from '../../assets/icon/holidays.svg'
 import UsersLikeIcon from '../../assets/icon/userslike.svg'
-import UserSideBar from './users/UserSideBar'
+// import UserSideBar from './users/UserSideBar'
 // import UsersIcon from '../../assets/icon/users.svg'
 
-const user = {
+const roles = {
    users: [
       { title: 'Лента', icon: TapeIcon },
       { title: 'Друзья', icon: UsersIcon },
@@ -26,8 +26,29 @@ const user = {
    ],
 }
 
-const SideBar = () => {
-   return <div></div>
+const SideBar = ({ role }) => {
+   return (
+      <Mainh1>
+         <h1>Gift - List</h1>
+         {role === 'USER'
+            ? roles.users.map(({ title, icon }) => {
+                 return (
+                    <Button>
+                       <img src={icon} alt={title} />
+                       <span>{title}</span>
+                    </Button>
+                 )
+              })
+            : roles.admin.map(({ title, icon }) => {
+                 return (
+                    <Button>
+                       <img src={icon} alt={title} />
+                       <span>{title}</span>
+                    </Button>
+                 )
+              })}
+      </Mainh1>
+   )
 }
 const Mainh1 = styled('div')({
    background:
@@ -35,7 +56,7 @@ const Mainh1 = styled('div')({
 
    color: '#fff',
    width: '284px',
-   height: '607px',
+   height: '100vh',
    '& .MuiButtonBase-root': {
       textTransform: 'lowercase',
    },
