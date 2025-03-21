@@ -26,7 +26,7 @@ const InputSearch = () => {
                   padding: '6px 12px',
                   color: 'gray',
                   fontWeight: 300,
-                  width: '821px',
+                  width: '381px',
                },
             }}
             style={{
@@ -68,17 +68,17 @@ const MainBox = styled(Box)({
    maxWidth: '1300px',
 
    '.MuiInputBase-input-MuiInput-input': {
-      '.MuiBox-root:focus': {
-         border: '1px solid #f00',
+      focus: {
+         border: '1px solid #8d0782',
       },
    },
 })
 
 const Selecting = styled(Select)({
-   minWidth: 140,
+   minWidth: 120,
    background: '#fff',
    borderRadius: '8px',
-   padding: '6px 12px',
+   padding: '6px 10px',
    color: 'gray',
    fontWeight: '100px',
 
