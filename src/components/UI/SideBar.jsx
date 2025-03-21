@@ -1,4 +1,4 @@
-import { Button, colors, styled } from '@mui/material'
+import { Button,  styled } from '@mui/material'
 import React from 'react'
 import UsersIcon from '../../assets/icon/users.svg'
 import TapeIcon from '../../assets/icon/tape.svg'
@@ -6,43 +6,28 @@ import ListIcon from '../../assets/icon/list.svg'
 import GiftIcon from '../../assets/icon/gifts.svg'
 import HolydaysIcon from '../../assets/icon/holidays.svg'
 import UsersLikeIcon from '../../assets/icon/userslike.svg'
+import UserSideBar from './users/UserSideBar'
+// import UsersIcon from '../../assets/icon/users.svg'
+
+const user = {
+   users: [
+      { title: 'Лента', icon: TapeIcon },
+      { title: 'Друзья', icon: UsersIcon },
+      { title: 'Список желании ', icon: ListIcon },
+      { title: 'Забронирование', icon: GiftIcon },
+      { title: 'Мои праздники', icon: HolydaysIcon },
+      { title: 'Благовторительность', icon: UsersLikeIcon },
+   ],
+   admin: [
+      { title: 'Пользователи', icon: UsersIcon },
+      { title: 'Благотворительность', icon: UsersIcon },
+      { title: 'Жалобы ', icon: UsersIcon },
+      { title: 'Рассылка', icon: UsersIcon },
+   ],
+}
 
 const SideBar = () => {
-   return (
-      <div>
-         <Mainh1>
-            <h1>GIFT LIST</h1>
-            <div>
-               <Button>
-                  {' '}
-                  <img src={TapeIcon} alt="" />
-                  Лента
-               </Button>
-               <Button>
-                  <img src={UsersIcon} alt="" /> Друзья
-               </Button>
-               <Button>
-                  <img src={ListIcon} alt="" />
-                  Список желаний
-               </Button>
-               <Button>
-                  {' '}
-                  <img src={GiftIcon} alt="" />
-                  Забронирование
-               </Button>
-               <Button>
-                  {' '}
-                  <img src={HolydaysIcon} alt="" />
-                  Мои праздники
-               </Button>
-               <Button>
-                  <img src={UsersLikeIcon} alt="" />
-                  Благотворительность
-               </Button>
-            </div>
-         </Mainh1>
-      </div>
-   )
+   return <div></div>
 }
 const Mainh1 = styled('div')({
    background:
