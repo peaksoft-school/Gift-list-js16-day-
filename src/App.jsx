@@ -6,7 +6,7 @@ const App = () => {
 
    return (
       <div style={{ padding: '20px' }}>
-         <Typography variant="h1" style={{ color: theme.palette.linear.main }}>
+         <Typography variant="h1" style={{ color: theme.palette.secondary.main }}>
             Hello Themes!
          </Typography>
 
