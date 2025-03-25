@@ -1,12 +1,3 @@
-import InputSearch from './components/UI/InputSearch'
-
-const App = () => (
-   <h1>
-      Gist List JS-16 Day
-      <div>
-         <InputSearch />
-      </div>
-   </h1>
-)
+const App = () => <h1>Gift List JS-16</h1>
 
 export default App
