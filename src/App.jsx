@@ -1,9 +1,3 @@
-import SideBar from './components/UI/SideBar'
-
-const App = () => (
-   <div>
-      <SideBar role="USER" />
-   </div>
-)
+const App = () => <h1>Gift List JS-16</h1>
 
 export default App
