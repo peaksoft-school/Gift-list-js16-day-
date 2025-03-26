@@ -4,7 +4,7 @@ import { Button as MuiButton } from '@mui/material'
 const Button = ({
    children,
    onClick,
-   variant,
+   variant = 'contained',
    disabled,
    type = 'submit',
    ...rest
@@ -14,7 +14,7 @@ const Button = ({
          onClick={onClick}
          type={type}
          disabled={disabled}
-         variant="contained"
+         variant={variant}
          {...rest}
       >
          {children}
@@ -26,7 +26,7 @@ export default Button
 
 const StyledButton = styled(MuiButton)(({ variant }) => {
    const buttonStyles = {
-      '&MuiButton-root': {
+      '&.MuiButton-root': {
          borderRadius: '10px',
          height: '53px',
          padding: '14px 32px',
@@ -35,9 +35,9 @@ const StyledButton = styled(MuiButton)(({ variant }) => {
       },
    }
 
-   if (variant === "contained.error") {
-      buttonStyles['&MuiButton-root'] = {
-         ...buttonStyles['&MuiButton-root'],
+   if (variant === 'contained') {
+      buttonStyles['&.MuiButton-root'] = {
+         ...buttonStyles['&.MuiButton-root'],
 
          backgroundColor: '#F44336',
          color: '#fff',
@@ -53,11 +53,12 @@ const StyledButton = styled(MuiButton)(({ variant }) => {
 
          '&.Mui-disabled': {
             backgroundColor: '#BDBDBD',
+            color:"white",
          },
       }
    } else if (variant === 'warning') {
-      buttonStyles['&MuiButton-root'] = {
-         ...buttonStyles['&MuiButton-root'],
+      buttonStyles['&.MuiButton-root'] = {
+         ...buttonStyles['&.MuiButton-root'],
 
          backgroundColor: '#673AB7',
 
@@ -69,29 +70,30 @@ const StyledButton = styled(MuiButton)(({ variant }) => {
             backgroundColor: '#7e4cd4',
          },
          '&.Mui-disabled': {
-            backgroundColor: '#B39DDB',
-            color: '#ffffff99',
+            backgroundColor: '#7a52c5e0',
+            color: '#fff',
          },
       }
    } else if (variant === 'outlined') {
-      buttonStyles['&MuiButton-root'] = {
-         ...buttonStyles['&MuiButton-root'],
+      buttonStyles['&.MuiButton-root'] = {
+         ...buttonStyles['&.MuiButton-root'],
 
-         backgroundColor: '#E0E0E0',
-         color: '#9E9E9E',
+         backgroundColor: '#8639B5',
+         color: 'white',
 
          '&:hover': {
             backgroundColor: '#5E35B1',
-            color: '#fff',
+            
          },
          '&:active': {
             backgroundColor: '#7e4cd4',
          },
          '&.Mui-disabled': {
-            backgroundColor: '#ffffffb1',
-            color: '#ffffff93',
+            backgroundColor: '#1c1b1f38',
+           color: "white"
          },
       }
-      return buttonStyles;
    }
+
+   return buttonStyles
 })
