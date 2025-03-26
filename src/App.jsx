@@ -1,26 +1,13 @@
 import Button from './components/UI/Button'
+import { Add } from '@mui/icons-material'
+
+
 
 const App = () => {
    return (
-      <div
-         style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '10px',
-            marginTop: '20px',
-         }}
-      >
-         <Button name="ВОЙТИ" variant="primary">
-            Войти
-         </Button>
-
-         <Button name="+ Добавить подарок" variant="secondary">
-            +Добавть подарок
-         </Button>
-
-         <Button name="ОТМЕНА" variant="disabled">
-            Отмена
+      <div>
+         <Button variant="warning"  color="error" startIcon={<Add />}>
+            Добавить подарок
          </Button>
       </div>
    )
