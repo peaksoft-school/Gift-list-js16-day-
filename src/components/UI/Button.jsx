@@ -20,9 +20,9 @@ const Button = ({
          {children}
       </StyledButton>
    )
-}
+};
 
-export default Button
+export default Button;
 
 const StyledButton = styled(MuiButton)(({ variant }) => {
    const buttonStyles = {
@@ -33,7 +33,7 @@ const StyledButton = styled(MuiButton)(({ variant }) => {
          marginTop: '20px',
          fontSize: '18px',
       },
-   }
+   };
 
    if (variant === 'contained') {
       buttonStyles['&.MuiButton-root'] = {
@@ -53,7 +53,7 @@ const StyledButton = styled(MuiButton)(({ variant }) => {
 
          '&.Mui-disabled': {
             backgroundColor: '#BDBDBD',
-            color:"white",
+            color: 'white',
          },
       }
    } else if (variant === 'warning') {
@@ -87,12 +87,11 @@ const StyledButton = styled(MuiButton)(({ variant }) => {
 
          '&:hover': {
             backgroundColor: '#5E35B1',
-            
          },
          '&:active': {
             backgroundColor: '#7e4cd4',
          },
-        '&.Mui-disabled': {
+         '&.Mui-disabled': {
             backgroundColor: '#1C1B1F1F',
             color: 'white',
             border: 'none',
@@ -101,4 +100,4 @@ const StyledButton = styled(MuiButton)(({ variant }) => {
    }
 
    return buttonStyles
-})
+});
