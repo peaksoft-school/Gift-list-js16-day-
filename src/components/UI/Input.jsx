@@ -1,11 +1,13 @@
 import {
    FormHelperText,
+   InputAdornment,
    InputLabel,
    TextField,
    Typography,
    styled,
 } from '@mui/material'
 import { forwardRef } from 'react'
+import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded'
 
 const Input = forwardRef(
    (
@@ -37,6 +39,14 @@ const Input = forwardRef(
                name={name}
                errorMessage={errorMessage}
                ref={ref}
+               fullWidth
+               props={{
+                  endAdornment: error ? (
+                     <InputAdornment position="end">
+                        <ErrorOutlineRoundedIcon sx={{ color: 'red' }} />
+                     </InputAdornment>
+                  ) : null,
+               }}
                {...rest}
             />
 
@@ -67,7 +77,7 @@ const StyledInput = styled(TextField)(() => ({
       borderRadius: '12px',
       padding: '0px 15px',
       width: '257px',
-      height: '46px',
+      height: '44px',
 
       '& fieldset': {
          margin: '8px 0',
