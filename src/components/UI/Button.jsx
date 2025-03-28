@@ -60,18 +60,22 @@ const StyledButton = styled(MuiButton)(({ variant }) => {
       buttonStyles['&.MuiButton-root'] = {
          ...buttonStyles['&.MuiButton-root'],
 
-         backgroundColor: '#673AB7',
+         backgroundColor: 'white',
+         border: '1px solid #8D949E',
+         color: '#8D949E',
 
          '&:hover': {
             backgroundColor: '#5E35B1',
             color: '#fff',
+            borderColor: '#5E35B1',
          },
          '&:active': {
-            backgroundColor: '#7e4cd4',
+            backgroundColor: '#AB62D8',
+            borderColor: '#AB62D8',
          },
          '&.Mui-disabled': {
-            backgroundColor: '#7a52c5e0',
-            color: '#fff',
+            color: '#1C1B1F1F',
+            borderColor: '#1C1B1F1F',
          },
       }
    } else if (variant === 'outlined') {
@@ -88,9 +92,10 @@ const StyledButton = styled(MuiButton)(({ variant }) => {
          '&:active': {
             backgroundColor: '#7e4cd4',
          },
-         '&.Mui-disabled': {
-            backgroundColor: '#1c1b1f38',
-           color: "white"
+        '&.Mui-disabled': {
+            backgroundColor: '#1C1B1F1F',
+            color: 'white',
+            border: 'none',
          },
       }
    }
