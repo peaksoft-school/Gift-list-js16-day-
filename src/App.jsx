@@ -1,16 +1,3 @@
-import Button from './components/UI/Button'
-import { Add } from '@mui/icons-material'
-
-
-
-const App = () => {
-   return (
-      <div>
-         <Button variant='contained'  startIcon={<Add />}>
-            Добавить подарок
-         </Button>
-      </div>
-   )
-}
+const App = () => <h1>Gift List JS-16</h1>
 
 export default App
