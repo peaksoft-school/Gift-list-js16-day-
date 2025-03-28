@@ -14,12 +14,11 @@ const theme = createTheme({
       },
 
       linear: {
-         main:  rgba(3,78,156,1),
-         red:  rgba(224,70,72,0.938340301941089),
-         green:  rgba(37,187,78,0.8851190134256828)
- 
+         main: rgba(3, 78, 156, 1),
+         red: rgba(224, 70, 72, 0.938340301941089),
+         green: rgba(37, 187, 78, 0.8851190134256828),
       },
    },
 })
 
-export default theme;
+export default theme
