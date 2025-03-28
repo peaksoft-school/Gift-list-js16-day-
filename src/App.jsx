@@ -1,3 +1,15 @@
-const App = () => <h1>Gift List JS-16</h1>
+import React from 'react'
+import Header from './components/Header'
+import MeetBalls from './components/UI/MeetBalls'
+
+const App = () => {
+   return (
+      <div>
+         <Header />
+         <MeetBalls/>
+
+      </div>
+   )
+}
 
 export default App
