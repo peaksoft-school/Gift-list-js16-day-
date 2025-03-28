@@ -71,6 +71,7 @@ const StyledInputLabel = styled(InputLabel)(() => ({
    fontWeight: '400',
    lineHeight: '100%',
 }))
+
 const StyledInput = styled(TextField)(() => ({
    '& .MuiOutlinedInput-root': {
       fontSize: '12px',
@@ -91,6 +92,7 @@ const StyledInput = styled(TextField)(() => ({
          borderColor: '#8639B5',
       },
    },
+   
    '& .MuiOutlinedInput-root.Mui-focused input': {
       caretColor: '#8639B5',
    },
