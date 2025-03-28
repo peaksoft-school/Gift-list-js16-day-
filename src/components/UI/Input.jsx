@@ -1,54 +1,96 @@
-import { styled, TextField } from '@mui/material'
+import {
+   FormHelperText,
+   InputLabel,
+   TextField,
+   Typography,
+   styled,
+} from '@mui/material'
+import { forwardRef } from 'react'
 
-const Input = ({
-   type,
-   placeholder,
-   onChange,
-   props,
-   value,
-   label,
-   error,
-   disabled,
-   rest,
-   variant,
-}) => {
-   return (
-      <div>
-         <label for="">Название праздника</label>
-         <StyledTextField
-            label={label}
-            type={type}
-            placeholder={placeholder}
-            onChange={onChange}
-            props={props}
-            value={value}
-            error={error}
-            disabled={disabled}
-            rest={rest}
-            variant={variant}
-         />
-      </div>
-   )
-}
+const Input = forwardRef(
+   (
+      {
+         type,
+         placeholder,
+         handleChange,
+         value,
+         labelText,
+         name,
+         error,
+         errorText,
+         inputProps,
+         errorMessage,
+         ...rest
+      },
+      ref
+   ) => {
+      return (
+         <>
+            <StyledInputLabel>{labelText}</StyledInputLabel>
 
+            <StyledInput
+               type={type}
+               value={value}
+               onChange={handleChange}
+               placeholder={placeholder}
+               error={Boolean(error)}
+               name={name}
+               errorMessage={errorMessage}
+               ref={ref}
+               {...rest}
+            />
+
+            {error && (
+               <Typography variant="caption" color="error">
+                  {errorText}
+               </Typography>
+            )}
+            {error && (
+               <FormHelperText sx={{ color: 'red', ml: '200px' }}>
+                  {errorMessage}
+               </FormHelperText>
+            )}
+         </>
+      )
+   }
+)
 export default Input
 
-const StyledTextField = styled(TextField)((props) => ({
-   width: '250px',
-   margin: '10px ',
-
+const StyledInputLabel = styled(InputLabel)(() => ({
+   fontSize: '9.75px',
+   fontWeight: '400',
+   lineHeight: '100%',
+}))
+const StyledInput = styled(TextField)(() => ({
    '& .MuiOutlinedInput-root': {
+      fontSize: '12px',
+      borderRadius: '12px',
+      padding: '0px 15px',
+      width: '257px',
+      height: '46px',
+
       '& fieldset': {
-         borderColor: props.error ? 'red' : 'gray',
+         margin: '8px 0',
+         borderWidth: '2px',
       },
       '&:hover fieldset': {
-         borderColor: props.error ? 'darkred' : 'black',
+         borderColor: '#8639B5',
       },
+
       '&.Mui-focused fieldset': {
-         borderColor: props.error ? 'red' : 'blue',
+         borderColor: '#8639B5',
       },
    },
-   '& .MuiInputLabel-root': {
-      color: props.error ? 'red' : 'inherit',
+   '& .MuiOutlinedInput-root.Mui-focused input': {
+      caretColor: '#8639B5',
+   },
+
+   '& .MuiOutlinedInput-root.Mui-error': {
+      '& fieldset': {
+         borderColor: 'red',
+      },
+      '& input': {
+         color: 'red',
+      },
    },
 }))

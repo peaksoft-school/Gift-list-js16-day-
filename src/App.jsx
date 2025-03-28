@@ -1,9 +1,8 @@
-import Input from './components/UI/Input'
 
 const App = () => (
-   <>
-      <Input variant="outlined" placeholder="Введите название праздника" />
-   </>
+   <div>
+      <h1>Gift List</h1>
+   </div>
 )
 
 export default App
