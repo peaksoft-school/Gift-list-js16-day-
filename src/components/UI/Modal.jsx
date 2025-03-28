@@ -17,15 +17,15 @@ const style = {
    p: 4,
 }
 
-export default function OpenModal({ children, buttonText = 'Open Modal' }) {
+export default function OpenModal({ children, buttonText = 'Modal' }) {
    const [open, setOpen] = React.useState(false)
    const handleOpen = () => setOpen(true)
    const handleClose = () => setOpen(false)
 
    return (
       <div>
-         <Button onClick={handleOpen} color="primary">
-            {/* {buttonText} */}фыв
+         <Button onClick={handleOpen} color="primary" style={{color:"#000"}}>
+            {buttonText}
          </Button>
          <Modal
             aria-labelledby="transition-modal-title"
