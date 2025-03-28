@@ -1,13 +1,12 @@
 import { Button, styled } from '@mui/material'
 import React from 'react'
-import UsersIcon from '../../assets/icon/users.svg'
-import TapeIcon from '../../assets/icon/tape.svg'
-import ListIcon from '../../assets/icon/list.svg'
-import GiftIcon from '../../assets/icon/gifts.svg'
-import HolydaysIcon from '../../assets/icon/holidays.svg'
-import UsersLikeIcon from '../../assets/icon/userslike.svg'
-// import UserSideBar from './users/UserSideBar'
-// import UsersIcon from '../../assets/icon/users.svg'
+import UsersIcon from '../../assets/icons/users.svg'
+import TapeIcon from '../../assets/icons/tape.svg'
+import ListIcon from '../../assets/icons/list.svg'
+import GiftIcon from '../../assets/icons/gifts.svg'
+import HolydaysIcon from '../../assets/icons/holidays.svg'
+import UsersLikeIcon from '../../assets/icons/userslike.svg'
+import Mailings from '../../assets/icons/mailings.svg'
 
 const roles = {
    users: [
@@ -20,9 +19,9 @@ const roles = {
    ],
    admin: [
       { title: 'Пользователи', icon: UsersIcon },
-      { title: 'Благотворительность', icon: UsersIcon },
+      { title: 'Благотворительность', icon: UsersLikeIcon },
       { title: 'Жалобы ', icon: UsersIcon },
-      { title: 'Рассылка', icon: UsersIcon },
+      { title: 'Рассылка', icon: Mailings },
    ],
 }
 
@@ -51,8 +50,7 @@ const SideBar = ({ role }) => {
    )
 }
 const Mainh1 = styled('div')({
-   background:
-      'linear-gradient(356deg, rgba(2,0,36,1) 0%, rgba(21,21,96,1) 40%, rgba(218,0,255,1) 100%)',
+   background: 'linear-gradient(180deg, #8639B5 50%, #092056 100%)',
 
    color: '#fff',
    width: '284px',
@@ -64,10 +62,13 @@ const Mainh1 = styled('div')({
    '& .MuiButtonBase-root': {
       textTransform: 'none',
    },
+   '& .MuiTouchRipple-root': {
+      fontWeight: 300,
+   },
 
    h1: {
       fontSize: '24px',
-      fontWeight: '700px',
+      fontWeight: '500px',
       padding: '23px 70px',
    },
    img: {
@@ -78,13 +79,13 @@ const Mainh1 = styled('div')({
       width: 234,
       height: 50,
       marginLeft: '30px',
-
+      fontWeight: 500,
       justifyContent: 'start',
       display: 'flex',
       fontSize: '16px',
       color: '#fff',
       ':focus': {
-         backgroundColor: '#ab42ec',
+         backgroundColor: '#ba19eb',
       },
    },
 })
