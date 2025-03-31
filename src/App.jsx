@@ -1,3 +1,2 @@
-const App = () => <h1>GIFT LIST JS-16 DAY</h1>
-
+const App = () => <p>Gift List 16</p>
 export default App
