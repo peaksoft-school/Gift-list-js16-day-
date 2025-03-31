@@ -1,5 +1,4 @@
 import { Button, styled } from '@mui/material'
-import React from 'react'
 import UsersIcon from '../../assets/icons/users.svg'
 import TapeIcon from '../../assets/icons/tape.svg'
 import ListIcon from '../../assets/icons/list.svg'
@@ -50,7 +49,7 @@ const SideBar = ({ role }) => {
    )
 }
 const Mainh1 = styled('div')({
-   background: 'linear-gradient(180deg, #8639B5 50%, #092056 100%)',
+   background: 'linear-gradient(180deg, #8639B5 0%, #092056 100%)',
 
    color: '#fff',
    width: '284px',
@@ -68,7 +67,8 @@ const Mainh1 = styled('div')({
 
    h1: {
       fontSize: '24px',
-      fontWeight: '500px',
+      fontWeight: '100',
+      fontFamily: 'Gill Sans, sans-serif',
       padding: '23px 70px',
    },
    img: {
@@ -85,7 +85,7 @@ const Mainh1 = styled('div')({
       fontSize: '16px',
       color: '#fff',
       ':focus': {
-         backgroundColor: '#ba19eb',
+         backgroundColor: '#9f5bdf58',
       },
    },
 })
