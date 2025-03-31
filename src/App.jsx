@@ -1,9 +1,3 @@
-import Checkbox from './components/UI/Checkboxs'
-
-const App = () => (
-   <>
-      <Checkbox />
-   </>
-)
+const App = () => <p>Gift List-16</p>
 
 export default App
