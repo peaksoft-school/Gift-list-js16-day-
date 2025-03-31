@@ -2,25 +2,21 @@ import { Button } from '@mui/material'
 import { roles } from '../../utils/constants'
 import styled from 'styled-components'
 
-const SideBar = ({ role }) => (
-   <Mainh1>
-      <h1>Gift - List</h1>
+const SideBar = ({ role }) => {
+   const menuItems = role.toLowerCase() === 'user' ? roles.users : roles.admin
 
-      {role === 'USER'
-         ? roles.users.map(({ title, icon }) => (
-              <Button>
-                 <img src={icon} alt={title} />
-                 <span>{title}</span>
-              </Button>
-           ))
-         : roles.admin.map(({ title, icon }) => (
-              <Button>
-                 <img src={icon} alt={title} />
-                 <span>{title}</span>
-              </Button>
-           ))}
-   </Mainh1>
-)
+   return (
+      <Mainh1>
+         <h1>Gift - List</h1>
+
+         {menuItems.map(({ title, icon }, index) => (
+            <Button key={index}>
+               <img src={icon} alt={title} /> <span>{title}</span>
+            </Button>
+         ))}
+      </Mainh1>
+   )
+}
 
 export default SideBar
 
