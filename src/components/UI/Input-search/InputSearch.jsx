@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Box, InputAdornment, TextField } from '@mui/material'
-import Select from './Select'
 import SearchIcon from '@mui/icons-material/Search'
 import styled from 'styled-components'
 import {
@@ -9,6 +8,7 @@ import {
    countries,
    subcategories,
 } from '../../../utils/constants/index'
+import Select from './Select'
 
 const InputSearch = () => {
    const [filters, setFilters] = useState({
