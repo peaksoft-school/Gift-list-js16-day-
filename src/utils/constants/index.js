@@ -1,3 +1,11 @@
+import UsersIcon from '../../assets/icons/users.svg'
+import TapeIcon from '../../assets/icons/tape.svg'
+import ListIcon from '../../assets/icons/list.svg'
+import GiftIcon from '../../assets/icons/gifts.svg'
+import HolydaysIcon from '../../assets/icons/holidays.svg'
+import UsersLikeIcon from '../../assets/icons/userslike.svg'
+import Mailings from '../../assets/icons/mailings.svg'
+
 const conditions = [
    { value: '1', name: 'Все' },
    { value: '2', name: 'Б/У' },
@@ -31,4 +39,21 @@ const countries = [
    { value: '2', name: 'Таджикистан' },
 ]
 
-export { conditions, categories, subcategories, countries }
+const roles = {
+   users: [
+      { title: 'Лента', icon: TapeIcon },
+      { title: 'Друзья', icon: UsersIcon },
+      { title: 'Список желании ', icon: ListIcon },
+      { title: 'Забронирование', icon: GiftIcon },
+      { title: 'Мои праздники', icon: HolydaysIcon },
+      { title: 'Благовторительность', icon: UsersLikeIcon },
+   ],
+   admin: [
+      { title: 'Пользователи', icon: UsersIcon },
+      { title: 'Благотворительность', icon: UsersLikeIcon },
+      { title: 'Жалобы ', icon: UsersIcon },
+      { title: 'Рассылка', icon: Mailings },
+   ],
+}
+
+export { conditions, categories, subcategories, countries, roles }
