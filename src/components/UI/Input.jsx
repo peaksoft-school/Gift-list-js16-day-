@@ -4,7 +4,6 @@ import {
    InputAdornment,
    InputLabel,
    TextField,
-   Typography,
 } from '@mui/material'
 import styled from 'styled-components'
 import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded'
@@ -20,7 +19,6 @@ const Input = forwardRef(
          name,
          error,
          errorText,
-         errorMessage,
          inputProps,
          ...rest
       },
@@ -36,7 +34,6 @@ const Input = forwardRef(
                onChange={handleChange}
                placeholder={placeholder}
                error={Boolean(error)}
-               errorMessage={errorMessage}
                name={name}
                ref={ref}
                fullWidth
@@ -51,16 +48,7 @@ const Input = forwardRef(
                {...rest}
             />
 
-            {error && (
-               <Typography variant="caption" color="error">
-                  {errorText}
-               </Typography>
-            )}
-            {error && (
-               <FormHelperText sx={{ color: 'red', ml: '200px' }}>
-                  {errorMessage}
-               </FormHelperText>
-            )}
+            {error && <StyledFormHelperText>{errorText}</StyledFormHelperText>}
          </>
       )
    }
@@ -79,7 +67,7 @@ const StyledInput = styled(TextField)(() => ({
    '& .MuiOutlinedInput-root': {
       borderRadius: '12px',
       padding: '0px 5px',
-      width: '287px',
+      width: '290px',
       height: '50px',
       marginTop: '4.5px',
 
@@ -123,7 +111,7 @@ const StyledInput = styled(TextField)(() => ({
 const StyledFormHelperText = styled(FormHelperText)(() => ({
    '&.MuiFormHelperText-root': {
       color: 'red',
-      width: '257px',
+      width: '290px',
       textAlign: 'right',
       fontSize: '11px',
    },
