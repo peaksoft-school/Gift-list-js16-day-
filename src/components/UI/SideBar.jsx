@@ -1,53 +1,29 @@
-import { Button, styled } from '@mui/material'
-import UsersIcon from '../../assets/icons/users.svg'
-import TapeIcon from '../../assets/icons/tape.svg'
-import ListIcon from '../../assets/icons/list.svg'
-import GiftIcon from '../../assets/icons/gifts.svg'
-import HolydaysIcon from '../../assets/icons/holidays.svg'
-import UsersLikeIcon from '../../assets/icons/userslike.svg'
-import Mailings from '../../assets/icons/mailings.svg'
+import { Button } from '@mui/material'
+import { roles } from '../../utils/constants'
+import styled from 'styled-components'
 
-const roles = {
-   users: [
-      { title: 'Лента', icon: TapeIcon },
-      { title: 'Друзья', icon: UsersIcon },
-      { title: 'Список желании ', icon: ListIcon },
-      { title: 'Забронирование', icon: GiftIcon },
-      { title: 'Мои праздники', icon: HolydaysIcon },
-      { title: 'Благовторительность', icon: UsersLikeIcon },
-   ],
-   admin: [
-      { title: 'Пользователи', icon: UsersIcon },
-      { title: 'Благотворительность', icon: UsersLikeIcon },
-      { title: 'Жалобы ', icon: UsersIcon },
-      { title: 'Рассылка', icon: Mailings },
-   ],
-}
+const SideBar = ({ role }) => (
+   <Mainh1>
+      <h1>Gift - List</h1>
 
-const SideBar = ({ role }) => {
-   return (
-      <Mainh1>
-         <h1>Gift - List</h1>
-         {role === 'USER'
-            ? roles.users.map(({ title, icon }) => {
-                 return (
-                    <Button>
-                       <img src={icon} alt={title} />
-                       <span>{title}</span>
-                    </Button>
-                 )
-              })
-            : roles.admin.map(({ title, icon }) => {
-                 return (
-                    <Button>
-                       <img src={icon} alt={title} />
-                       <span>{title}</span>
-                    </Button>
-                 )
-              })}
-      </Mainh1>
-   )
-}
+      {role === 'USER'
+         ? roles.users.map(({ title, icon }) => (
+              <Button>
+                 <img src={icon} alt={title} />
+                 <span>{title}</span>
+              </Button>
+           ))
+         : roles.admin.map(({ title, icon }) => (
+              <Button>
+                 <img src={icon} alt={title} />
+                 <span>{title}</span>
+              </Button>
+           ))}
+   </Mainh1>
+)
+
+export default SideBar
+
 const Mainh1 = styled('div')({
    background: 'linear-gradient(180deg, #8639B5 0%, #092056 100%)',
 
@@ -84,10 +60,8 @@ const Mainh1 = styled('div')({
       display: 'flex',
       fontSize: '16px',
       color: '#fff',
-      ':focus': {
+      '&:focus': {
          backgroundColor: '#9f5bdf58',
       },
    },
 })
-
-export default SideBar
