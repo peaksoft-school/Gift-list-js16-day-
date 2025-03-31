@@ -1,3 +1,5 @@
-const App = () => <h1> Gift List JS-16</h1>
+import Toastify from './components/UI/Toastify'
+
+const App = () => <Toastify />
 
 export default App
