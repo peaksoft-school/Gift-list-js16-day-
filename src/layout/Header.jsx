@@ -6,8 +6,7 @@ import Notification from '../assets/icons/notification.svg'
 const Header = () => {
    return (
       <StyledHeader>
-         <img src={Notification} alt="" />
-
+         <img src={Notification} alt="" style={{ marginRight: '20px' }} />
          <MeetBalls />
       </StyledHeader>
    )
@@ -15,11 +14,9 @@ const Header = () => {
 
 export default Header
 
-const StyledHeader = styled.header`
-   background-color: rgb(245, 245, 247);
-   width: 71.6rem;
-   height: 86px;
-   padding-left: 900px;
-
-   border: 1px;
-`
+const StyledHeader = styled('div')({
+   display: 'flex',
+   justifyContent: 'end',
+   backgroundColor: 'rgb(245, 245, 247)',
+   padding: '20px 40px 20px 0px',
+})
