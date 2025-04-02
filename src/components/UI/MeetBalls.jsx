@@ -1,8 +1,9 @@
 import React from 'react'
 import { Menu, MenuItem, Button, styled } from '@mui/material'
-import Notification from "../../assets/icons/notification.svg"
 import Profile from "../../assets/icons/profile.svg"
 import ExitIcon from "../../assets/icons/exit.svg"
+import chevrons from "../../assets/icons/chevrons.svg"
+import profilebackg from '../../assets/icons/profilebackg.svg'
 
 const MeetBalls = () => {
    const [anchorEl, setAnchorEl] = React.useState(null)
@@ -24,8 +25,10 @@ const MeetBalls = () => {
             onClick={handleClick}
             color="#212121"
          >
-            <img src={Notification} alt="" />
-            Naruto Uzumaki
+           
+            <img src={profilebackg} alt="" />
+            Naruto Uzumaki 
+            <img src={chevrons} alt="" />
          </Button>
          <Menu
             id="basic-menu"

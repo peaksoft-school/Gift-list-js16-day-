@@ -1,12 +1,12 @@
 import React from 'react'
 import MeetBalls from '../components/UI/MeetBalls'
 import styled from 'styled-components'
-// import profilebackg from '../assets/icons/profileback.svg'
+import Notification from '../assets/icons/notification.svg'
 
 const Header = () => {
    return (
       <StyledHeader>
-         {/* <img src={profilebackg} alt="" /> */}
+         <img src={Notification} alt="" />
 
          <MeetBalls />
       </StyledHeader>
