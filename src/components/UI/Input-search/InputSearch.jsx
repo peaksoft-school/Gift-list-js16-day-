@@ -9,9 +9,7 @@ import {
    subcategories,
 } from '../../../utils/constants/index'
 import Select from './Select'
-import ToastifyNotify from '../../../utils/helpers/ToastifyNotify'
-import Button from '../Button'
-import Notification from '../../Notification'
+
 
 const InputSearch = () => {
    const [filters, setFilters] = useState({
@@ -74,19 +72,6 @@ const InputSearch = () => {
                onChange={handleChange('country')}
             />
          </MainBox>
-         <Button
-            onClick={() =>
-               ToastifyNotify({
-                  title: 'Успешно',
-                  message: 'Вы успешно зарегистрировались',
-                  autoClose: 3000,
-                  type: 'error',
-               })
-            }
-         >
-            Зарегистрироваться
-         </Button>
-         <Notification />
       </div>
    )
 }

@@ -1,11 +1,6 @@
 import { toast } from 'react-toastify'
 
-const ToastifyNotify = ({
-   title,
-   message,
-   autoClose = 3000,
-   type = 'success',
-}) => {
+const ToastifyNotify = ({ title, message, autoClose = 20000, type = '' }) => {
    toast[type](
       <div>
          <strong>{title}</strong>
@@ -18,3 +13,5 @@ const ToastifyNotify = ({
 }
 
 export default ToastifyNotify
+{
+}

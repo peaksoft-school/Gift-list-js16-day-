@@ -10,6 +10,7 @@ const Notification = () => {
          draggable
          hideProgressBar
          limit={3}
+         style={{ paddingLeft: '220px' }}
       />
    )
 }
@@ -23,10 +24,8 @@ const StyledToastContainer = styled(ToastContainer)({
       fontFamily: 'Inter, sans-serif',
 
       padding: '12px 28px 12px 28px',
-
       display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
+      justifyContent: 'flex-start',
 
       boxShadow: '0px 4px 10px rgba(20, 18, 18, 0.1)',
    },
@@ -42,24 +41,34 @@ const StyledToastContainer = styled(ToastContainer)({
       color: '#3cbb22',
       borderRadius: '3px',
       textAlign: 'start',
+      border: '1px solid #3cbb22',
    },
    '.Toastify__toast--info': {
       backgroundColor: 'rgba(90, 180, 192, 0.5)',
       color: '#0078af',
+      border: '1px solid #0078af',
       borderRadius: '7px',
    },
    '.Toastify__toast--warning': {
       backgroundColor: 'rgba(233, 230, 46, 0.322)',
+      border: '1px solid #e6a01e',
       color: '#e6a01e',
       borderRadius: '7px',
    },
 
    '.Toastify__toast--error': {
       backgroundColor: 'rgba(255, 0, 0, 0.1)',
+      border: '1px solid #fa5b5b',
       color: '#fa5b5b',
       borderRadius: '7px',
    },
-   '& .Toastify__toast-container': {
-      marginRight: '30px',
+   '&.Toastify__toast-container': {
+      display: 'flex',
+      justifyContent: 'start',
+   },
+
+   '.Toastify__toast-icon ': {
+      width: '18px',
+      marginBottom: '18px',
    },
 })
