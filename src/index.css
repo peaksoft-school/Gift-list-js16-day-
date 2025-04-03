@@ -1,6 +1,6 @@
 @font-face {
    font-family: 'Inter';
-   src: url('./assets/fonts/Inter_24pt-Medium.ttf');
+   src: url('./assets/fonts/Inter_24pt-SemiBold.ttf');
 }
 
 @font-face {
@@ -10,7 +10,7 @@
 
 @font-face {
    font-family: 'Inter';
-   src: url('./assets/fonts/Inter_24pt-SemiBold.ttf');
+   src: url('./assets/fonts/Inter_24pt-Medium.ttf');
 }
 
 * {

@@ -1,13 +1,3 @@
-import React from 'react'
-import Header from './layout/Header'
-
-
-const App = () => {
-   return (
-      <div>
-         <Header />
-      </div>
-   )
-}
+const App = () => <h1>Gift List JS-16</h1>
 
 export default App

@@ -20,9 +20,9 @@ const Button = ({
          {children}
       </StyledButton>
    )
-};
+}
 
-export default Button;
+export default Button
 
 const StyledButton = styled(MuiButton)(({ variant }) => {
    const buttonStyles = {
@@ -33,7 +33,7 @@ const StyledButton = styled(MuiButton)(({ variant }) => {
          marginTop: '20px',
          fontSize: '18px',
       },
-   };
+   }
 
    if (variant === 'contained') {
       buttonStyles['&.MuiButton-root'] = {
@@ -100,4 +100,4 @@ const StyledButton = styled(MuiButton)(({ variant }) => {
    }
 
    return buttonStyles
-});
+})

@@ -2,10 +2,12 @@ import React from 'react'
 import MeetBalls from '../components/UI/MeetBalls'
 import styled from 'styled-components'
 import Notification from '../assets/icons/notification.svg'
+// import Input from '../components/UI/Input'
 
 const Header = () => {
    return (
       <StyledHeader>
+         {/* <Input/> */}
          <img src={Notification} alt="" style={{ marginRight: '20px' }} />
          <MeetBalls />
       </StyledHeader>
