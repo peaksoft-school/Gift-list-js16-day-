@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.8",
     "@mui/material": "^6.4.7",
+    "lucide-react": "^0.486.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-toastify": "^11.0.5",

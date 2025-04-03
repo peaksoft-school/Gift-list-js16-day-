@@ -9,6 +9,9 @@ import {
    subcategories,
 } from '../../../utils/constants/index'
 import Select from './Select'
+import ToastifyNotify from '../../../utils/helpers/ToastifyNotify'
+import Button from '../Button'
+import Notification from '../../Notification'
 
 const InputSearch = () => {
    const [filters, setFilters] = useState({
@@ -38,38 +41,53 @@ const InputSearch = () => {
    }
 
    return (
-      <MainBox tabIndex={0}>
-         <MainInputSearch
-            variant="standard"
-            placeholder={'Поиск'}
-            InputProps={searchInputProps}
-         />
+      <div>
+         <MainBox tabIndex={0}>
+            <MainInputSearch
+               variant="standard"
+               placeholder={'Поиск'}
+               InputProps={searchInputProps}
+            />
 
-         <Select
-            label="Состояние"
-            options={conditions}
-            value={filters.condition}
-            onChange={handleChange('condition')}
-         />
-         <Select
-            label="Категория"
-            options={categories}
-            value={filters.category}
-            onChange={handleChange('category')}
-         />
-         <Select
-            label="Подкатегория"
-            options={subcategories}
-            value={filters.subcategory}
-            onChange={handleChange('subcategory')}
-         />
-         <Select
-            label="Страна"
-            options={countries}
-            value={filters.country}
-            onChange={handleChange('country')}
-         />
-      </MainBox>
+            <Select
+               label="Состояние"
+               options={conditions}
+               value={filters.condition}
+               onChange={handleChange('condition')}
+            />
+            <Select
+               label="Категория"
+               options={categories}
+               value={filters.category}
+               onChange={handleChange('category')}
+            />
+            <Select
+               label="Подкатегория"
+               options={subcategories}
+               value={filters.subcategory}
+               onChange={handleChange('subcategory')}
+            />
+            <Select
+               label="Страна"
+               options={countries}
+               value={filters.country}
+               onChange={handleChange('country')}
+            />
+         </MainBox>
+         <Button
+            onClick={() =>
+               ToastifyNotify({
+                  title: 'Успешно',
+                  message: 'Вы успешно зарегистрировались',
+                  autoClose: 3000,
+                  type: 'error',
+               })
+            }
+         >
+            Зарегистрироваться
+         </Button>
+         <Notification />
+      </div>
    )
 }
 
