@@ -23,7 +23,7 @@ const MeetBalls = () => {
       <StyledMain>
          <img src={profilebackg} alt="" />
 
-         <Button
+         <StyledMainButton
             id="basic-button"
             aria-controls={open ? 'basic-menu' : undefined}
             aria-haspopup="true"
@@ -33,7 +33,7 @@ const MeetBalls = () => {
          >
             Naruto Uzumaki
             <img src={chevrons} alt="" />
-         </Button>
+         </StyledMainButton>
          <Menu
             id="basic-menu"
             anchorEl={anchorEl}
@@ -44,10 +44,7 @@ const MeetBalls = () => {
             }}
          >
             <StyledMainMenuItem onClick={handleClose}>
-               <img
-                  src={Profile}
-                  alt=""
-               />
+               <img src={Profile} alt="" />
                Профиль
             </StyledMainMenuItem>
             <StyledMainMenuItem onClick={handleClose}>
@@ -64,6 +61,12 @@ const StyledMain = styled('div')({
 const StyledMainMenuItem = styled(MenuItem)({
    img: {
       padding: '9px',
+   },
+})
+
+const StyledMainButton = styled(Button)({
+   img: {
+      padding: '20px',
    },
 })
 
