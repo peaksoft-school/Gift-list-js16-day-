@@ -1,10 +1,5 @@
-import Advantage from './components/Advantage'
-import MyCounter from './components/MyCounter'
 
-const App = () => (
-   <>
-      <MyCounter />
-      <Advantage />
-   </>
-)
+
+const App = () => <h1>Gift List JS-16</h1>
+
 export default App

@@ -1,4 +1,5 @@
 import { Favorite, ThumbUp, VolunteerActivism } from '@mui/icons-material'
+import Button from './UI/Button'
 import styled from 'styled-components'
 
 const Advantage = () => {
@@ -7,7 +8,8 @@ const Advantage = () => {
          <FeatureList>
             <article>
                <IconWrapper>
-                  <Favorite sx={{color: "green"}}/> <Title>Дари то, что необходимо</Title>
+                  <Favorite sx={{ color: 'green' }} />
+                  <Title>Дари то, что необходимо</Title>
                </IconWrapper>
 
                <List>
@@ -19,7 +21,8 @@ const Advantage = () => {
 
             <article>
                <IconWrapper>
-                  <ThumbUp sx={{color: "green"}}/> <Title>Удобство в использовании</Title>
+                  <ThumbUp sx={{ color: 'green' }} />
+                  <Title>Удобство в использовании</Title>
                </IconWrapper>
 
                <List>
@@ -31,7 +34,8 @@ const Advantage = () => {
 
             <article>
                <IconWrapper>
-                  <VolunteerActivism sx={{color: "green"}}/> <Title>Твори добро</Title>
+                  <VolunteerActivism sx={{ color: 'green' }} />
+                  <Title>Твори добро</Title>
                </IconWrapper>
 
                <List>
@@ -42,7 +46,7 @@ const Advantage = () => {
             </article>
          </FeatureList>
 
-         <RegisterButton>ЗАРЕГИСТРИРОВАТЬСЯ</RegisterButton>
+         <Button variant="outlined">ЗАРЕГИСТРИРОВАТЬСЯ</Button>
       </Section>
    )
 }
@@ -63,11 +67,10 @@ const FeatureList = styled.div`
 `
 
 const IconWrapper = styled.div`
- 
    border: 1px;
    border-radius: 50%;
    display: flex;
-   justify-content:start;
+   justify-content: start;
    align-items: start;
    gap: 15px;
 `
@@ -89,20 +92,4 @@ const List = styled.ul`
    list-style: disc;
    padding-left: 20px;
    text-align: left;
-`
-
-const RegisterButton = styled.button`
-   padding: 12px 30px;
-   background-color: #8e44ad;
-   color: #fff;
-   font-weight: bold;
-   border: none;
-   border-radius: 6px;
-   cursor: pointer;
-   font-size: 14px;
-   transition: background-color 0.3s;
-
-   &:hover {
-      background-color: #732d91;
-   }
 `

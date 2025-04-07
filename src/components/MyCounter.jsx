@@ -1,24 +1,19 @@
 import CountUp from 'react-countup'
 import styled from 'styled-components'
+import COUNTER from '../utils/helpers'
 
-const stats = [
-   { end: 100, label: 'K+', text: 'Пользователей' },
-   { end: 10, label: 'K+', text: 'Размещенных подарков' },
-   { end: 15, label: 'K+', text: 'Подаренных подарков' },
-   { end: 9, label: 'K+', text: 'Реализованной благотворительной помощи' },
-]
 
 const MyCounter = () => {
    return (
       <ContainerDiv>
-         {stats.map((stat, id) => (
+         {COUNTER.map((COUNTER, id) => (
             <Number key={id}>
                
                <StyledDiv>
-                  <CountUp end={stat.end} /> {stat.label}
+                  <CountUp end={COUNTER.end} /> {COUNTER.label}
                </StyledDiv>
 
-               <Text>{stat.text}</Text>
+               <Text>{COUNTER.text}</Text>
             </Number>
          ))}
       </ContainerDiv>
