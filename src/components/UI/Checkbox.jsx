@@ -42,13 +42,13 @@ const Checkbox = forwardRef(
 export default Checkbox
 
 const StyledFormControlLabel = styled(FormControlLabel)(() => ({
-   '&.MuiFormControlLabel-root': {
-      color: '#87898E ',
+   '&.MuiButtonBase-root-MuiCheckbox-root ': {
+      color: '#1744b8 ',
    },
 }))
 
 const StyledMuiCheckbox = styled(MuiCheckbox)(() => ({
-   '&.MuiButtonBase-root-MuiCheckbox-root ': {
+   '&.MuiTouchRipple-root ': {
       '& svg:hover': {
          color: '#8639B5 !important',
       },
