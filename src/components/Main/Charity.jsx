@@ -72,10 +72,11 @@ const StyledImage = styled('img')({
 })
 
 const TextContent = styled('div')({
-   maxWidth: '440px',
-   minWidth: '332px',
+   maxWidth: '570px',
+   minHeight: '192px',
    fontSize: '16px',
+   fontFamily: 'interit',
+   fontWeight: '400',
    lineHeight: '150%',
    letterSpacing: '0%',
-   fontWeight: '400',
 })
