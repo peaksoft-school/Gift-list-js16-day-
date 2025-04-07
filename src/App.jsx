@@ -1,3 +1,11 @@
-const App = () => <h1> Gift List JS-16</h1>
+import Charity from './components/Main/Charity'
+
+const App = () => {
+   return (
+      <>
+         <Charity />
+      </>
+   )
+}
 
 export default App
