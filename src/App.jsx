@@ -1,9 +1,3 @@
-import MainPage from './components/MainPage'
-
-const App = () => (
-   <h1>
-      <MainPage />
-   </h1>
-)
+const App = () => <h1>GIFT-LIST JS-16 DAY</h1>
 
 export default App
