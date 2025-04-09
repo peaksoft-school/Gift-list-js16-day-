@@ -74,7 +74,7 @@ const MainHeader = styled('div')({
    h3: {
       fontWeight: 700,
       fontSize: '24px',
-      marginLeft: '50px',  
+      marginLeft: '50px',
    },
 })
 
@@ -127,12 +127,13 @@ const FriendsImageRight = styled('div')({
    position: 'absolute',
    top: '130px',
    right: '80px',
+   // zIndex: 1,
 })
 
 const StyledFriendImage = styled('img')({
    width: 240,
    height: 300,
-   borderTopRightRadius: '80px',
+   // borderTopRightRadius: '80px',
    zIndex: 2,
 })
 
@@ -140,6 +141,8 @@ const StyledBorderBox = styled('div')({
    position: 'relative',
    width: '260px',
    height: '320px',
+   zIndex: -0,
+
    '&::after': {
       content: '""',
       position: 'absolute',
@@ -149,7 +152,7 @@ const StyledBorderBox = styled('div')({
       height: '100%',
       border: '1px solid white',
       borderTopRightRadius: '100px',
-      zIndex: 0,
+      zIndex: -1,
    },
 })
 
@@ -161,18 +164,18 @@ const MainBorderBox2 = styled('div')({
       content: '""',
       position: 'absolute',
       top: '-20px',
-      right: '-20px',
+      right: '30px',
       width: '100%',
       height: '100%',
       border: '1px solid white',
-      borderTopRightRadius: '100px',
+      borderTopLeftRadius: '100px',
       zIndex: 0,
    },
    img: {
       width: '100%',
       height: '100%',
       objectFit: 'cover',
-      borderTopRightRadius: '80px',
+      // borderTopRightRadius: '80px',
       position: 'relative',
       zIndex: 2,
    },
