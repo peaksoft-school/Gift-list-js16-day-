@@ -13,5 +13,3 @@ const ToastifyNotify = ({ title, message, autoClose = 20000, type = '' }) => {
 }
 
 export default ToastifyNotify
-{
-}

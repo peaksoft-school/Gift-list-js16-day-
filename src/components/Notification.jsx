@@ -22,7 +22,6 @@ const StyledToastContainer = styled(ToastContainer)({
       minWidth: '500px',
       borderRadius: '2px',
       fontFamily: 'Inter, sans-serif',
-
       padding: '12px 28px 12px 28px',
       display: 'flex',
       justifyContent: 'flex-start',

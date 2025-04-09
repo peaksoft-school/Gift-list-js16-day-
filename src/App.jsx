@@ -1,7 +1,23 @@
+import Notification from './components/Notification'
+import Button from './components/UI/Button'
+import ToastifyNotify from './utils/helpers/ToastifyNotify'
+
 const App = () => {
    return (
       <div>
-         <h1>Gift-List JS 16</h1>
+         <Button
+            onClick={() =>
+               ToastifyNotify({
+                  title: 'Успешно',
+                  message: 'Вы успешно зарегистрировались',
+                  autoClose: 3000,
+                  type: 'error',
+               })
+            }
+         >
+            Зарегистрироваться
+         </Button>
+         <Notification />
       </div>
    )
 }
