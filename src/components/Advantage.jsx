@@ -1,95 +1,113 @@
 import { Favorite, ThumbUp, VolunteerActivism } from '@mui/icons-material'
 import Button from './UI/Button'
-import styled from 'styled-components'
+import { styled } from '@mui/material/styles'
+import { Box, Container, Stack, Typography } from '@mui/material'
 
 const Advantage = () => {
    return (
-      <Section>
-         <FeatureList>
-            <article>
-               <IconWrapper>
+      <StyledBox>
+         <StyledContainer>
+            <Stack>
+               <Box
+                  sx={{
+                     border: '1px',
+                     borderRadius: '50%',
+                     display: 'flex',
+                     justifyContent: 'start',
+                     alignItems: 'start',
+                     gap: '20px',
+                  }}
+               >
                   <Favorite sx={{ color: 'green' }} />
-                  <Title>Дари то, что необходимо</Title>
-               </IconWrapper>
+                  <StyledTitle>Дари то, что необходимо</StyledTitle>
+               </Box>
 
-               <List>
+               <StyledText>
                   <li>Находи своих близких</li>
                   <li>Просматривай их списки желаний</li>
                   <li>Узнавай о ближайших мероприятиях</li>
-               </List>
-            </article>
+               </StyledText>
+            </Stack>
 
-            <article>
-               <IconWrapper>
+            <Stack>
+               <Box
+                  sx={{
+                     border: '1px',
+                     borderRadius: '50%',
+                     display: 'flex',
+                     justifyContent: 'start',
+                     alignItems: 'start',
+                     gap: '15px',
+                  }}
+               >
                   <ThumbUp sx={{ color: 'green' }} />
-                  <Title>Удобство в использовании</Title>
-               </IconWrapper>
+                  <StyledTitle>Удобство в использовании</StyledTitle>
+               </Box>
 
-               <List>
+               <StyledText>
                   <li>Создавай неограниченное количество желаний</li>
                   <li>Добавляй подарки которые ты действительно хочешь</li>
                   <li>Делись своими желаниями с другими</li>
-               </List>
-            </article>
+               </StyledText>
+            </Stack>
 
-            <article>
-               <IconWrapper>
+            <Stack>
+               <Box
+                  sx={{
+                     border: '1px',
+                     borderRadius: '50%',
+                     display: 'flex',
+                     justifyContent: 'start',
+                     alignItems: 'start',
+                     gap: '15px',
+                  }}
+               >
                   <VolunteerActivism sx={{ color: 'green' }} />
-                  <Title>Твори добро</Title>
-               </IconWrapper>
+                  <StyledTitle>Твори добро</StyledTitle>
+               </Box>
 
-               <List>
+               <StyledText>
                   <li>Дари благотворительные подарки</li>
                   <li>Делись своими вещами</li>
                   <li>Помогай другим приобрести необходимое</li>
-               </List>
-            </article>
-         </FeatureList>
+               </StyledText>
+            </Stack>
+         </StyledContainer>
 
          <Button variant="outlined">ЗАРЕГИСТРИРОВАТЬСЯ</Button>
-      </Section>
+      </StyledBox>
    )
 }
 
 export default Advantage
 
-const Section = styled.section`
-   padding: 60px 20px;
-   background-color: #fff;
-   text-align: center;
-`
+const StyledBox = styled(Box)({
+   padding: '60px 20px',
+   backgroundColor: '#fff',
+   textAlign: ' center ',
+})
 
-const FeatureList = styled.div`
-   display: flex;
-   justify-content: space-around;
-   flex-wrap: wrap;
-   margin-bottom: 40px;
-`
+const StyledContainer = styled(Container)({
+   display: 'flex',
+   justifyContent: 'space-around',
+   marginBottom: '40px',
+})
 
-const IconWrapper = styled.div`
-   border: 1px;
-   border-radius: 50%;
-   display: flex;
-   justify-content: start;
-   align-items: start;
-   gap: 15px;
-`
+const StyledTitle = styled(Typography)({
+   fontFamily: 'Inter',
+   fontWeight: ' 600',
+   fontSize: '20px',
+   lineHeight: '150%',
+   fontWeight: 'bold',
+   marginBottom: '10px',
+})
 
-const Title = styled.h3`
-   font-family: Inter;
-   font-weight: 600;
-   font-size: 20px;
-   line-height: 150%;
-   font-weight: bold;
-   margin-bottom: 10px;
-`
-
-const List = styled.ul`
-   font-family: Inter;
-   font-weight: 400;
-   font-size: 14px;
-   line-height: 170%;
-   list-style: disc;
-   padding-left: 20px;
-   text-align: left;
-`
+const StyledText = styled(Typography)({
+   fontFamily: 'Inter',
+   fontWeight: '400',
+   fontSize: '14px',
+   lineHeight: '170%',
+   listStyle: 'disc',
+   paddingLeft: '20px',
+   textAlign: 'left',
+})
