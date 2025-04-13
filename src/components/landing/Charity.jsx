@@ -1,56 +1,54 @@
-import React from 'react'
 import { Typography, Box } from '@mui/material'
 import styled from 'styled-components'
-import Charity from '../../assets/images/Charity.png'
+import Childrens from '../../assets/images/Childrens.png'
 
-const CharitySection = () => {
+const Charity = () => {
    return (
-      <Section>
-         <ImageWrapper elevation={4}>
+      <StyledBox>
+         <ImageWrapper>
             <ImageBorder>
-               <StyledImage src={Charity} alt="charity" />
+               <StyledImage src={Childrens} alt="charity" />
             </ImageBorder>
          </ImageWrapper>
-         <TextContent>
+         <TextContentBox>
             <Typography variant="h4" gutterBottom>
                Благотворительность
             </Typography>
-            <Typography variant="body1" paragraph>
+            <Typography paragraph>
                Найти удачный подарок, который принесёт радость, не всегда
                простая задача.
             </Typography>
-            <Typography variant="body1" paragraph>
+            <Typography paragraph>
                Благодаря нашему сервису у вас есть возможность не только
                обрадовать подарком, но и помочь другим приобрести необходимые им
                вещи.
             </Typography>
-            <Typography variant="body1">
+            <Typography>
                В разделе благотворительность вы можете найти список
                опубликованных вещей, забронировав, вы связываетесь с их
                обладателем.
             </Typography>
-         </TextContent>
-      </Section>
+         </TextContentBox>
+      </StyledBox>
    )
 }
 
-export default CharitySection
+export default Charity
 
-const Section = styled('section')({
-   backgroundColor: '#6a1b9a',
-   color: '#fff',
-   padding: '40px',
+const StyledBox = styled(Box)(() => ({
    display: 'flex',
    justifyContent: 'center',
    alignItems: 'center',
+   backgroundColor: '#6a1b9a',
+   color: '#fff',
+   padding: '40px',
    width: '100%',
-   height: '602px',
-})
+   minHeight: '100vh',
+}))
 
 const ImageWrapper = styled(Box)(() => ({
    padding: '10px',
    display: 'flex',
-   flex: 1,
    justifyContent: 'center',
    alignItems: 'center',
 }))
@@ -71,12 +69,13 @@ const StyledImage = styled('img')({
    position: 'relative',
 })
 
-const TextContent = styled('div')({
+const TextContentBox = styled(Box)(() => ({
    maxWidth: '570px',
    minHeight: '192px',
    fontSize: '16px',
-   fontFamily: 'interit',
+   fontFamily: 'inter',
    fontWeight: '400',
    lineHeight: '150%',
    letterSpacing: '0%',
-})
+   marginLeft: '100px',
+}))
