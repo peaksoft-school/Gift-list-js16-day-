@@ -1,24 +1,24 @@
-import Notification from './components/Notification'
-import Button from './components/UI/Button'
+import { Button } from "@mui/material"
+import Notification from "./components/Notification"
 import ToastifyNotify from './utils/helpers/ToastifyNotify'
 
 const App = () => {
    return (
-      <div>
+      <h1>
          <Button
             onClick={() =>
                ToastifyNotify({
                   title: 'Успешно',
                   message: 'Вы успешно зарегистрировались',
                   autoClose: 3000,
-                  type: 'error',
+                  type: 'success',
                })
             }
          >
             Зарегистрироваться
          </Button>
          <Notification />
-      </div>
+      </h1>
    )
 }
 
