@@ -30,4 +30,4 @@ const FRIENDS = [
    },
 ]
 
-export { FRIENDS }
+export default FRIENDS
