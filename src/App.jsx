@@ -1,3 +1,12 @@
-const App = () => <h1> Gift List JS-16</h1>
+import React from 'react'
+import Footer from "./components/Footer.jsx"
+
+const App = () => {
+  return (
+    <div>
+        <Footer/>
+    </div>
+  )
+}
 
 export default App
