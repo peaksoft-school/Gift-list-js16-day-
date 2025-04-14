@@ -1,3 +1,3 @@
-const App = () => <>GIFT LIST 16 </>
+const App = () => <>Gift List 16 </>
 
 export default App
