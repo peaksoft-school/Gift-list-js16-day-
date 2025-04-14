@@ -1,5 +1,4 @@
-import { Typography, Box } from '@mui/material'
-import styled from 'styled-components'
+import { Typography, Box, styled } from '@mui/material'
 import Childrens from '../../assets/images/Childrens.png'
 
 const Charity = () => {
