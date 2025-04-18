@@ -13,21 +13,13 @@ const COUNTER = [
 const Statistics = () => {
    return (
       <StyledBox>
-         {COUNTER.map((COUNTER, id) => (
-            <Box
-               key={id}
-               sx={{
-                  textAlign: 'center',
-                  color: '#9333ea',
-                  fontWeight: '500',
-                  fontSize: '54px',
-               }}
-            >
-               <Box sx={{ fontSize: '32px', fontWeight: 'bold' }}>
-                  <CountUp end={COUNTER.end} /> {COUNTER.label}
+         {COUNTER.map(({ end, label, text }, id) => (
+            <Box key={id}>
+               <Box>
+                  <CountUp end={end} /> {label}
                </Box>
 
-               <StyledText>{COUNTER.text}</StyledText>
+               <StyledText>{text}</StyledText>
             </Box>
          ))}
       </StyledBox>
@@ -41,13 +33,18 @@ const StyledBox = styled(Box)({
    padding: '40px',
    backgroundColor: 'white',
    borderTop: '5px solid #9333ea',
+   textAlign: 'center',
+   color: '#9333ea',
+   fontWeight: '500',
+   fontSize: '54px',
+   fontWeight: 'bold',
 })
 
 const StyledText = styled(Typography)({
    fontFamily: 'Inter',
    color: 'black',
    fontWeight: '400',
-   fontSize: '14px',
+   fontSize: '18px',
    lineHeight: '120%',
    letterSpacing: '0%',
    textAlign: 'center',

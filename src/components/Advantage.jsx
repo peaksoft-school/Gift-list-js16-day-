@@ -7,71 +7,50 @@ const Advantage = () => {
    return (
       <StyledBox>
          <StyledContainer>
-            <Stack>
-               <Box
-                  sx={{
-                     border: '1px',
-                     borderRadius: '50%',
-                     display: 'flex',
-                     justifyContent: 'start',
-                     alignItems: 'start',
-                     gap: '20px',
-                  }}
-               >
-                  <Favorite sx={{ color: 'green' }} />
+            <StyledStack>
+               <ContainerBox>
+                  <IconWrapper>
+                     <Favorite />
+                  </IconWrapper>
                   <StyledTitle>Дари то, что необходимо</StyledTitle>
-               </Box>
+               </ContainerBox>
 
                <StyledText>
                   <li>Находи своих близких</li>
                   <li>Просматривай их списки желаний</li>
                   <li>Узнавай о ближайших мероприятиях</li>
                </StyledText>
-            </Stack>
+            </StyledStack>
 
-            <Stack>
-               <Box
-                  sx={{
-                     border: '1px',
-                     borderRadius: '50%',
-                     display: 'flex',
-                     justifyContent: 'start',
-                     alignItems: 'start',
-                     gap: '15px',
-                  }}
-               >
-                  <ThumbUp sx={{ color: 'green' }} />
+            <StyledStack>
+               <ContainerBox>
+                  <IconWrapper>
+                     <ThumbUp />
+                  </IconWrapper>
                   <StyledTitle>Удобство в использовании</StyledTitle>
-               </Box>
+               </ContainerBox>
 
                <StyledText>
                   <li>Создавай неограниченное количество желаний</li>
                   <li>Добавляй подарки которые ты действительно хочешь</li>
                   <li>Делись своими желаниями с другими</li>
                </StyledText>
-            </Stack>
+            </StyledStack>
 
-            <Stack>
-               <Box
-                  sx={{
-                     border: '1px',
-                     borderRadius: '50%',
-                     display: 'flex',
-                     justifyContent: 'start',
-                     alignItems: 'start',
-                     gap: '15px',
-                  }}
-               >
-                  <VolunteerActivism sx={{ color: 'green' }} />
+            <StyledStack>
+               <ContainerBox>
+                  <IconWrapper>
+                     <VolunteerActivism />
+                  </IconWrapper>
                   <StyledTitle>Твори добро</StyledTitle>
-               </Box>
+               </ContainerBox>
 
                <StyledText>
                   <li>Дари благотворительные подарки</li>
                   <li>Делись своими вещами</li>
                   <li>Помогай другим приобрести необходимое</li>
                </StyledText>
-            </Stack>
+            </StyledStack>
          </StyledContainer>
 
          <Button variant="outlined">ЗАРЕГИСТРИРОВАТЬСЯ</Button>
@@ -110,4 +89,26 @@ const StyledText = styled(Typography)({
    listStyle: 'disc',
    paddingLeft: '20px',
    textAlign: 'left',
+})
+
+const ContainerBox = styled(Box)({
+   display: 'flex',
+   justifyContent: 'flex-start',
+   gap: '30px',
+})
+
+const IconWrapper = styled(Box)({
+   color: '#0BA360',
+   width: '48px',
+   height: '48px',
+   border: '1px solid #0BA360',
+   borderRadius: '50%',
+   display: 'flex',
+   alignItems: 'center',
+   justifyContent: 'center',
+})
+
+const StyledStack = styled(Stack)({
+   display: 'flex',
+   gap: '18px',
 })
