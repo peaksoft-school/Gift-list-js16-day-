@@ -1,11 +1,10 @@
-import React from 'react'
 import Slider from 'react-slick'
-import { styled } from '@mui/system'
+import { styled } from '@mui/material'
 import { Container, Grid, Typography, Avatar, Box } from '@mui/material'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import teamDevelops from '../utils/constants/LandingDevelops'
-import MackBook from '../assets/images/MackbookPro.svg'
+import { teamDevelops } from '../../utils/constants/index'
+import MackBook from '../../assets/images/MackBookPro.svg'
 
 const sliderSettings = {
    infinite: true,

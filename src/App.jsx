@@ -1,3 +1,9 @@
-const App = () => <h1>GIFT-LIST JS 16</h1>
+import LandingMenegers from './components/landing/LandingMenegers'
+
+const App = () => (
+   <h1>
+      <LandingMenegers />
+   </h1>
+)
 
 export default App
