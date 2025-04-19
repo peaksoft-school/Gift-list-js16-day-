@@ -15,14 +15,13 @@ const ToastifyNotify = ({ title, message, autoClose = 20000, type = '' }) => {
 
 export default ToastifyNotify
 const StyledTitle = styled('strong')(() => ({
-   margin: '-27px 0px 0 0px',
+   margin: '-29px 0px 0 0px',
    position: 'absolute',
    fontSize: '16px',
    fontWeight: '500',
 }))
 
 const StyledMassege = styled('p')(() => ({
-   margin: '0px 0px 0 0px',
    position: 'absolute',
    fontSize: '16px',
    fontWeight: '400',
