@@ -9,8 +9,8 @@ const Notification = () => {
          closeOnClick
          draggable
          hideProgressBar
-         limit={3}
-         style={{ paddingLeft: '220px' }}
+         limit={1}
+         // style={{ paddingLeft: '220px' }}
       />
    )
 }
@@ -20,11 +20,13 @@ export default Notification
 const StyledToastContainer = styled(ToastContainer)({
    '.Toastify__toast': {
       minWidth: '500px',
+      height: '98px',
       borderRadius: '2px',
       fontFamily: 'Inter, sans-serif',
-      padding: '12px 28px',
+      padding: '32px 38px',
       display: 'flex',
-      justifyContent: 'flex-start',
+      // justifyContent: 'flex-start',
+      fontSize: '14px',
 
       boxShadow: '0px 4px 10px rgba(20, 18, 18, 0.1)',
    },
@@ -37,28 +39,28 @@ const StyledToastContainer = styled(ToastContainer)({
 
    '.Toastify__toast--success': {
       backgroundColor: '#C6F0C2',
-      color: '#3cbb22',
+      color: '#328048',
       borderRadius: '3px',
       textAlign: 'start',
-      border: '1px solid #3cbb22',
+      border: '1px solid #C6F0C2',
    },
    '.Toastify__toast--info': {
       backgroundColor: '#EBEFF7',
-      color: '#0078af',
-      border: '1px solid #0078af',
+      color: '#3772FF',
+      border: '1px solid #375BB0',
       borderRadius: '7px',
    },
    '.Toastify__toast--warning': {
       backgroundColor: '#FFF3D8',
-      border: '1px solid #e6a01e',
-      color: '#e6a01e',
+      border: '1px solid #ED9E44',
+      color: '#FF8800',
       borderRadius: '7px',
    },
 
    '.Toastify__toast--error': {
       backgroundColor: '#FFEBEB',
-      border: '1px solid #fa5b5b',
-      color: '#fa5b5b',
+      border: '1px solid #BC2C2C',
+      color: '#E53535',
       borderRadius: '7px',
    },
    '&.Toastify__toast-container': {
@@ -66,8 +68,12 @@ const StyledToastContainer = styled(ToastContainer)({
       justifyContent: 'start',
    },
 
-   '.Toastify__toast-icon ': {
+   '.Toastify__toast-icon': {
       width: '18px',
-      marginBottom: '18px',
+      padding: '-12px -10px',
+      marginBottom: '38px',
+   },
+   '.Toastify__close-button': {
+      padding: '15px',
    },
 })

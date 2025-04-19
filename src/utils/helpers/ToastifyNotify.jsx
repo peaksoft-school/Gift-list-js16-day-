@@ -1,10 +1,11 @@
 import { toast } from 'react-toastify'
+import styled from 'styled-components'
 
 const ToastifyNotify = ({ title, message, autoClose = 20000, type = '' }) => {
    toast[type](
       <div>
-         <strong>{title}</strong>
-         <p style={{ color: '#333' }}>{message}</p>
+         <StyledTitle>{title}</StyledTitle>
+         <StyledMassege style={{ color: '#333' }}>{message}</StyledMassege>
       </div>,
       {
          autoClose,
@@ -13,3 +14,16 @@ const ToastifyNotify = ({ title, message, autoClose = 20000, type = '' }) => {
 }
 
 export default ToastifyNotify
+const StyledTitle = styled('strong')(() => ({
+   margin: '-27px 0px 0 0px',
+   position: 'absolute',
+   fontSize: '16px',
+   fontWeight: '500',
+}))
+
+const StyledMassege = styled('p')(() => ({
+   margin: '0px 0px 0 0px',
+   position: 'absolute',
+   fontSize: '16px',
+   fontWeight: '400',
+}))
