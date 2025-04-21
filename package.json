@@ -1,36 +1,37 @@
 {
-   "name": "gift-list",
-   "private": true,
-   "version": "0.0.0",
-   "type": "module",
-   "scripts": {
-      "dev": "vite",
-      "build": "vite build",
-      "lint": "eslint .",
-      "preview": "vite preview"
-   },
-   "dependencies": {
-      "@emotion/react": "^11.14.0",
-      "@emotion/styled": "^11.14.0",
-      "@mui/material": "^7.0.1",
-      "@mui/icons-material": "^6.4.9",
-      "react": "^18.3.1",
-      "react-dom": "^18.3.1",
-      "styled-components": "^6.1.15"
-   },
-   "devDependencies": {
-      "@eslint/js": "^9.22.0",
-      "@types/react": "^18.3.12",
-      "@types/react-dom": "^18.3.1",
-      "@vitejs/plugin-react": "^4.3.4",
-      "eslint": "^9.22.0",
-      "eslint-config-prettier": "^10.1.1",
-      "eslint-plugin-prettier": "^5.2.3",
-      "eslint-plugin-react": "^7.37.4",
-      "eslint-plugin-react-hooks": "^5.0.0",
-      "eslint-plugin-react-refresh": "^0.4.14",
-      "globals": "^15.15.0",
-      "prettier": "^3.5.3",
-      "vite": "^6.0.1"
-   }
+  "name": "gift-list",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.4.9",
+    "@mui/material": "^6.4.7",
+    "react": "^18.3.1",
+    "react-countup": "^6.5.3",
+    "react-dom": "^18.3.1",
+    "styled-components": "^6.1.15"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.22.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
+    "globals": "^15.15.0",
+    "prettier": "^3.5.3",
+    "vite": "^6.0.1"
+  }
 }
