@@ -1,5 +1,5 @@
 import { Box, styled, Typography } from '@mui/material'
-import Menu from '../UI/menu/MenuCards'
+import Menu from '../menu/MenuCards'
 
 const UserCards = ({ users = [] }) => {
    return (
