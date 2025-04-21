@@ -16,7 +16,7 @@ const UserCards = ({ users = [] }) => {
                      подарков
                   </Typography>
                </StyledBox>
-               <Menu sx={{}} />
+               <Menu />
             </StyledCard>
          ))}
       </FlexContainer>

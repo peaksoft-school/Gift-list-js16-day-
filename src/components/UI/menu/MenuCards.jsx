@@ -23,7 +23,7 @@ function ActionMenu() {
          <IconButton onClick={handleClick} sx={{ left: '90px' }}>
             <img src={MenuIcon} alt="icon" />
          </IconButton>
-         <Menu anchorEl={block} open={Boolean(block)} onClose={handleClose}>
+         <Menu block={block} open={Boolean(block)} onClose={handleClose}>
             <StyledBox>
                <StyledMenuItem>
                   <img src={Block} alt="block" />
