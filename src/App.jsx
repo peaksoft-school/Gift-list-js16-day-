@@ -1,3 +1,11 @@
-const App = () => <h1>Gift List JS-16</h1>
+import Statistics from './components/Statistics'
+
+const App = () => {
+   return (
+      <div>
+         <Statistics />
+      </div>
+   )
+}
 
 export default App

@@ -13,8 +13,8 @@ const COUNTER = [
 const Statistics = () => {
    return (
       <StyledBox>
-         {COUNTER.map(({ end, label, text }, id) => (
-            <Box key={id}>
+         {COUNTER.map(({ end, label, text }) => (
+            <Box>
                <Box>
                   <CountUp end={end} /> {label}
                </Box>
