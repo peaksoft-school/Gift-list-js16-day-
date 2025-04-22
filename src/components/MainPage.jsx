@@ -58,6 +58,7 @@ const StyledMain = styled(Box)({
    minHeight: '120vh',
    position: 'relative',
    overflow: 'hidden',
+   textAlign: 'center',
 })
 
 const MainHeader = styled('div')({
