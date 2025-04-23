@@ -15,9 +15,9 @@ const AppRouter = () => {
             path="/"
             element={
                <PrivateRoute
-                  roles={[ROLES.USER, ROLES.GUEST]}
+                  roles={['USER', 'GUEST']}
                   Component={<Home />}
-                  fallbackPath={'/admin'}
+                  fallbackPath={'/'}
                />
             }
          />
@@ -28,17 +28,30 @@ const AppRouter = () => {
             path="/admin"
             element={
                <PrivateRoute
-                  roles={[ROLES.ADMIN]}
+                  roles={['ADMIN']}
                   Component={
                      <Suspense>
                         <Admin />
                      </Suspense>
                   }
-                  fallbackPath={ROUTES.ADMIN.INDEX}
+                  fallbackPath={'/'}
                ></PrivateRoute>
             }
          />
-         <Route path="/user" element={<User />} />
+         <Route
+            path="/user"
+            element={
+               <PrivateRoute
+                  roles={['USER']}
+                  Component={
+                     <Suspense>
+                        <User />
+                     </Suspense>
+                  }
+                  fallbackPath={'/'}
+               ></PrivateRoute>
+            }
+         />
       </Routes>
    )
 }
