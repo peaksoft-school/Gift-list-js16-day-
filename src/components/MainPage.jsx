@@ -7,15 +7,12 @@ import Friends from '../assets/images/Friends.svg'
 import Friends2 from '../assets/images/Friends2.png'
 import { Box } from '@mui/material'
 import Button from './UI/Button'
+import MainHeaderPage from './MainHeaderPage'
 
 const MainPage = () => {
    return (
       <StyledMain>
-         <MainHeader>
-            <a href="#">О проекте</a>
-            <h3>GIFT LIST</h3>
-            <a href="#">Благотворительность</a>
-         </MainHeader>
+      <MainHeaderPage/>
 
          <SocialIcons>
             <StyledIcons src={Facebook} alt="facebook" />
@@ -61,23 +58,6 @@ const StyledMain = styled(Box)({
    textAlign: 'center',
 })
 
-const MainHeader = styled('div')({
-   display: 'flex',
-   justifyContent: 'space-between',
-   alignItems: 'center',
-   padding: '25px 60px',
-   a: {
-      color: '#fff',
-      textDecoration: 'none',
-      fontWeight: 500,
-      fontSize: '16px',
-   },
-   h3: {
-      fontWeight: 700,
-      fontSize: '24px',
-      marginLeft: '50px',
-   },
-})
 
 const SocialIcons = styled('div')({
    position: 'absolute',
