@@ -4,7 +4,6 @@ import AppRouter from './routes/AppRouter'
 const App = () => (
    <>
       <AppRouter />
-      {/* <Loading /> */}
    </>
 )
 
