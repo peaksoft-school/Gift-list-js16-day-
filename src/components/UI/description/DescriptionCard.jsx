@@ -1,12 +1,11 @@
 import { Box, styled, Typography } from '@mui/material'
-import PhotoSale from '../../../assets/images/PhotoSale.png'
+import Photo2Sale from '../../../assets/images/Photo2Sale.png'
 
 const DescriptionCard = () => {
-  
    return (
       <FlexContainer>
          <StyledBox>
-            <img src={PhotoSale} alt="photo" />
+            <img src={Photo2Sale} alt="photo" />
             <StyledText>
                <StyledParagraf variant="h5">Тема рассылки</StyledParagraf>
                <StyledContent variant="h6">
