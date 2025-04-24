@@ -1,11 +1,3 @@
-import MailingList from './components/UI/card/Мailinglist'
-import DescriptionCard from './components/UI/description/DescriptionCard'
-
-const App = () => (
-   <>
-      <MailingList />
-      <DescriptionCard />
-   </>
-)
+const App = () => <h1>Gift List 16</h1>
 
 export default App
