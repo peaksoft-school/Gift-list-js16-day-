@@ -18,8 +18,6 @@ const authSlise = createSlice({
          state.isAuth = false
          state.role = 'Guest'
          state.email = null
-
-         //   payload.navigate("/")
       },
    },
    extraReducers: (builder) => {

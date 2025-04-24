@@ -10,7 +10,7 @@ import { persistor, store } from './store/store.js'
 import { PersistGate } from 'redux-persist/integration/react'
 
 
-injectStore()
+injectStore(store)
 
 createRoot(document.getElementById('root')).render(
    <StrictMode>

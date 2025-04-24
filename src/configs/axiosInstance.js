@@ -3,7 +3,7 @@ import axios from 'axios'
 const BASE_URL = 'http://ec2-3-145-61-7.us-east-2.compute.amazonaws.com'
 
 export const axiosInstance = axios.create({
-   baseUrl: BASE_URL,
+   baseURL: BASE_URL,
 
    headers: {
       'Content-Type': 'application/json',
