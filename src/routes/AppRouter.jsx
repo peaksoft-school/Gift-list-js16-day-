@@ -1,12 +1,13 @@
 import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router'
 import { ROLES, ROUTES } from './routes'
-const Home = lazy(() => import('../pages/home/Home'))
+const Loading = lazy(() => import('../components/UI/loading/Loading'))
+const Home = lazy(() => import('../components/landing/Charity'))
 const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
 const SignUp = lazy(() => import('../pages/sign-up/SignUp'))
-const Admin = lazy(() => import('../pages/admin/Admin'))
+const Admin = lazy(() => import('../layout/AdminLayout'))
 const PrivateRoute = lazy(() => import('./PrivateRoute'))
-const User = lazy(() => import('../pages/user/User'))
+const User = lazy(() => import('../layout/UserLayout'))
 
 const AppRouter = () => {
    return (
@@ -15,9 +16,13 @@ const AppRouter = () => {
             path="/"
             element={
                <PrivateRoute
-                  roles={['USER', 'GUEST']}
-                  Component={<Home />}
-                  fallbackPath={'/'}
+                  roles={[ROLES.GUEST, ROLES.USER]}
+                  Component={
+                     <Suspense fallback={<Loading />}>
+                        <Home />
+                     </Suspense>
+                  }
+                  fallbackPath={'/admin'}
                />
             }
          />
@@ -28,21 +33,23 @@ const AppRouter = () => {
             path="/admin"
             element={
                <PrivateRoute
-                  roles={['ADMIN']}
+                  roles={[ROLES.ADMIN]}
                   Component={
                      <Suspense>
                         <Admin />
                      </Suspense>
                   }
                   fallbackPath={'/'}
-               ></PrivateRoute>
+               >
+                  {' '}
+               </PrivateRoute>
             }
          />
          <Route
             path="/user"
             element={
                <PrivateRoute
-                  roles={['USER']}
+                  roles={[ROLES.USER]}
                   Component={
                      <Suspense>
                         <User />
