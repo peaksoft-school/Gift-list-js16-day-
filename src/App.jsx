@@ -1,9 +1,9 @@
-import Loading from './components/UI/loading/Loading'
+import Loading from './components/Loading'
 import AppRouter from './routes/AppRouter'
 
 const App = () => (
    <>
-      <AppRouter  />
+      <AppRouter />
       {/* <Loading /> */}
    </>
 )

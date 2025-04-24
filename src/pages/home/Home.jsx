@@ -1,8 +1,5 @@
+import Charity from '../../components/landing/Charity'
 
-const Home = () => {
-  return (
-    <div>Home</div>
-  )
-}
+const Home = () => <Charity />
 
 export default Home
