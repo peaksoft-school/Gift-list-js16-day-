@@ -15,7 +15,10 @@ const Header = ({ role }) => {
                ) : role === 'admin' ? (
                   <div>
                      <StyledUnionIcon src={UnionIcon} alt="" />
-                     <StyledInput placeholder="Поиск" variant="outlined" />
+                     <StyledInput
+                        placeholder="Введите имя"
+                        variant="outlined"
+                     />
                   </div>
                ) : null}
                <div>
