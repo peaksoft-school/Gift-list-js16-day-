@@ -18,10 +18,11 @@ const Header = ({ role }) => {
                      <StyledInput placeholder="Поиск" variant="outlined" />
                   </div>
                ) : null}
+               <div>
+                  <StyledNotificationIcon src={Notification} alt="" />
 
-               <StyledNotificationIcon src={Notification} alt="" />
-
-               <StyledMeetBalls />
+                  <StyledMeetBox />
+               </div>
             </StyledBox>
          </Toolbar>
       </StyledCustomAppBar>
@@ -31,7 +32,7 @@ const Header = ({ role }) => {
 const StyledBox = styled(Box)(() => ({
    display: 'flex',
    alignItems: 'center',
-   justifyContent: 'space-between',
+   justifyContent: 'space-evenly',
    width: '100%',
    height: '40px',
    top: '23px',
@@ -60,18 +61,13 @@ const StyledCustomAppBar = styled(AppBar)(() => ({
 
 const StyledNotificationIcon = styled('img')(() => ({
    width: '24px',
-   height: '24px',
-   top: '31px',
-   left: '861px',
+   margin: '-50px',
+   marginRight: '30px',
 }))
 
-const StyledMeetBalls = styled(MeetBalls)(() => ({
-   width: '201px',
-   height: '46px',
-   top: '20px',
-   left: '905px',
-   padding: '8px',
-   gap: '4px',
+const StyledMeetBox = styled(MeetBalls)(() => ({
+   display: 'inline-block',
+   marginLeft: '5%',
 }))
 
 export default Header
