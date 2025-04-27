@@ -1,23 +1,27 @@
 import MeetBalls from '../components/UI/MeetBalls'
 import Notification from '../assets/icons/notification.svg'
 import InputSearch from '../components/UI/Input-search/InputSearch'
-import { Input as MainInput } from '../components/UI/Input'
+import Input from '../components/UI/Input'
 import { AppBar, Toolbar, Box, styled } from '@mui/material/'
+import UnionIcon from '../assets/icons/Union.svg'
 
 const Header = ({ role }) => {
    return (
-      <StyledCustomAppBar AppBar position="static">
+      <StyledCustomAppBar>
          <Toolbar>
             <StyledBox>
                {role === 'user' ? (
                   <StyledInputSearch />
                ) : role === 'admin' ? (
-                  <StyledInput placeholder="Поиск" variant="outlined" />
+                  <div>
+                     <StyledUnionIcon src={UnionIcon} alt="" />
+                     <StyledInput placeholder="Поиск" variant="outlined" />
+                  </div>
                ) : null}
 
-               <img src={Notification} alt="" />
+               <StyledNotificationIcon src={Notification} alt="" />
 
-               <MeetBalls />
+               <StyledMeetBalls />
             </StyledBox>
          </Toolbar>
       </StyledCustomAppBar>
@@ -37,17 +41,37 @@ const StyledBox = styled(Box)(() => ({
 const StyledInputSearch = styled(InputSearch)(() => ({
    width: '821px',
 }))
-const StyledInput = styled(MainInput)(() => ({
+const StyledInput = styled(Input)(() => ({
    '& .MuiInputBase-root': {
+      padding: '33px',
       width: '821px',
    },
-   input: {
-      padding: '30px',
-   },
+}))
+const StyledUnionIcon = styled('img')(() => ({
+   position: 'absolute',
+   margin: '28px 0 0 14px',
+   width: '18px',
 }))
 const StyledCustomAppBar = styled(AppBar)(() => ({
+   position: 'static',
    backgroundColor: 'transparent',
    boxShadow: 'none',
+}))
+
+const StyledNotificationIcon = styled('img')(() => ({
+   width: '24px',
+   height: '24px',
+   top: '31px',
+   left: '861px',
+}))
+
+const StyledMeetBalls = styled(MeetBalls)(() => ({
+   width: '201px',
+   height: '46px',
+   top: '20px',
+   left: '905px',
+   padding: '8px',
+   gap: '4px',
 }))
 
 export default Header
