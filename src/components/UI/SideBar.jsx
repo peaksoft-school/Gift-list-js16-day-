@@ -7,7 +7,7 @@ const SideBar = ({ role }) => {
 
    return (
       <Mainh1>
-         <h1>Gift - List</h1>
+         <h1>GIFT LIST</h1>
 
          {menuItems.map(({ title, icon }, index) => (
             <Button key={index}>
@@ -39,8 +39,7 @@ const Mainh1 = styled('div')({
 
    h1: {
       fontSize: '24px',
-      fontWeight: '100',
-      fontFamily: 'Gill Sans, sans-serif',
+      fontWeight: '700',
       padding: '23px 70px',
    },
    img: {
