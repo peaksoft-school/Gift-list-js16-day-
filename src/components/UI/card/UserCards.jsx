@@ -1,24 +1,35 @@
 import { Box, styled, Typography } from '@mui/material'
-import Menu from '../menu/MenuCards'
+import Menu from '../menu/Menu'
+import Block from '../../../assets/images/Block.png'
+import Delete from '../../../assets/images/Delete.png'
 
-const UserCards = ({ users = [] }) => {
+const menuItems = [
+   {
+      label: 'Заблокировать',
+      icon: Block,
+   },
+   {
+      label: 'Удалить',
+      icon: Delete,
+   },
+]
+
+const UserCards = ({ user }) => {
    return (
       <FlexContainer>
-         {users.map((user) => (
-            <StyledCard>
-               <StyledImage src={user.image} />
-               <StyledText> {user.fullName}</StyledText>
-               <StyledBox>
-                  <Typography>{user.amount}</Typography>
-                  <Typography align="center" fontSize="12px">
-                     желаемых
-                     <br />
-                     подарков
-                  </Typography>
-               </StyledBox>
-               <Menu />
-            </StyledCard>
-         ))}
+         <StyledCard>
+            <StyledImage src={user.image} />
+            <StyledText> {user.fullName}</StyledText>
+            <StyledBox>
+               <Typography>{user.amount}</Typography>
+               <Typography align="center" fontSize="12px">
+                  желаемых
+                  <br />
+                  подарков
+               </Typography>
+               <Menu items={menuItems} />
+            </StyledBox>
+         </StyledCard>
       </FlexContainer>
    )
 }
@@ -32,13 +43,13 @@ const FlexContainer = styled(Box)(() => ({
    gap: '24px',
    marginTop: '12px',
    width: '100%',
-   paddingTop: '100px',
+   marginLeft: '50px',
 }))
 
 const StyledCard = styled(Box)(() => ({
    background: ' linear-gradient(#f3e5f5 125px, #ffffff 125px)',
    width: '257px',
-   maxHeight: '287px',
+   height: '287px',
    fontWeight: '256px',
    borderRadius: '12px',
    padding: '16px',
@@ -71,7 +82,7 @@ const Text = styled(Box)({
    justifyContent: 'space-around',
 })
 
-const StyledBox = styled(Typography)(() => ({
+const StyledBox = styled(Box)(() => ({
    display: 'flex',
    flexDirection: 'column',
    alignItems: 'center',
