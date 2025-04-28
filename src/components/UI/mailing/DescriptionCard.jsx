@@ -1,27 +1,37 @@
 import { Box, styled, Typography } from '@mui/material'
 import Photo2Sale from '../../../assets/images/Photo2Sale.png'
+import BreadCrumbs from './BreadCrumbs'
 
 const DescriptionCard = () => {
+   const links = [
+      { href: '/Рассылка', label: 'Рассылка' },
+      { href: '/description', label: 'Тема рассылки' },
+      
+   ]
+
    return (
-      <FlexContainer>
-         <StyledBox>
-            <img src={Photo2Sale} alt="photo" />
-            <StyledText>
-               <StyledParagraf variant="h5">Тема рассылки</StyledParagraf>
-               <StyledContent variant="h6">
-                  Рубашка с технологией ProMotion и быстрым, плавным откликом.
-                  Грандиозный апгрейд системы камер, открывающий совершенно
-                  новые возможности. Исключительная прочность. A15 Bionic —
-                  самый быстрый чип для iPhone. И впечатляющее время работы без
-                  подзарядки. Всё это Pro.
-               </StyledContent>
-               <StyledData>
-                  <Typography variant="h6">Дата добавления:</Typography>
-                  <Typography>12.04.2025</Typography>
-               </StyledData>
-            </StyledText>
-         </StyledBox>
-      </FlexContainer>
+      <>
+         <BreadCrumbs links={links} />
+         <FlexContainer>
+            <StyledBox>
+               <img src={Photo2Sale} alt="photo" />
+               <StyledText>
+                  <StyledParagraf variant="h5">Тема рассылки</StyledParagraf>
+                  <StyledContent variant="h6">
+                     Рубашка с технологией ProMotion и быстрым, плавным
+                     откликом. Грандиозный апгрейд системы камер, открывающий
+                     совершенно новые возможности. Исключительная прочность. A15
+                     Bionic — самый быстрый чип для iPhone. И впечатляющее время
+                     работы без подзарядки. Всё это Pro.
+                  </StyledContent>
+                  <StyledData>
+                     <Typography variant="h6">Дата добавления:</Typography>
+                     <Typography>12.04.2025</Typography>
+                  </StyledData>
+               </StyledText>
+            </StyledBox>
+         </FlexContainer>
+      </>
    )
 }
 
