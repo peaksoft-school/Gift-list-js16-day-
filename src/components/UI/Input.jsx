@@ -76,11 +76,11 @@ const StyledInput = styled(TextField)(() => ({
          borderWidth: '2px',
       },
       '&:hover fieldset': {
-         borderColor: '#8639B5',
+         borderColor: 'grey',
       },
 
       '&.Mui-focused fieldset': {
-         borderColor: '#8639B5',
+         borderColor: 'grey',
       },
 
       '& .error-icon': {
