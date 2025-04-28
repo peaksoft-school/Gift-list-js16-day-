@@ -3,16 +3,17 @@ import Photo2Sale from '../../../assets/images/Photo2Sale.png'
 import BreadCrumbs from './BreadCrumbs'
 
 const DescriptionCard = () => {
-   const links = [
-      { href: '/Рассылка', label: 'Рассылка' },
-      { href: '/description', label: 'Тема рассылки' },
-      
-   ]
+   // const links = [
+   //    { href: '/Рассылка', label: 'Рассылка' },
+   //    { href: '/description', label: 'Тема рассылки' },
+
+   // ]
 
    return (
-      <>
-         <BreadCrumbs links={links} />
-         <FlexContainer>
+      <FlexContainer>
+         <BlockContainer>
+            {/* <BreadCrumbs links={links} /> */}
+
             <StyledBox>
                <img src={Photo2Sale} alt="photo" />
                <StyledText>
@@ -30,8 +31,8 @@ const DescriptionCard = () => {
                   </StyledData>
                </StyledText>
             </StyledBox>
-         </FlexContainer>
-      </>
+         </BlockContainer>
+      </FlexContainer>
    )
 }
 
@@ -40,12 +41,16 @@ export default DescriptionCard
 const FlexContainer = styled(Box)(() => ({
    display: 'flex',
    justifyContent: 'center',
+   alignItems: 'center',
+}))
+const BlockContainer = styled(Box)(() => ({
+   // display: 'flex',
+   // justifyContent: 'center',
+   // alignItems: 'center',
    width: '1086px',
-   height: '871px',
-   background: '#FFFFFF',
-   borderRadius: '10px',
-   border: '1px solid #f1efef ',
-   margin: '50px',
+   height: '1024px',
+   background: '#F7F8FA',
+   margin: '100px',
 }))
 
 const StyledBox = styled(Box)(() => ({
@@ -53,6 +58,11 @@ const StyledBox = styled(Box)(() => ({
    justifyContent: 'space-between',
    alignItems: 'start',
    padding: '30px',
+   width: '1086px',
+   height: '871px',
+   background: '#FFFFFF',
+   borderRadius: '10px',
+   border: '1px solid #f1efef ',
 }))
 
 const StyledText = styled(Box)(() => ({}))
