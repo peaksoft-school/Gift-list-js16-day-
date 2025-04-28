@@ -44,13 +44,11 @@ const FlexContainer = styled(Box)(() => ({
    alignItems: 'center',
 }))
 const BlockContainer = styled(Box)(() => ({
-   // display: 'flex',
-   // justifyContent: 'center',
-   // alignItems: 'center',
    width: '1086px',
    height: '1024px',
    background: '#F7F8FA',
    margin: '100px',
+   padding: '20px',
 }))
 
 const StyledBox = styled(Box)(() => ({
@@ -58,7 +56,8 @@ const StyledBox = styled(Box)(() => ({
    justifyContent: 'space-between',
    alignItems: 'start',
    padding: '30px',
-   width: '1086px',
+   marginTop: '80px',
+   width: '1050px',
    height: '871px',
    background: '#FFFFFF',
    borderRadius: '10px',
