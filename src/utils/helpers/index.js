@@ -7,6 +7,8 @@ import UsersLikeIcon from '../../assets/icons/users-like.svg'
 import Mailings from '../../assets/icons/mailings.svg'
 import ProfileIcon from '../../assets/icons/profile.svg'
 import LogoutIcon from '../../assets/icons/exit.svg'
+import Block from '../../assets/images/Block.png'
+import Delete from '../../assets/images/Delete.png'
 
 const ROLES_SIDEBAR = {
    users: [
@@ -31,4 +33,15 @@ const PROFILE_OPTIONS = [
    { title: 'Выход', icon: LogoutIcon },
 ]
 
-export { ROLES_SIDEBAR, PROFILE_OPTIONS }
+const USER_CARD_OPTIONS = [
+   {
+      title: 'Заблокировать',
+      icon: Block,
+   },
+   {
+      title: 'Удалить',
+      icon: Delete,
+   },
+]
+
+export { ROLES_SIDEBAR, PROFILE_OPTIONS, USER_CARD_OPTIONS }
