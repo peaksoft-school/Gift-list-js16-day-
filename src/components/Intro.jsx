@@ -1,62 +1,68 @@
-import styled from 'styled-components'
+import { Box, styled, Typography } from '@mui/material'
+import Button from './UI/Button'
 import VK from '../assets/icons/vk.svg'
 import Facebook from '../assets/icons/facebook.svg'
 import Instagram from '../assets/icons/instagram.svg'
+import DownIcon from '../assets/icons/down.png'
 import Friends from '../assets/images/Friends.svg'
 import Friends2 from '../assets/images/Friends2.png'
-import { Box } from '@mui/material'
-import Button from './UI/Button'
-import MainHeaderPage from './MainHeaderPage'
-import DownIcon from '../assets/icons/down.png'
 
-const Intro = () => {
-   return (
-      <StyledContiner>
-         <StyledMain>
-            <MainHeaderPage />
+const Intro = () => (
+   <StyledContiner>
+      <StyledMain>
+         <MainHeader>
+            <a href="#">О проекте</a>
 
-            <SocialIcons>
-               <StyledIcons src={Facebook} alt="facebook" />
-               <StyledIcons src={VK} alt="vk" />
-               <StyledIcons src={Instagram} alt="instagram" />
-            </SocialIcons>
+            <Typography variant="h3">GIFT LIST</Typography>
 
-            <FriendsImageLeft>
-               <StyledBorderBox>
-                  <StyledFriendImage src={Friends} alt="friends" />
-               </StyledBorderBox>
-            </FriendsImageLeft>
+            <a href="#">Благотворительность</a>
+         </MainHeader>
 
-            <FriendsImageRight>
-               <MainBorderBox2>
-                  <img src={Friends2} alt="friends2" />
-               </MainBorderBox2>
-            </FriendsImageRight>
+         <SocialIcons>
+            <StyledIcons src={Facebook} alt="facebook" />
+            <StyledIcons src={VK} alt="vk" />
+            <StyledIcons src={Instagram} alt="instagram" />
+         </SocialIcons>
 
-            <CenterContent>
-               <h1>
-                  Социальная сеть
-                  <br /> нового поколения
-               </h1>
-               <div>
-                  Всегда подскажет, что подарить близким <br /> и осуществит
-                  твои желания
-               </div>
-               <StyledButton>Войти</StyledButton>
-               <StyledButton variant="outlined">Регистрация</StyledButton>
-            </CenterContent>
-            <DowmText>
-               <p>
-                  <img src={DownIcon} alt="" style={{ marginTop: '15px' }} />
-                  Листай вниз
-               </p>
-            </DowmText>
-         </StyledMain>
-      </StyledContiner>
-   )
-}
+         <FriendsImageLeft>
+            <StyledBorderBox>
+               <StyledFriendImage src={Friends} alt="friends" />
+            </StyledBorderBox>
+         </FriendsImageLeft>
 
-const StyledContiner = styled('div')(() => ({
+         <FriendsImageRight>
+            <MainBorderBox2>
+               <img src={Friends2} alt="friends2" />
+            </MainBorderBox2>
+         </FriendsImageRight>
+
+         <CenterContent>
+            <Typography variant="h1">
+               Социальная сеть
+               <br /> нового поколения
+            </Typography>
+
+            <Box>
+               Всегда подскажет, что подарить близким <br /> и осуществит твои
+               желания
+            </Box>
+
+            <StyledButton>Войти</StyledButton>
+
+            <StyledButton variant="outlined">Регистрация</StyledButton>
+         </CenterContent>
+
+         <DowmText>
+            <Typography>
+               <img src={DownIcon} alt="down-list" className="down-list" />
+               Листай вниз
+            </Typography>
+         </DowmText>
+      </StyledMain>
+   </StyledContiner>
+)
+
+const StyledContiner = styled(Box)(() => ({
    display: 'flex',
    alignItems: 'center',
    textAlign: 'center',
@@ -71,12 +77,32 @@ const StyledMain = styled(Box)({
    minHeight: '120vh',
    position: 'relative',
    overflow: 'hidden',
-   width: '1200px',
+   width: '1400px',
    maxWidth: '100%',
    margin: '0 auto',
 })
 
-const SocialIcons = styled('div')({
+const MainHeader = styled(Box)({
+   display: 'flex',
+   justifyContent: 'space-between',
+   alignItems: 'center',
+   padding: '25px 60px',
+
+   a: {
+      color: '#fff',
+      textDecoration: 'none',
+      fontWeight: 500,
+      fontSize: '16px',
+   },
+
+   h3: {
+      fontWeight: 700,
+      fontSize: '24px',
+      marginLeft: '50px',
+   },
+})
+
+const SocialIcons = styled(Box)({
    position: 'absolute',
    top: '120px',
    left: '60px',
@@ -90,7 +116,7 @@ const StyledIcons = styled('img')({
    height: 22,
 })
 
-const CenterContent = styled('div')({
+const CenterContent = styled(Box)({
    textAlign: 'center',
    maxWidth: '520px',
    margin: '0 auto',
@@ -115,13 +141,13 @@ const StyledButton = styled(Button)({
    marginBottom: '12px',
 })
 
-const FriendsImageLeft = styled('div')({
+const FriendsImageLeft = styled(Box)({
    position: 'relative',
    position: 'absolute',
    top: 400,
 })
 
-const FriendsImageRight = styled('div')({
+const FriendsImageRight = styled(Box)({
    position: 'absolute',
    top: '130px',
    right: '40px',
@@ -134,7 +160,7 @@ const StyledFriendImage = styled('img')({
    zIndex: 2,
 })
 
-const StyledBorderBox = styled('div')({
+const StyledBorderBox = styled(Box)({
    position: 'relative',
    width: '260px',
    height: '320px',
@@ -168,6 +194,7 @@ const MainBorderBox2 = styled('div')({
       borderTopLeftRadius: '100px',
       zIndex: 0,
    },
+
    img: {
       width: '100%',
       height: '100%',
@@ -182,6 +209,10 @@ const DowmText = styled('div')(() => ({
    fontSize: '14px',
    fontWeight: 400,
    cursor: 'pointer',
+
+   '& .down-list': {
+      marginTop: '15px',
+   },
 }))
 
 export default Intro
