@@ -1,6 +1,10 @@
 import { lazy, Suspense } from 'react'
-import { Route, Routes } from 'react-router'
-import { ROLES } from './routes'
+import { Navigate, Route, Routes } from 'react-router'
+import { ROLES, ROUTES } from './routes'
+import InputSearch from '../components/UI/Input-search/InputSearch'
+import Header from '../layout/Header'
+import Blago from '../pages/user/Blago'
+
 const Loading = lazy(() => import('../components/Loading'))
 const Home = lazy(() => import('../pages/home/Home'))
 const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
@@ -26,11 +30,36 @@ const AppRouter = () => (
          }
       />
 
-      <Route path="sign-in" element={<SignIn />} />
-      <Route path="sign-up" element={<SignUp />} />
+      <Route
+         path="/sign-in"
+         element={
+            <PrivateRoute
+               roles={[ROUTES.SIGN_IN]}
+               Component={
+                  <Suspense fallback={<Loading />}>
+                     <SignIn />
+                  </Suspense>
+               }
+            />
+         }
+      />
 
       <Route
-         path="/admin"
+         path="/sign-up"
+         element={
+            <PrivateRoute
+               roles={[ROUTES.SIGN_UP]}
+               Component={
+                  <Suspense fallback={<Loading />}>
+                     <SignUp />
+                  </Suspense>
+               }
+            />
+         }
+      />
+
+      <Route
+         path="admin"
          element={
             <PrivateRoute
                roles={[ROLES.ADMIN]}
@@ -42,7 +71,14 @@ const AppRouter = () => (
                fallbackPath={'/'}
             />
          }
-      />
+      >
+         <Route index element={<Navigate to="users" />} />
+         <Route path="users" />
+         <Route path="charity" />
+         <Route path="complaints" />
+         <Route path="newsletter" />
+      </Route>
+
       <Route
          path="/user"
          element={
@@ -53,10 +89,17 @@ const AppRouter = () => (
                      <User />
                   </Suspense>
                }
-               fallbackPath={'/'}
+               fallbackPath={'/admin'}
             />
          }
-      />
+      >
+         <Route path="lenta" />
+         <Route path="friends" />
+         <Route path="spisok" />
+         <Route path="zabro" />
+         <Route path="my-part" />
+         <Route path="charity" element={<Blago />} />
+      </Route>
    </Routes>
 )
 

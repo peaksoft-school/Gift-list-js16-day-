@@ -5,6 +5,7 @@ import GiftIcon from '../../assets/icons/gifts.svg'
 import HolydaysIcon from '../../assets/icons/holidays.svg'
 import UsersLikeIcon from '../../assets/icons/userslike.svg'
 import Mailings from '../../assets/icons/mailings.svg'
+import Vector from '../../assets/icons/Vector.svg'
 
 const conditions = [
    { value: '1', name: 'Все' },
@@ -41,18 +42,18 @@ const countries = [
 
 const roles = {
    users: [
-      { title: 'Лента', icon: TapeIcon },
-      { title: 'Друзья', icon: UsersIcon },
-      { title: 'Список желании ', icon: ListIcon },
-      { title: 'Забронирование', icon: GiftIcon },
-      { title: 'Мои праздники', icon: HolydaysIcon },
-      { title: 'Благовторительность', icon: UsersLikeIcon },
+      { title: 'Лента', icon: TapeIcon, link: 'lenta' },
+      { title: 'Друзья', icon: UsersIcon, link: 'friends' },
+      { title: 'Список желании ', icon: ListIcon, link: 'spisok' },
+      { title: 'Забронирование', icon: GiftIcon, link: 'zabro' },
+      { title: 'Мои праздники', icon: HolydaysIcon, link: 'my-part' },
+      { title: 'Благовторительность', icon: UsersLikeIcon, link: 'charity' },
    ],
    admin: [
-      { title: 'Пользователи', icon: UsersIcon },
-      { title: 'Благотворительность', icon: UsersLikeIcon },
-      { title: 'Жалобы ', icon: UsersIcon },
-      { title: 'Рассылка', icon: Mailings },
+      { title: 'Пользователи', icon: UsersIcon, link: 'users' },
+      { title: 'Благотворительность', icon: UsersLikeIcon, link: 'charity' },
+      { title: 'Жалобы ', icon: Vector, link: 'complaints' },
+      { title: 'Рассылка', icon: Mailings, link: 'newsletter' },
    ],
 }
 
