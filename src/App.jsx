@@ -1,3 +1,5 @@
-const App = () => <h1>GIFT-LIST-16-DAY</h1>
+import Home from './pages/home/Home'
+
+const App = () => <Home />
 
 export default App

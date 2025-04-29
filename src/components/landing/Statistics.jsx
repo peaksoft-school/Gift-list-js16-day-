@@ -1,6 +1,6 @@
 import CountUp from 'react-countup'
 import { Box, Typography, styled } from '@mui/material'
-import { STATISTICS } from '../../utils/constants/index'
+import { STATISTICS } from '../../utils/constants'
 
 const Statistics = () => (
    <StyledBox>
