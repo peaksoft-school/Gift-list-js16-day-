@@ -1,6 +1,6 @@
 import { Box, Container, Stack, Typography, styled } from '@mui/material'
 import { Favorite, ThumbUp, VolunteerActivism } from '@mui/icons-material'
-import Button from './UI/Button'
+import Button from '../UI/Button'
 
 const Advantage = () => (
    <StyledBox>

@@ -1,22 +1,26 @@
 import { Box, styled, Typography } from '@mui/material'
-import MeetBalls from '../UI/MeetBalls'
+import MeetBalls from './MeetBalls'
 import { USER_CARD_OPTIONS } from '../../utils/helpers'
 
-const UserCards = ({ user }) => {
+const UserCard = ({ user }) => {
    const { image, fullName, amount } = user
 
    return (
       <FlexContainer>
          <StyledCard>
             <StyledImage src={image} />
+
             <StyledText> {fullName}</StyledText>
+
             <StyledBox>
                <Typography>{amount}</Typography>
+
                <Typography align="center" fontSize="12px">
                   желаемых
                   <br />
                   подарков
                </Typography>
+
                <MeetBalls options={USER_CARD_OPTIONS} />
             </StyledBox>
          </StyledCard>
@@ -24,7 +28,7 @@ const UserCards = ({ user }) => {
    )
 }
 
-export default UserCards
+export default UserCard
 
 const FlexContainer = styled(Box)(() => ({
    display: 'flex',
