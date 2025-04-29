@@ -1,30 +1,21 @@
-import Box from '@mui/material/Box'
 import CountUp from 'react-countup'
-import { styled } from '@mui/material/styles'
-import { Typography } from '@mui/material'
+import { Box, Typography, styled } from '@mui/material'
+import { STATISTICS } from '../utils/constants/index'
 
-const COUNTER = [
-   { end: 100, label: 'K+', text: 'Пользователей' },
-   { end: 10, label: 'K+', text: 'Размещенных подарков' },
-   { end: 15, label: 'K+', text: 'Подаренных подарков' },
-   { end: 9, label: 'K+', text: 'Реализованной благотворительной помощи' },
-]
-
-const Statistics = () => {
-   return (
-      <StyledBox>
-         {COUNTER.map(({ end, label, text }) => (
+const Statistics = () => (
+   <StyledBox>
+      {STATISTICS.map(({ end, label, text }) => (
+         <Box>
             <Box>
-               <Box>
-                  <CountUp end={end} /> {label}
-               </Box>
-
-               <StyledText>{text}</StyledText>
+               <CountUp end={end} /> {label}
             </Box>
-         ))}
-      </StyledBox>
-   )
-}
+
+            <StyledText>{text}</StyledText>
+         </Box>
+      ))}
+   </StyledBox>
+)
+
 export default Statistics
 
 const StyledBox = styled(Box)({

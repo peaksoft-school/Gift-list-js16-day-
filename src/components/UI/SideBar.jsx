@@ -1,9 +1,11 @@
-import { Button } from '@mui/material'
-import { roles } from '../../utils/constants'
-import styled from 'styled-components'
+import { Button, styled } from '@mui/material'
+import { ROLES_SIDEBAR } from '../../utils/helpers'
 
-const SideBar = ({ role }) => {
-   const menuItems = role.toLowerCase() === 'user' ? roles.users : roles.admin
+const SideBar = () => {
+   const role = 'USER'
+
+   const menuItems =
+      role.toLowerCase() === 'user' ? ROLES_SIDEBAR.users : ROLES_SIDEBAR.admin
 
    return (
       <Mainh1>
@@ -11,7 +13,8 @@ const SideBar = ({ role }) => {
 
          {menuItems.map(({ title, icon }, index) => (
             <Button key={index}>
-               <img src={icon} alt={title} /> <span>{title}</span>
+               <img src={icon} alt={title} />
+               <span>{title}</span>
             </Button>
          ))}
       </Mainh1>
@@ -43,6 +46,7 @@ const Mainh1 = styled('div')({
       fontFamily: 'Gill Sans, sans-serif',
       padding: '23px 70px',
    },
+
    img: {
       paddingRight: '19px',
    },
