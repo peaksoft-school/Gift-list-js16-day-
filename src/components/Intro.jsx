@@ -9,7 +9,7 @@ import Button from './UI/Button'
 import MainHeaderPage from './MainHeaderPage'
 import DownIcon from '../assets/icons/down.png'
 
-const MainPage = () => {
+const Intro = () => {
    return (
       <StyledContiner>
          <StyledMain>
@@ -184,4 +184,4 @@ const DowmText = styled('div')(() => ({
    cursor: 'pointer',
 }))
 
-export default MainPage
+export default Intro
