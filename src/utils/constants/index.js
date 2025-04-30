@@ -1,11 +1,3 @@
-import UsersIcon from '../../assets/icons/users.svg'
-import TapeIcon from '../../assets/icons/tape.svg'
-import ListIcon from '../../assets/icons/list.svg'
-import GiftIcon from '../../assets/icons/gifts.svg'
-import HolydaysIcon from '../../assets/icons/holidays.svg'
-import UsersLikeIcon from '../../assets/icons/userslike.svg'
-import Mailings from '../../assets/icons/mailings.svg'
-
 const conditions = [
    { value: '1', name: 'Все' },
    { value: '2', name: 'Б/У' },
@@ -39,21 +31,43 @@ const countries = [
    { value: '6', name: 'Таджикистан' },
 ]
 
-const roles = {
-   users: [
-      { title: 'Лента', icon: TapeIcon },
-      { title: 'Друзья', icon: UsersIcon },
-      { title: 'Список желании ', icon: ListIcon },
-      { title: 'Забронирование', icon: GiftIcon },
-      { title: 'Мои праздники', icon: HolydaysIcon },
-      { title: 'Благовторительность', icon: UsersLikeIcon },
-   ],
-   admin: [
-      { title: 'Пользователи', icon: UsersIcon },
-      { title: 'Благотворительность', icon: UsersLikeIcon },
-      { title: 'Жалобы ', icon: UsersIcon },
-      { title: 'Рассылка', icon: Mailings },
-   ],
-}
+const STATISTICS = [
+   { end: 100, label: 'K+', text: 'Пользователей' },
+   { end: 10, label: 'K+', text: 'Размещенных подарков' },
+   { end: 15, label: 'K+', text: 'Подаренных подарков' },
+   { end: 9, label: 'K+', text: 'Реализованной благотворительной помощи' },
+]
+
+const FRIENDS = [
+   {
+      id: 1,
+      image: 'https://i.pinimg.com/736x/b8/25/f8/b825f8aca31785c9165e18a279771100.jpg',
+      fullName: 'Annette Black',
+      desires: 12,
+      holidays: 10,
+   },
+
+   {
+      id: 2,
+      image: 'https://masterpiecer-images.s3.yandex.net/541b62ae9ccf11ee9c107acfd41307a6:upscaled',
+      fullName: 'Annette Black',
+      desires: 12,
+      holidays: 10,
+   },
+   {
+      id: 3,
+      image: 'https://masterpiecer-images.s3.yandex.net/4b2b37aba11711eebb734a50f1b511f1:upscaled',
+      fullName: 'Annette Black',
+      desires: 12,
+      holidays: 10,
+   },
+   {
+      id: 4,
+      image: 'https://klev.club/uploads/posts/2023-10/1697480887_klev-club-p-kartinki-krasivie-lyudi-40.jpg',
+      fullName: 'Annette Black',
+      desires: 12,
+      holidays: 10,
+   },
+]
 
 export { conditions, categories, subcategories, countries, STATISTICS, FRIENDS }

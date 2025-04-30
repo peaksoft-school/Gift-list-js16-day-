@@ -8,7 +8,7 @@ const SideBar = () => {
       role.toLowerCase() === 'user' ? ROLES_SIDEBAR.users : ROLES_SIDEBAR.admin
 
    const roleNavigation = (param) => {
-      return role.toLowerCase() === 'user'
+      return role.toLowerCase() === ''
          ? `/user/${param}`
          : `/admin/${param}`
    }

@@ -1,7 +1,7 @@
 import { isValidElement, useState } from 'react'
 import { IconButton, Menu, MenuItem, styled } from '@mui/material'
-// import { MoreHoriz, MoreVert } from '@mui/icons-material'
-// import ArrowIcon from '../../assets/icons/chevrons.svg'
+import { MoreHoriz, MoreVert } from '@mui/icons-material'
+import ArrowIcon from '../../assets/icons/chevrons.svg'
 import Button from './Button'
 
 const MeatBalls = ({
@@ -27,7 +27,7 @@ const MeatBalls = ({
    }
    return (
       <StyledMenu>
-         <img src={profilebackg} alt="" />
+         <img src={ArrowIcon} alt="" />
 
          <Button
             id="basic-button"
@@ -38,7 +38,7 @@ const MeatBalls = ({
             color="#212121"
          >
             Naruto Uzumaki
-            <img src={chevrons} alt="" />
+            <img src={ArrowIcon} alt="" />
          </Button>
          <Menu
             id="basic-menu"

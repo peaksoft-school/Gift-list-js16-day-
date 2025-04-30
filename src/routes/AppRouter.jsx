@@ -38,6 +38,7 @@ const AppRouter = () => (
                      <SignIn />
                   </Suspense>
                }
+               // fallbackPath={'/admin'}
             />
          }
       />
@@ -52,6 +53,7 @@ const AppRouter = () => (
                      <SignUp />
                   </Suspense>
                }
+               fallbackPath={'/admin'}
             />
          }
       />
@@ -87,7 +89,7 @@ const AppRouter = () => (
                      <User />
                   </Suspense>
                }
-               fallbackPath={'/admin' && '/'}
+               fallbackPath={'/admin' && '/user'}
             />
          }
       >

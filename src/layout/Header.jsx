@@ -31,14 +31,14 @@ const Header = () => {
                      />
                   </>
                ) : null}
-               <>
-                  <StyledNotificationIcon src={Notification} alt="" />
-
                   <StyledMeetBox
                      variant="profile"
                      options={PROFILE_OPTIONS}
                      handleChange={handleChange}
                   />
+               <>
+                  <StyledNotificationIcon src={Notification} alt="" />
+
                </>
             </StyledBox>
          </Toolbar>
@@ -67,8 +67,8 @@ const StyledInput = styled(Input)(() => ({
    },
 }))
 const StyledUnionIcon = styled('img')(() => ({
-   position: 'absolute',
-   margin: '28px 0 0 14px',
+   // position: 'absolute',
+   // margin: '28px 0 0 14px',
    width: '18px',
 }))
 const StyledCustomAppBar = styled(AppBar)(() => ({
