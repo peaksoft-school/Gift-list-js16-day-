@@ -1,6 +1,6 @@
 import { Box, styled, Typography } from '@mui/material'
 import MeetBalls from './MeetBalls'
-import { USER_CARD_OPTIONS } from '../../utils/helpers'
+import { USER_CARD_OPTIONS } from '../../utils/helpers/index'
 
 const UserCard = ({ user }) => {
    const { image, fullName, amount } = user

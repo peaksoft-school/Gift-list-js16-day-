@@ -1,7 +1,8 @@
 import { isValidElement, useState } from 'react'
 import { IconButton, Menu, MenuItem, styled } from '@mui/material'
-import { MoreHoriz, MoreVert } from '@mui/icons-material'
-import ArrowIcon from '../../assets/icons/chevrons.svg'
+// import { MoreHoriz, MoreVert } from '@mui/icons-material'
+// import ArrowIcon from '../../assets/icons/chevrons.svg'
+import Button from './Button'
 
 const MeatBalls = ({
    variant = 'horiz',
@@ -28,7 +29,7 @@ const MeatBalls = ({
       <StyledMenu>
          <img src={profilebackg} alt="" />
 
-         <StyledMainButton
+         <Button
             id="basic-button"
             aria-controls={open ? 'basic-menu' : undefined}
             aria-haspopup="true"
@@ -38,7 +39,7 @@ const MeatBalls = ({
          >
             Naruto Uzumaki
             <img src={chevrons} alt="" />
-         </StyledMainButton>
+         </Button>
          <Menu
             id="basic-menu"
             anchorEl={anchorEl}

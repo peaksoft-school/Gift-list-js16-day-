@@ -1,11 +1,8 @@
 import { AppBar, Toolbar, Box, styled } from '@mui/material'
-import InputSearch from '../components/UI/InputSearch'
-import Input from '../components/UI/Input'
 import MeatBalls from '../components/UI/MeetBalls'
 import Notification from '../assets/icons/notification.svg'
-import InputSearch from '../components/UI/Input-search/InputSearch'
+import InputSearch from '../components/UI/InputSearch'
 import Input from '../components/UI/Input'
-import { AppBar, Toolbar, Box, styled } from '@mui/material/'
 import UnionIcon from '../assets/icons/Union.svg'
 import { PROFILE_OPTIONS } from '../utils/helpers'
 

@@ -1,8 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { Navigate, Route, Routes } from 'react-router'
 import { ROLES, ROUTES } from './routes'
-import InputSearch from '../components/UI/Input-search/InputSearch'
-import Header from '../layout/Header'
 import Blago from '../pages/user/Blago'
 
 const Loading = lazy(() => import('../components/Loading'))

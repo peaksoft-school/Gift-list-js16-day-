@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { Box, InputAdornment, TextField } from '@mui/material'
-import UnionIcon from '../../../assets/icons/Union.svg'
+import UnionIcon from '../../assets/icons/Union.svg'
 import styled from 'styled-components'
 import {
    categories,
    conditions,
    countries,
    subcategories,
-} from '../../../utils/constants/index'
-import Select from '../Select'
+} from '../../utils/constants/index'
+import Select from './Select'
 
 const InputSearch = () => {
    const [filters, setFilters] = useState({
