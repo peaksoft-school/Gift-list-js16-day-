@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { Box, InputAdornment, TextField } from '@mui/material'
-import UnionIcon from '../../assets/icons/Union.svg'
-import styled from 'styled-components'
+import { Box, InputAdornment, TextField, styled } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
 import {
    categories,
    conditions,
@@ -9,6 +8,7 @@ import {
    subcategories,
 } from '../../utils/constants/index'
 import Select from './Select'
+import UnionIcon from '../../assets/icons/Union.svg'
 
 const InputSearch = () => {
    const [filters, setFilters] = useState({
@@ -23,13 +23,13 @@ const InputSearch = () => {
 
    const searchInputProps = {
       disableUnderline: true,
+
       startAdornment: <InputAdornment position="start"></InputAdornment>,
    }
 
    return (
       <MainBox tabIndex={0}>
-         <StyledUnionIcon src={UnionIcon} />
-
+         <StyledUnionIcon src={UnionIcon} alt="" />
          <MainInputSearch
             variant="standard"
             placeholder="Поиск"
@@ -77,10 +77,9 @@ const MainBox = styled(Box)({
    padding: '0px',
    borderRadius: '8px',
    border: '1px solid #ddd',
-   marginTop: '3px',
    width: '100%',
-   height: '50px',
-   maxWidth: '821px',
+   maxWidth: '72%',
+   marginRight: '90px',
 
    '.MuiInputBase-input-MuiInput-input': {
       focus: {
@@ -97,7 +96,7 @@ const MainInputSearch = styled(TextField)({
    '& input::placeholder': { color: 'gray', opacity: 1 },
 })
 
-const StyledUnionIcon = styled('img')(() => ({
-   margin: '0px 0 0 13px',
-   width: '18px',
-}))
+const StyledUnionIcon = styled('img')({
+   color: 'gray',
+   marginLeft: '10px',
+})

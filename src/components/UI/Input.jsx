@@ -7,6 +7,7 @@ import {
    styled,
 } from '@mui/material'
 import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded'
+import UnionIcon from '../../assets/icons/Union.svg'
 
 const Input = forwardRef(
    (
@@ -20,6 +21,7 @@ const Input = forwardRef(
          error,
          errorText,
          inputProps,
+         icon,
          ...rest
       },
       ref
@@ -37,6 +39,12 @@ const Input = forwardRef(
             ref={ref}
             fullWidth
             InputProps={{
+               startAdornment: icon ? (
+                  <InputAdornment position="start">
+                     <img src={UnionIcon} alt="notification" />
+                  </InputAdornment>
+               ) : null,
+
                endAdornment: error ? (
                   <InputAdornment position="end">
                      <ErrorOutlineRoundedIcon className="error-icon" />

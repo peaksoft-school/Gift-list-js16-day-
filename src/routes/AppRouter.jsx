@@ -77,7 +77,7 @@ const AppRouter = () => (
                      <User />
                   </Suspense>
                }
-               fallbackPath={'/admin' && '/user'}
+               fallbackPath={'/admin'}
             />
          }
       >

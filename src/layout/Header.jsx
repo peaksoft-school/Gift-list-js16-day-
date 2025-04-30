@@ -1,41 +1,35 @@
-import { AppBar, Toolbar, Box, styled } from '@mui/material'
-import MeatBalls from '../components/UI/MeetBalls'
 import Notification from '../assets/icons/notification.svg'
 import InputSearch from '../components/UI/InputSearch'
 import Input from '../components/UI/Input'
-import UnionIcon from '../assets/icons/Union.svg'
+import { AppBar, Toolbar, Box, styled, Typography } from '@mui/material'
+import MeatBalls from '../components/UI/MeetBalls'
 import { PROFILE_OPTIONS } from '../utils/helpers'
+import { useLocation } from 'react-router'
 
-const Header = ({ role }) => {
-   const handleChange = (e) => {
-      const selected = e.currentTarget.getAttribute('value')
-
-      console.log('Выбран пункт:', selected)
-   }
+const Header = () => {
+   const { pathname } = useLocation()
 
    return (
       <StyledCustomAppBar>
          <Toolbar>
             <StyledBox>
-               {role === 'USER' ? (
+               {pathname === '/admin/charity' ||
+               pathname === '/user/charity' ? (
                   <StyledInputSearch />
-               ) : role === 'ADMIN' ? (
-                  <>
-                     <StyledUnionIcon src={UnionIcon} alt="" />
+               ) : (
+                  <StyledInput
+                     placeholder="Введите имя"
+                     variant="outlined"
+                     icon={true}
+                  />
+               )}
 
-                     <StyledInput
-                        placeholder="Введите имя"
-                        variant="outlined"
-                     />
-                  </>
-               ) : null}
-               <StyledMeetBox
-                  variant="profile"
-                  options={PROFILE_OPTIONS}
-                  handleChange={handleChange}
-               />
                <>
                   <StyledNotificationIcon src={Notification} alt="" />
+
+                  <Typography className="user-name">Naruto Uzumaki</Typography>
+
+                  <MeatBalls variant="profile" options={PROFILE_OPTIONS} />
                </>
             </StyledBox>
          </Toolbar>
@@ -47,10 +41,14 @@ const StyledBox = styled(Box)(() => ({
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'space-evenly',
-   gap: '70px',
    height: '40px',
    top: '33px',
    marginLeft: '280px',
+   width: '100%',
+
+   '& .user-name': {
+      width: '140px',
+   },
 }))
 
 const StyledInputSearch = styled(InputSearch)(() => ({
@@ -59,15 +57,11 @@ const StyledInputSearch = styled(InputSearch)(() => ({
 
 const StyledInput = styled(Input)(() => ({
    '& .MuiInputBase-root': {
-      padding: '33px',
-      width: '742px',
+      padding: '30px 10px',
+      width: '90%',
    },
 }))
-const StyledUnionIcon = styled('img')(() => ({
-   // position: 'absolute',
-   // margin: '28px 0 0 14px',
-   width: '18px',
-}))
+
 const StyledCustomAppBar = styled(AppBar)(() => ({
    backgroundColor: 'transparent',
    boxShadow: 'none',
@@ -75,13 +69,8 @@ const StyledCustomAppBar = styled(AppBar)(() => ({
 
 const StyledNotificationIcon = styled('img')(() => ({
    width: '24px',
-   margin: '-53px',
-   marginRight: '20px',
-}))
-
-const StyledMeetBox = styled(MeatBalls)(() => ({
-   display: 'inline-block',
-   marginLeft: '5%',
+   margin: '-50px',
+   marginRight: '30px',
 }))
 
 export default Header
