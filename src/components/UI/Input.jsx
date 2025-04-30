@@ -4,8 +4,8 @@ import {
    InputAdornment,
    InputLabel,
    TextField,
+   styled,
 } from '@mui/material'
-import styled from 'styled-components'
 import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded'
 
 const Input = forwardRef(
@@ -23,35 +23,33 @@ const Input = forwardRef(
          ...rest
       },
       ref
-   ) => {
-      return (
-         <>
-            <StyledInputLabel error={error}>{labelText}</StyledInputLabel>
+   ) => (
+      <>
+         <StyledInputLabel error={error}>{labelText}</StyledInputLabel>
 
-            <StyledInput
-               type={type}
-               value={value}
-               onChange={handleChange}
-               placeholder={placeholder}
-               error={Boolean(error)}
-               name={name}
-               ref={ref}
-               fullWidth
-               InputProps={{
-                  endAdornment: error ? (
-                     <InputAdornment position="end">
-                        <ErrorOutlineRoundedIcon className="error-icon" />
-                     </InputAdornment>
-                  ) : null,
-                  ...inputProps,
-               }}
-               {...rest}
-            />
+         <StyledInput
+            type={type}
+            value={value}
+            onChange={handleChange}
+            placeholder={placeholder}
+            error={Boolean(error)}
+            name={name}
+            ref={ref}
+            fullWidth
+            InputProps={{
+               endAdornment: error ? (
+                  <InputAdornment position="end">
+                     <ErrorOutlineRoundedIcon className="error-icon" />
+                  </InputAdornment>
+               ) : null,
+               ...inputProps,
+            }}
+            {...rest}
+         />
 
-            {error && <StyledFormHelperText>{errorText}</StyledFormHelperText>}
-         </>
-      )
-   }
+         {error && <StyledFormHelperText>{errorText}</StyledFormHelperText>}
+      </>
+   )
 )
 export default Input
 
@@ -74,6 +72,7 @@ const StyledInput = styled(TextField)(() => ({
       '& fieldset': {
          margin: '8px 0',
       },
+
       '&:hover fieldset': {
          border: '1px solid grey',
       },
@@ -101,6 +100,7 @@ const StyledInput = styled(TextField)(() => ({
       '& fieldset': {
          borderColor: 'red',
       },
+
       '& input': {
          color: 'red',
       },

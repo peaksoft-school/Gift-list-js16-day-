@@ -5,7 +5,6 @@ import GiftIcon from '../../assets/icons/gifts.svg'
 import HolydaysIcon from '../../assets/icons/holidays.svg'
 import UsersLikeIcon from '../../assets/icons/userslike.svg'
 import Mailings from '../../assets/icons/mailings.svg'
-import Vector from '../../assets/icons/Vector.svg'
 
 const conditions = [
    { value: '1', name: 'Все' },
@@ -16,45 +15,45 @@ const conditions = [
 const categories = [
    { value: '1', name: 'Смартфоны и телефоны' },
    { value: '2', name: 'Аудиотехника' },
-   { value: '2', name: 'Фото и видеокамеры' },
-   { value: '2', name: 'Автоэлектроника' },
-   { value: '2', name: 'ТВ и видео' },
-   { value: '2', name: 'Компьютеры, ноутбуки и планшеты' },
+   { value: '3', name: 'Фото и видеокамеры' },
+   { value: '4', name: 'Автоэлектроника' },
+   { value: '5', name: 'ТВ и видео' },
+   { value: '6', name: 'Компьютеры, ноутбуки и планшеты' },
 ]
 
 const subcategories = [
    { value: '1', name: 'Электроника' },
    { value: '2', name: 'Одежда' },
-   { value: '2', name: 'Школа' },
-   { value: '2', name: 'Дом и сад' },
-   { value: '2', name: 'Обувь' },
-   { value: '2', name: 'Транспорт' },
+   { value: '3', name: 'Школа' },
+   { value: '4', name: 'Дом и сад' },
+   { value: '5', name: 'Обувь' },
+   { value: '6', name: 'Транспорт' },
 ]
 
 const countries = [
    { value: '1', name: 'Кыргызстан' },
    { value: '2', name: 'Азербайджан' },
-   { value: '2', name: 'Россия' },
-   { value: '2', name: 'Казахстан' },
-   { value: '2', name: 'Узбекистан' },
-   { value: '2', name: 'Таджикистан' },
+   { value: '3', name: 'Россия' },
+   { value: '4', name: 'Казахстан' },
+   { value: '5', name: 'Узбекистан' },
+   { value: '6', name: 'Таджикистан' },
 ]
 
 const roles = {
    users: [
-      { title: 'Лента', icon: TapeIcon, link: 'lenta' },
-      { title: 'Друзья', icon: UsersIcon, link: 'friends' },
-      { title: 'Список желании ', icon: ListIcon, link: 'list' },
-      { title: 'Забронирование', icon: GiftIcon, link: 'booking' },
-      { title: 'Мои праздники', icon: HolydaysIcon, link: 'my-part' },
-      { title: 'Благовторительность', icon: UsersLikeIcon, link: 'charity' },
+      { title: 'Лента', icon: TapeIcon },
+      { title: 'Друзья', icon: UsersIcon },
+      { title: 'Список желании ', icon: ListIcon },
+      { title: 'Забронирование', icon: GiftIcon },
+      { title: 'Мои праздники', icon: HolydaysIcon },
+      { title: 'Благовторительность', icon: UsersLikeIcon },
    ],
    admin: [
-      { title: 'Пользователи', icon: UsersIcon, link: 'users' },
-      { title: 'Благотворительность', icon: UsersLikeIcon, link: 'charity' },
-      { title: 'Жалобы ', icon: Vector, link: 'complaints' },
-      { title: 'Рассылка', icon: Mailings, link: 'newsletter' },
+      { title: 'Пользователи', icon: UsersIcon },
+      { title: 'Благотворительность', icon: UsersLikeIcon },
+      { title: 'Жалобы ', icon: UsersIcon },
+      { title: 'Рассылка', icon: Mailings },
    ],
 }
 
-export { conditions, categories, subcategories, countries, roles }
+export { conditions, categories, subcategories, countries, STATISTICS, FRIENDS }

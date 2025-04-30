@@ -1,11 +1,11 @@
-import { Button } from '@mui/material'
-import { roles } from '../../utils/constants'
-import styled from 'styled-components'
-import { useNavigate } from 'react-router'
+import { Button, styled } from '@mui/material'
+import { ROLES_SIDEBAR } from '../../utils/helpers'
 
-const SideBar = ({ role }) => {
-   const navigate = useNavigate()
-   const menuItems = role.toLowerCase() === 'user' ? roles.users : roles.admin
+const SideBar = () => {
+   const role = 'USER'
+
+   const menuItems =
+      role.toLowerCase() === 'user' ? ROLES_SIDEBAR.users : ROLES_SIDEBAR.admin
 
    const roleNavigation = (param) => {
       return role.toLowerCase() === 'user'
@@ -48,6 +48,7 @@ const Mainh1 = styled('div')({
       fontWeight: '700',
       padding: '23px 70px',
    },
+
    img: {
       paddingRight: '19px',
       color: '#fff',

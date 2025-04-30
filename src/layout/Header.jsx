@@ -1,31 +1,48 @@
-import MeetBalls from '../components/UI/MeetBalls'
+import { AppBar, Toolbar, Box, styled } from '@mui/material'
+import InputSearch from '../components/UI/InputSearch'
+import Input from '../components/UI/Input'
+import MeatBalls from '../components/UI/MeetBalls'
 import Notification from '../assets/icons/notification.svg'
 import InputSearch from '../components/UI/Input-search/InputSearch'
 import Input from '../components/UI/Input'
-import { AppBar, Toolbar, Box, styled } from '@mui/material'
+import { AppBar, Toolbar, Box, styled } from '@mui/material/'
 import UnionIcon from '../assets/icons/Union.svg'
+import { PROFILE_OPTIONS } from '../utils/helpers'
 
-const Header = ({ role }) => {
+const Header = () => {
+   const role = 'ADMIN'
+
+   const handleChange = (e) => {
+      const selected = e.currentTarget.getAttribute('value')
+
+      console.log('Выбран пункт:', selected)
+   }
+
    return (
       <StyledCustomAppBar>
          <Toolbar>
             <StyledBox>
-               {role === 'user' ? (
+               {role === 'USER' ? (
                   <StyledInputSearch />
-               ) : role === 'admin' ? (
-                  <div>
+               ) : role === 'ADMIN' ? (
+                  <>
                      <StyledUnionIcon src={UnionIcon} alt="" />
+
                      <StyledInput
                         placeholder="Введите имя"
                         variant="outlined"
                      />
-                  </div>
+                  </>
                ) : null}
-               <div>
+               <>
                   <StyledNotificationIcon src={Notification} alt="" />
 
-                  <StyledMeetBox />
-               </div>
+                  <StyledMeetBox
+                     variant="profile"
+                     options={PROFILE_OPTIONS}
+                     handleChange={handleChange}
+                  />
+               </>
             </StyledBox>
          </Toolbar>
       </StyledCustomAppBar>
@@ -41,9 +58,11 @@ const StyledBox = styled(Box)(() => ({
    top: '33px',
    marginLeft: '280px',
 }))
+
 const StyledInputSearch = styled(InputSearch)(() => ({
    width: '821px',
 }))
+
 const StyledInput = styled(Input)(() => ({
    '& .MuiInputBase-root': {
       padding: '33px',
@@ -66,7 +85,7 @@ const StyledNotificationIcon = styled('img')(() => ({
    marginRight: '20px',
 }))
 
-const StyledMeetBox = styled(MeetBalls)(() => ({
+const StyledMeetBox = styled(MeatBalls)(() => ({
    display: 'inline-block',
    marginLeft: '5%',
 }))
