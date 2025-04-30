@@ -1,5 +1,4 @@
-import { MenuItem, Select as MuiSelect } from '@mui/material'
-import styled from 'styled-components'
+import { MenuItem, Select as MuiSelect, styled } from '@mui/material'
 
 const Select = ({ label, options, value, onChange }) => (
    <Selecting
@@ -10,9 +9,10 @@ const Select = ({ label, options, value, onChange }) => (
       disableUnderline
    >
       <MainItem value="">{label}</MainItem>
-      {options.map((option) => (
-         <MainItem key={option.value} value={option.name}>
-            {option.name}
+
+      {options.map(({ value, name }, i) => (
+         <MainItem key={`${value}-${i}`} value={name}>
+            {name}
          </MainItem>
       ))}
    </Selecting>
@@ -41,6 +41,7 @@ const MainItem = styled(MenuItem)({
    '&:hover': {
       background: '#500e7c33',
    },
+
    '&:focus': {
       background: '#8639B566',
    },

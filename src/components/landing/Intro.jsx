@@ -1,11 +1,11 @@
 import { Box, styled, Typography } from '@mui/material'
-import Button from './UI/Button'
-import VK from '../assets/icons/vk.svg'
-import Facebook from '../assets/icons/facebook.svg'
-import Instagram from '../assets/icons/instagram.svg'
-import DownIcon from '../assets/icons/down.png'
-import Friends from '../assets/images/Friends.svg'
-import Friends2 from '../assets/images/Friends2.png'
+import Button from '../UI/Button'
+import VK from '../../assets/icons/vk.svg'
+import Facebook from '../../assets/icons/facebook.svg'
+import Instagram from '../../assets/icons/instagram.svg'
+import DownIcon from '../../assets/images/down.png'
+import Friends from '../../assets/images/Friends.svg'
+import Friends2 from '../../assets/images/Friends2.png'
 
 const Intro = () => (
    <StyledContiner>

@@ -1,14 +1,13 @@
 import { useState } from 'react'
-import { Box, InputAdornment, TextField } from '@mui/material'
+import { Box, InputAdornment, TextField, styled } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
-import styled from 'styled-components'
 import {
    categories,
    conditions,
    countries,
    subcategories,
 } from '../../../utils/constants/index'
-import Select from './Select'
+import Select from '../Select'
 
 const InputSearch = () => {
    const [filters, setFilters] = useState({
@@ -23,16 +22,10 @@ const InputSearch = () => {
 
    const searchInputProps = {
       disableUnderline: true,
+
       startAdornment: (
          <InputAdornment position="start">
-            <SearchIcon
-               style={{
-                  color: 'gray',
-                  marginLeft: '10px',
-                  marginRight: '10px',
-                  width: '24px',
-               }}
-            />
+            <StyledSearchIcon />
          </InputAdornment>
       ),
    }
@@ -41,7 +34,7 @@ const InputSearch = () => {
       <MainBox tabIndex={0}>
          <MainInputSearch
             variant="standard"
-            placeholder={'Поиск'}
+            placeholder="Поиск"
             InputProps={searchInputProps}
          />
 
@@ -51,18 +44,21 @@ const InputSearch = () => {
             value={filters.condition}
             onChange={handleChange('condition')}
          />
+
          <Select
             label="Категория"
             options={categories}
             value={filters.category}
             onChange={handleChange('category')}
          />
+
          <Select
             label="Подкатегория"
             options={subcategories}
             value={filters.subcategory}
             onChange={handleChange('subcategory')}
          />
+
          <Select
             label="Страна"
             options={countries}
@@ -72,6 +68,8 @@ const InputSearch = () => {
       </MainBox>
    )
 }
+
+export default InputSearch
 
 const MainBox = styled(Box)({
    display: 'flex',
@@ -99,4 +97,9 @@ const MainInputSearch = styled(TextField)({
    '& input::placeholder': { color: 'gray', opacity: 1 },
 })
 
-export default InputSearch
+const StyledSearchIcon = styled(SearchIcon)({
+   color: 'gray',
+   marginLeft: '10px',
+   marginRight: '10px',
+   width: '24px',
+})

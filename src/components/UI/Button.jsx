@@ -1,26 +1,30 @@
-import styled from 'styled-components'
-import { Button as MuiButton } from '@mui/material'
+import { Button as MuiButton, styled } from '@mui/material'
+import { forwardRef } from 'react'
 
-const Button = ({
-   children,
-   onClick,
-   variant = 'contained',
-   disabled,
-   type = 'submit',
-   ...rest
-}) => {
-   return (
+const Button = forwardRef(
+   (
+      {
+         children,
+         onClick,
+         variant = 'contained',
+         disabled,
+         type = 'submit',
+         ...rest
+      },
+      ref
+   ) => (
       <StyledButton
          onClick={onClick}
          type={type}
          disabled={disabled}
          variant={variant}
+         ref={ref}
          {...rest}
       >
          {children}
       </StyledButton>
    )
-}
+)
 
 export default Button
 
@@ -69,10 +73,12 @@ const StyledButton = styled(MuiButton)(({ variant }) => {
             color: '#fff',
             borderColor: '#5E35B1',
          },
+
          '&:active': {
             backgroundColor: '#AB62D8',
             borderColor: '#AB62D8',
          },
+
          '&.Mui-disabled': {
             color: '#1C1B1F1F',
             borderColor: '#1C1B1F1F',
@@ -88,9 +94,11 @@ const StyledButton = styled(MuiButton)(({ variant }) => {
          '&:hover': {
             backgroundColor: '#5E35B1',
          },
+
          '&:active': {
             backgroundColor: '#7e4cd4',
          },
+
          '&.Mui-disabled': {
             backgroundColor: '#1C1B1F1F',
             color: 'white',

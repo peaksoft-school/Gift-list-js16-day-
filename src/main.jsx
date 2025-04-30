@@ -9,17 +9,16 @@ import { Provider } from 'react-redux'
 import { persistor, store } from './store/store.js'
 import { PersistGate } from 'redux-persist/integration/react'
 
-
 injectStore(store)
 
 createRoot(document.getElementById('root')).render(
    <StrictMode>
       <Provider store={store}>
-        <PersistGate persistor={persistor}>
+         <PersistGate persistor={persistor}>
             <ThemeProvider theme={theme}>
                <App />
             </ThemeProvider>
-            </PersistGate>
+         </PersistGate>
       </Provider>
    </StrictMode>
 )

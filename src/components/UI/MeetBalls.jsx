@@ -1,73 +1,73 @@
-import { Menu, MenuItem, Button } from '@mui/material'
-import Profile from '../../assets/icons/profile.svg'
-import ExitIcon from '../../assets/icons/exit.svg'
-import chevrons from '../../assets/icons/chevrons.svg'
-import profilebackg from '../../assets/icons/profilebackg.svg'
-import { useState } from 'react'
-import styled from 'styled-components'
+import { isValidElement, useState } from 'react'
+import { IconButton, Menu, MenuItem, styled } from '@mui/material'
+import { MoreHoriz, MoreVert } from '@mui/icons-material'
+import ArrowIcon from '../../assets/icons/chevrons.svg'
 
-const MeetBalls = () => {
+const MeatBalls = ({
+   variant = 'horiz',
+   onChange,
+   options,
+   top = '0',
+   left = '25',
+}) => {
    const [anchorEl, setAnchorEl] = useState(null)
 
    const open = Boolean(anchorEl)
 
-   const handleClick = (event) => {
-      setAnchorEl(event.currentTarget)
-   }
+   const handleClick = (e) => {
+      e.stopPropagation()
 
-   const handleClose = () => {
+      setAnchorEl(e.currentTarget)
+   }
+   const handleClose = (e) => {
+      e.stopPropagation()
+
       setAnchorEl(null)
    }
-
    return (
-      <StyledMain>
-         <img src={profilebackg} alt="" />
+      <>
+         <IconButton onClick={handleClick}>
+            {variant !== 'profile' &&
+               (variant === 'horiz' ? <MoreHoriz /> : <MoreVert />)}
+            {variant === 'profile' && <img src={ArrowIcon} alt="" />}
+         </IconButton>
 
-         <StyledMainButton
-            id="basic-button"
-            aria-controls={open ? 'basic-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-            onClick={handleClick}
-            color="#212121"
-         >
-            Naruto Uzumaki
-            <img src={chevrons} alt="" />
-         </StyledMainButton>
-         <Menu
-            id="basic-menu"
+         <StyledMenu
+            left={left}
+            top={top}
             anchorEl={anchorEl}
             open={open}
-            onClose={handleClose}
-            MenuListProps={{
-               'aria-labelledby': 'basic-button',
-            }}
+            onClick={handleClose}
          >
-            <StyledMainMenuItem onClick={handleClose}>
-               <img src={Profile} alt="" />
-               Профиль
-            </StyledMainMenuItem>
-            <StyledMainMenuItem onClick={handleClose}>
-               <img src={ExitIcon} alt="" />
-               Выход
-            </StyledMainMenuItem>
-         </Menu>
-      </StyledMain>
+            {options.map(({ title, icon: Icon }) => (
+               <StyledMenuItem
+                  key={title}
+                  onClick={(e) => {
+                     e.stopPropagation()
+                     handleClose(e)
+                     onChange(e)
+                  }}
+                  value={title}
+               >
+                  {Icon && isValidElement(Icon) && Icon}
+
+                  {title}
+               </StyledMenuItem>
+            ))}
+         </StyledMenu>
+      </>
    )
 }
-const StyledMain = styled('div')({
+
+export default MeatBalls
+
+const StyledMenu = styled(Menu)(({ left, top }) => ({
+   width: '20rem',
+   left: `${left}px`,
+   top: `${top}px`,
+}))
+
+const StyledMenuItem = styled(MenuItem)({
    display: 'flex',
+   gap: '10px',
 })
-const StyledMainMenuItem = styled(MenuItem)({
-   img: {
-      padding: '9px',
-   },
-})
-
-const StyledMainButton = styled(Button)({
-   img: {
-      padding: '20px',
-   },
-})
-
-export default MeetBalls
