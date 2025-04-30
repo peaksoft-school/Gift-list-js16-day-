@@ -74,7 +74,7 @@ const AppRouter = () => (
       >
          <Route index element={<Navigate to="users" />} />
          <Route path="users" />
-         <Route path="charity" />
+         <Route path="charity" element={<Blago />} />
          <Route path="complaints" />
          <Route path="newsletter" />
       </Route>
@@ -89,15 +89,15 @@ const AppRouter = () => (
                      <User />
                   </Suspense>
                }
-               fallbackPath={'/admin'}
+               fallbackPath={'/admin' && '/'}
             />
          }
       >
-         <Route path="lenta" />
-         <Route path="friends" />
-         <Route path="spisok" />
-         <Route path="zabro" />
-         <Route path="my-part" />
+         <Route path="lenta" index element={''} />
+         <Route path="friends" element={''} />
+         <Route path="list" element={''} />
+         <Route path="booking" element={''} />
+         <Route path="my-part" element={''} />
          <Route path="charity" element={<Blago />} />
       </Route>
    </Routes>

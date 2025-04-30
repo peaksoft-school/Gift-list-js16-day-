@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Box, InputAdornment, TextField } from '@mui/material'
-import SearchIcon from '@mui/icons-material/Search'
+import UnionIcon from '../../../assets/icons/Union.svg'
 import styled from 'styled-components'
 import {
    categories,
@@ -23,22 +23,13 @@ const InputSearch = () => {
 
    const searchInputProps = {
       disableUnderline: true,
-      startAdornment: (
-         <InputAdornment position="start">
-            <SearchIcon
-               style={{
-                  color: 'gray',
-                  marginLeft: '10px',
-                  marginRight: '10px',
-                  width: '24px',
-               }}
-            />
-         </InputAdornment>
-      ),
+      startAdornment: <InputAdornment position="start"></InputAdornment>,
    }
 
    return (
       <MainBox tabIndex={0}>
+         <StyledUnionIcon src={UnionIcon} />
+
          <MainInputSearch
             variant="standard"
             placeholder={'Поиск'}
@@ -81,7 +72,9 @@ const MainBox = styled(Box)({
    padding: '0px',
    borderRadius: '8px',
    border: '1px solid #ddd',
+   marginTop: '3px',
    width: '100%',
+   height: '50px',
    maxWidth: '821px',
 
    '.MuiInputBase-input-MuiInput-input': {
@@ -99,4 +92,8 @@ const MainInputSearch = styled(TextField)({
    '& input::placeholder': { color: 'gray', opacity: 1 },
 })
 
+const StyledUnionIcon = styled('img')(() => ({
+   margin: '0px 0 0 13px',
+   width: '18px',
+}))
 export default InputSearch

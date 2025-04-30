@@ -65,7 +65,7 @@ const StyledInputLabel = styled(InputLabel)(({ error }) => ({
 
 const StyledInput = styled(TextField)(() => ({
    '& .MuiOutlinedInput-root': {
-      borderRadius: '12px',
+      borderRadius: '8px',
       padding: '0px 5px',
       width: '290px',
       height: '50px',
@@ -73,14 +73,13 @@ const StyledInput = styled(TextField)(() => ({
 
       '& fieldset': {
          margin: '8px 0',
-         borderWidth: '2px',
       },
       '&:hover fieldset': {
-         borderColor: 'grey',
+         border: '1px solid grey',
       },
 
       '&.Mui-focused fieldset': {
-         borderColor: 'grey',
+         border: '1px solid grey',
       },
 
       '& .error-icon': {

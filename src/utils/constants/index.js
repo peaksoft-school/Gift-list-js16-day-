@@ -44,8 +44,8 @@ const roles = {
    users: [
       { title: 'Лента', icon: TapeIcon, link: 'lenta' },
       { title: 'Друзья', icon: UsersIcon, link: 'friends' },
-      { title: 'Список желании ', icon: ListIcon, link: 'spisok' },
-      { title: 'Забронирование', icon: GiftIcon, link: 'zabro' },
+      { title: 'Список желании ', icon: ListIcon, link: 'list' },
+      { title: 'Забронирование', icon: GiftIcon, link: 'booking' },
       { title: 'Мои праздники', icon: HolydaysIcon, link: 'my-part' },
       { title: 'Благовторительность', icon: UsersLikeIcon, link: 'charity' },
    ],

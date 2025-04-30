@@ -7,15 +7,17 @@ const SideBar = ({ role }) => {
    const navigate = useNavigate()
    const menuItems = role.toLowerCase() === 'user' ? roles.users : roles.admin
 
+   const roleNavigation = (param) => {
+      return role.toLowerCase() === 'user'
+         ? `/user/${param}`
+         : `/admin/${param}`
+   }
    return (
       <Mainh1>
          <h1>GIFT LIST</h1>
 
          {menuItems.map(({ title, icon, link }, index) => (
-            <Button
-               key={index}
-               onClick={() => navigate(`/admin/${link}` && `/user/${link}`)}
-            >
+            <Button key={index} onClick={() => navigate(roleNavigation(link))}>
                <img src={icon} alt={title} /> <span>{title}</span>
             </Button>
          ))}
