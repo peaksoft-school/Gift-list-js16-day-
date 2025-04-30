@@ -1,10 +1,3 @@
-import LandingMenegers from './components/landing/LandingMenegers'
-
-const App = () => (
-   <>
-      <LandingMenegers />
-      Gift List 16
-   </>
-)
+const App = () => <h1>Gift-list 16-day</h1>
 
 export default App

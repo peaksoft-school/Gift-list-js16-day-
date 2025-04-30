@@ -1,36 +1,36 @@
 import { Typography, Box, styled } from '@mui/material'
-import Childrens from '../../assets/images/Childrens.png'
+import Childrens from '../../assets/images/childrens.png'
 
-const Charity = () => {
-   return (
-      <StyledBox>
-         <ImageWrapper>
-            <ImageBorder>
-               <StyledImage src={Childrens} alt="charity" />
-            </ImageBorder>
-         </ImageWrapper>
-         <TextContentBox>
-            <Typography variant="h4" gutterBottom>
-               Благотворительность
-            </Typography>
-            <Typography paragraph>
-               Найти удачный подарок, который принесёт радость, не всегда
-               простая задача.
-            </Typography>
-            <Typography paragraph>
-               Благодаря нашему сервису у вас есть возможность не только
-               обрадовать подарком, но и помочь другим приобрести необходимые им
-               вещи.
-            </Typography>
-            <Typography>
-               В разделе благотворительность вы можете найти список
-               опубликованных вещей, забронировав, вы связываетесь с их
-               обладателем.
-            </Typography>
-         </TextContentBox>
-      </StyledBox>
-   )
-}
+const Charity = () => (
+   <StyledBox>
+      <ImageWrapper>
+         <ImageBorder>
+            <StyledImage src={Childrens} alt="charity" />
+         </ImageBorder>
+      </ImageWrapper>
+
+      <TextContentBox>
+         <Typography variant="h4" gutterBottom>
+            Благотворительность
+         </Typography>
+
+         <Typography paragraph>
+            Найти удачный подарок, который принесёт радость, не всегда простая
+            задача.
+         </Typography>
+
+         <Typography paragraph>
+            Благодаря нашему сервису у вас есть возможность не только обрадовать
+            подарком, но и помочь другим приобрести необходимые им вещи.
+         </Typography>
+
+         <Typography>
+            В разделе благотворительность вы можете найти список опубликованных
+            вещей, забронировав, вы связываетесь с их обладателем.
+         </Typography>
+      </TextContentBox>
+   </StyledBox>
+)
 
 export default Charity
 

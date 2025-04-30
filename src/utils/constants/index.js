@@ -1,16 +1,4 @@
-import UsersIcon from '../../assets/icons/users.svg'
-import TapeIcon from '../../assets/icons/tape.svg'
-import ListIcon from '../../assets/icons/list.svg'
-import GiftIcon from '../../assets/icons/gifts.svg'
-import HolydaysIcon from '../../assets/icons/holidays.svg'
-import UsersLikeIcon from '../../assets/icons/userslike.svg'
-import Mailings from '../../assets/icons/mailings.svg'
-import Katya from '../../assets/images/Katya.svg'
-import Marina from '../../assets/images/Marina.jpg'
-import Sava from '../../assets/images/Sava.jpg'
-import Pasha from '../../assets/images/Pasha.jpg'
-import Sasha from '../../assets/images/Sasha.jpg'
-import Lena from '../../assets/images/Lena.jpg'
+
 
 const conditions = [
    { value: '1', name: 'Все' },
@@ -21,84 +9,67 @@ const conditions = [
 const categories = [
    { value: '1', name: 'Смартфоны и телефоны' },
    { value: '2', name: 'Аудиотехника' },
-   { value: '2', name: 'Фото и видеокамеры' },
-   { value: '2', name: 'Автоэлектроника' },
-   { value: '2', name: 'ТВ и видео' },
-   { value: '2', name: 'Компьютеры, ноутбуки и планшеты' },
+   { value: '3', name: 'Фото и видеокамеры' },
+   { value: '4', name: 'Автоэлектроника' },
+   { value: '5', name: 'ТВ и видео' },
+   { value: '6', name: 'Компьютеры, ноутбуки и планшеты' },
 ]
 
 const subcategories = [
    { value: '1', name: 'Электроника' },
    { value: '2', name: 'Одежда' },
-   { value: '2', name: 'Школа' },
-   { value: '2', name: 'Дом и сад' },
-   { value: '2', name: 'Обувь' },
-   { value: '2', name: 'Транспорт' },
+   { value: '3', name: 'Школа' },
+   { value: '4', name: 'Дом и сад' },
+   { value: '5', name: 'Обувь' },
+   { value: '6', name: 'Транспорт' },
 ]
 
 const countries = [
    { value: '1', name: 'Кыргызстан' },
    { value: '2', name: 'Азербайджан' },
-   { value: '2', name: 'Россия' },
-   { value: '2', name: 'Казахстан' },
-   { value: '2', name: 'Узбекистан' },
-   { value: '2', name: 'Таджикистан' },
+   { value: '3', name: 'Россия' },
+   { value: '4', name: 'Казахстан' },
+   { value: '5', name: 'Узбекистан' },
+   { value: '6', name: 'Таджикистан' },
 ]
 
-const roles = {
-   users: [
-      { title: 'Лента', icon: TapeIcon },
-      { title: 'Друзья', icon: UsersIcon },
-      { title: 'Список желании ', icon: ListIcon },
-      { title: 'Забронирование', icon: GiftIcon },
-      { title: 'Мои праздники', icon: HolydaysIcon },
-      { title: 'Благовторительность', icon: UsersLikeIcon },
-   ],
-   admin: [
-      { title: 'Пользователи', icon: UsersIcon },
-      { title: 'Благотворительность', icon: UsersLikeIcon },
-      { title: 'Жалобы ', icon: UsersIcon },
-      { title: 'Рассылка', icon: Mailings },
-   ],
-}
+const STATISTICS = [
+   { end: 100, label: 'K+', text: 'Пользователей' },
+   { end: 10, label: 'K+', text: 'Размещенных подарков' },
+   { end: 15, label: 'K+', text: 'Подаренных подарков' },
+   { end: 9, label: 'K+', text: 'Реализованной благотворительной помощи' },
+]
 
-const teamDevelops = [
+const FRIENDS = [
    {
-      name: 'Катя',
-      role: 'ведущий дизайнер',
-      company: 'TailGroup',
-      img: Katya,
+      id: 1,
+      image: 'https://i.pinimg.com/736x/b8/25/f8/b825f8aca31785c9165e18a279771100.jpg',
+      fullName: 'Annette Black',
+      desires: 12,
+      holidays: 10,
+   },
+
+   {
+      id: 2,
+      image: 'https://masterpiecer-images.s3.yandex.net/541b62ae9ccf11ee9c107acfd41307a6:upscaled',
+      fullName: 'Annette Black',
+      desires: 12,
+      holidays: 10,
    },
    {
-      name: 'Марина',
-      role: 'маркетолог',
-      company: 'Headers Market',
-      img: Marina,
+      id: 3,
+      image: 'https://masterpiecer-images.s3.yandex.net/4b2b37aba11711eebb734a50f1b511f1:upscaled',
+      fullName: 'Annette Black',
+      desires: 12,
+      holidays: 10,
    },
    {
-      name: 'Сава',
-      role: 'PR-менеджер',
-      company: 'Central Media',
-      img: Sava,
-   },
-   {
-      name: 'Паша',
-      role: 'сооснователь',
-      company: 'LeadCompany',
-      img: Pasha,
-   },
-   {
-      name: 'Саша',
-      role: 'главный',
-      company: 'редактор Just Journal',
-      img: Sasha,
-   },
-   {
-      name: 'Лёня',
-      role: 'ведущий ',
-      company: 'разработчик Ymail',
-      img: Lena,
+      id: 4,
+      image: 'https://klev.club/uploads/posts/2023-10/1697480887_klev-club-p-kartinki-krasivie-lyudi-40.jpg',
+      fullName: 'Annette Black',
+      desires: 12,
+      holidays: 10,
    },
 ]
 
-export { conditions, categories, subcategories, countries, roles, teamDevelops }
+export { conditions, categories, subcategories, countries, roles }
