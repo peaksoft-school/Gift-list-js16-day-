@@ -1,17 +1,16 @@
 import { Button, styled } from '@mui/material'
 import { ROLES_SIDEBAR } from '../../utils/helpers'
+import { useNavigate } from 'react-router'
 
-const SideBar = () => {
-   const role = 'USER'
+const SideBar = ({ role }) => {
+   const navigate = useNavigate()
 
    const menuItems =
       role.toLowerCase() === 'user' ? ROLES_SIDEBAR.users : ROLES_SIDEBAR.admin
 
-   const roleNavigation = (param) => {
-      return role.toLowerCase() === ''
-         ? `/user/${param}`
-         : `/admin/${param}`
-   }
+   const roleNavigation = (param) =>
+      role.toLowerCase() === '' ? `/user/${param}` : `/admin/${param}`
+
    return (
       <Mainh1>
          <h1>GIFT LIST</h1>

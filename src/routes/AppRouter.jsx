@@ -1,14 +1,14 @@
 import { lazy, Suspense } from 'react'
 import { Navigate, Route, Routes } from 'react-router'
-import { ROLES, ROUTES } from './routes'
+import { ROLES } from './routes'
 import Blago from '../pages/user/Blago'
+import PrivateRoute from './PrivateRoute'
+import Loading from '../components/Loading'
 
-const Loading = lazy(() => import('../components/Loading'))
 const Home = lazy(() => import('../pages/home/Home'))
 const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
 const SignUp = lazy(() => import('../pages/sign-up/SignUp'))
 const Admin = lazy(() => import('../layout/AdminLayout'))
-const PrivateRoute = lazy(() => import('./PrivateRoute'))
 const User = lazy(() => import('../layout/UserLayout'))
 
 const AppRouter = () => (
@@ -31,35 +31,23 @@ const AppRouter = () => (
       <Route
          path="/sign-in"
          element={
-            <PrivateRoute
-               roles={[ROUTES.SIGN_IN]}
-               Component={
-                  <Suspense fallback={<Loading />}>
-                     <SignIn />
-                  </Suspense>
-               }
-               // fallbackPath={'/admin'}
-            />
+            <Suspense fallback={<Loading />}>
+               <SignIn />
+            </Suspense>
          }
       />
 
       <Route
          path="/sign-up"
          element={
-            <PrivateRoute
-               roles={[ROUTES.SIGN_UP]}
-               Component={
-                  <Suspense fallback={<Loading />}>
-                     <SignUp />
-                  </Suspense>
-               }
-               fallbackPath={'/admin'}
-            />
+            <Suspense fallback={<Loading />}>
+               <SignUp />
+            </Suspense>
          }
       />
 
       <Route
-         path="admin"
+         path="/admin"
          element={
             <PrivateRoute
                roles={[ROLES.ADMIN]}
@@ -73,10 +61,10 @@ const AppRouter = () => (
          }
       >
          <Route index element={<Navigate to="users" />} />
-         <Route path="users" />
+         <Route path="users" element={<h1>Users</h1>} />
          <Route path="charity" element={<Blago />} />
-         <Route path="complaints" />
-         <Route path="newsletter" />
+         <Route path="complaints" element={<h1>complaints</h1>} />
+         <Route path="newsletter" element={<h1>newsletter</h1>} />
       </Route>
 
       <Route
@@ -93,11 +81,11 @@ const AppRouter = () => (
             />
          }
       >
-         <Route path="lenta" index element={''} />
-         <Route path="friends" element={''} />
-         <Route path="list" element={''} />
-         <Route path="booking" element={''} />
-         <Route path="my-part" element={''} />
+         <Route path="lenta" index element={<h1>Friends</h1>} />
+         <Route path="friends" element={<h1>Friends</h1>} />
+         <Route path="list" element={<h1>Friends</h1>} />
+         <Route path="booking" element={<h1>Friends</h1>} />
+         <Route path="my-part" element={<h1>Friends</h1>} />
          <Route path="charity" element={<Blago />} />
       </Route>
    </Routes>

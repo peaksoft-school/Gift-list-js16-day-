@@ -6,9 +6,7 @@ import Input from '../components/UI/Input'
 import UnionIcon from '../assets/icons/Union.svg'
 import { PROFILE_OPTIONS } from '../utils/helpers'
 
-const Header = () => {
-   const role = 'ADMIN'
-
+const Header = ({ role }) => {
    const handleChange = (e) => {
       const selected = e.currentTarget.getAttribute('value')
 
@@ -31,14 +29,13 @@ const Header = () => {
                      />
                   </>
                ) : null}
-                  <StyledMeetBox
-                     variant="profile"
-                     options={PROFILE_OPTIONS}
-                     handleChange={handleChange}
-                  />
+               <StyledMeetBox
+                  variant="profile"
+                  options={PROFILE_OPTIONS}
+                  handleChange={handleChange}
+               />
                <>
                   <StyledNotificationIcon src={Notification} alt="" />
-
                </>
             </StyledBox>
          </Toolbar>

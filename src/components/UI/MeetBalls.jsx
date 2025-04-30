@@ -2,7 +2,6 @@ import { isValidElement, useState } from 'react'
 import { IconButton, Menu, MenuItem, styled } from '@mui/material'
 import { MoreHoriz, MoreVert } from '@mui/icons-material'
 import ArrowIcon from '../../assets/icons/chevrons.svg'
-import Button from './Button'
 
 const MeatBalls = ({
    variant = 'horiz',
@@ -26,22 +25,16 @@ const MeatBalls = ({
       setAnchorEl(null)
    }
    return (
-      <StyledMenu>
-         <img src={ArrowIcon} alt="" />
+      <>
+         <IconButton onClick={handleClick}>
+            {variant !== 'profile' &&
+               (variant === 'horiz' ? <MoreHoriz /> : <MoreVert />)}
+            {variant === 'profile' && <img src={ArrowIcon} alt="" />}
+         </IconButton>
 
-         <Button
-            id="basic-button"
-            aria-controls={open ? 'basic-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-            onClick={handleClick}
-            color="#212121"
-         >
-            Naruto Uzumaki
-            <img src={ArrowIcon} alt="" />
-         </Button>
-         <Menu
-            id="basic-menu"
+         <StyledMenu
+            left={left}
+            top={top}
             anchorEl={anchorEl}
             open={open}
             onClick={handleClose}
@@ -61,8 +54,8 @@ const MeatBalls = ({
                   {title}
                </StyledMenuItem>
             ))}
-         </Menu>
-      </StyledMenu>
+         </StyledMenu>
+      </>
    )
 }
 
@@ -76,15 +69,5 @@ const StyledMenu = styled(Menu)(({ left, top }) => ({
 
 const StyledMenuItem = styled(MenuItem)({
    display: 'flex',
-})
-const StyledMainMenuItem = styled(MenuItem)({
-   img: {
-      padding: '9px',
-   },
-})
-
-const StyledMainButton = styled(Button)({
-   img: {
-      padding: '20px',
-   },
+   gap: '10px',
 })

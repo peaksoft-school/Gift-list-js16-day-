@@ -3,7 +3,7 @@ import Header from '../../layout/Header'
 const Blago = () => {
    return (
       <div>
-         <Header role="user" />
+         <Header />
       </div>
    )
 }

@@ -6,8 +6,9 @@ import { Outlet } from 'react-router'
 const AdminLayout = () => {
    return (
       <StyledMain>
-         <Header role="admin" />
+         <Header role="ADMIN" />
          <SideBar role="ADMIN" />
+
          <Outlet />
       </StyledMain>
    )
