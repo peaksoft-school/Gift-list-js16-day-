@@ -21,7 +21,6 @@ const Select = ({ label, options, value, onChange }) => (
 export default Select
 
 const Selecting = styled(MuiSelect)({
-   minWidth: 90,
    marginLeft: 10,
    background: '#fff',
    borderRadius: '8px',

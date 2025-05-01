@@ -1,4 +1,4 @@
-import { isValidElement, useState } from 'react'
+import { useState } from 'react'
 import { IconButton, Menu, MenuItem, styled } from '@mui/material'
 import { MoreHoriz, MoreVert } from '@mui/icons-material'
 import ArrowIcon from '../../assets/icons/chevrons.svg'
@@ -29,7 +29,7 @@ const MeatBalls = ({
          <IconButton onClick={handleClick}>
             {variant !== 'profile' &&
                (variant === 'horiz' ? <MoreHoriz /> : <MoreVert />)}
-            {variant === 'profile' && <img src={ArrowIcon} alt="" />}
+            {variant === 'profile' && <img src={ArrowIcon} alt="arrow-icon" />}
          </IconButton>
 
          <StyledMenu
@@ -49,7 +49,7 @@ const MeatBalls = ({
                   }}
                   value={title}
                >
-                  {Icon && isValidElement(Icon) && Icon}
+                  <img src={Icon} alt="${title}-icon" />
 
                   {title}
                </StyledMenuItem>
