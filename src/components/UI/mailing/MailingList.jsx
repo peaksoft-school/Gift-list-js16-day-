@@ -1,10 +1,8 @@
 import {
    Box,
-   DialogActions,
    DialogContent,
    IconButton,
    styled,
-   TextField,
    Typography,
 } from '@mui/material'
 import SaleSale from '../../../assets/images/SaleSale.png'
