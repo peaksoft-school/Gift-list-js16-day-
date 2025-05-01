@@ -7,6 +7,7 @@ import {
    styled,
 } from '@mui/material'
 import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded'
+import UnionIcon from '../../assets/icons/Union.svg'
 
 const Input = forwardRef(
    (
@@ -20,6 +21,7 @@ const Input = forwardRef(
          error,
          errorText,
          inputProps,
+         icon,
          ...rest
       },
       ref
@@ -37,6 +39,12 @@ const Input = forwardRef(
             ref={ref}
             fullWidth
             InputProps={{
+               startAdornment: icon ? (
+                  <InputAdornment position="start">
+                     <img src={UnionIcon} alt="notification" />
+                  </InputAdornment>
+               ) : null,
+
                endAdornment: error ? (
                   <InputAdornment position="end">
                      <ErrorOutlineRoundedIcon className="error-icon" />
@@ -63,7 +71,7 @@ const StyledInputLabel = styled(InputLabel)(({ error }) => ({
 
 const StyledInput = styled(TextField)(() => ({
    '& .MuiOutlinedInput-root': {
-      borderRadius: '12px',
+      borderRadius: '8px',
       padding: '0px 5px',
       width: '290px',
       height: '50px',
@@ -71,15 +79,14 @@ const StyledInput = styled(TextField)(() => ({
 
       '& fieldset': {
          margin: '8px 0',
-         borderWidth: '2px',
       },
 
       '&:hover fieldset': {
-         borderColor: 'grey',
+         border: '1px solid grey',
       },
 
       '&.Mui-focused fieldset': {
-         borderColor: 'grey',
+         border: '1px solid grey',
       },
 
       '& .error-icon': {
