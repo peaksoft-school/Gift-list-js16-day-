@@ -12,6 +12,7 @@ import Button from '../Button'
 import { useState } from 'react'
 import Modal from '../Modal'
 import Input from '../Input'
+import { useNavigate } from 'react-router'
 
 const MailingList = ({
    title = 'Рассылка',
@@ -19,8 +20,9 @@ const MailingList = ({
    imageSrc = SaleSale,
    mailingTopic = 'Тема рассылки',
    date = '12.04.2025',
-   onImageClik,
 }) => {
+   const navigate = useNavigate()
+
    const [openModal, setOpenModal] = useState(false)
 
    const handleOpenModal = () => {
@@ -30,6 +32,10 @@ const MailingList = ({
    const handleCloseModal = () => {
       setOpenModal(false)
    }
+
+
+
+   
    return (
       <BlockContainer>
          <StyledMain>
@@ -52,7 +58,11 @@ const MailingList = ({
 
             <FlexContainer>
                <StyledBox>
-                  <img src={imageSrc} alt="card" onClick={onImageClik} />
+                  <img
+                     src={imageSrc}
+                     alt="card"
+                     onClick={() => navigate('/description')}
+                  />
                   <StyledText>{mailingTopic}</StyledText>
                   <StyledData>{date}</StyledData>
                </StyledBox>
@@ -112,7 +122,7 @@ const BlockContainer = styled(Box)(() => ({
 }))
 const StyledMainButton = styled(Button)(() => ({
    '&.MuiButton-root': {
-      width: '270px',
+      width: '280px',
       height: '40px',
       fontSize: '14px',
    },

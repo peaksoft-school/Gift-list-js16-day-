@@ -3,16 +3,15 @@ import Photo2Sale from '../../../assets/images/Photo2Sale.png'
 import BreadCrumbs from './BreadCrumbs'
 
 const DescriptionCard = () => {
-   // const links = [
-   //    { href: '/Рассылка', label: 'Рассылка' },
-   //    { href: '/description', label: 'Тема рассылки' },
-
-   // ]
+   const links = [
+      { href: '/Рассылка', label: 'Рассылка' },
+      { href: '/description', label: 'Тема рассылки' },
+   ]
 
    return (
       <FlexContainer>
          <BlockContainer>
-            {/* <BreadCrumbs links={links} /> */}
+            <BreadCrumbs links={links} />
 
             <StyledBox>
                <img src={Photo2Sale} alt="photo" />
@@ -56,7 +55,7 @@ const StyledBox = styled(Box)(() => ({
    justifyContent: 'space-between',
    alignItems: 'start',
    padding: '30px',
-   marginTop: '80px',
+   marginTop: '30px',
    width: '1050px',
    height: '871px',
    background: '#FFFFFF',

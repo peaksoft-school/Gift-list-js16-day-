@@ -1,11 +1,9 @@
-import DescriptionCard from './components/UI/mailing/DescriptionCard'
-import MailingList from './components/UI/mailing/MailingList'
+import Router from './routes/Router'
 
 const App = () => {
    return (
       <>
-         <MailingList />
-         <DescriptionCard />
+         <Router />
       </>
    )
 }
