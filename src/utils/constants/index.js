@@ -1,4 +1,6 @@
-
+import AigerimEje from '../../assets/images/aigerim-eje.png'
+import NurgulEje from '../../assets/images/nurgulEje.png'
+import NargizaEje from '../../assets/images/nargizaEje.jpg'
 
 const conditions = [
    { value: '1', name: 'Все' },
@@ -43,33 +45,46 @@ const STATISTICS = [
 const FRIENDS = [
    {
       id: 1,
-      image: 'https://i.pinimg.com/736x/b8/25/f8/b825f8aca31785c9165e18a279771100.jpg',
-      fullName: 'Annette Black',
-      desires: 12,
-      holidays: 10,
+      img: NurgulEje,
+      name: 'Нургуль Маданбекова',
+      role: 'Front-end developer',
    },
 
    {
       id: 2,
-      image: 'https://masterpiecer-images.s3.yandex.net/541b62ae9ccf11ee9c107acfd41307a6:upscaled',
-      fullName: 'Annette Black',
-      desires: 12,
-      holidays: 10,
+      img: '',
+      name: '',
+      role: '',
    },
    {
       id: 3,
-      image: 'https://masterpiecer-images.s3.yandex.net/4b2b37aba11711eebb734a50f1b511f1:upscaled',
-      fullName: 'Annette Black',
-      desires: 12,
-      holidays: 10,
+      img: '',
+      name: '',
+      role: '',
    },
    {
       id: 4,
-      image: 'https://klev.club/uploads/posts/2023-10/1697480887_klev-club-p-kartinki-krasivie-lyudi-40.jpg',
-      fullName: 'Annette Black',
-      desires: 12,
-      holidays: 10,
+      img: AigerimEje,
+      name: 'Маматтойчуева Айгерим',
+      role: 'Front-end developer',
+   },
+   {
+      id: 5,
+      img: '',
+      name: '',
+      role: '',
+   },
+   {
+      id: 6,
+      img: NargizaEje,
+      name: 'Наргиза Нааматбекова',
+      role: 'Front-end developer',
+   },
+   {
+      id: 7,
+      img: '',
+      name: 'Annette Black',
    },
 ]
 
-export { conditions, categories, subcategories, countries, roles }
+export { conditions, categories, subcategories, countries, FRIENDS, STATISTICS }

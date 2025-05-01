@@ -3,25 +3,28 @@ import { styled } from '@mui/material'
 import { Container, Grid, Typography, Avatar, Box } from '@mui/material'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import { teamDevelops } from '../../utils/constants/index'
+import { FRIENDS } from '../../utils/constants/index'
 import MackBook from '../../assets/images/MackBookPro.svg'
 
 const sliderSettings = {
    infinite: true,
-   arrows: false,
-   speed: 5000,
+   arrows: true,
+   speed: 3000,
    autoplay: true,
-   autoplaySpeed: 0,
+   autoplaySpeed: 1000,
    cssEase: 'linear',
    pauseOnHover: true,
    variableWidth: true,
 }
 
-function LandingMenegers() {
+function AboutAs() {
    return (
       <Section>
          <StyledContainer>
-            <Grid container spacing={6} alignItems="center">
+            <StyledGrid container spacing={4} alignItems="center">
+               <Grid item xs={12} md={6}>
+                  <LaptopImage src={MackBook} alt="Laptop" />
+               </Grid>
                <Grid item xs={12} md={6}>
                   <Title>О проекте</Title>
                   <Paragraph>
@@ -30,7 +33,7 @@ function LandingMenegers() {
                      простая задача...
                   </Paragraph>
                   <Paragraph>
-                     Благодаря нашему сервису у вас есть возможность не только{' '}
+                     Благодаря нашему сервису у вас есть возможность не только
                      <br />
                      обрадовать подарком, но и помочь другим приобрести
                      <br />
@@ -38,27 +41,22 @@ function LandingMenegers() {
                   </Paragraph>
                   <Paragraph>
                      В разделе благодарительность вы можете найти список
+                     <br />
                      опубликованных вещей, забронировать, и связываетесь <br />с
                      их обладателем.
                   </Paragraph>
                </Grid>
-
-               <Grid item xs={12} md={6}>
-                  <ImageWrapper>
-                     <LaptopImage src={MackBook} alt="Laptop" />
-                  </ImageWrapper>
-               </Grid>
-            </Grid>
+            </StyledGrid>
 
             <SliderWrapper>
                <StyledSlider {...sliderSettings}>
-                  {teamDevelops.map((person, index) => (
+                  {FRIENDS.map((person, index) => (
                      <Slide key={index}>
                         <AvatarWrapper>
                            <TeamAvatar src={person.img} alt={person.name} />
                         </AvatarWrapper>
                         <TeamName>
-                           {person.name}, {person.role} <br />
+                           {person.name},<br /> {person.role} <br />
                            {person.company}
                         </TeamName>
                      </Slide>
@@ -70,7 +68,7 @@ function LandingMenegers() {
    )
 }
 
-export default LandingMenegers
+export default AboutAs
 
 const Section = styled('section')(({ theme }) => ({
    backgroundColor: '#fff',
@@ -81,6 +79,10 @@ const Section = styled('section')(({ theme }) => ({
 const StyledContainer = styled(Container)(({ theme }) => ({
    maxWidth: '1200px',
 }))
+const StyledGrid = styled(Grid)(({ theme }) => ({
+   display: 'flex',
+   flexDirection: 'row-reverse',
+}))
 
 const Title = styled(Typography)(({ theme }) => ({
    fontSize: '46px',
@@ -90,18 +92,15 @@ const Title = styled(Typography)(({ theme }) => ({
 
 const Paragraph = styled(Typography)(({ theme }) => ({
    marginTop: '10px',
+   marginRight: '100px',
    lineHeight: 1.6,
-}))
-
-const ImageWrapper = styled(Box)(({ theme }) => ({
-   display: 'flex',
-   justifyContent: 'center',
 }))
 
 const LaptopImage = styled('img')(() => ({
    width: '100%',
    height: 'auto',
-   maxWidth: '500px',
+   maxWidth: '100%',
+   display: 'block',
 }))
 
 const SliderWrapper = styled(Box)(({ theme }) => ({

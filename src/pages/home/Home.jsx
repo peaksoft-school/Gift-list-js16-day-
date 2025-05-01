@@ -1,3 +1,4 @@
+import AboutAs from '../../components/landing/AboutAs'
 import Advantage from '../../components/landing/Advantage'
 import Charity from '../../components/landing/Charity'
 import Intro from '../../components/landing/Intro'
@@ -9,6 +10,7 @@ const Home = () => (
       <Statistics />
       <Advantage />
       <Charity />
+      <AboutAs />
    </>
 )
 
