@@ -42,7 +42,7 @@ const StyledToastContainer = styled(ToastContainer)({
       color: '#328048',
       borderRadius: '3px',
       textAlign: 'start',
-      border: '1px solid #C6F0C2',
+      border: '1px solid #70ea65',
    },
    '.Toastify__toast--info': {
       backgroundColor: '#EBEFF7',
@@ -59,7 +59,7 @@ const StyledToastContainer = styled(ToastContainer)({
 
    '.Toastify__toast--error': {
       backgroundColor: '#FFEBEB',
-      border: '1px solid #BC2C2C',
+      border: '1px solid #ea8e8e',
       color: '#E53535',
       borderRadius: '7px',
    },
