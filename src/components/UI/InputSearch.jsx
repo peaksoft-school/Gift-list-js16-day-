@@ -6,8 +6,9 @@ import {
    conditions,
    countries,
    subcategories,
-} from '../../../utils/constants/index'
-import Select from '../Select'
+} from '../../utils/constants/index'
+import Select from './Select'
+import UnionIcon from '../../assets/icons/Union.svg'
 
 const InputSearch = () => {
    const [filters, setFilters] = useState({
@@ -23,15 +24,12 @@ const InputSearch = () => {
    const searchInputProps = {
       disableUnderline: true,
 
-      startAdornment: (
-         <InputAdornment position="start">
-            <StyledSearchIcon />
-         </InputAdornment>
-      ),
+      startAdornment: <InputAdornment position="start"></InputAdornment>,
    }
 
    return (
       <MainBox tabIndex={0}>
+         <StyledUnionIcon src={UnionIcon} alt="" />
          <MainInputSearch
             variant="standard"
             placeholder="Поиск"
@@ -80,7 +78,8 @@ const MainBox = styled(Box)({
    borderRadius: '8px',
    border: '1px solid #ddd',
    width: '100%',
-   maxWidth: '821px',
+   maxWidth: '72%',
+   marginRight: '90px',
 
    '.MuiInputBase-input-MuiInput-input': {
       focus: {
@@ -97,9 +96,7 @@ const MainInputSearch = styled(TextField)({
    '& input::placeholder': { color: 'gray', opacity: 1 },
 })
 
-const StyledSearchIcon = styled(SearchIcon)({
+const StyledUnionIcon = styled('img')({
    color: 'gray',
    marginLeft: '10px',
-   marginRight: '10px',
-   width: '24px',
 })

@@ -5,9 +5,9 @@ import { STATISTICS } from '../../utils/constants'
 const Statistics = () => (
    <StyledBox>
       {STATISTICS.map(({ end, label, text }) => (
-         <Box>
+         <Box key={end}>
             <Box>
-               <CountUp end={end} /> {label}
+               <CountUp end={end} duration={5} /> {label}
             </Box>
 
             <StyledText>{text}</StyledText>

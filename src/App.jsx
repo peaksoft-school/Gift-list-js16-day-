@@ -1,3 +1,10 @@
-const App = () => <h1>Gift-list 16-day</h1>
+import Loading from './components/Loading'
+import AppRouter from './routes/AppRouter'
+
+const App = () => (
+   <>
+      <AppRouter />
+   </>
+)
 
 export default App

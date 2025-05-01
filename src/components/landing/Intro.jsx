@@ -6,61 +6,67 @@ import Instagram from '../../assets/icons/instagram.svg'
 import DownIcon from '../../assets/images/down.png'
 import Friends from '../../assets/images/Friends.svg'
 import Friends2 from '../../assets/images/Friends2.png'
+import { useNavigate } from 'react-router'
 
-const Intro = () => (
-   <StyledContiner>
-      <StyledMain>
-         <MainHeader>
-            <a href="#">О проекте</a>
+const Intro = () => {
+   const navigate = useNavigate()
+   return (
+      <StyledContiner>
+         <StyledMain>
+            <MainHeader>
+               <a href="#">О проекте</a>
 
-            <Typography variant="h3">GIFT LIST</Typography>
+               <Typography variant="h3">GIFT LIST</Typography>
 
-            <a href="#">Благотворительность</a>
-         </MainHeader>
+               <a href="#">Благотворительность</a>
+            </MainHeader>
 
-         <SocialIcons>
-            <StyledIcons src={Facebook} alt="facebook" />
-            <StyledIcons src={VK} alt="vk" />
-            <StyledIcons src={Instagram} alt="instagram" />
-         </SocialIcons>
+            <SocialIcons>
+               <StyledIcons src={Facebook} alt="facebook" />
+               <StyledIcons src={VK} alt="vk" />
+               <StyledIcons src={Instagram} alt="instagram" />
+            </SocialIcons>
 
-         <FriendsImageLeft>
-            <StyledBorderBox>
-               <StyledFriendImage src={Friends} alt="friends" />
-            </StyledBorderBox>
-         </FriendsImageLeft>
+            <FriendsImageLeft>
+               <StyledBorderBox>
+                  <StyledFriendImage src={Friends} alt="friends" />
+               </StyledBorderBox>
+            </FriendsImageLeft>
 
-         <FriendsImageRight>
-            <MainBorderBox2>
-               <img src={Friends2} alt="friends2" />
-            </MainBorderBox2>
-         </FriendsImageRight>
+            <FriendsImageRight>
+               <MainBorderBox2>
+                  <img src={Friends2} alt="friends2" />
+               </MainBorderBox2>
+            </FriendsImageRight>
 
-         <CenterContent>
-            <Typography variant="h1">
-               Социальная сеть
-               <br /> нового поколения
-            </Typography>
+            <CenterContent>
+               <Typography variant="h1">
+                  Социальная сеть
+                  <br /> нового поколения
+               </Typography>
 
-            <Box>
-               Всегда подскажет, что подарить близким <br /> и осуществит твои
-               желания
-            </Box>
+               <Box>
+                  Всегда подскажет, что подарить близким <br /> и осуществит
+                  твои желания
+               </Box>
 
-            <StyledButton>Войти</StyledButton>
+               <StyledButton onClick={() => navigate('/sign-in')}>
+                  Войти
+               </StyledButton>
 
-            <StyledButton variant="outlined">Регистрация</StyledButton>
-         </CenterContent>
+               <StyledButton variant="outlined" onClick={() => navigate('/sign-up')}>Регистрация</StyledButton>
+            </CenterContent>
 
-         <DowmText>
-            <Typography>
-               <img src={DownIcon} alt="down-list" className="down-list" />
-               Листай вниз
-            </Typography>
-         </DowmText>
-      </StyledMain>
-   </StyledContiner>
-)
+            <DowmText>
+               <Typography>
+                  <img src={DownIcon} alt="down-list" className="down-list" />
+                  Листай вниз
+               </Typography>
+            </DowmText>
+         </StyledMain>
+      </StyledContiner>
+   )
+}
 
 const StyledContiner = styled(Box)(() => ({
    display: 'flex',

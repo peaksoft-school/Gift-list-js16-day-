@@ -12,19 +12,19 @@ import Delete from '../../assets/images/Delete.png'
 
 const ROLES_SIDEBAR = {
    users: [
-      { title: 'Лента', icon: TapeIcon },
-      { title: 'Друзья', icon: UsersIcon },
-      { title: 'Список желании ', icon: ListIcon },
-      { title: 'Забронирование', icon: GiftIcon },
-      { title: 'Мои праздники', icon: HolydaysIcon },
-      { title: 'Благовторительность', icon: UsersLikeIcon },
+      { title: 'Лента', icon: TapeIcon, link: 'lenta' },
+      { title: 'Друзья', icon: UsersIcon, link: 'friends' },
+      { title: 'Список желании ', icon: ListIcon, link: 'list' },
+      { title: 'Забронирование', icon: GiftIcon, link: 'booking' },
+      { title: 'Мои праздники', icon: HolydaysIcon, link: 'my-part' },
+      { title: 'Благовторительность', icon: UsersLikeIcon, link: 'charity' },
    ],
 
    admin: [
-      { title: 'Пользователи', icon: UsersIcon },
-      { title: 'Благотворительность', icon: UsersLikeIcon },
-      { title: 'Жалобы ', icon: UsersIcon },
-      { title: 'Рассылка', icon: Mailings },
+      { title: 'Пользователи', icon: UsersIcon, link: 'users' },
+      { title: 'Благотворительность', icon: UsersLikeIcon, link: 'charity' },
+      { title: 'Жалобы ', icon: UsersIcon, link: 'complaints' },
+      { title: 'Рассылка', icon: Mailings, link: 'newsletter' },
    ],
 }
 
