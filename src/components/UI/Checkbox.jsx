@@ -4,8 +4,8 @@ import {
    styled,
 } from '@mui/material'
 import { forwardRef } from 'react'
-import borderCheck from '../../assets/icon/BorderCheck.svg'
-import colorCheck from '../../assets/icon/ColorCheck.svg'
+import borderCheck from '../../assets/icons/border-check.svg'
+import colorCheck from '../../assets/icons/color-check.svg'
 
 const Checkbox = forwardRef(
    ({ checked, onChange, disabled, label, ...rest }, ref) => (
@@ -21,12 +21,12 @@ const Checkbox = forwardRef(
                   <img
                      src={borderCheck}
                      alt="unchecked"
-                     width="24"
-                     height="24"
+                     width="15"
+                     height="15"
                   />
                }
                checkedIcon={
-                  <img src={colorCheck} alt="checked" width="24" height="24" />
+                  <img src={colorCheck} alt="checked" width="20" height="20" />
                }
                {...rest}
             />

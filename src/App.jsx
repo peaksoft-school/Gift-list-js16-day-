@@ -1,8 +1,9 @@
-
+import AppRouter from './routes/AppRouter'
 
 const App = () => (
    <>
-    GIFT-LIST JS-16 DAY
+      <AppRouter />
+      {/* GIFT-LIST JS-16 DAY */}
    </>
 )
 

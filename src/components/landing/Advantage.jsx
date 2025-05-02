@@ -1,62 +1,67 @@
 import { Box, Container, Stack, Typography, styled } from '@mui/material'
 import { Favorite, ThumbUp, VolunteerActivism } from '@mui/icons-material'
 import Button from '../UI/Button'
+import { useNavigate } from 'react-router'
 
-const Advantage = () => (
-   <StyledBox>
-      <StyledContainer>
-         <StyledStack>
-            <ContainerBox>
-               <IconWrapper>
-                  <Favorite />
-               </IconWrapper>
+const Advantage = () => {
+   const navigate = useNavigate()
 
-               <StyledTitle>Дари то, что необходимо</StyledTitle>
-            </ContainerBox>
+   return (
+      <StyledBox>
+         <StyledContainer>
+            <StyledStack>
+               <ContainerBox>
+                  <IconWrapper>
+                     <Favorite />
+                  </IconWrapper>
 
-            <StyledText>
-               <li>Находи своих близких</li>
-               <li>Просматривай их списки желаний</li>
-               <li>Узнавай о ближайших мероприятиях</li>
-            </StyledText>
-         </StyledStack>
+                  <StyledTitle>Дари то, что необходимо</StyledTitle>
+               </ContainerBox>
 
-         <StyledStack>
-            <ContainerBox>
-               <IconWrapper>
-                  <ThumbUp />
-               </IconWrapper>
+               <StyledText>
+                  <li>Находи своих близких</li>
+                  <li>Просматривай их списки желаний</li>
+                  <li>Узнавай о ближайших мероприятиях</li>
+               </StyledText>
+            </StyledStack>
 
-               <StyledTitle>Удобство в использовании</StyledTitle>
-            </ContainerBox>
+            <StyledStack>
+               <ContainerBox>
+                  <IconWrapper>
+                     <ThumbUp />
+                  </IconWrapper>
 
-            <StyledText>
-               <li>Создавай неограниченное количество желаний</li>
-               <li>Добавляй подарки которые ты действительно хочешь</li>
-               <li>Делись своими желаниями с другими</li>
-            </StyledText>
-         </StyledStack>
+                  <StyledTitle>Удобство в использовании</StyledTitle>
+               </ContainerBox>
 
-         <StyledStack>
-            <ContainerBox>
-               <IconWrapper>
-                  <VolunteerActivism />
-               </IconWrapper>
+               <StyledText>
+                  <li>Создавай неограниченное количество желаний</li>
+                  <li>Добавляй подарки которые ты действительно хочешь</li>
+                  <li>Делись своими желаниями с другими</li>
+               </StyledText>
+            </StyledStack>
 
-               <StyledTitle>Твори добро</StyledTitle>
-            </ContainerBox>
+            <StyledStack>
+               <ContainerBox>
+                  <IconWrapper>
+                     <VolunteerActivism />
+                  </IconWrapper>
 
-            <StyledText>
-               <li>Дари благотворительные подарки</li>
-               <li>Делись своими вещами</li>
-               <li>Помогай другим приобрести необходимое</li>
-            </StyledText>
-         </StyledStack>
-      </StyledContainer>
+                  <StyledTitle>Твори добро</StyledTitle>
+               </ContainerBox>
 
-      <Button variant="outlined">ЗАРЕГИСТРИРОВАТЬСЯ</Button>
-   </StyledBox>
-)
+               <StyledText>
+                  <li>Дари благотворительные подарки</li>
+                  <li>Делись своими вещами</li>
+                  <li>Помогай другим приобрести необходимое</li>
+               </StyledText>
+            </StyledStack>
+         </StyledContainer>
+
+         <Button variant="outlined" onClick={() => navigate('/sign-up')}>ЗАРЕГИСТРИРОВАТЬСЯ</Button>
+      </StyledBox>
+   )
+}
 
 export default Advantage
 
