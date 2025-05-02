@@ -13,14 +13,9 @@ import { useState } from 'react'
 import Modal from '../Modal'
 import Input from '../Input'
 import { useNavigate } from 'react-router'
+import MailingCards from '../card/MailingCards'
 
-const MailingList = ({
-   title = 'Рассылка',
-   buttonText = 'Отправить рассылку',
-   imageSrc = SaleSale,
-   mailingTopic = 'Тема рассылки',
-   date = '12.04.2025',
-}) => {
+const MailingList = () => {
    const navigate = useNavigate()
 
    const [openModal, setOpenModal] = useState(false)
@@ -33,14 +28,11 @@ const MailingList = ({
       setOpenModal(false)
    }
 
-
-
-   
    return (
       <BlockContainer>
          <StyledMain>
             <HeaderRow>
-               <h3>{title}</h3>
+               <h3>Рассылка</h3>
                <StyledMainButton
                   variant="outlined"
                   color="primary"
@@ -52,22 +44,9 @@ const MailingList = ({
                      alt="icon"
                      style={{ marginRight: '10px' }}
                   />
-                  {buttonText}
+                  Отправить рассылку
                </StyledMainButton>
             </HeaderRow>
-
-            <FlexContainer>
-               <StyledBox>
-                  <img
-                     src={imageSrc}
-                     alt="card"
-                     onClick={() => navigate('/description')}
-                  />
-                  <StyledText>{mailingTopic}</StyledText>
-                  <StyledData>{date}</StyledData>
-               </StyledBox>
-            </FlexContainer>
-
             <Modal open={openModal} onClose={handleCloseModal}>
                <StyledDialogTitle>Создание рассылки</StyledDialogTitle>
                <DialogContent>
@@ -109,6 +88,13 @@ const MailingList = ({
                   </StyledButton>
                </ButtonContainer>
             </Modal>
+            <FlexContainer>
+               <MailingCards onClick={() => navigate('/description')} />
+               <MailingCards onClick={() => navigate('/description')} />
+               <MailingCards onClick={() => navigate('/description')} />
+               <MailingCards onClick={() => navigate('/description')} />
+               <MailingCards onClick={() => navigate('/description')} />
+            </FlexContainer>
          </StyledMain>
       </BlockContainer>
    )
@@ -118,7 +104,7 @@ export default MailingList
 const BlockContainer = styled(Box)(() => ({
    display: 'flex',
    justifyContent: 'center',
-   alignItems: 'center',
+   paddingLeft: '20px',
 }))
 const StyledMainButton = styled(Button)(() => ({
    '&.MuiButton-root': {
@@ -129,52 +115,29 @@ const StyledMainButton = styled(Button)(() => ({
 }))
 
 const StyledMain = styled(Box)(() => ({
-   width: '1086px',
-   height: '1024px',
+   width: '100%',
+   margin: '100px 10px',
    background: '#F7F8FA',
-   borderRadius: '8px',
-   border: '1px solid #f1efef ',
-   margin: '100px',
-   padding: '20px',
 }))
 const HeaderRow = styled(Box)(() => ({
    display: 'flex',
    justifyContent: 'space-between',
+
    alignItems: 'center',
    marginBottom: '16px',
+   padding: '10px',
 }))
 
 const FlexContainer = styled(Box)(() => ({
-   width: '349px',
-   height: '250px',
-   background: '#FFFFFF',
-   borderRadius: '8px',
-   border: '1px solid #f1efef ',
+   width: '100%',
+   height: '100%',
+
    marginLeft: '10px',
+   display: 'flex',
+   flexWrap: 'wrap',
+   gap: '1rem',
 }))
 
-const StyledBox = styled(Box)(() => ({
-   padding: '10px ',
-}))
-
-const StyledText = styled(Typography)(() => ({
-   marginTop: '30px',
-   fontFamily: ' Inter',
-   fontWeight: '600',
-   fontSize: '14px',
-   lineHeight: '100%',
-   letterSpacing: ' 0%',
-   color: '#000000',
-}))
-const StyledData = styled(Typography)(() => ({
-   fontFamily: ' Inter',
-   fontWeight: '400',
-   fontSize: '14px',
-   lineHeight: '100%',
-   letterSpacing: ' 0%',
-   paddingTop: '20px',
-   color: '#636C84',
-}))
 //Модальное окно
 
 const StyledDialogTitle = styled(Box)(() => ({

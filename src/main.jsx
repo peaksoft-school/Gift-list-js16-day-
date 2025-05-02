@@ -4,11 +4,11 @@ import './index.css'
 import App from './App.jsx'
 import { ThemeProvider } from '@mui/material'
 import theme from './components/Themes.jsx'
-import { injectStore } from './configs/axiosInstance.js'
 import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router'
+import { injectStore } from './configs/axiosInstance.js'
 import { persistor, store } from './store/store.js'
 import { PersistGate } from 'redux-persist/integration/react'
-import { BrowserRouter } from 'react-router'
 
 injectStore(store)
 
