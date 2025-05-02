@@ -10,7 +10,7 @@ const AdminLayout = () => {
          <SideBar role="ADMIN" />
          <Header role="ADMIN" />
       
-         {/* <Outlet /> */}
+         <Outlet />
       </StyledMain>
    )
 }

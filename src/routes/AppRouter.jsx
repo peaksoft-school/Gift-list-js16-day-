@@ -1,17 +1,19 @@
 import { lazy, Suspense } from 'react'
-import { Navigate, Route, Routes } from 'react-router'
+import { Navigate, Route, Routes, useLocation } from 'react-router'
 import { ROLES } from './routes'
 import Blago from '../pages/user/Blago'
 import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
-import MailingList from '../components/UI/mailing/MailingList'
 import DescriptionCard from '../components/UI/mailing/DescriptionCard'
+import MailingList from '../components/UI/mailing/MailingList'
 
 const Home = lazy(() => import('../pages/home/Home'))
 const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
 const SignUp = lazy(() => import('../pages/sign-up/SignUp'))
 const Admin = lazy(() => import('../layout/AdminLayout'))
 const User = lazy(() => import('../layout/UserLayout'))
+
+const { pathname } = useLocation()
 
 const AppRouter = () => (
    <Routes>
@@ -58,15 +60,18 @@ const AppRouter = () => (
                      <Admin />
                   </Suspense>
                }
-               fallbackPath={'/admin'}
+               fallbackPath={'/' && '/user'}
             />
          }
       >
-         {/* <Route index element={<Navigate to="users" />} /> */}
+         <Route index element={<Navigate to="users" />} />
          <Route path="users" element={<h1>Users</h1>} />
          <Route path="charity" element={<Blago />} />
          <Route path="complaints" element={<h1>complaints</h1>} />
-         <Route path="newsletter" element={<MailingList />} />
+         <Route
+            path="newsletter"
+            element={`${pathname === '/admin/newsletter'(<MailingList />)}`}
+         />
          <Route path="description" element={<DescriptionCard />} />
       </Route>
 
