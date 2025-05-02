@@ -4,9 +4,10 @@ import {
    InputAdornment,
    InputLabel,
    TextField,
+   styled,
 } from '@mui/material'
-import styled from 'styled-components'
 import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded'
+import UnionIcon from '../../assets/icons/Union.svg'
 
 const Input = forwardRef(
    (
@@ -20,38 +21,43 @@ const Input = forwardRef(
          error,
          errorText,
          inputProps,
+         icon,
          ...rest
       },
       ref
-   ) => {
-      return (
-         <>
-            <StyledInputLabel error={error}>{labelText}</StyledInputLabel>
+   ) => (
+      <>
+         <StyledInputLabel error={error}>{labelText}</StyledInputLabel>
 
-            <StyledInput
-               type={type}
-               value={value}
-               onChange={handleChange}
-               placeholder={placeholder}
-               error={Boolean(error)}
-               name={name}
-               ref={ref}
-               fullWidth
-               InputProps={{
-                  endAdornment: error ? (
-                     <InputAdornment position="end">
-                        <ErrorOutlineRoundedIcon className="error-icon" />
-                     </InputAdornment>
-                  ) : null,
-                  ...inputProps,
-               }}
-               {...rest}
-            />
+         <StyledInput
+            type={type}
+            value={value}
+            onChange={handleChange}
+            placeholder={placeholder}
+            error={Boolean(error)}
+            name={name}
+            ref={ref}
+            fullWidth
+            InputProps={{
+               startAdornment: icon ? (
+                  <InputAdornment position="start">
+                     <img src={UnionIcon} alt="notification" />
+                  </InputAdornment>
+               ) : null,
 
-            {error && <StyledFormHelperText>{errorText}</StyledFormHelperText>}
-         </>
-      )
-   }
+               endAdornment: error ? (
+                  <InputAdornment position="end">
+                     <ErrorOutlineRoundedIcon className="error-icon" />
+                  </InputAdornment>
+               ) : null,
+               ...inputProps,
+            }}
+            {...rest}
+         />
+
+         {error && <StyledFormHelperText>{errorText}</StyledFormHelperText>}
+      </>
+   )
 )
 export default Input
 
@@ -65,7 +71,7 @@ const StyledInputLabel = styled(InputLabel)(({ error }) => ({
 
 const StyledInput = styled(TextField)(() => ({
    '& .MuiOutlinedInput-root': {
-      borderRadius: '12px',
+      borderRadius: '8px',
       padding: '0px 5px',
       width: '290px',
       height: '50px',
@@ -73,14 +79,14 @@ const StyledInput = styled(TextField)(() => ({
 
       '& fieldset': {
          margin: '8px 0',
-         borderWidth: '2px',
       },
+
       '&:hover fieldset': {
-         borderColor: '#8639B5',
+         border: '1px solid grey',
       },
 
       '&.Mui-focused fieldset': {
-         borderColor: '#8639B5',
+         border: '1px solid grey',
       },
 
       '& .error-icon': {
@@ -102,6 +108,7 @@ const StyledInput = styled(TextField)(() => ({
       '& fieldset': {
          borderColor: 'red',
       },
+
       '& input': {
          color: 'red',
       },

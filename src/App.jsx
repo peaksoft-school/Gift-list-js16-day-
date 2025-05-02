@@ -1,10 +1,10 @@
-import Router from './routes/Router'
+import Loading from './components/Loading'
+import AppRouter from './routes/AppRouter'
 
-const App = () => {
-   return (
-      <>
-         <Router />
-      </>
-   )
-}
+const App = () => (
+   <>
+      <AppRouter />
+   </>
+)
+
 export default App
