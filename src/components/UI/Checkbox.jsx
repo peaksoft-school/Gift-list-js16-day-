@@ -21,8 +21,8 @@ const Checkbox = forwardRef(
                   <img
                      src={borderCheck}
                      alt="unchecked"
-                     width="15"
-                     height="15"
+                     width="20"
+                     height="20"
                   />
                }
                checkedIcon={
