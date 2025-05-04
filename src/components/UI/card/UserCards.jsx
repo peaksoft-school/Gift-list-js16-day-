@@ -1,35 +1,40 @@
 import { Box, styled, Typography } from '@mui/material'
-import MeetBalls from './MeetBalls'
-import { USER_CARD_OPTIONS } from '../../utils/helpers/index'
+import Menu from '../menu/Menu'
+import Block from '../../../assets/images/Block.png'
+import Delete from '../../../assets/images/Delete.png'
 
-const UserCard = ({ user }) => {
-   const { image, fullName, amount } = user
+const menuItems = [
+   {
+      label: 'Заблокировать',
+      icon: Block,
+   },
+   {
+      label: 'Удалить',
+      icon: Delete,
+   },
+]
 
+const UserCards = ({ user }) => {
    return (
       <FlexContainer>
          <StyledCard>
-            <StyledImage src={image} />
-
-            <StyledText> {fullName}</StyledText>
-
+            <StyledImage src={user.image} />
+            <StyledText> {user.fullName}</StyledText>
             <StyledBox>
-               <Typography>{amount}</Typography>
-
+               <Typography>{user.amount}</Typography>
                <Typography align="center" fontSize="12px">
                   желаемых
                   <br />
                   подарков
                </Typography>
-
-               <MeetBalls options={USER_CARD_OPTIONS} />
-               
+               <Menu items={menuItems} />
             </StyledBox>
          </StyledCard>
       </FlexContainer>
    )
 }
 
-export default UserCard
+export default UserCards
 
 const FlexContainer = styled(Box)(() => ({
    display: 'flex',
@@ -66,6 +71,15 @@ const StyledText = styled(Typography)({
    backgroundColor: 'white',
    padding: '8px',
    borderRadius: '5px',
+})
+
+const Text = styled(Box)({
+   fontfamily: 'Inter',
+   fontWeight: '400',
+   fontSize: '12px',
+   color: '#606060',
+   display: 'flex',
+   justifyContent: 'space-around',
 })
 
 const StyledBox = styled(Box)(() => ({
