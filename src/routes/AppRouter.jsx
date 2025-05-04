@@ -13,8 +13,6 @@ const SignUp = lazy(() => import('../pages/sign-up/SignUp'))
 const Admin = lazy(() => import('../layout/AdminLayout'))
 const User = lazy(() => import('../layout/UserLayout'))
 
-const { pathname } = useLocation()
-
 const AppRouter = () => (
    <Routes>
       <Route
@@ -60,7 +58,7 @@ const AppRouter = () => (
                      <Admin />
                   </Suspense>
                }
-               fallbackPath={'/' && '/user'}
+               fallbackPath={'/'}
             />
          }
       >

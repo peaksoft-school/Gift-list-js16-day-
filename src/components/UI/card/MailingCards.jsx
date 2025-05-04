@@ -1,31 +1,59 @@
-import React from 'react'
-import SaleSale from '../../../assets/images/SaleSale.png'
+import React, { useEffect } from 'react'
+import NoMailings from '../../../assets/images/NoMailings.png'
 import { Box, styled, Typography } from '@mui/material'
-
-const mailings = [
-   {
-      imageSrc: SaleSale,
-      mailingTopic: 'Тема рассылки',
-      date: '12.04.2025',
-   },
-]
+import { useNavigate } from 'react-router'
+import { useDispatch, useSelector } from 'react-redux'
+import { MAILING_THUNK } from '../../../store/slices/mailing/mailingThunk'
 
 const MailingCards = () => {
+   const { mailings } = useSelector((state) => state.mailing)
+
+   const navigate = useNavigate()
+
+   const dispatch = useDispatch()
+
+   useEffect(() => {
+      dispatch(MAILING_THUNK.getAllMailings())
+   }, [])
+
    return (
       <div>
-         {mailings.map((mailing) => (
-            <StyledBox>
-               <img src={mailing.imageSrc} alt="card" />
-               <StyledText>{mailing.mailingTopic}</StyledText>
-               <StyledData>{mailing.date}</StyledData>
-            </StyledBox>
-         ))}
+         {mailings.length === 0 ? (
+            <StyledNotBlockBox>
+               <img src={NoMailings} alt="icon" />
+               <h1>Нет рассылок!</h1>
+            </StyledNotBlockBox>
+         ) : (
+            mailings.map((mailing) => (
+               <StyledBox>
+                  <img
+                     src={mailing.imageSrc}
+                     alt="card"
+                     onClick={() => navigate('/admin/description')}
+                  />
+                  <StyledText>{mailing.mailingTopic}</StyledText>
+                  <StyledData>{mailing.date}</StyledData>
+               </StyledBox>
+            ))
+         )}
       </div>
    )
 }
 
 export default MailingCards
-
+const StyledNotBlockBox = styled(Box)(() => ({
+   display: 'flex',
+   justifyContent: 'center',
+   flexDirection: 'column',
+   alignItems: 'center',
+   '& img': {
+      width: '200px',
+      marginLeft: '400px',
+   },
+   '& h1': {
+      marginLeft: '400px',
+   },
+}))
 const StyledBox = styled(Box)(() => ({
    padding: '10px ',
    borderRadius: '10px',

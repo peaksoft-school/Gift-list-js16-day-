@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
    Box,
    DialogContent,
@@ -5,19 +6,15 @@ import {
    styled,
    Typography,
 } from '@mui/material'
-import SaleSale from '../../../assets/images/SaleSale.png'
 import ImageIcon from '@mui/icons-material/Image'
-import Message from '../../../assets/images/Message.png'
 import Button from '../Button'
-import { useState } from 'react'
 import Modal from '../Modal'
 import Input from '../Input'
-import { useNavigate } from 'react-router'
 import MailingCards from '../card/MailingCards'
+import Message from '../../../assets/images/Message.png'
 
 const MailingList = () => {
-   const navigate = useNavigate()
-
+   // const { mailings } = useSelector((state) => state.mailing)
    const [openModal, setOpenModal] = useState(false)
 
    const handleOpenModal = () => {
@@ -89,11 +86,7 @@ const MailingList = () => {
                </ButtonContainer>
             </Modal>
             <FlexContainer>
-               <MailingCards onClick={() => navigate('/description')} />
-               <MailingCards onClick={() => navigate('/description')} />
-               <MailingCards onClick={() => navigate('/description')} />
-               <MailingCards onClick={() => navigate('/description')} />
-               <MailingCards onClick={() => navigate('/description')} />
+               <MailingCards />
             </FlexContainer>
          </StyledMain>
       </BlockContainer>
@@ -103,8 +96,8 @@ const MailingList = () => {
 export default MailingList
 const BlockContainer = styled(Box)(() => ({
    display: 'flex',
-   justifyContent: 'center',
-   paddingLeft: '20px',
+   // justifyContent: 'center',
+   width: '100%',
 }))
 const StyledMainButton = styled(Button)(() => ({
    '&.MuiButton-root': {
@@ -115,30 +108,24 @@ const StyledMainButton = styled(Button)(() => ({
 }))
 
 const StyledMain = styled(Box)(() => ({
-   width: '100%',
-   margin: '100px 10px',
+   margin: '100px 0 0 0px',
    background: '#F7F8FA',
+   width: '100%',
 }))
 const HeaderRow = styled(Box)(() => ({
    display: 'flex',
    justifyContent: 'space-between',
-
    alignItems: 'center',
    marginBottom: '16px',
    padding: '10px',
 }))
 
 const FlexContainer = styled(Box)(() => ({
-   width: '100%',
-   height: '100%',
-
    marginLeft: '10px',
    display: 'flex',
    flexWrap: 'wrap',
    gap: '1rem',
 }))
-
-//Модальное окно
 
 const StyledDialogTitle = styled(Box)(() => ({
    textAlign: 'center',
@@ -182,7 +169,7 @@ const StyledButton = styled(Button)(() => ({
 }))
 const ButtonContainer = styled(Box)(() => ({
    '& .MuiButton-root': {
-      height: '40px',
+      height: '37px',
    },
    display: 'flex',
    justifyContent: 'center',

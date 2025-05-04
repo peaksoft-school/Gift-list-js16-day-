@@ -41,12 +41,12 @@ const FlexContainer = styled(Box)(() => ({
    display: 'flex',
    justifyContent: 'center',
    alignItems: 'center',
+   // marginLeft: '280px',
 }))
 const BlockContainer = styled(Box)(() => ({
-   width: '1086px',
-   height: '1024px',
+   width: '1250px',
    background: '#F7F8FA',
-   margin: '100px',
+   margin: '30px 0 0 0px',
    padding: '20px',
 }))
 
@@ -56,14 +56,17 @@ const StyledBox = styled(Box)(() => ({
    alignItems: 'start',
    padding: '30px',
    marginTop: '30px',
-   width: '1050px',
-   height: '871px',
+   width: '1100px',
+   height: '100%',
    background: '#FFFFFF',
    borderRadius: '10px',
    border: '1px solid #f1efef ',
 }))
 
-const StyledText = styled(Box)(() => ({}))
+const StyledText = styled(Box)(() => ({
+   display: 'flex',
+   flexDirection: 'column',
+}))
 
 const StyledParagraf = styled('h1')(() => ({
    fontFamily: 'Inter',
