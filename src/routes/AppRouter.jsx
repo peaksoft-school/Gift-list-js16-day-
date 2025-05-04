@@ -4,6 +4,7 @@ import { ROLES } from './routes'
 import Blago from '../pages/user/Blago'
 import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
+import ForgotRassword from '../pages/forgotPassword/ForgotRassword'
 
 const Home = lazy(() => import('../pages/home/Home'))
 const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
@@ -36,6 +37,14 @@ const AppRouter = () => (
             </Suspense>
          }
       />
+      <Route
+         path="/forgot-password"
+         element={
+            <Suspense fallback={<Loading />}>
+               <ForgotRassword />
+            </Suspense>
+         }
+      ></Route>
 
       <Route
          path="/sign-up"

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { signInWithPopup } from 'firebase/auth'
 import { auth, provider } from '../../configs/firebase'
 import Input from '../../components/UI/Input'
-import { NavLink, useNavigate } from 'react-router'
+import { Form, NavLink, useNavigate } from 'react-router'
 import Checkbox from '../../components/UI/Checkbox'
 import { useForm } from 'react-hook-form'
 import Button from '../../components/UI/Button'
@@ -119,7 +119,9 @@ const SignIn = () => {
                Войти
             </StyledButton>
          </form>
-         <StyledForgotPassword to="">Забыли пароль?</StyledForgotPassword>
+         <StyledForgotPassword to="/forgot-password">
+            Забыли пароль?
+         </StyledForgotPassword>
          <StyledOrDivider>
             <StyledLine />
             <StyledText>или</StyledText>
@@ -135,6 +137,8 @@ const SignIn = () => {
             Нет аккаунта?
             <StyledNavLink to="/sign-up">Зарегистрироваться</StyledNavLink>
          </p>
+
+         <div></div>
       </StyledMainSignIn>
    )
 }
@@ -155,7 +159,7 @@ const StyledMainSignIn = styled('div')(() => ({
 const StyledMainHeader = styled('div')(() => ({
    display: 'flex',
    gap: '399px',
-   marginTop: '124px',
+   marginTop: '50px',
    marginBottom: '34px',
 }))
 const StyledMainCheckbox = styled('div')(() => ({
@@ -169,6 +173,7 @@ const StyledInput = styled(Input)(() => ({
       height: '35px',
       backgroundColor: 'none',
    },
+   paddingRight: '30px',
 }))
 
 const StyledButton = styled(Button)(() => ({
