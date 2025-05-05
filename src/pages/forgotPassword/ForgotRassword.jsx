@@ -1,8 +1,7 @@
-
 const ForgotRassword = () => {
-  return (
-    <div>ForgotRassword</div>
-  )
+   return <div>
+    
+   </div>
 }
 
 export default ForgotRassword
