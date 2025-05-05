@@ -1,41 +1,48 @@
 import { styled } from '@mui/material/styles'
-import { Box, Container, Typography, TextField } from '@mui/material'
+import { List, Container, Typography, TextField, Box } from '@mui/material'
 import facebook from '../assets/icons/facebook.svg'
 import wk from '../assets/icons/wk.svg'
 import instagram from '../assets/icons/instagram.svg'
-import Inactive from '../assets/icons/inactive.svg'
+import inactive from '../assets/icons/inactive.svg'
 
 const Footer = () => {
    return (
       <div>
-         <StyledBox>
+         <StyledList>
             <StyledContainer>
-               <div>
-                  <StyledText>GIFT LIST</StyledText>
-                  <StyledTitle>Социальная сеть нового поколения</StyledTitle>
+               <StyledBoxBlock>
                   <Box>
-                     <img src={facebook} alt="" />
-                     <img src={wk} alt="" />
-                     <img src={instagram} alt="" />
+                     <StyledText>GIFT LIST</StyledText>
+                     <StyledTitle>Социальная сеть нового поколения</StyledTitle>
+                     <StyledImages>
+                        <img src={facebook} alt="" />
+                        <img src={wk} alt="" />
+                        <img src={instagram} alt="" />
+                     </StyledImages>
                   </Box>
-               </div>
-
-               <div>
+               </StyledBoxBlock>
+               <Box>
                   <StyledType>Навигация</StyledType>
-                  <StyledTitle>О проекте Благотворительность</StyledTitle>
-               </div>
+                  <StyledTitle>О проекте </StyledTitle>
+                  <StyledTitle>Благотворительность</StyledTitle>
+               </Box>
 
-               <div>
+               <Box>
                   <StyledType>Подписаться на рассылку</StyledType>
-                  <TextField
-                     variant="outlined"
-                     placeholder="Введите ваш Email"
-                     size="small"
-                  />
-                  <img src={Inactive} alt="" />
-               </div>
+
+                  <StyledIcon>
+                     {/* <StyledInput
+                        variant="outlined"
+                        placeholder="Введите ваш Email"
+                        size="large"
+                       /> */}
+                     <label className="Введите ваш Email"></label>
+
+                     <StyledButton src={inactive} alt="" />
+                  </StyledIcon>
+               </Box>
             </StyledContainer>
-         </StyledBox>
+         </StyledList>
 
          <StyledSoft>Peaksoft © 2022 Все права защищены</StyledSoft>
       </div>
@@ -44,23 +51,20 @@ const Footer = () => {
 
 export default Footer
 
-const StyledBox = styled(Box)({
+const StyledList = styled(List)({
    width: '1440 px',
-   top: '3128 px ',
-   border: '1px solid #353A5A',
+   border: '1px solid #BDBDBD',
    opacsity: '10%',
    borderRadius: '1px ',
+   display: 'flex',
+   justifyContent: 'space-between',
 })
 
 const StyledText = styled(Typography)({
-   width: '113',
-   height: '29',
-   top: '3153px',
-   left: '135px',
+   marginBottom: '8px',
    fontFamily: 'Inter',
-   fontWeight: '700',
+   fontWeight: '700px',
    fontSize: '24px',
-   lineHeight: '100%',
    letterSpacing: '0%',
    textTransform: 'uppercase',
    color: '#020202',
@@ -68,44 +72,35 @@ const StyledText = styled(Typography)({
 
 const StyledContainer = styled(Container)({
    display: 'flex',
-   justifyContent: 'space-evenly',
+   justifyContent: 'space-between',
    marginTop: '80px',
    padding: '20px',
+   gap: '50px',
 })
+const StyledBoxBlock = styled(Box)(() => ({
+   lineHeight: '100%',
+}))
 
 const StyledTitle = styled(Typography)({
-   width: '172',
-   height: '16',
-   top: '3219px',
-   left: ' 634px',
-
    fontFamily: 'Inter',
-   fontWeight: '400',
-   fontSize: '16px',
-   lineHeight: '100%',
+   fontWeight: '400px',
+   fontSize: '15px',
+   marginBottom: '8px',
    letterSpacing: '0%',
+   color: ' #353A5A',
 })
 
 const StyledType = styled(Typography)({
-   width: '96',
-   height: '18',
-   top: '3153px',
-   left: '634px',
-
    fontFamily: 'Inter, san-serif',
-   fontWeight: '500',
+   fontWeight: '500px',
    fontSize: '18px',
    lineHeight: '100%',
    letterSpacing: '0%',
-   paddingTop: '5px',
+   marginBottom: '10px',
 })
 
 const StyledSoft = styled(Typography)({
-   width: '265',
-   height: '14',
-   top: '3298px',
-   left: '588px',
-
+   marginBottom: '20px',
    fontFamily: 'Inter',
    fontWeight: '400',
    fontSize: '14px',
@@ -113,4 +108,24 @@ const StyledSoft = styled(Typography)({
    letterSpacing: '0%',
    textAlign: 'center',
    color: '#020202',
+   marginTop: '30px',
+})
+const StyledImages = styled(Box)({
+   marginRight: '50px',
+   display: 'flex',
+   gap: '20px',
+})
+
+const StyledButton = styled('img')(() => ({
+   width: '39px',
+   height: '39px',
+   right: '283px',
+}))
+
+const StyledIcon = styled(Box)({
+   display: 'flex',
+   border: '1px solid #BDBDBD',
+   width: '322px',
+   borderRadius: '4px',
+   justifyContent: 'space-between',
 })
