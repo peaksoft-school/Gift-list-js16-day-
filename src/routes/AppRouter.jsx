@@ -7,6 +7,9 @@ import Loading from '../components/Loading'
 import ForgotRassword from '../pages/forgotPassword/ForgotRassword'
 
 const Home = lazy(() => import('../pages/home/Home'))
+const ChangePassword = lazy(
+   () => import('../pages/resetPassword/ResetPassword')
+)
 const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
 const SignUp = lazy(() => import('../pages/sign-up/SignUp'))
 const Admin = lazy(() => import('../layout/AdminLayout'))
@@ -56,6 +59,15 @@ const AppRouter = () => (
       />
 
       <Route
+         path="/reset-password"
+         element={
+            <Suspense fallback={<Loading />}>
+               <ChangePassword />
+            </Suspense>
+         }
+      />
+
+      <Route
          path="/admin"
          element={
             <PrivateRoute
@@ -90,11 +102,11 @@ const AppRouter = () => (
             />
          }
       >
-         <Route path="lenta" index element={<h1>Friends</h1>} />
+         <Route path="lenta" index element={<h1>lenta</h1>} />
          <Route path="friends" element={<h1>Friends</h1>} />
-         <Route path="list" element={<h1>Friends</h1>} />
-         <Route path="booking" element={<h1>Friends</h1>} />
-         <Route path="my-part" element={<h1>Friends</h1>} />
+         <Route path="list" element={<h1>list</h1>} />
+         <Route path="booking" element={<h1>booking</h1>} />
+         <Route path="my-part" element={<h1>my part</h1>} />
          <Route path="charity" element={<Blago />} />
       </Route>
    </Routes>

@@ -8,8 +8,9 @@ const UserLayout = () => {
       <StyledMain>
          <SideBar role="USER" />
          <Header role="USER" />
-
-         <Outlet />
+         <StyledOutlet>
+            <Outlet />
+         </StyledOutlet>
       </StyledMain>
    )
 }
@@ -18,4 +19,8 @@ export default UserLayout
 
 const StyledMain = styled(Box)(() => ({
    display: 'flex',
+}))
+
+const StyledOutlet = styled('div')(() => ({
+   margin: '50px',
 }))

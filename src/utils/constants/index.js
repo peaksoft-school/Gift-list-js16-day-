@@ -70,4 +70,5 @@ const FRIENDS = [
    },
 ]
 
+
 export { conditions, categories, subcategories, countries, STATISTICS, FRIENDS }

@@ -1,127 +1,188 @@
 import { Typography } from '@mui/material'
-import LightIcon from '../../assets/icons/light.svg'
 import styled from 'styled-components'
-import { signInWithPopup } from 'firebase/auth'
-import { auth, provider } from '../../configs/firebase'
+import { Formik } from 'formik'
+import { NavLink, useNavigate } from 'react-router'
+import { useDispatch, useSelector } from 'react-redux'
+import LightIcon from '../../assets/icons/light.svg'
 import Input from '../../components/UI/Input'
-import { Form, NavLink, useNavigate } from 'react-router'
-import Checkbox from '../../components/UI/Checkbox'
-import { useForm } from 'react-hook-form'
 import Button from '../../components/UI/Button'
+import Checkbox from '../../components/UI/Checkbox'
 import GoogleIcon from '../../assets/icons/google.svg'
-import { useState } from 'react'
 import EyeIcon from '../../assets/icons/eye.svg'
 import EyeSlash from '../../assets/icons/eye-off.svg'
+import { AUTH_THUNK } from '../../store/slices/auth/authThunk'
+import { ROUTES } from '../../routes/routes'
+import { useState } from 'react'
+import ToastifyNotify from '../../utils/helpers/ToastifyNotify'
+import Notification from '../../components/Notification'
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { auth } from '../../configs/firebase'
 
 const SignIn = () => {
    const navigate = useNavigate()
-   const { register, handleSubmit } = useForm()
-   const [password, setPassword] = useState('')
+   const dispatch = useDispatch()
+   const { isLoading } = useSelector((state) => state.auth)
    const [showPassword, setShowPassword] = useState(false)
 
-   const togglePasswordVisibility = () => {
-      setShowPassword((prev) => !prev)
-   }
-
-   const onSubmit = (data) => {
-      console.log('Form Data:', data)
-   }
+   const togglePasswordVisibility = () => setShowPassword((prev) => !prev)
 
    const handleGoogleSignIn = async () => {
       try {
+         const provider = new GoogleAuthProvider()
+         provider.addScope('email')
+         provider.addScope('profile')
+
          const result = await signInWithPopup(auth, provider)
-         const user = result.user
-         console.log('Пользователь вошел:', user.displayName, user.email)
-         alert(`Добро пожаловать, ${user.displayName}!`)
+         const idToken = await result.user.getIdToken()
+
+         const response = await dispatch(
+            AUTH_THUNK.googleSignIn({ idToken, navigate })
+         ).unwrap()
+
+         ToastifyNotify({
+            title: 'Успешно',
+            message: 'Вы успешно зарегистрировались',
+            autoClose: 3000,
+            type: 'success',
+         })
       } catch (error) {
-         console.error('Ошибка входа:', error)
+         console.error('Ошибка входа через Google:', error)
+         ToastifyNotify({
+            title: 'Ошибка',
+            message: 'При регистрации',
+            autoClose: 3000,
+            type: 'error',
+         })
       }
    }
 
    return (
       <StyledMainSignIn>
-         <form onSubmit={handleSubmit(onSubmit)}>
-            <StyledMain>
-               <StyledMainHeader>
-                  <Typography
-                     typography="h3"
-                     style={{ fontSize: '24px', fontWeight: 500 }}
-                  >
-                     Вход
-                  </Typography>
-                  <img
-                     src={LightIcon}
-                     alt=""
-                     style={{ cursor: 'pointer' }}
-                     onClick={() => navigate('/')}
-                  />
-               </StyledMainHeader>
-               <div style={{ position: 'relative' }}>
-                  <StyledInput
-                     {...register('email')}
-                     placeholder="Email"
-                     type="email"
-                  />
-                  <StyledInput
-                     {...register('password')}
-                     type={showPassword ? 'text' : 'password'}
-                     placeholder="Введите пароль"
-                     value={password}
-                     onChange={(e) => setPassword(e.target.value)}
-                  />
-                  <span
-                     onClick={togglePasswordVisibility}
-                     style={{
-                        position: 'absolute',
-                        top: '66%',
-                        right: '10px',
-                        cursor: 'pointer',
-                     }}
-                  >
-                     {showPassword ? (
+         <Formik
+            initialValues={{ email: '', password: '' }}
+            validate={(values) => {
+               const errors = {}
+               if (!values.email) errors.email = 'Email is required'
+               if (!values.password) errors.password = 'Password is required'
+               return errors
+            }}
+            onSubmit={(values, { setSubmitting }) => {
+               const loginData = {
+                  email: values.email.trim(),
+                  password: values.password,
+               }
+
+               dispatch(AUTH_THUNK.login(loginData))
+                  .unwrap()
+                  .then((result) => {
+                     ToastifyNotify({
+                        title: 'Успешно',
+                        message: 'Вы успешно вошли',
+                        autoClose: 3000,
+                        type: 'success',
+                     })
+                     if (result.role === 'ADMIN') {
+                        navigate(ROUTES.ADMIN.INDEX)
+                     } else {
+                        navigate(ROUTES.USER.INDEX)
+                     }
+                  })
+                  .catch((error) => {
+                     ToastifyNotify({
+                        title: 'Ошибка',
+                        message: error.message || 'Ошибка входа',
+                        autoClose: 3000,
+                        type: 'error',
+                     })
+                  })
+                  .finally(() => {
+                     setSubmitting(false)
+                  })
+            }}
+         >
+            {({ values, handleChange, handleSubmit, isSubmitting }) => (
+               <form onSubmit={handleSubmit}>
+                  <Notification />
+                  <StyledMain>
+                     <StyledMainHeader>
+                        <Typography
+                           typography="h3"
+                           style={{ fontSize: '24px', fontWeight: 500 }}
+                        >
+                           Вход
+                        </Typography>
                         <img
-                           src={EyeIcon}
+                           src={LightIcon}
                            alt=""
-                           style={{
-                              width: '20px',
-                              marginTop: 3,
-                              border: '#ccc',
-                           }}
+                           style={{ cursor: 'pointer' }}
+                           onClick={() => navigate('/')}
                         />
-                     ) : (
-                        <img
-                           src={EyeSlash}
-                           alt=""
-                           style={{
-                              width: '20px',
-                              marginTop: 3,
-                              border: '#ccc',
-                           }}
+                     </StyledMainHeader>
+                     <div style={{ position: 'relative' }}>
+                        <StyledInput
+                           placeholder="Email"
+                           name="email"
+                           type="email"
+                           onChange={handleChange}
+                           value={values.email}
                         />
-                     )}
-                  </span>
-               </div>
-               <StyledMainCheckbox>
-                  <Checkbox />
-                  <span
-                     style={{
-                        fontWeight: 400,
-                        fontSize: '14px',
-                        color: '#87898E',
-                        marginLeft: '-10px',
-                     }}
-                  >
-                     Запомнить меня
-                  </span>
-               </StyledMainCheckbox>
-            </StyledMain>
-            <StyledButton type="submit" variant="outlined">
-               Войти
-            </StyledButton>
-         </form>
+                        <StyledInput
+                           placeholder="Введите пароль"
+                           name="password"
+                           type={showPassword ? 'text' : 'password'}
+                           onChange={handleChange}
+                           value={values.password}
+                        />
+                        <span
+                           onClick={togglePasswordVisibility}
+                           style={{
+                              position: 'absolute',
+                              top: '66%',
+                              right: '10px',
+                              cursor: 'pointer',
+                           }}
+                        >
+                           <img
+                              src={showPassword ? EyeIcon : EyeSlash}
+                              alt="toggle password"
+                              style={{
+                                 width: '20px',
+                                 marginTop: 3,
+                                 border: '#ccc',
+                              }}
+                           />
+                        </span>
+                     </div>
+
+                     <StyledMainCheckbox>
+                        <Checkbox />
+                        <span
+                           style={{
+                              fontWeight: 400,
+                              fontSize: '14px',
+                              color: '#87898E',
+                              marginLeft: '-10px',
+                           }}
+                        >
+                           Запомнить меня
+                        </span>
+                     </StyledMainCheckbox>
+                     <StyledButton
+                        type="submit"
+                        variant="outlined"
+                        disabled={isSubmitting || isLoading}
+                     >
+                        {isLoading ? 'Загрузка...' : 'Войти'}
+                     </StyledButton>
+                  </StyledMain>
+               </form>
+            )}
+         </Formik>
+
          <StyledForgotPassword to="/forgot-password">
             Забыли пароль?
          </StyledForgotPassword>
+
          <StyledOrDivider>
             <StyledLine />
             <StyledText>или</StyledText>
@@ -137,8 +198,6 @@ const SignIn = () => {
             Нет аккаунта?
             <StyledNavLink to="/sign-up">Зарегистрироваться</StyledNavLink>
          </p>
-
-         <div></div>
       </StyledMainSignIn>
    )
 }
@@ -169,7 +228,7 @@ const StyledMainCheckbox = styled('div')(() => ({
 }))
 const StyledInput = styled(Input)(() => ({
    '&.MuiOutlinedInput-root': {
-      width: '482px',
+      width: '492px',
       height: '35px',
       backgroundColor: 'none',
    },
