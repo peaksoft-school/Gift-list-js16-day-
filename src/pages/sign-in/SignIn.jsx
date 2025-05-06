@@ -49,7 +49,7 @@ const SignIn = () => {
          console.error('Ошибка входа через Google:', error)
          ToastifyNotify({
             title: 'Ошибка',
-            message: 'При регистрации',
+            message: 'Ошибка при регистрации',
             autoClose: 3000,
             type: 'error',
          })
@@ -89,8 +89,8 @@ const SignIn = () => {
                   })
                   .catch((error) => {
                      ToastifyNotify({
-                        title: 'Ошибка',
-                        message: error.message || 'Ошибка входа',
+                        title: 'Error',
+                        message: 'Не верный пароль!',
                         autoClose: 3000,
                         type: 'error',
                      })
