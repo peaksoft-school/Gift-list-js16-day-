@@ -1,46 +1,39 @@
-import React, { useEffect } from 'react'
 import NoMailings from '../../../assets/images/NoMailings.png'
 import { Box, styled, Typography } from '@mui/material'
+import { memo } from 'react'
 import { useNavigate } from 'react-router'
-import { useDispatch, useSelector } from 'react-redux'
-import { MAILING_THUNK } from '../../../store/slices/mailing/mailingThunk'
 
-const MailingCards = () => {
-   const { mailings } = useSelector((state) => state.mailing)
-
+const MailingCards = ({ mailings }) => {
    const navigate = useNavigate()
 
-   const dispatch = useDispatch()
-
-   useEffect(() => {
-      dispatch(MAILING_THUNK.getAllMailings())
-   }, [])
+   console.log(mailings.map((mailing) => mailing.id))
 
    return (
-      <div>
-         {mailings.length === 0 ? (
+      <>
+         {mailings?.length === 0 ? (
             <StyledNotBlockBox>
                <img src={NoMailings} alt="icon" />
                <h1>Нет рассылок!</h1>
             </StyledNotBlockBox>
          ) : (
-            mailings.map((mailing) => (
-               <StyledBox>
-                  <img
-                     src={mailing.imageSrc}
-                     alt="card"
-                     onClick={() => navigate('/admin/description')}
-                  />
-                  <StyledText>{mailing.mailingTopic}</StyledText>
-                  <StyledData>{mailing.date}</StyledData>
+            mailings?.map((mailing) => (
+               <StyledBox
+                  key={mailing.id}
+                  mailing={mailing}
+                  onClick={() => navigate(`/admin/newsletter/${mailing.id}`)}
+               >
+                  <img src={mailing.image} alt="card" />
+                  <StyledText>{mailing.subject}</StyledText>
+                  <StyledData>{mailing.createdAt}</StyledData>
                </StyledBox>
             ))
          )}
-      </div>
+      </>
    )
 }
 
-export default MailingCards
+export default memo(MailingCards)
+
 const StyledNotBlockBox = styled(Box)(() => ({
    display: 'flex',
    justifyContent: 'center',

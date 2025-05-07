@@ -1,11 +1,9 @@
-import { useState } from 'react'
-import {
-   Box,
-   DialogContent,
-   IconButton,
-   styled,
-   Typography,
-} from '@mui/material'
+import React from 'react'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { MAILING_THUNK } from '../../../store/slices/mailing/mailingThunk'
+import { FILES_THUNK } from '../../../store/slices/file/filesThunk'
+import { Box, DialogContent, styled, Typography } from '@mui/material'
 import ImageIcon from '@mui/icons-material/Image'
 import Button from '../Button'
 import Modal from '../Modal'
@@ -13,16 +11,67 @@ import Input from '../Input'
 import MailingCards from '../card/MailingCards'
 import Message from '../../../assets/images/Message.png'
 
-const MailingList = () => {
-   // const { mailings } = useSelector((state) => state.mailing)
+const MailingList = React.memo(() => {
+   const { mailings } = useSelector((state) => state.mailing)
+
    const [openModal, setOpenModal] = useState(false)
+   const [subject, setSubject] = useState('')
+   const [message, setMessage] = useState('')
+   const [image, setImage] = useState(null)
+   const [preview, setPreview] = useState(null)
+   const [abortController, setAbortController] = useState(null)
+
+   const dispatch = useDispatch()
 
    const handleOpenModal = () => {
       setOpenModal(true)
+      setAbortController(new AbortController())
+   }
+   const handleCloseModal = () => {
+      if (abortController) {
+         abortController.abort()
+      }
+      setOpenModal(false)
+      resetForm()
+   }
+   const resetForm = () => {
+      setSubject('')
+      setMessage('')
+      setImage(null)
+      setPreview(null)
    }
 
-   const handleCloseModal = () => {
-      setOpenModal(false)
+   useEffect(() => {
+      dispatch(MAILING_THUNK.getAllMailings())
+   }, [dispatch])
+
+   const handleSubmit = async () => {
+      try {
+         const result = await dispatch(
+            FILES_THUNK.addFile({ file: image, signal: abortController.signal })
+         ).unwrap()
+
+         const imageUrl = result.link
+
+         const newMailing = {
+            subject,
+            message,
+            image: imageUrl,
+         }
+
+         await dispatch(MAILING_THUNK.createMailings(newMailing))
+         await dispatch(MAILING_THUNK.getAllMailings())
+
+         resetForm()
+         setOpenModal(false)
+         
+      } catch (error) {
+         if (error.name === 'AbortError') {
+            console.log('Запрос был отменен')
+         } else {
+            console.error('Ошибка при создании рассылки:', error)
+         }
+      }
    }
 
    return (
@@ -47,15 +96,38 @@ const MailingList = () => {
             <Modal open={openModal} onClose={handleCloseModal}>
                <StyledDialogTitle>Создание рассылки</StyledDialogTitle>
                <DialogContent>
-                  <UploadBox>
-                     <IconButton>
+                  <label htmlFor="upload-file">
+                     <UploadBox>
                         <ImageIcon />
-                     </IconButton>
-                     <Typography>
-                        Нажмите для добавления
-                        <br /> фотографии
-                     </Typography>
-                  </UploadBox>
+                        <Typography>Выберите файл</Typography>
+                        {preview && (
+                           <Box
+                              component="img"
+                              src={preview}
+                              alt="photo"
+                              sx={{ width: '100%' }}
+                           />
+                        )}
+                     </UploadBox>
+                  </label>
+                  <input
+                     type="file"
+                     id="upload-file"
+                     accept="image/*"
+                     hidden
+                     onChange={(e) => {
+                        const file = e.target.files[0]
+                        setImage(file)
+
+                        if (file) {
+                           const reader = new FileReader()
+                           reader.onloadend = () => {
+                              setPreview(reader.result)
+                           }
+                           reader.readAsDataURL(file)
+                        }
+                     }}
+                  />
                </DialogContent>
 
                <label htmlFor="newsletter-input" style={{ color: '#676767' }}>
@@ -64,6 +136,8 @@ const MailingList = () => {
                <StyledInput
                   id="newsletter-input"
                   placeholder="Введите тему рассылки"
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
                />
                <label htmlFor="newsletter2-input" style={{ color: '#585858' }}>
                   Текст рассылки
@@ -71,27 +145,34 @@ const MailingList = () => {
                <StyledInput
                   id="newsletter2-input"
                   placeholder="Введите текст рассылки"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                />
                <ButtonContainer>
-                  <StyledButton variant="warning" type="button">
+                  <StyledButton
+                     variant="warning"
+                     type="button"
+                     onClick={handleCloseModal}
+                  >
                      ОТМЕНА
                   </StyledButton>
                   <StyledButton
                      variant="outlined"
                      color="primary"
                      type="button"
+                     onClick={handleSubmit}
                   >
                      ОТПРАВИТЬ
                   </StyledButton>
                </ButtonContainer>
             </Modal>
             <FlexContainer>
-               <MailingCards />
+               <MailingCards mailings={mailings} />
             </FlexContainer>
          </StyledMain>
       </BlockContainer>
    )
-}
+})
 
 export default MailingList
 const BlockContainer = styled(Box)(() => ({
@@ -130,7 +211,7 @@ const FlexContainer = styled(Box)(() => ({
 const StyledDialogTitle = styled(Box)(() => ({
    textAlign: 'center',
    fontFamily: 'Inter',
-   fontWeigh: '500',
+   fontWeight: '500',
    fontSize: '24px',
    lineHeight: '32px',
    letterSpacing: '0%',

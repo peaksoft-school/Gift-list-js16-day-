@@ -1,5 +1,8 @@
 import { Box, styled, Typography } from '@mui/material'
-import Photo2Sale from '../../../assets/images/Photo2Sale.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { MAILING_THUNK } from '../../../store/slices/mailing/mailingThunk'
+import { useParams } from 'react-router'
+import { memo, useEffect } from 'react'
 import BreadCrumbs from './BreadCrumbs'
 
 const DescriptionCard = () => {
@@ -8,45 +11,53 @@ const DescriptionCard = () => {
       { href: '/description', label: 'Тема рассылки' },
    ]
 
+   const { mailing } = useSelector((state) => state.mailing)
+
+   const { id } = useParams()
+   const dispatch = useDispatch()
+
+   useEffect(() => {
+      dispatch(MAILING_THUNK.getById(id))
+   }, [dispatch])
+
    return (
       <FlexContainer>
          <BlockContainer>
             <BreadCrumbs links={links} />
-
-            <StyledBox>
-               <img src={Photo2Sale} alt="photo" />
-               <StyledText>
-                  <StyledParagraf variant="h5">Тема рассылки</StyledParagraf>
-                  <StyledContent variant="h6">
-                     Рубашка с технологией ProMotion и быстрым, плавным
-                     откликом. Грандиозный апгрейд системы камер, открывающий
-                     совершенно новые возможности. Исключительная прочность. A15
-                     Bionic — самый быстрый чип для iPhone. И впечатляющее время
-                     работы без подзарядки. Всё это Pro.
-                  </StyledContent>
-                  <StyledData>
-                     <Typography variant="h6">Дата добавления:</Typography>
-                     <Typography>12.04.2025</Typography>
-                  </StyledData>
-               </StyledText>
-            </StyledBox>
+            {mailing && (
+               <StyledBox>
+                  <img src={mailing.image} alt="photo" />
+                  <StyledText>
+                     <StyledParagraf variant="h5">
+                        {mailing.subject}
+                     </StyledParagraf>
+                     <StyledContent variant="h6">
+                        {mailing.message}
+                     </StyledContent>
+                     <StyledData>
+                        <Typography variant="h6">Дата добавления:</Typography>
+                        <Typography>{mailing.createdAt}</Typography>
+                     </StyledData>
+                  </StyledText>
+               </StyledBox>
+            )}
          </BlockContainer>
       </FlexContainer>
    )
 }
 
-export default DescriptionCard
+export default memo(DescriptionCard)
 
 const FlexContainer = styled(Box)(() => ({
    display: 'flex',
    justifyContent: 'center',
-   alignItems: 'center',
+
    // marginLeft: '280px',
 }))
 const BlockContainer = styled(Box)(() => ({
    width: '1250px',
    background: '#F7F8FA',
-   margin: '30px 0 0 0px',
+   margin: '80px 0 0 0px',
    padding: '20px',
 }))
 
@@ -81,12 +92,12 @@ const StyledParagraf = styled('h1')(() => ({
 
 const StyledContent = styled('h6')(() => ({
    fontSize: '16px',
-   fontFamily: ' Inter',
+   fontFamily: 'Inter',
    fontWeight: '400',
-   lineHeight: ' 130%',
-   letterSpacing: ' 0px',
+   lineHeight: '130%',
+   letterSpacing: '0px',
    verticalAlign: 'middle',
-   width: '483',
+   width: '483px',
    paddingTop: '30px',
    paddingLeft: '20px',
    color: '#000000',

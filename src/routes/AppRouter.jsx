@@ -67,7 +67,7 @@ const AppRouter = () => (
          <Route path="charity" element={<Blago />} />
          <Route path="complaints" element={<h1>complaints</h1>} />
          <Route path="newsletter" element={<MailingList />} />
-         <Route path="description" element={<DescriptionCard />} />
+         <Route path="newsletter/:id" element={<DescriptionCard />} />
       </Route>
 
       <Route
