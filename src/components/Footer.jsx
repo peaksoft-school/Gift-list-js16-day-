@@ -1,9 +1,10 @@
 import { styled } from '@mui/material/styles'
-import { List, Container, Typography, TextField, Box } from '@mui/material'
+import { List, Container, Typography, Box } from '@mui/material'
 import facebook from '../assets/icons/facebook.svg'
 import wk from '../assets/icons/wk.svg'
 import instagram from '../assets/icons/instagram.svg'
 import inactive from '../assets/icons/inactive.svg'
+import TextField from '@mui/material/TextField'
 
 const Footer = () => {
    return (
@@ -31,12 +32,10 @@ const Footer = () => {
                   <StyledType>Подписаться на рассылку</StyledType>
 
                   <StyledIcon>
-                     {/* <StyledInput
+                     <StyledInput
                         variant="outlined"
                         placeholder="Введите ваш Email"
-                        size="large"
-                       /> */}
-                     <label className="Введите ваш Email"></label>
+                     />
 
                      <StyledButton src={inactive} alt="" />
                   </StyledIcon>
@@ -84,8 +83,8 @@ const StyledBoxBlock = styled(Box)(() => ({
 const StyledTitle = styled(Typography)({
    fontFamily: 'Inter',
    fontWeight: '400px',
-   fontSize: '15px',
-   marginBottom: '8px',
+   fontSize: '16px',
+   marginBottom: '7px',
    letterSpacing: '0%',
    color: ' #353A5A',
 })
@@ -119,13 +118,18 @@ const StyledImages = styled(Box)({
 const StyledButton = styled('img')(() => ({
    width: '39px',
    height: '39px',
-   right: '283px',
 }))
 
 const StyledIcon = styled(Box)({
    display: 'flex',
-   border: '1px solid #BDBDBD',
    width: '322px',
-   borderRadius: '4px',
-   justifyContent: 'space-between',
+   height: '30px',
+})
+
+const StyledInput = styled(TextField)({
+   '& .MuiInputBase-root': {
+      height: '39px',
+      width: '322px',
+      borderRadius: '17px',
+   },
 })
