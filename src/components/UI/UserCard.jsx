@@ -2,8 +2,9 @@ import { Box, styled, Typography } from '@mui/material'
 import MeetBalls from './MeetBalls'
 import { USER_CARD_OPTIONS } from '../../utils/helpers/index'
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user, onVisibleModal }) => {
    const { image, fullName, amount } = user
+   
 
    return (
       <FlexContainer>
@@ -21,8 +22,11 @@ const UserCard = ({ user }) => {
                   подарков
                </Typography>
 
-               <MeetBalls options={USER_CARD_OPTIONS} />
+               <MeetBalls
+                  options={USER_CARD_OPTIONS}
+                  onChange={onVisibleModal}
                
+               />
             </StyledBox>
          </StyledCard>
       </FlexContainer>
