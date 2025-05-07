@@ -88,7 +88,14 @@ const ForgotPassword = () => {
                            })
                      }}
                   >
-                     <span style={{ textTransform: 'uppercase' }}>О</span>
+                     <span
+                        style={{
+                           textTransform: 'uppercase',
+                           paddingBottom: '2px',
+                        }}
+                     >
+                        О
+                     </span>
                      тправить
                   </StyledButton>
 

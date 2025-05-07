@@ -172,7 +172,15 @@ const SignIn = () => {
                         variant="outlined"
                         disabled={isSubmitting || isLoading}
                      >
-                        {isLoading ? 'Загрузка...' : 'Войти'}
+                        <span
+                           style={{
+                              textTransform: 'uppercase',
+                              paddingBottom: '2px',
+                           }}
+                        >
+                           В
+                        </span>
+                        {isLoading ? 'Загрузка...' : 'ойти'}
                      </StyledButton>
                   </StyledMain>
                </form>

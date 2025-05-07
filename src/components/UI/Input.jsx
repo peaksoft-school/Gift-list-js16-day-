@@ -63,7 +63,6 @@ const Input = forwardRef(
    )
 )
 
-// 🔒 Input.Password с глазком
 Input.Password = forwardRef(
    ({ placeholder, error, errorText, inputProps, ...rest }, ref) => {
       const [showPassword, setShowPassword] = useState(false)

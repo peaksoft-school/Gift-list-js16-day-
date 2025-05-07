@@ -220,8 +220,9 @@ const SignUp = () => {
             </StyledMain>
 
             <StyledButton type="submit" variant="outlined">
-               <StyledP style={{ textTransform: 'uppercase' }}>
-                  Создать аккаунт
+               <StyledP style={{ textTransform: 'lowercase' }}>
+                  <span style={{ textTransform: 'uppercase' }}>С</span>оздать
+                  аккаунт
                </StyledP>
             </StyledButton>
          </form>

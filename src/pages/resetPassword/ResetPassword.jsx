@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useLocation } from 'react-router'
 import { AUTH_THUNK } from '../../store/slices/auth/authThunk'
 import { Formik, Form, Field } from 'formik'
-import { Card } from 'antd'
 import { ResetPasswordSchema } from '../../utils/constants/validation'
 import ToastifyNotify from '../../utils/helpers/ToastifyNotify'
 import Input from '../../components/UI/Input'
 import Button from '../../components/UI/Button'
+import LightIcon from '../../assets/icons/light.svg'
 
-const ChangePassword = () => {
+const ResetPassword = () => {
    const dispatch = useDispatch()
    const navigate = useNavigate()
    const { resetPasswordStatus } = useSelector((state) => state.auth)
@@ -58,8 +58,20 @@ const ChangePassword = () => {
 
    return (
       <CenteredWrapper>
-         <StyledCard>
-            <Title>Смена пароля</Title>
+         <div>
+            <StyledMainHeaderContent>
+               <Title>Смена пароля</Title>
+               <img
+                  src={LightIcon}
+                  alt=""
+                  style={{
+                     cursor: 'pointer',
+                     marginBottom: '25px',
+                     marginLeft: '10px',
+                  }}
+                  onClick={() => navigate('/sign-in')}
+               />
+            </StyledMainHeaderContent>
             <Formik
                initialValues={{ password: '', confirmPassword: '' }}
                validationSchema={ResetPasswordSchema}
@@ -70,7 +82,7 @@ const ChangePassword = () => {
                      <FormBlock>
                         <Field name="password">
                            {({ field }) => (
-                              <Input.Password
+                              <StyledInput
                                  {...field}
                                  placeholder="Введите новый пароль"
                                  error={touched.password && errors.password}
@@ -83,7 +95,7 @@ const ChangePassword = () => {
                      <FormBlock>
                         <Field name="confirmPassword">
                            {({ field }) => (
-                              <Input.Password
+                              <StyledInput
                                  {...field}
                                  placeholder="Повторите пароль"
                                  error={
@@ -103,17 +115,25 @@ const ChangePassword = () => {
                         block
                         className="reset-button"
                      >
-                        Подтвердить
+                        <span
+                           style={{
+                              textTransform: 'uppercase',
+                              paddingBottom: '2px',
+                           }}
+                        >
+                           П
+                        </span>
+                        одтвердить
                      </StyledButton>
                   </Form>
                )}
             </Formik>
-         </StyledCard>
+         </div>
       </CenteredWrapper>
    )
 }
 
-export default ChangePassword
+export default ResetPassword
 
 const CenteredWrapper = styled(Box)({
    minHeight: '100vh',
@@ -122,15 +142,12 @@ const CenteredWrapper = styled(Box)({
    justifyContent: 'center',
 })
 
-const StyledCard = styled(Box)({
-   background: '#fff',
-   borderRadius: 12,
-   padding: '32px 24px 24px 24px',
-   minWidth: 340,
-   maxWidth: 400,
-   width: '100%',
-   position: 'relative',
-})
+const StyledMainHeaderContent = styled('div')(() => ({
+   display: 'flex',
+   alignItems: 'center',
+   justifyContent: 'center',
+   gap: '310px',
+}))
 
 const Title = styled(Typography)({
    fontWeight: 500,
@@ -150,30 +167,14 @@ export const ErrorText = styled(Typography)(({ theme }) => ({
 }))
 
 const StyledButton = styled(Button)({
-   marginTop: 16,
-   background: '#8D35F5',
-   color: '#fff',
-   fontWeight: 500,
-   fontSize: 16,
-   borderRadius: 8,
-   height: 44,
-   '&:hover': {
-      background: '#7a2fd1',
-   },
+   width: '482px',
+   height: '42px',
+   marginBottom: '32px',
+   textTransform: 'lowercase',
 })
 
-// Если нужен крестик в углу (иконка закрытия)
-const CloseButton = styled('button')({
-   position: 'absolute',
-   top: 16,
-   right: 16,
-   background: 'transparent',
-   border: 'none',
-   cursor: 'pointer',
-   fontSize: 20,
-   color: '#aaa',
-   transition: 'color 0.2s',
-   '&:hover': {
-      color: '#333',
+const StyledInput = styled((props) => <Input.Password {...props} />)(() => ({
+   '&.reset-password-change': {
+      width: '482px',
    },
-})
+}))
