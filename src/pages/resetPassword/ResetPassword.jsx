@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useLocation } from 'react-router'
 import { AUTH_THUNK } from '../../store/slices/auth/authThunk'
 import { Formik, Form, Field } from 'formik'
-import { Button, Input, Card } from 'antd'
-import { toast } from 'react-toastify'
+import { Card } from 'antd'
 import { ResetPasswordSchema } from '../../utils/constants/validation'
+import ToastifyNotify from '../../utils/helpers/ToastifyNotify'
+import Input from '../../components/UI/Input'
+import Button from '../../components/UI/Button'
 
 const ChangePassword = () => {
    const dispatch = useDispatch()
@@ -36,21 +38,28 @@ const ChangePassword = () => {
       )
          .unwrap()
          .then(() => {
-            toast.success('Пароль успешно изменен!')
+            ToastifyNotify({
+               title: 'Успешно',
+               message: 'Пароль успешно изменен!',
+               autoClose: 3000,
+               type: 'success',
+            })
             navigate('/')
          })
          .catch((err) => {
-            toast.error(err.message || 'Ошибка при сбросе пароля')
+            ToastifyNotify({
+               title: 'Error',
+               message: err.message || 'Ошибка при сбросе пароля',
+               autoClose: 3000,
+               type: 'error',
+            })
          })
    }
 
    return (
-      <ResetBox>
-         <HouseBackground
-            src="https://img.freepik.com/free-photo/greyscale-low-angle-shot-concrete-building-with-lot-windows-dark-sky_181624-14824.jpg?semt=ais_hybrid&w=740"
-            alt="House illustration"
-         />
-         <AuthCard title="Change Password">
+      <CenteredWrapper>
+         <StyledCard>
+            <Title>Смена пароля</Title>
             <Formik
                initialValues={{ password: '', confirmPassword: '' }}
                validationSchema={ResetPasswordSchema}
@@ -63,106 +72,75 @@ const ChangePassword = () => {
                            {({ field }) => (
                               <Input.Password
                                  {...field}
-                                 placeholder="New Password"
-                                 status={
-                                    touched.password && errors.password
-                                       ? 'error'
-                                       : ''
-                                 }
+                                 placeholder="Введите новый пароль"
+                                 error={touched.password && errors.password}
+                                 errorText={errors.password}
                                  className="reset-password-change"
                               />
                            )}
                         </Field>
-                        {errors.password && touched.password && (
-                           <ErrorText>{errors.password}</ErrorText>
-                        )}
                      </FormBlock>
-
-                     <FormBlock gap={24}>
+                     <FormBlock>
                         <Field name="confirmPassword">
                            {({ field }) => (
                               <Input.Password
                                  {...field}
-                                 placeholder="Confirm your password"
-                                 status={
+                                 placeholder="Повторите пароль"
+                                 error={
                                     touched.confirmPassword &&
                                     errors.confirmPassword
-                                       ? 'error'
-                                       : ''
                                  }
+                                 errorText={errors.confirmPassword}
                                  className="reset-password-change"
                               />
                            )}
                         </Field>
-                        {errors.confirmPassword && touched.confirmPassword && (
-                           <ErrorText>{errors.confirmPassword}</ErrorText>
-                        )}
                      </FormBlock>
-                     <Button
-                        type="text"
+                     <StyledButton
+                        variant="outlined"
                         htmlType="submit"
                         loading={resetPasswordStatus === 'loading'}
                         block
                         className="reset-button"
                      >
-                        Save password
-                     </Button>
+                        Подтвердить
+                     </StyledButton>
                   </Form>
                )}
             </Formik>
-         </AuthCard>
-      </ResetBox>
+         </StyledCard>
+      </CenteredWrapper>
    )
 }
 
 export default ChangePassword
 
-export const AuthCard = styled(Card)(({ theme }) => ({
-   width: 500,
-   borderRadius: '12px',
-   boxShadow: theme.shadows[3],
+const CenteredWrapper = styled(Box)({
+   minHeight: '100vh',
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'center',
-   flexDirection: 'column',
-   '& .reset-button': {
-      width: '414px',
-      height: '37px',
-      borderRadius: '2px',
-      cursor: 'pointer',
+})
 
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      gap: '10px',
+const StyledCard = styled(Box)({
+   background: '#fff',
+   borderRadius: 12,
+   padding: '32px 24px 24px 24px',
+   minWidth: 340,
+   maxWidth: 400,
+   width: '100%',
+   position: 'relative',
+})
 
-      textTransform: 'uppercase',
-      fontFamily: 'Arial',
-      fontWeight: '500',
-      fontSize: '14px',
-      color: '#F7F7F7',
-      backgroundColor: '#DD8A08',
-      '&:hover': { backgroundColor: '#BB7200' },
-      '&:active': { backgroundColor: '#F2B75B' },
-      '&:disabled': { backgroundColor: '#C4C4C4' },
-   },
-   '& .reset-password-change': {
-      width: '414px',
-      height: '39px',
-      borderRadius: '2px',
-      borderColor: '#828282',
-      border: '1px solid #828282',
-   },
-   '& .ant-card-head-title': {
-      fontSize: '19px',
-      fontWeight: 500,
-      textAlign: 'center',
-      fontFamily: 'Inter, sans-serif',
-   },
-}))
+const Title = styled(Typography)({
+   fontWeight: 500,
+   fontSize: 20,
+   marginBottom: 24,
+   textAlign: 'left',
+})
 
 export const FormBlock = styled(Box)(({ gap = 16 }) => ({
-   marginBottom: ` ${gap}px`,
+   marginBottom: `${gap}px`,
 }))
 
 export const ErrorText = styled(Typography)(({ theme }) => ({
@@ -171,18 +149,31 @@ export const ErrorText = styled(Typography)(({ theme }) => ({
    fontSize: 13,
 }))
 
-const HouseBackground = styled('img')(() => ({
-   position: 'absolute',
-   opacity: 0.08,
-   width: '100%',
-   maxWidth: '100%',
-   bottom: 0,
-   zIndex: 0,
-}))
+const StyledButton = styled(Button)({
+   marginTop: 16,
+   background: '#8D35F5',
+   color: '#fff',
+   fontWeight: 500,
+   fontSize: 16,
+   borderRadius: 8,
+   height: 44,
+   '&:hover': {
+      background: '#7a2fd1',
+   },
+})
 
-const ResetBox = styled(Box)(() => ({
-   display: 'flex',
-   alignItems: 'center',
-   justifyContent: 'center',
-   padding: '15% 0 0 0 ',
-}))
+// Если нужен крестик в углу (иконка закрытия)
+const CloseButton = styled('button')({
+   position: 'absolute',
+   top: 16,
+   right: 16,
+   background: 'transparent',
+   border: 'none',
+   cursor: 'pointer',
+   fontSize: 20,
+   color: '#aaa',
+   transition: 'color 0.2s',
+   '&:hover': {
+      color: '#333',
+   },
+})

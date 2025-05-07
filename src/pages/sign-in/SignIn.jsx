@@ -228,11 +228,9 @@ const StyledMainCheckbox = styled('div')(() => ({
 }))
 const StyledInput = styled(Input)(() => ({
    '&.MuiOutlinedInput-root': {
-      width: '492px',
       height: '35px',
       backgroundColor: 'none',
    },
-   paddingRight: '30px',
 }))
 
 const StyledButton = styled(Button)(() => ({

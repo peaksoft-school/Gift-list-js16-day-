@@ -1,12 +1,15 @@
-import { forwardRef } from 'react'
+import { useState, forwardRef } from 'react'
 import {
    FormHelperText,
    InputAdornment,
    InputLabel,
    TextField,
    styled,
+   IconButton,
 } from '@mui/material'
 import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded'
+import Visibility from '@mui/icons-material/Visibility'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import UnionIcon from '../../assets/icons/Union.svg'
 
 const Input = forwardRef(
@@ -59,6 +62,42 @@ const Input = forwardRef(
       </>
    )
 )
+
+// 🔒 Input.Password с глазком
+Input.Password = forwardRef(
+   ({ placeholder, error, errorText, inputProps, ...rest }, ref) => {
+      const [showPassword, setShowPassword] = useState(false)
+
+      const toggleShowPassword = () => {
+         setShowPassword((prev) => !prev)
+      }
+
+      return (
+         <>
+            <StyledInput
+               type={showPassword ? 'text' : 'password'}
+               placeholder={placeholder}
+               error={Boolean(error)}
+               fullWidth
+               ref={ref}
+               InputProps={{
+                  endAdornment: (
+                     <InputAdornment position="end">
+                        <IconButton onClick={toggleShowPassword} edge="end">
+                           {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                     </InputAdornment>
+                  ),
+                  ...inputProps,
+               }}
+               {...rest}
+            />
+            {error && <StyledFormHelperText>{errorText}</StyledFormHelperText>}
+         </>
+      )
+   }
+)
+
 export default Input
 
 const StyledInputLabel = styled(InputLabel)(({ error }) => ({

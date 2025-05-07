@@ -7,9 +7,7 @@ import Loading from '../components/Loading'
 import ForgotRassword from '../pages/forgotPassword/ForgotRassword'
 
 const Home = lazy(() => import('../pages/home/Home'))
-const ChangePassword = lazy(
-   () => import('../pages/resetPassword/ResetPassword')
-)
+const ResetPassword = lazy(() => import('../pages/resetPassword/ResetPassword'))
 const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
 const SignUp = lazy(() => import('../pages/sign-up/SignUp'))
 const Admin = lazy(() => import('../layout/AdminLayout'))
@@ -62,7 +60,7 @@ const AppRouter = () => (
          path="/reset-password"
          element={
             <Suspense fallback={<Loading />}>
-               <ChangePassword />
+               <ResetPassword />
             </Suspense>
          }
       />
