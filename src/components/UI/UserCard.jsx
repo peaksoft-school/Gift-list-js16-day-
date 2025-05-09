@@ -4,7 +4,6 @@ import { USER_CARD_OPTIONS } from '../../utils/helpers/index'
 
 const UserCard = ({ user, onVisibleModal }) => {
    const { image, fullName, amount } = user
-   
 
    return (
       <FlexContainer>
@@ -25,7 +24,7 @@ const UserCard = ({ user, onVisibleModal }) => {
                <MeetBalls
                   options={USER_CARD_OPTIONS}
                   onChange={onVisibleModal}
-               
+                  
                />
             </StyledBox>
          </StyledCard>

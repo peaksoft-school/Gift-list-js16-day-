@@ -1,4 +1,4 @@
-import { Box, DialogTitle, styled, Typography } from '@mui/material'
+import { Box, DialogTitle, Stack, styled, Typography } from '@mui/material'
 import Modal from './UI/Modal'
 import UserCard from './UI/UserCard'
 import Button from './UI/Button'
@@ -50,25 +50,35 @@ const UserList = () => {
          ))}
 
          <Modal open={open} onClose={handleCloseModal}>
-            <Box>
-               <StyledDialogTitle>
-                  <StyledDeleteOutlineOutlined />
-                  Удаление
-               </StyledDialogTitle>
+            <StyledStack>
+               <CustomBox>
+                  <StyledDialogTitle>
+                     <StyledDeleteOutlineOutlined />
+                     <Typography>Удаление</Typography>
+                  </StyledDialogTitle>
 
-               <StyledTypography>
-                  Вы уверены, что хотите удалить Annet Black?
-               </StyledTypography>
+                  <StyledTypography>
+                     Вы уверены, что хотите удалить Annet Black?
+                  </StyledTypography>
+               </CustomBox>
 
                <BoxContainer>
-                  <Button variant="warning" onClick={handleCloseModal}>
+                  <Button
+                     variant="warning"
+                     onClick={handleCloseModal}
+                     sx={{ width: '232px', height: '37px' }}
+                  >
                      Отмена
                   </Button>
-                  <Button variant="contained" onClick={handleDeleteUser}>
+                  <Button
+                     variant="contained"
+                     onClick={handleDeleteUser}
+                     sx={{ width: '232px', height: '37px' }}
+                  >
                      Удалить
                   </Button>
                </BoxContainer>
-            </Box>
+            </StyledStack>
          </Modal>
       </StyledBox>
    )
@@ -80,6 +90,18 @@ const StyledBox = styled(Box)(() => ({
    marginTop: '90px',
    marginLeft: '40px',
    fontFamily: 'Inter',
+}))
+
+const StyledStack = styled(Stack)(() => ({
+   display: 'flex',
+   justifyContent: 'center',
+   alignItems: 'center',
+   width: '544px',
+   paddingBottom: '30px',
+}))
+
+const CustomBox = styled(Box)(() => ({
+   marginRight: '60px',
 }))
 
 const StyledDeleteOutlineOutlined = styled(DeleteOutlineOutlined)(() => ({
@@ -97,17 +119,19 @@ const StyledTypography = styled(Typography)(() => ({
    color: '#87898E',
    fontWeight: '400',
    fontSize: '14px',
-   lineHeight: '16px',
+   paddingLeft: '65px',
+   paddingBottom: '30px',
 }))
 
 const BoxContainer = styled(Box)(() => ({
+   gap: '15px',
+   borderRadius: '12px',
    display: 'flex',
-   gap: '16px',
 }))
 
 const StyledDialogTitle = styled(DialogTitle)(() => ({
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'start',
-   gap: '7px',
+   paddingBottom: '20px',
 }))

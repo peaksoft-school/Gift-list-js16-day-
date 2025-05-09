@@ -6,7 +6,7 @@ const addUsers = createAsyncThunk(
    async ({ values }, { rejectWithValue }) => {
       try {
          console.log(axiosInstance)
-         const { data } = await axiosInstance.post('/api/users/update', values)
+         const { data } = await axiosInstance.put('/api/users/update', values)
 
          return data
       } catch (error) {
@@ -19,7 +19,7 @@ const deleteUsers = createAsyncThunk(
     async ({ values }, { rejectWithValue }) => {
        try {
           console.log(axiosInstance)
-          const { data } = await axiosInstance.post('/api/users/delete/{userId}', values)
+          const { data } = await axiosInstance.delete('/api/users/delete/{userId}', values)
  
           return data
        } catch (error) {
@@ -28,6 +28,19 @@ const deleteUsers = createAsyncThunk(
     }
  )
 
+ const getUsers = createAsyncThunk(
+   'auth/getUsers',
+   async ({ values }, { rejectWithValue }) => {
+      try {
+         console.log(axiosInstance)
+         const { data } = await axiosInstance.get('/api/users/users', values)
 
+         return data
+      } catch (error) {
+         return rejectWithValue({ message: error.response.data.message })
+      }
+   }
 
-export const USERS_THUNK = { addUsers, deleteUsers }
+ )
+
+export const USERS_THUNK = { addUsers, deleteUsers, getUsers }
