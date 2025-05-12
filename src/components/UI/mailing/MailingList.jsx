@@ -1,5 +1,4 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { MAILING_THUNK } from '../../../store/slices/mailing/mailingThunk'
 import { FILES_THUNK } from '../../../store/slices/file/filesThunk'
@@ -11,7 +10,7 @@ import Input from '../Input'
 import MailingCards from '../card/MailingCards'
 import Message from '../../../assets/images/Message.png'
 
-const MailingList = React.memo(() => {
+const MailingList = memo(() => {
    const { mailings } = useSelector((state) => state.mailing)
 
    const [openModal, setOpenModal] = useState(false)
@@ -64,7 +63,6 @@ const MailingList = React.memo(() => {
 
          resetForm()
          setOpenModal(false)
-         
       } catch (error) {
          if (error.name === 'AbortError') {
             console.log('Запрос был отменен')
@@ -85,11 +83,7 @@ const MailingList = React.memo(() => {
                   type="button"
                   onClick={handleOpenModal}
                >
-                  <img
-                     src={Message}
-                     alt="icon"
-                     style={{ marginRight: '10px' }}
-                  />
+                  <img src={Message} alt="icon" />
                   Отправить рассылку
                </StyledMainButton>
             </HeaderRow>
@@ -101,12 +95,7 @@ const MailingList = React.memo(() => {
                         <ImageIcon />
                         <Typography>Выберите файл</Typography>
                         {preview && (
-                           <Box
-                              component="img"
-                              src={preview}
-                              alt="photo"
-                              sx={{ width: '100%' }}
-                           />
+                           <Box component="img" src={preview} alt="photo" />
                         )}
                      </UploadBox>
                   </label>
@@ -175,9 +164,9 @@ const MailingList = React.memo(() => {
 })
 
 export default MailingList
+
 const BlockContainer = styled(Box)(() => ({
    display: 'flex',
-   // justifyContent: 'center',
    width: '100%',
 }))
 const StyledMainButton = styled(Button)(() => ({

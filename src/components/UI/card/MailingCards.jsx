@@ -6,8 +6,9 @@ import { useNavigate } from 'react-router'
 const MailingCards = ({ mailings }) => {
    const navigate = useNavigate()
 
-   console.log(mailings.map((mailing) => mailing.id))
-
+   const handleNavigate = (id) => {
+      navigate(`/admin/newsletter/${id}`)
+   }
    return (
       <>
          {mailings?.length === 0 ? (
@@ -20,7 +21,7 @@ const MailingCards = ({ mailings }) => {
                <StyledBox
                   key={mailing.id}
                   mailing={mailing}
-                  onClick={() => navigate(`/admin/newsletter/${mailing.id}`)}
+                  onClick={() => handleNavigate(mailing.id)}
                >
                   <img src={mailing.image} alt="card" />
                   <StyledText>{mailing.subject}</StyledText>

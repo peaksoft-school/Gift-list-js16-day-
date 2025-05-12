@@ -4,13 +4,9 @@ import { MAILING_THUNK } from '../../../store/slices/mailing/mailingThunk'
 import { useParams } from 'react-router'
 import { memo, useEffect } from 'react'
 import BreadCrumbs from './BreadCrumbs'
+import links from '../../../utils/helpers/links'
 
 const DescriptionCard = () => {
-   const links = [
-      { href: '/Рассылка', label: 'Рассылка' },
-      { href: '/description', label: 'Тема рассылки' },
-   ]
-
    const { mailing } = useSelector((state) => state.mailing)
 
    const { id } = useParams()
@@ -51,8 +47,6 @@ export default memo(DescriptionCard)
 const FlexContainer = styled(Box)(() => ({
    display: 'flex',
    justifyContent: 'center',
-
-   // marginLeft: '280px',
 }))
 const BlockContainer = styled(Box)(() => ({
    width: '1250px',
