@@ -14,14 +14,14 @@ const CharityDescription = () => {
       { href: '/description', label: 'Iphone 13 Pro ' },
    ]
 
-   // const { charities } = useSelector((state) => state.charities)
+   const { charities } = useSelector((state) => state.charities)
 
-   // const { id } = useParams()
-   // const dispatch = useDispatch()
+   const { id } = useParams()
+   const dispatch = useDispatch()
 
-   // useEffect(() => {
-   //    dispatch(CHARITY_THUNK.getById(id))
-   // }, [dispatch])
+   useEffect(() => {
+      dispatch(CHARITY_THUNK.getById(id))
+   }, [dispatch])
    return (
       <StyledBlockList>
          <BreadCrumbs links={links} />

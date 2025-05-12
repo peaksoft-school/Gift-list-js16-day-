@@ -13,28 +13,29 @@ const CharityCard = ({ charity }) => {
                onClick={() => navigate(`/admin/charity/${charity.id}`)}
             >
                <StyledBoxAvatar>
-                  <Avatar src={item.image} />
+                  <Avatar src={item.ownerProfilePhoto} />
                   <Typography sx={{ marginLeft: '20px' }}>
                      {item.ownerFullName}
                   </Typography>
                </StyledBoxAvatar>
                <StyledParagraph>
-                  <Typography>{item.name}</Typography>
+                  <Typography>{item.giftName}</Typography>
                   <Typography
                      sx={{
-                        color: item.tag === 'Новый' ? '#3CBA92' : '#FD5200',
+                        color:
+                           item.condition === 'Новый' ? '#3CBA92' : '#FD5200',
                      }}
                   >
-                     {item.tag}
+                     {item.condition}
                   </Typography>
                </StyledParagraph>
-               <img src={item.image} alt="book" />
+               <img src={item.bookedByProfilePhoto} alt="book" />
                <StyledUpBox>
                   <Typography>{item.createdAt}</Typography>
                   <StyledSmallBlock>
-                     <Avatar src={item.avatar} />
+                     <Avatar src={item.ownerProfilePhoto} />
                      <Typography sx={{ marginLeft: '10px' }}>
-                        {item.status}
+                        {item.statusMessage}
                      </Typography>
                      <img
                         src={Menu}
