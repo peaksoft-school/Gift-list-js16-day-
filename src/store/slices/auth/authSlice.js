@@ -9,7 +9,7 @@ const initialState = {
    isLoading: false,
 }
 
-const authSlise = createSlice({
+const authSlice = createSlice({
    name: 'auth',
    initialState,
    reducers: {
@@ -38,6 +38,6 @@ const authSlise = createSlice({
    },
 })
 
-const AUTH_ACTIONS = authSlise.AUTH_ACTIONS
+const AUTH_ACTIONS = authSlice.AUTH_ACTIONS
 
-export { authSlise, AUTH_ACTIONS }
+export { authSlice, AUTH_ACTIONS }
