@@ -69,12 +69,6 @@ const FRIENDS = [
       role: 'Front-end developer',
    },
    {
-      id: 5,
-      img: '',
-      name: '',
-      role: '',
-   },
-   {
       id: 6,
       img: NargizaEje,
       name: 'Наргиза Нааматбекова',
