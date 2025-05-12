@@ -1,5 +1,5 @@
 const links = [
-   { href: '/рассылка', label: 'Рассылка' },
+   { href: '/newsletter', label: 'Рассылка' },
    { href: '/description', label: 'Тема рассылки' },
 ]
 
