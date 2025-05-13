@@ -7,25 +7,20 @@ const CrudCards = ({ card }) => {
       <StyledBox>
          <StyledCard>
             <BoxContainer>
-               <Box display="flex" alignItems="center" gap={2}>
+               <ContainerBox>
                   <Avatar src={avatar} />
 
                   <ContainerBox>
                      <Typography fontWeight="bold">{fullName}</Typography>
                      <Typography color="green">{event}</Typography>
                   </ContainerBox>
-
-               </Box>
+               </ContainerBox>
             </BoxContainer>
 
-            <Typography variant="h6" mt={2}>
-               {title}
-            </Typography>
+            <StyledTypography>{title}</StyledTypography>
 
             <StyledImage src={image} alt={title} />
-            <Typography mt={1} fontSize="14px" color="gray">
-               {date}
-            </Typography>
+            <StyledText>{date}</StyledText>
          </StyledCard>
       </StyledBox>
    )
@@ -52,10 +47,6 @@ const BoxContainer = styled(Box)({
    justifyContent: 'space-between',
 })
 
-const StyledStack = styled(Stack)(() => ({
-   
-}))
-
 const StyledImage = styled('img')({
    width: '100%',
    height: 'auto',
@@ -64,6 +55,19 @@ const StyledImage = styled('img')({
 })
 
 const ContainerBox = styled(Box)(() => ({
-   display:"flex",
-   gap:"30px"
+   display: 'flex',
+   alignItems: 'center',
+   gap: '20px',
+}))
+
+const StyledTypography = styled(Typography)(() => ({
+   fontFamily: 'Inter',
+   fontWeight: '400',
+   fontSize: '20px',
+   marginTop: '15px',
+}))
+
+const StyledText = styled(Typography)(() => ({
+   fontSize: '14px',
+   color: 'gray',
 }))
