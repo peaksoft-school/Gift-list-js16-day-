@@ -1,6 +1,6 @@
 import { Avatar, Box, Stack, styled, Typography } from '@mui/material'
 
-const CrudCards = ({ card }) => {
+const BookedsCard = ({ card }) => {
    const { fullName, event, title, date, image, avatar } = card
 
    return (
@@ -26,7 +26,7 @@ const CrudCards = ({ card }) => {
    )
 }
 
-export default CrudCards
+export default BookedsCard
 
 const StyledBox = styled(Box)(() => ({
    marginTop: '100px',
