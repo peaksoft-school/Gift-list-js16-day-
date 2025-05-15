@@ -1,6 +1,5 @@
 import Slider from 'react-slick'
-import { styled } from '@mui/material'
-import { Container, Grid, Typography, Avatar, Box } from '@mui/material'
+import { Container, Grid, Typography, Avatar, Box, styled } from '@mui/material'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { FRIENDS } from '../../utils/constants/index'
@@ -17,56 +16,62 @@ const sliderSettings = {
    variableWidth: true,
 }
 
-function AboutAs() {
-   return (
-      <Section>
-         <StyledContainer>
-            <StyledGrid container spacing={4} alignItems="center">
-               <Grid item xs={12} md={6}>
-                  <LaptopImage src={MackBook} alt="Laptop" />
-               </Grid>
-               <Grid item xs={12} md={6}>
-                  <Title>О проекте</Title>
-                  <Paragraph>
-                     Найти удачный подарок, который принесёт радость, не всегда
-                     <br />
-                     простая задача...
-                  </Paragraph>
-                  <Paragraph>
-                     Благодаря нашему сервису у вас есть возможность не только
-                     <br />
-                     обрадовать подарком, но и помочь другим приобрести
-                     <br />
-                     необходимые им вещи.
-                  </Paragraph>
-                  <Paragraph>
-                     В разделе благодарительность вы можете найти список
-                     <br />
-                     опубликованных вещей, забронировать, и связываетесь <br />с
-                     их обладателем.
-                  </Paragraph>
-               </Grid>
-            </StyledGrid>
+const AboutAs = () => (
+   <Section>
+      <StyledContainer>
+         <StyledGrid container spacing={4} alignItems="center">
+            <Grid item xs={12} md={6}>
+               <LaptopImage src={MackBook} alt="laptop" />
+            </Grid>
 
-            <SliderWrapper>
-               <StyledSlider {...sliderSettings}>
-                  {FRIENDS.map((person, index) => (
-                     <Slide key={index}>
-                        <AvatarWrapper>
-                           <TeamAvatar src={person.img} alt={person.name} />
-                        </AvatarWrapper>
-                        <TeamName>
-                           {person.name},<br /> {person.role} <br />
-                           {person.company}
-                        </TeamName>
-                     </Slide>
-                  ))}
-               </StyledSlider>
-            </SliderWrapper>
-         </StyledContainer>
-      </Section>
-   )
-}
+            <Grid item xs={12} md={6}>
+               <Title>О проекте</Title>
+
+               <Paragraph>
+                  Найти удачный подарок, который принесёт радость, не всегда
+                  <br />
+                  простая задача...
+               </Paragraph>
+
+               <Paragraph>
+                  Благодаря нашему сервису у вас есть возможность не только
+                  <br />
+                  обрадовать подарком, но и помочь другим приобрести
+                  <br />
+                  необходимые им вещи.
+               </Paragraph>
+
+               <Paragraph>
+                  В разделе благодарительность вы можете найти список
+                  <br />
+                  опубликованных вещей, забронировать, и связываетесь <br />с их
+                  обладателем.
+               </Paragraph>
+            </Grid>
+         </StyledGrid>
+
+         <SliderWrapper>
+            <StyledSlider {...sliderSettings}>
+               {FRIENDS.map(({ img, name, company, role, personname }, i) => (
+                  <Slide key={i}>
+                     <AvatarWrapper>
+                        <TeamAvatar src={img} alt={name} />
+                     </AvatarWrapper>
+
+                     <TeamName>
+                        {personname},
+                        <br />
+                        {role}
+                        <br />
+                        {company}
+                     </TeamName>
+                  </Slide>
+               ))}
+            </StyledSlider>
+         </SliderWrapper>
+      </StyledContainer>
+   </Section>
+)
 
 export default AboutAs
 
@@ -90,9 +95,8 @@ const Title = styled(Typography)(({ theme }) => ({
    marginBottom: theme.spacing(2),
 }))
 
-const Paragraph = styled(Typography)(({ theme }) => ({
-   marginTop: '10px',
-   marginRight: '100px',
+const Paragraph = styled(Typography)(() => ({
+   marginTop: '10px 100px 0 0 ',
    lineHeight: 1.6,
 }))
 
@@ -138,7 +142,7 @@ const TeamAvatar = styled(Avatar)(() => ({
    objectFit: 'cover',
 }))
 
-const TeamName = styled(Typography)(({ theme }) => ({
+const TeamName = styled(Typography)(() => ({
    fontWeight: 500,
    textAlign: 'center',
 }))
