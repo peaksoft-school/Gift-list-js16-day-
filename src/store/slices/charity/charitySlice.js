@@ -38,6 +38,19 @@ const charitySlice = createSlice({
          .addCase(CHARITY_THUNK.getById.rejected, (state) => {
             state.loading = false
          })
+         .addCase(
+            CHARITY_THUNK.deleteCharity.fulfilled,
+            (state, { payload }) => {
+               state.delete = payload
+               state.loading = false
+            }
+         )
+         .addCase(CHARITY_THUNK.deleteCharity.pending, (state) => {
+            state.loading = true
+         })
+         .addCase(CHARITY_THUNK.deleteCharity.rejected, (state) => {
+            state.loading = false
+         })
    },
 })
 

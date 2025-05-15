@@ -1,33 +1,10 @@
 import React, { useEffect } from 'react'
-import AvatarPhoto from '../../../assets/images/avatarPhoto.png'
-import Books from '../../../assets/images/Books.png'
 import { Box, styled, Typography } from '@mui/material'
 import CharityCard from './CharityCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { CHARITY_THUNK } from '../../../store/slices/charity/charityThunk'
 
-// const charity = [
-//    {
-//       id: 1,
-//       avatar: AvatarPhoto,
-//       author: 'Rupert Kunde ',
-//       title: 'Письма Элджертона',
-//       tag: 'Новый',
-//       bookImage: Books,
-//       date: '08.05.2025',
-//       status: 'Забронирован',
-//    },
-//    {
-//       id: 1,
-//       avatar: AvatarPhoto,
-//       author: 'Rupert Kunde ',
-//       title: 'Письма Элджертона',
-//       tag: 'Б/У',
-//       bookImage: Books,
-//       date: '08.05.2025',
-//       status: 'Забронирован',
-//    },
-// ]
+
 const CharityList = () => {
    const { charity } = useSelector((state) => state.charity)
 

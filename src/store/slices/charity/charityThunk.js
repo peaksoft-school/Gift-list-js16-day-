@@ -6,7 +6,7 @@ const getAllCharity = createAsyncThunk(
 
    async (_, { rejectWithValue }) => {
       try {
-         const { data } = await axiosInstance.get('/api/charity')
+         const { data } = await axiosInstance.get(`/api/charity`)
 
          return data
       } catch (error) {
@@ -29,4 +29,19 @@ const getById = createAsyncThunk(
    }
 )
 
-export const CHARITY_THUNK = { getAllCharity, getById }
+const deleteCharity = createAsyncThunk(
+   'charity/delete-сharity',
+
+   async ({ id }, { rejectWithValue }) => {
+      try {
+         const { data } = await axiosInstance.delete(`/api/charity/${id}`)
+
+         navigate('/admin/charity')
+         return data
+      } catch (error) {
+         return rejectWithValue({ message: error.response.data.message })
+      }
+   }
+)
+
+export const CHARITY_THUNK = { getAllCharity, getById, deleteCharity }

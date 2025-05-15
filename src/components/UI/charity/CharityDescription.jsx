@@ -7,13 +7,18 @@ import Button from '../Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { CHARITY_THUNK } from '../../../store/slices/charity/charityThunk'
 import links from '../../../utils/helpers/links'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 
 const CharityDescription = () => {
    const { selectedCharity } = useSelector((state) => state.charity)
 
    const { id } = useParams()
    const dispatch = useDispatch()
+   const navigate = useNavigate()
+
+   const handleDeleteCharity = (id) => {
+      dispatch(CHARITY_THUNK.deleteCharity({ id, navigate }))
+   }
 
    useEffect(() => {
       dispatch(CHARITY_THUNK.getById({ id }))
@@ -22,59 +27,69 @@ const CharityDescription = () => {
    return (
       <StyledBlockList>
          <BreadCrumbs links={links} />
-         <StyledContainer1>
-            <StyledBlockMain>
-               <img src={selectedCharity.ownerProfilePhoto} alt="photo" />
-               <StyledTextBlock>
-                  <StyledAva>
-                     <Avatar
-                        src={selectedCharity.bookedByProfilePhoto}
-                     ></Avatar>
-                     <StyledData>
-                        <Typography variant="paragraf">
-                           {selectedCharity.ownerFullName}
+         {selectedCharity && (
+            <StyledContainer1>
+               <StyledBlockMain>
+                  <img src={selectedCharity.ownerProfilePhoto} alt="photo" />
+                  <StyledTextBlock>
+                     <StyledAva>
+                        <Avatar
+                           src={selectedCharity.bookedByProfilePhoto}
+                        ></Avatar>
+                        <StyledData>
+                           <Typography variant="paragraf">
+                              {selectedCharity.ownerFullName}
+                           </Typography>
+                           <Typography>{selectedCharity.ownerPhone}</Typography>
+                        </StyledData>
+                        <Typography variant="p">
+                           {selectedCharity.statusMessage}
                         </Typography>
-                        <Typography>{selectedCharity.ownerPhone}</Typography>
-                     </StyledData>
-                     <Typography variant="p">
-                        {selectedCharity.statusMessage}
+                     </StyledAva>
+
+                     <Typography variant="h6">
+                        {selectedCharity.giftName}
                      </Typography>
-                  </StyledAva>
+                     <Typography variant="p">
+                        {selectedCharity.description}
+                     </Typography>
+                     <StyledBlockLi>
+                        <Box>
+                           <Value>{selectedCharity.category}</Value>
+                           <Label>Школьные</Label>
+                           <br />
+                           <Value>{selectedCharity.subCategory}</Value>
+                           <Label>Сумка</Label>
+                        </Box>
 
-                  <Typography variant="h6">
-                     {selectedCharity.giftName}
-                  </Typography>
-                  <Typography variant="p">
-                     {selectedCharity.description}
-                  </Typography>
-                  <StyledBlockLi>
-                     <Box>
-                        <Value>{selectedCharity.category}</Value>
-                        <Label>Школьные</Label>
-                        <br />
-                        <Value>{selectedCharity.subCategory}</Value>
-                        <Label>Сумка</Label>
-                     </Box>
-
-                     <StyledState>
-                        <Value>Состояние:</Value>
-                        <Label>{selectedCharity.condition}</Label>
-                        <br />
-                        <Value>Дата добавления:</Value>
-                        <Label>{selectedCharity.createdAt}</Label>
-                     </StyledState>
-                  </StyledBlockLi>
-               </StyledTextBlock>
-            </StyledBlockMain>
-            <ButtonContainer>
-               <StyledButton variant="warning" type="button">
-                  Удалить
-               </StyledButton>
-               <StyledButton2 variant="outlined" color="primary" type="button">
-                  Редактировать
-               </StyledButton2>
-            </ButtonContainer>
-         </StyledContainer1>
+                        <StyledState>
+                           <Value>Состояние:</Value>
+                           <Label>{selectedCharity.condition}</Label>
+                           <br />
+                           <Value>Дата добавления:</Value>
+                           <Label>{selectedCharity.createdAt}</Label>
+                        </StyledState>
+                     </StyledBlockLi>
+                  </StyledTextBlock>
+               </StyledBlockMain>
+               <ButtonContainer>
+                  <StyledButton
+                     variant="warning"
+                     type="button"
+                     onClick={() => handleDeleteCharity(id)}
+                  >
+                     Удалить
+                  </StyledButton>
+                  <StyledButton2
+                     variant="outlined"
+                     color="primary"
+                     type="button"
+                  >
+                     Редактировать
+                  </StyledButton2>
+               </ButtonContainer>
+            </StyledContainer1>
+         )}
       </StyledBlockList>
    )
 }
