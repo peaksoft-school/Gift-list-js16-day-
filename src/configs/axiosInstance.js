@@ -23,7 +23,7 @@ axiosInstance.interceptors.request.use(
       const { token } = customStore.getState().auth
 
       if (token) {
-         updateConfig.headers.Authorization = `Bearer ${token}`
+         updateConfig.headers.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NDczMTU4NDIsImV4cCI6MTc0NzkyMDY0Mn0.WjXrqEPJzNwbzwU8ayl8Pl6rarzhN8Kzpm92qcnx6I4`
       }
 
       return updateConfig

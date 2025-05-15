@@ -4,8 +4,12 @@ import UserCard from './UI/UserCard'
 import Button from './UI/Button'
 import { DeleteOutlineOutlined } from '@mui/icons-material'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { USERS_THUNK } from '../store/slices/admin/users/usersThunk'
 
 const UserList = () => {
+   const { selectedUsers } = useSelector((state) => state.user)
+
    const [users, setUsers] = useState([
       {
          id: 1,
@@ -29,9 +33,13 @@ const UserList = () => {
       setSelectedUserId(null)
    }
 
-   const handleDeleteUser = () => {
-      setUsers((prev) => prev.filter((user) => user.id !== selectedUserId))
-      handleCloseModal()
+   // const handleDeleteUser = () => {
+   //    setUsers((prev) => prev.filter((user) => user.id !== selectedUserId))
+   //    handleCloseModal()
+   // }
+
+   const handleDeleteUser = (id) => {
+      dispatch(USERS_THUNK.deleteUsers({ id }))
    }
 
    const selectedUser = users.find((user) => user.id === selectedUserId)
@@ -72,7 +80,7 @@ const UserList = () => {
                   </Button>
                   <Button
                      variant="contained"
-                     onClick={handleDeleteUser}
+                     onClick={() => handleDeleteUser(id)}
                      sx={{ width: '232px', height: '37px' }}
                   >
                      Удалить
