@@ -1,4 +1,6 @@
-import { Avatar, Box, Stack, styled, Typography } from '@mui/material'
+import { Avatar, Box, styled, Typography } from '@mui/material'
+import MeatBalls from './MeetBalls'
+import { USER_CARD_OPTIONS } from '../../utils/helpers'
 
 const BookedsCard = ({ card }) => {
    const { fullName, event, title, date, image, avatar } = card
@@ -11,7 +13,7 @@ const BookedsCard = ({ card }) => {
                   <Avatar src={avatar} />
 
                   <ContainerBox>
-                     <Typography fontWeight="bold">{fullName}</Typography>
+                     <Typography>{fullName}</Typography>
                      <Typography color="green">{event}</Typography>
                   </ContainerBox>
                </ContainerBox>
@@ -20,7 +22,9 @@ const BookedsCard = ({ card }) => {
             <StyledTypography>{title}</StyledTypography>
 
             <StyledImage src={image} alt={title} />
-            <StyledText>{date}</StyledText>
+            <StyledText>
+               {date} <MeatBalls options={USER_CARD_OPTIONS} />
+            </StyledText>
          </StyledCard>
       </StyledBox>
    )
@@ -37,8 +41,10 @@ const StyledCard = styled(Box)({
    padding: '16px',
    borderRadius: '12px',
    boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
-   marginBottom: '20px',
-   width: '360px',
+
+   width: '349px',
+   height: '301px',
+   top: '141px',
 })
 
 const BoxContainer = styled(Box)({
@@ -48,8 +54,9 @@ const BoxContainer = styled(Box)({
 })
 
 const StyledImage = styled('img')({
-   width: '100%',
-   height: 'auto',
+   width: '317px',
+   height: '153px',
+   top: '98px',
    borderRadius: '8px',
    marginTop: '12px',
 })
@@ -63,11 +70,13 @@ const ContainerBox = styled(Box)(() => ({
 const StyledTypography = styled(Typography)(() => ({
    fontFamily: 'Inter',
    fontWeight: '400',
-   fontSize: '20px',
+   fontSize: '14px',
    marginTop: '15px',
 }))
 
 const StyledText = styled(Typography)(() => ({
    fontSize: '14px',
    color: 'gray',
+   display: 'flex',
+   justifyContent: 'space-between',
 }))

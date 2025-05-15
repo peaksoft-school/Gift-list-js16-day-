@@ -1,6 +1,8 @@
 // src/pages/user/BookingPage.jsx
-import CrudCards from '../../components/UI/CrudCards'
+
 import { Box } from '@mui/material'
+import BookedsCard from '../../components/UI/BookedsCard'
+
 
 const CARDS = [
    {
@@ -18,7 +20,7 @@ const BookingPage = () => {
    return (
       <Box>
          {CARDS.map((card) => (
-            <CrudCards key={card.id} card={card} />
+            <BookedsCard key={card.id} card={card} />
          ))}
       </Box>
    )
