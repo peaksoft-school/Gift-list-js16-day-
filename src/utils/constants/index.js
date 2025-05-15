@@ -3,7 +3,7 @@ const conditions = [
    { value: '2', name: 'Б/У' },
    { value: '3', name: 'Новое' },
 ]
-
+   
 const categories = [
    { value: '1', name: 'Смартфоны и телефоны' },
    { value: '2', name: 'Аудиотехника' },
