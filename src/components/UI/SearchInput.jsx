@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Box, InputAdornment, TextField, styled } from '@mui/material'
-import SearchIcon from '@mui/icons-material/Search'
 import {
    categories,
    conditions,
@@ -10,7 +9,7 @@ import {
 import Select from './Select'
 import UnionIcon from '../../assets/icons/Union.svg'
 
-const InputSearch = () => {
+const SearchInput = () => {
    const [filters, setFilters] = useState({
       condition: '',
       category: '',
@@ -67,7 +66,7 @@ const InputSearch = () => {
    )
 }
 
-export default InputSearch
+export default SearchInput
 
 const MainBox = styled(Box)({
    display: 'flex',
