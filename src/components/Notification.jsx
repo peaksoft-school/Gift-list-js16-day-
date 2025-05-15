@@ -22,7 +22,7 @@ const StyledToastContainer = styled(ToastContainer)({
       height: '98px',
       borderRadius: '2px',
       fontFamily: 'Inter, sans-serif',
-      padding: '32px 38px',
+      padding: '30px 15px',
       display: 'flex',
       fontSize: '14px',
 
@@ -36,11 +36,11 @@ const StyledToastContainer = styled(ToastContainer)({
    },
 
    '.Toastify__toast--success': {
-      backgroundColor: '#C6F0C2',
-      color: '#328048',
+      backgroundColor: '#eafbe8',
+      color: '#317e46',
       borderRadius: '3px',
       textAlign: 'start',
-      border: '1px solid #70ea65',
+      border: '1px solid #82b78d',
    },
    '.Toastify__toast--info': {
       backgroundColor: '#EBEFF7',
@@ -68,7 +68,6 @@ const StyledToastContainer = styled(ToastContainer)({
 
    '.Toastify__toast-icon': {
       width: '18px',
-      padding: '-12px -10px',
       marginBottom: '38px',
    },
    '.Toastify__close-button': {
