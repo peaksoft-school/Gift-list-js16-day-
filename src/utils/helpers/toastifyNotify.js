@@ -1,19 +1,20 @@
+import { styled, Typography } from '@mui/material'
 import { toast } from 'react-toastify'
-import styled from 'styled-components'
 
-const ToastifyNotify = ({ title, message, autoClose = 20000, type = '' }) => {
+const toastifyNotify = ({ title, message, autoClose = 20000, type = '' }) => {
    toast[type](
-      <div>
+      <>
          <StyledTitle>{title}</StyledTitle>
-         <StyledMassege style={{ color: '#333' }}>{message}</StyledMassege>
-      </div>,
+         <StyledMassege>{message}</StyledMassege>
+      </>,
       {
          autoClose,
       }
    )
 }
 
-export default ToastifyNotify
+export default toastifyNotify
+
 const StyledTitle = styled('strong')(() => ({
    margin: '-29px 0px 0 0px',
    position: 'absolute',
@@ -21,8 +22,9 @@ const StyledTitle = styled('strong')(() => ({
    fontWeight: '500',
 }))
 
-const StyledMassege = styled('p')(() => ({
+const StyledMassege = styled(Typography)(() => ({
    position: 'absolute',
    fontSize: '16px',
    fontWeight: '400',
+   color: '#333',
 }))
