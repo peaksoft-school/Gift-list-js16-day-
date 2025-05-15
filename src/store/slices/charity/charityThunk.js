@@ -9,17 +9,18 @@ const getAllCharity = createAsyncThunk(
          const { data } = await axiosInstance.get('/api/charity')
 
          return data
-      } catch (error) {}
-      return rejectWithValue({ message: error.response.data.message })
+      } catch (error) {
+         return rejectWithValue({ message: error.response.data.message })
+      }
    }
 )
 
 const getById = createAsyncThunk(
    'charity/getById',
 
-   async (id, { rejectWithValue }) => {
+   async ({ id }, { rejectWithValue }) => {
       try {
-         const { data } = await axiosInstance.get(`/api/charity/${id}`, {})
+         const { data } = await axiosInstance.get(`/api/charity/${id}`)
 
          return data
       } catch (error) {
@@ -28,5 +29,4 @@ const getById = createAsyncThunk(
    }
 )
 
-
-export const CHARITY_THUNK = { getAllCharity,  getById }
+export const CHARITY_THUNK = { getAllCharity, getById }

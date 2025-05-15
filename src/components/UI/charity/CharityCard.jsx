@@ -5,18 +5,20 @@ import { useNavigate } from 'react-router'
 
 const CharityCard = ({ charity }) => {
    const navigate = useNavigate()
+
+   const handleNavigate = (id) => {
+      navigate(`/admin/charity/${id}`)
+   }
    return (
       <StyledCard>
-         {charity.map((item) => (
+         {charity.map((item, index) => (
             <BoxCard
-               key={item.id}
-               onClick={() => navigate(`/admin/charity/${charity.id}`)}
+               key={item.id || index}
+               onClick={() => handleNavigate(item.giftId)}
             >
                <StyledBoxAvatar>
                   <Avatar src={item.ownerProfilePhoto} />
-                  <Typography sx={{ marginLeft: '20px' }}>
-                     {item.ownerFullName}
-                  </Typography>
+                  <Typography>{item.ownerFullName}</Typography>
                </StyledBoxAvatar>
                <StyledParagraph>
                   <Typography>{item.giftName}</Typography>
@@ -34,14 +36,8 @@ const CharityCard = ({ charity }) => {
                   <Typography>{item.createdAt}</Typography>
                   <StyledSmallBlock>
                      <Avatar src={item.ownerProfilePhoto} />
-                     <Typography sx={{ marginLeft: '10px' }}>
-                        {item.statusMessage}
-                     </Typography>
-                     <img
-                        src={Menu}
-                        alt="icon"
-                        style={{ marginLeft: '10px' }}
-                     />
+                     <Typography>{item.statusMessage}</Typography>
+                     <img src={Menu} alt="icon" />
                   </StyledSmallBlock>
                </StyledUpBox>
             </BoxCard>
@@ -75,6 +71,7 @@ const StyledBoxAvatar = styled(Box)(() => ({
       fontSize: '16px',
       lineHeight: ' 100%',
       letterSpacing: '2%',
+      marginLeft: '20px',
    },
 }))
 const StyledParagraph = styled(Box)(() => ({
@@ -102,4 +99,10 @@ const StyledUpBox = styled(Box)(() => ({
 const StyledSmallBlock = styled(Box)(() => ({
    display: 'flex',
    alignItems: 'center',
+   '& .MuiTypography-root': {
+      marginLeft: '10px',
+   },
+   '& img': {
+      marginLeft: '10px',
+   },
 }))

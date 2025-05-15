@@ -1,66 +1,67 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import BreadCrumbs from './BreadCrumbs'
 import { Avatar, Box, styled, Typography } from '@mui/material'
 import DescriptionAva from '../../../assets/images/descriptionAva.png'
 import AvatarPhoto from '../../../assets/images/avatarPhoto.png'
-import { Margin } from '@mui/icons-material'
 import Button from '../Button'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { CHARITY_THUNK } from '../../../store/slices/charity/charityThunk'
+import links from '../../../utils/helpers/links'
+import { useParams } from 'react-router'
 
 const CharityDescription = () => {
-   const links = [
-      { href: '/Благотворительность ', label: 'Благотворительность ' },
-      { href: '/description', label: 'Iphone 13 Pro ' },
-   ]
-
-   const { charities } = useSelector((state) => state.charities)
+   const { selectedCharity } = useSelector((state) => state.charity)
 
    const { id } = useParams()
    const dispatch = useDispatch()
 
    useEffect(() => {
-      dispatch(CHARITY_THUNK.getById(id))
+      dispatch(CHARITY_THUNK.getById({ id }))
    }, [dispatch])
+
    return (
       <StyledBlockList>
          <BreadCrumbs links={links} />
          <StyledContainer1>
             <StyledBlockMain>
-               <img src={DescriptionAva} alt="photo" />
+               <img src={selectedCharity.ownerProfilePhoto} alt="photo" />
                <StyledTextBlock>
                   <StyledAva>
-                     <Avatar src={AvatarPhoto}></Avatar>
+                     <Avatar
+                        src={selectedCharity.bookedByProfilePhoto}
+                     ></Avatar>
                      <StyledData>
-                        <Typography variant="paragraf">Rupert Kunde</Typography>
-                        <Typography>+996 705 86 95 44</Typography>
+                        <Typography variant="paragraf">
+                           {selectedCharity.ownerFullName}
+                        </Typography>
+                        <Typography>{selectedCharity.ownerPhone}</Typography>
                      </StyledData>
-                     <Typography variant="p"> В ожидании</Typography>
+                     <Typography variant="p">
+                        {selectedCharity.statusMessage}
+                     </Typography>
                   </StyledAva>
 
-                  <Typography variant="h6">Iphone 13 Pro</Typography>
+                  <Typography variant="h6">
+                     {selectedCharity.giftName}
+                  </Typography>
                   <Typography variant="p">
-                     Дисплей Super Retina XDR с технологией ProMotion и быстрым,
-                     плавным откликом. Грандиозный апгрейд системы камер,
-                     открывающий совершенно новые возможности. Исключительная
-                     прочность. A15 Bionic — самый быстрый чип для iPhone. И
-                     впечатляющее время работы без подзарядки. Всё это Pro.
+                     {selectedCharity.description}
                   </Typography>
                   <StyledBlockLi>
                      <Box>
-                        <Value>Категория:</Value>
+                        <Value>{selectedCharity.category}</Value>
                         <Label>Школьные</Label>
                         <br />
-                        <Value>Подкатегория:</Value>
+                        <Value>{selectedCharity.subCategory}</Value>
                         <Label>Сумка</Label>
                      </Box>
 
                      <StyledState>
                         <Value>Состояние:</Value>
-                        <Label>Б/У</Label>
+                        <Label>{selectedCharity.condition}</Label>
                         <br />
                         <Value>Дата добавления:</Value>
-                        <Label>08.05.2025</Label>
+                        <Label>{selectedCharity.createdAt}</Label>
                      </StyledState>
                   </StyledBlockLi>
                </StyledTextBlock>

@@ -1,4 +1,4 @@
-import { Navigate } from 'react-router'
+import { Navigate, Outlet } from 'react-router'
 
 const PrivateRoute = ({ roles, Component, fallbackPath }) => {
    const role = 'ADMIN'

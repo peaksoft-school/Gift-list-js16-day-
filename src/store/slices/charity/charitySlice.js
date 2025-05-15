@@ -3,7 +3,7 @@ import { CHARITY_THUNK } from './charityThunk'
 
 const initialState = {
    charity: [],
-   charities:{},
+   selectedCharity: {},
    loading: false,
    error: null,
 }
@@ -29,7 +29,7 @@ const charitySlice = createSlice({
          })
 
          .addCase(CHARITY_THUNK.getById.fulfilled, (state, { payload }) => {
-            state.charity = payload
+            state.selectedCharity = payload
             state.loading = false
          })
          .addCase(CHARITY_THUNK.getById.pending, (state) => {
@@ -41,7 +41,7 @@ const charitySlice = createSlice({
    },
 })
 
-const CHARITY_ACTIONS = charitySlice.actions
+const CHARITY_ACTIONS = charitySlice.CHARITY_ACTIONS
 
 export { charitySlice, CHARITY_ACTIONS }
 

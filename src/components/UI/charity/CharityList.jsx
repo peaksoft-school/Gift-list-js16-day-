@@ -33,20 +33,12 @@ const CharityList = () => {
 
    const dispatch = useDispatch()
 
+   console.log(charity)
+
    useEffect(() => {
       dispatch(CHARITY_THUNK.getAllCharity())
    }, [dispatch])
 
-   // const mappedCharity = charity.map((item) => ({
-   //    id: item.id,
-   //    author: 'Rupert Kunde',
-   //    title: item.name,
-   //    tag: 'Новый',
-   //    bookImage: Books,
-   //    date: item.createdAt,
-   //    status: 'Забронирован',
-   //    avatar: AvatarPhoto,
-   // }))
    return (
       <StyledBlockList>
          <StyledTypography>Благотворительность</StyledTypography>
