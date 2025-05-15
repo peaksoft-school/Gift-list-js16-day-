@@ -1,10 +1,14 @@
 import styled from 'styled-components'
 import { GIFTS, HOLIDAYS } from '../../utils/helpers'
 import { Box, Typography } from '@mui/material'
+import UserCard from '../UI/UserCard'
+import FriendCard from '../UI/FriendCard'
 
 const GiftHolydays = () => {
    return (
       <Container>
+         {/* <UserCard />
+         <FriendCard /> */}
          <TopRow>
             <SectionTitle>Желаемые подарки</SectionTitle>
             <a href="" size="16px">
@@ -16,7 +20,11 @@ const GiftHolydays = () => {
                <Card key={idx}>
                   <CardImage src={gift.img} alt={gift.name} />
                   <Typography>{gift.name}</Typography>
-                  <Typography variant="caption" color="text.secondary" marginRight='180px'>
+                  <Typography
+                     variant="caption"
+                     color="text.secondary"
+                     marginRight="180px"
+                  >
                      {gift.date}
                   </Typography>
                </Card>
@@ -79,7 +87,7 @@ const CardImage = styled('img')({
    height: 157,
 })
 const SectionTitle = styled('p')({
-   fontWeight: 900,
+   fontWeight: 500,
    margin: '32px 0 8px 0',
-   fontSize: '16px',
+   fontSize: '1.5rem',
 })

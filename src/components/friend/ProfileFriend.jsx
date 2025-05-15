@@ -198,8 +198,8 @@ const InfoColumn = styled(Box)({
 })
 
 const SectionTitle = styled(Typography)({
-   fontWeight: 600,
+   fontWeight: 500,
    margin: '32px 0 8px 0',
-   fontSize: '1.1em',
+   fontSize: '1.1rem',
    color: '#8e24aa',
 })
