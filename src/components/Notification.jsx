@@ -10,7 +10,6 @@ const Notification = () => {
          draggable
          hideProgressBar
          limit={1}
-         // style={{ paddingLeft: '220px' }}
       />
    )
 }
@@ -25,7 +24,6 @@ const StyledToastContainer = styled(ToastContainer)({
       fontFamily: 'Inter, sans-serif',
       padding: '32px 38px',
       display: 'flex',
-      // justifyContent: 'flex-start',
       fontSize: '14px',
 
       boxShadow: '0px 4px 10px rgba(20, 18, 18, 0.1)',
