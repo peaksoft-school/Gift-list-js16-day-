@@ -43,5 +43,15 @@ const USER_CARD_OPTIONS = [
       icon: Delete,
    },
 ]
+const CHARITY_CARD_OPTIONS = [
+   {
+      title: 'Редактировать',
+      icon: Block,
+   },
+   {
+      title: 'Удалить',
+      icon: Delete,
+   },
+]
 
-export { ROLES_SIDEBAR, PROFILE_OPTIONS, USER_CARD_OPTIONS }
+export { ROLES_SIDEBAR, PROFILE_OPTIONS, USER_CARD_OPTIONS, CHARITY_CARD_OPTIONS }

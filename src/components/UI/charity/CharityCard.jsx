@@ -1,7 +1,8 @@
 import { Avatar, Box, styled, Typography } from '@mui/material'
 import React from 'react'
-import Menu from '../../../assets/images/menu.png'
 import { useNavigate } from 'react-router'
+import MeetBalls from '../MeetBalls'
+import { CHARITY_CARD_OPTIONS,  } from '../../../utils/helpers'
 
 const CharityCard = ({ charity }) => {
    const navigate = useNavigate()
@@ -12,32 +13,30 @@ const CharityCard = ({ charity }) => {
    return (
       <StyledCard>
          {charity.map((item, index) => (
-            <BoxCard
-               key={item.id || index}
-               onClick={() => handleNavigate(item.giftId)}
-            >
+            <BoxCard key={item.id || index}>
                <StyledBoxAvatar>
                   <Avatar src={item.ownerProfilePhoto} />
                   <Typography>{item.ownerFullName}</Typography>
                </StyledBoxAvatar>
-               <StyledParagraph>
+               <StyledParagraph >
                   <Typography>{item.giftName}</Typography>
                   <Typography
                      sx={{
                         color:
-                           item.condition === 'Новый' ? '#3CBA92' : '#FD5200',
+                           item.condition === 'NEW' ? '#3CBA92' : '#FD5200',
                      }}
                   >
                      {item.condition}
                   </Typography>
                </StyledParagraph>
-               <img src={item.bookedByProfilePhoto} alt="book" />
+               <img src={item.bookedByProfilePhoto} alt="book" onClick={() => handleNavigate(item.giftId)}/>
                <StyledUpBox>
                   <Typography>{item.createdAt}</Typography>
                   <StyledSmallBlock>
                      <Avatar src={item.ownerProfilePhoto} />
                      <Typography>{item.statusMessage}</Typography>
-                     <img src={Menu} alt="icon" />
+                     {/* <img src={Menu} alt="icon" /> */}
+                     <MeetBalls options={CHARITY_CARD_OPTIONS} />
                   </StyledSmallBlock>
                </StyledUpBox>
             </BoxCard>

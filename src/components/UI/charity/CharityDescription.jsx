@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 import BreadCrumbs from './BreadCrumbs'
 import { Avatar, Box, styled, Typography } from '@mui/material'
-import DescriptionAva from '../../../assets/images/descriptionAva.png'
-import AvatarPhoto from '../../../assets/images/avatarPhoto.png'
 import Button from '../Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { CHARITY_THUNK } from '../../../store/slices/charity/charityThunk'
