@@ -1,3 +1,9 @@
-const App = () => <>GIFT-LIST JS-16 DAY</>
+import AppRouter from './routes/AppRouter'
+
+const App = () => (
+   <>
+      <AppRouter />
+   </>
+)
 
 export default App
