@@ -51,7 +51,7 @@ const HOLIDAYS = [
       img: Baran,
    },
    { name: 'Курбан айт', img: Baran },
-   { name: 'Кадр туи', img: Baran },
+   { name: 'Кадр тун', img: Baran },
 ]
 
 const GIFTS = [
@@ -72,4 +72,10 @@ const GIFTS = [
    },
 ]
 
-export { ROLES_SIDEBAR, PROFILE_OPTIONS, USER_CARD_OPTIONS, HOLIDAYS, GIFTS }
+export {
+   ROLES_SIDEBAR,
+   PROFILE_OPTIONS,
+   USER_CARD_OPTIONS,
+   HOLIDAYS,
+   GIFTS,
+}

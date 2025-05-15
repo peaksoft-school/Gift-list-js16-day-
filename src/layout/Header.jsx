@@ -43,8 +43,9 @@ const StyledBox = styled(Box)(() => ({
    justifyContent: 'space-evenly',
    height: '40px',
    top: '33px',
-   marginLeft: '280px',
+   marginLeft: '260px',
    width: '100%',
+   padding: '35px',
 
    '& .user-name': {
       width: '140px',
@@ -63,8 +64,9 @@ const StyledInput = styled(Input)(() => ({
 }))
 
 const StyledCustomAppBar = styled(AppBar)(() => ({
-   backgroundColor: 'transparent',
-   boxShadow: 'none',
+   position: 'fixed',
+   zIndex: 1,
+   marginBottom: 10,
 }))
 
 const StyledNotificationIcon = styled('img')(() => ({

@@ -5,7 +5,7 @@ import AppRouter from './routes/AppRouter'
 const App = () => (
    <>
       <AppRouter />
-      <ProfileFriend />
+      {/* <ProfileFriend /> */}
    </>
 )
 
