@@ -7,7 +7,6 @@ import {
    IconButton,
    Paper,
    Link,
-   Button,
    TextField,
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
@@ -18,6 +17,7 @@ import Vk from '../../assets/icons/bg.svg'
 import DeleteIcon from '@mui/icons-material/PersonRemove'
 import Aika from '../../assets/images/Aika.png'
 import GiftHolydays from './GiftHolydays'
+import Button from '../UI/Button'
 
 const ProfileFriend = () => {
    const initialProfile = {
@@ -41,9 +41,11 @@ const ProfileFriend = () => {
                      <LeftColumn>
                         <ProfilePhoto src={Aika} alt="Фото пользователя" />
 
-                        <Button variant="outlined" startIcon={<DeleteIcon />}>
-                           Удалить из друзей
-                        </Button>
+                        <StyledButton variant="warning">
+                           <p style={{ fontSize: '12px', fontWeight: 500 }}>
+                              Удалить из друзей
+                           </p>
+                        </StyledButton>
                         <Contacts>
                            <IconButton>
                               <img src={FaceBook} alt="" />
@@ -84,7 +86,7 @@ const ProfileFriend = () => {
                                  </Typography>
                               </>
                            </div>
-                           <div>
+                           <div style={{ marginLeft: '160px' }}>
                               <>
                                  <Typography>
                                     <p style={{ color: 'grey' }}>
@@ -136,7 +138,7 @@ export default ProfileFriend
 const PageWrapper = styled(Box)({
    background: '#f5f5f5',
    minHeight: '100%',
-   padding: '40px 16px',   
+   padding: '40px 16px',
    color: '#000',
 })
 
@@ -195,6 +197,11 @@ const ProfileDetails = styled(Box)({
 
 const InfoColumn = styled(Box)({
    flex: '1 1 240px',
+})
+
+const StyledButton = styled(Button)({
+   width: '206px',
+   height: '39px',
 })
 
 const SectionTitle = styled(Typography)({
