@@ -6,47 +6,45 @@ import instagram from '../assets/icons/instagram.svg'
 import inactive from '../assets/icons/inactive.svg'
 import TextField from '@mui/material/TextField'
 
-const Footer = () => {
-   return (
-      <div>
-         <StyledList>
-            <StyledContainer>
-               <StyledBoxBlock>
-                  <Box>
-                     <StyledText>GIFT LIST</StyledText>
-                     <StyledTitle>Социальная сеть нового поколения</StyledTitle>
-                     <StyledImages>
-                        <img src={facebook} alt="" />
-                        <img src={wk} alt="" />
-                        <img src={instagram} alt="" />
-                     </StyledImages>
-                  </Box>
-               </StyledBoxBlock>
+const Footer = () => (
+   <>
+      <StyledList>
+         <StyledContainer>
+            <StyledBoxBlock>
                <Box>
-                  <StyledType>Навигация</StyledType>
-                  <StyledTitle>О проекте </StyledTitle>
-                  <StyledTitle>Благотворительность</StyledTitle>
+                  <StyledText>GIFT LIST</StyledText>
+                  <StyledTitle>Социальная сеть нового поколения</StyledTitle>
+                  <StyledImages>
+                     <img src={facebook} alt="icon" />
+                     <img src={wk} alt="icon" />
+                     <img src={instagram} alt="icon" />
+                  </StyledImages>
                </Box>
+            </StyledBoxBlock>
+            <Box>
+               <StyledType>Навигация</StyledType>
+               <StyledTitle>О проекте </StyledTitle>
+               <StyledTitle>Благотворительность</StyledTitle>
+            </Box>
 
-               <Box>
-                  <StyledType>Подписаться на рассылку</StyledType>
+            <Box>
+               <StyledType>Подписаться на рассылку</StyledType>
 
-                  <StyledIcon>
-                     <StyledInput
-                        variant="outlined"
-                        placeholder="Введите ваш Email"
-                     />
+               <StyledIcon>
+                  <StyledInput
+                     variant="outlined"
+                     placeholder="Введите ваш Email"
+                  />
 
-                     <StyledButton src={inactive} alt="" />
-                  </StyledIcon>
-               </Box>
-            </StyledContainer>
-         </StyledList>
+                  <StyledButton src={inactive} alt="icon" />
+               </StyledIcon>
+            </Box>
+         </StyledContainer>
+      </StyledList>
 
-         <StyledSoft>Peaksoft © 2022 Все права защищены</StyledSoft>
-      </div>
-   )
-}
+      <StyledSoft>Peaksoft © 2022 Все права защищены</StyledSoft>
+   </>
+)
 
 export default Footer
 
@@ -57,12 +55,12 @@ const StyledList = styled(List)({
    borderRadius: '1px ',
    display: 'flex',
    justifyContent: 'space-between',
+   lineHeight: '130%',
 })
 
 const StyledText = styled(Typography)({
-   marginBottom: '8px',
    fontFamily: 'Inter',
-   fontWeight: '700px',
+   fontWeight: '800px',
    fontSize: '24px',
    letterSpacing: '0%',
    textTransform: 'uppercase',
@@ -84,7 +82,7 @@ const StyledTitle = styled(Typography)({
    fontFamily: 'Inter',
    fontWeight: '400px',
    fontSize: '16px',
-   marginBottom: '7px',
+   marginTop: '5px',
    letterSpacing: '0%',
    color: ' #353A5A',
 })
@@ -111,25 +109,29 @@ const StyledSoft = styled(Typography)({
 })
 const StyledImages = styled(Box)({
    marginRight: '50px',
+   marginTop: '5px',
    display: 'flex',
    gap: '20px',
 })
 
 const StyledButton = styled('img')(() => ({
-   width: '39px',
-   height: '39px',
+   width: '40px',
+   height: '40px',
+   position: 'absolute',
+   marginLeft: '290px',
 }))
 
 const StyledIcon = styled(Box)({
    display: 'flex',
    width: '322px',
    height: '30px',
+   position: 'relative',
 })
 
 const StyledInput = styled(TextField)({
    '& .MuiInputBase-root': {
       height: '39px',
       width: '322px',
-      borderRadius: '17px',
+      borderRadius: '7px',
    },
 })

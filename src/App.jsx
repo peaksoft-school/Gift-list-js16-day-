@@ -1,3 +1,11 @@
-const App = () => <h1>Gift List JS-16</h1>
+import AppRouter from './routes/AppRouter'
+
+const App = () => {
+   return (
+      <>
+         <AppRouter />
+      </>
+   )
+}
 
 export default App
