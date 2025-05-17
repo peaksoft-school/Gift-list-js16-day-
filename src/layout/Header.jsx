@@ -1,5 +1,5 @@
 import Notification from '../assets/icons/notification.svg'
-import InputSearch from '../components/UI/InputSearch'
+import InputSearch from '../components/UI/SearchInput'
 import Input from '../components/UI/Input'
 import { AppBar, Toolbar, Box, styled, Typography } from '@mui/material'
 import MeatBalls from '../components/UI/MeetBalls'
