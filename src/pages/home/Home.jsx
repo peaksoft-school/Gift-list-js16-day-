@@ -1,4 +1,4 @@
-import AboutAs from '../../components/landing/AboutAs'
+import AboutAs from '../../components/landing/AboutUs'
 import Advantage from '../../components/landing/Advantage'
 import Charity from '../../components/landing/Charity'
 import Intro from '../../components/landing/Intro'

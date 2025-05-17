@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router'
 
 const Advantage = () => {
    const navigate = useNavigate()
+
    return (
       <StyledBox>
          <StyledContainer>
@@ -14,14 +15,16 @@ const Advantage = () => {
                      <Favorite />
                   </IconWrapper>
 
-                  <StyledTitle>Дари то, что необходимо</StyledTitle>
-               </ContainerBox>
+                  <Box className="text-content">
+                     <StyledTitle>Дари то, что необходимо</StyledTitle>
 
-               <StyledText>
-                  <li>Находи своих близких</li>
-                  <li>Просматривай их списки желаний</li>
-                  <li>Узнавай о ближайших мероприятиях</li>
-               </StyledText>
+                     <StyledText>
+                        <li>Находи своих близких</li>
+                        <li>Просматривай их списки желаний</li>
+                        <li>Узнавай о ближайших мероприятиях</li>
+                     </StyledText>
+                  </Box>
+               </ContainerBox>
             </StyledStack>
 
             <StyledStack>
@@ -30,14 +33,18 @@ const Advantage = () => {
                      <ThumbUp />
                   </IconWrapper>
 
-                  <StyledTitle>Удобство в использовании</StyledTitle>
-               </ContainerBox>
+                  <Box className="text-content">
+                     <StyledTitle>Удобство в использовании</StyledTitle>
 
-               <StyledText>
-                  <li>Создавай неограниченное количество желаний</li>
-                  <li>Добавляй подарки которые ты действительно хочешь</li>
-                  <li>Делись своими желаниями с другими</li>
-               </StyledText>
+                     <StyledText>
+                        <li>Создавай неограниченное количество желаний</li>
+                        <li>
+                           Добавляй подарки которые ты действительно хочешь
+                        </li>
+                        <li>Делись своими желаниями с другими</li>
+                     </StyledText>
+                  </Box>
+               </ContainerBox>
             </StyledStack>
 
             <StyledStack>
@@ -46,14 +53,16 @@ const Advantage = () => {
                      <VolunteerActivism />
                   </IconWrapper>
 
-                  <StyledTitle>Твори добро</StyledTitle>
-               </ContainerBox>
+                  <Box className="text-content">
+                     <StyledTitle>Твори добро</StyledTitle>
 
-               <StyledText>
-                  <li>Дари благотворительные подарки</li>
-                  <li>Делись своими вещами</li>
-                  <li>Помогай другим приобрести необходимое</li>
-               </StyledText>
+                     <StyledText>
+                        <li>Дари благотворительные подарки</li>
+                        <li>Делись своими вещами</li>
+                        <li>Помогай другим приобрести необходимое</li>
+                     </StyledText>
+                  </Box>
+               </ContainerBox>
             </StyledStack>
          </StyledContainer>
 
@@ -67,15 +76,21 @@ const Advantage = () => {
 export default Advantage
 
 const StyledBox = styled(Box)({
-   padding: '60px 20px',
    backgroundColor: '#fff',
    textAlign: ' center ',
+   margin: '0 135px 135px 120px',
+   display: 'flex',
+   flexDirection: 'column',
+   justifyContent: 'center',
+   alignItems: 'center',
+   gap: '105px',
 })
 
 const StyledContainer = styled(Container)({
    display: 'flex',
-   justifyContent: 'space-around',
-   marginBottom: '40px',
+   justifyContent: 'center',
+   alignItems: 'start',
+   gap: '2rem',
 })
 
 const StyledTitle = styled(Typography)({
@@ -84,7 +99,6 @@ const StyledTitle = styled(Typography)({
    fontSize: '20px',
    lineHeight: '150%',
    fontWeight: 'bold',
-   marginBottom: '10px',
 })
 
 const StyledText = styled(Typography)({
@@ -93,14 +107,24 @@ const StyledText = styled(Typography)({
    fontSize: '14px',
    lineHeight: '170%',
    listStyle: 'disc',
-   paddingLeft: '20px',
    textAlign: 'left',
+   width: '290px',
 })
 
 const ContainerBox = styled(Box)({
    display: 'flex',
-   justifyContent: 'flex-start',
-   gap: '30px',
+   justifyContent: 'center',
+   alignItems: 'start',
+   gap: '20px',
+   textAlign: 'center',
+
+   '& .text-content': {
+      textAlign: 'start',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '1.5rem',
+      marginTop: '0.5rem',
+   },
 })
 
 const IconWrapper = styled(Box)({

@@ -42,43 +42,57 @@ const STATISTICS = [
    { end: 9, label: 'K+', text: 'Реализованной благотворительной помощи' },
 ]
 
-const FRIENDS = [
+const OUR_TEAM = [
    {
       id: 1,
       img: NurgulEje,
       name: 'Нургуль Маданбекова',
       role: 'Front-end developer',
+      borderRadius: '0 0 0 50%',
    },
 
    {
       id: 2,
       img: '',
-      name: '',
-      role: '',
-   },
-   {
-      id: 3,
-      img: '',
-      name: '',
-      role: '',
+      name: 'Бекмырза Абдилвакиров',
+      role: 'Frontend - Leader',
+      borderRadius: '50% 0',
    },
    {
       id: 4,
       img: AigerimEje,
       name: 'Маматтойчуева Айгерим',
       role: 'Front-end developer',
+      borderRadius: '50% 0 0  0',
+   },
+   {
+      id: 3,
+      img: '',
+      name: 'Курманбек',
+      role: 'Backend developer',
+      borderRadius: '0 0 50% 0',
    },
    {
       id: 6,
       img: NargizaEje,
       name: 'Наргиза Нааматбекова',
       role: 'Front-end developer',
+      borderRadius: '50% 0',
    },
    {
       id: 7,
       img: '',
       name: 'Annette Black',
+      role: '',
+      borderRadius: '0 50% 0 0',
    },
 ]
 
-export { conditions, categories, subcategories, countries, FRIENDS, STATISTICS }
+export {
+   conditions,
+   categories,
+   subcategories,
+   countries,
+   OUR_TEAM,
+   STATISTICS,
+}
