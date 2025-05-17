@@ -54,7 +54,7 @@ const OUR_TEAM = [
    {
       id: 2,
       img: '',
-      name: 'Бекмырза Абдилвакиров',
+      name: 'Бекмырза Абулвакиров',
       role: 'Frontend - Leader',
       borderRadius: '50% 0',
    },
