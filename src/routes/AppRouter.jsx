@@ -8,8 +8,8 @@ import Loading from '../components/Loading'
 const Home = lazy(() => import('../pages/home/Home'))
 const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
 const SignUp = lazy(() => import('../pages/sign-up/SignUp'))
-const Admin = lazy(() => import('../layout/AdminLayout'))
-const User = lazy(() => import('../layout/UserLayout'))
+const Admin = lazy(() => import('../layout/admin/AdminLayout'))
+const User = lazy(() => import('../layout/user/UserLayout'))
 
 const AppRouter = () => (
    <Routes>
