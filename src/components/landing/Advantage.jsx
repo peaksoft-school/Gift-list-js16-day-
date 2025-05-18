@@ -15,16 +15,6 @@ const Advantage = () => {
                      <Favorite />
                   </IconWrapper>
 
-<<<<<<< HEAD
-                  <StyledTitle>Дари то, что необходимо</StyledTitle>
-               </ContainerBox>
-
-               <StyledText>
-                  <li>Находи своих близких</li>
-                  <li>Просматривай их списки желаний</li>
-                  <li>Узнавай о ближайших мероприятиях</li>
-               </StyledText>
-=======
                   <Box className="text-content">
                      <StyledTitle>Дари то, что необходимо</StyledTitle>
 
@@ -35,7 +25,6 @@ const Advantage = () => {
                      </StyledText>
                   </Box>
                </ContainerBox>
->>>>>>> development
             </StyledStack>
 
             <StyledStack>
@@ -44,16 +33,6 @@ const Advantage = () => {
                      <ThumbUp />
                   </IconWrapper>
 
-<<<<<<< HEAD
-                  <StyledTitle>Удобство в использовании</StyledTitle>
-               </ContainerBox>
-
-               <StyledText>
-                  <li>Создавай неограниченное количество желаний</li>
-                  <li>Добавляй подарки которые ты действительно хочешь</li>
-                  <li>Делись своими желаниями с другими</li>
-               </StyledText>
-=======
                   <Box className="text-content">
                      <StyledTitle>Удобство в использовании</StyledTitle>
 
@@ -66,7 +45,6 @@ const Advantage = () => {
                      </StyledText>
                   </Box>
                </ContainerBox>
->>>>>>> development
             </StyledStack>
 
             <StyledStack>
@@ -75,20 +53,6 @@ const Advantage = () => {
                      <VolunteerActivism />
                   </IconWrapper>
 
-<<<<<<< HEAD
-                  <StyledTitle>Твори добро</StyledTitle>
-               </ContainerBox>
-
-               <StyledText>
-                  <li>Дари благотворительные подарки</li>
-                  <li>Делись своими вещами</li>
-                  <li>Помогай другим приобрести необходимое</li>
-               </StyledText>
-            </StyledStack>
-         </StyledContainer>
-
-         <Button variant="outlined" onClick={() => navigate('/sign-up')}>ЗАРЕГИСТРИРОВАТЬСЯ</Button>
-=======
                   <Box className="text-content">
                      <StyledTitle>Твори добро</StyledTitle>
 
@@ -105,7 +69,6 @@ const Advantage = () => {
          <Button variant="outlined" onClick={() => navigate('/sign-up')}>
             ЗАРЕГИСТРИРОВАТЬСЯ
          </Button>
->>>>>>> development
       </StyledBox>
    )
 }

@@ -1,4 +1,4 @@
-import { useState, forwardRef } from 'react'
+import { forwardRef } from 'react'
 import {
    FormHelperText,
    InputAdornment,
@@ -8,8 +8,6 @@ import {
    IconButton,
 } from '@mui/material'
 import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded'
-import Visibility from '@mui/icons-material/Visibility'
-import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import UnionIcon from '../../assets/icons/Union.svg'
 
 const Input = forwardRef(
@@ -30,7 +28,7 @@ const Input = forwardRef(
       ref
    ) => (
       <>
-         <StyledInputLabel error={error}>{labelText}</StyledInputLabel>
+         <StyledInputLabel error={Boolean(error)}>{labelText}</StyledInputLabel>
 
          <StyledInput
             type={type}
@@ -63,40 +61,6 @@ const Input = forwardRef(
    )
 )
 
-Input.Password = forwardRef(
-   ({ placeholder, error, errorText, inputProps, ...rest }, ref) => {
-      const [showPassword, setShowPassword] = useState(false)
-
-      const toggleShowPassword = () => {
-         setShowPassword((prev) => !prev)
-      }
-
-      return (
-         <>
-            <StyledInput
-               type={showPassword ? 'text' : 'password'}
-               placeholder={placeholder}
-               error={Boolean(error)}
-               fullWidth
-               ref={ref}
-               InputProps={{
-                  endAdornment: (
-                     <InputAdornment position="end">
-                        <IconButton onClick={toggleShowPassword} edge="end">
-                           {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                     </InputAdornment>
-                  ),
-                  ...inputProps,
-               }}
-               {...rest}
-            />
-            {error && <StyledFormHelperText>{errorText}</StyledFormHelperText>}
-         </>
-      )
-   }
-)
-
 export default Input
 
 const StyledInputLabel = styled(InputLabel)(({ error }) => ({
@@ -107,7 +71,7 @@ const StyledInputLabel = styled(InputLabel)(({ error }) => ({
    },
 }))
 
-const StyledInput = styled(TextField)(() => ({
+const StyledInput = styled(TextField)(({ error }) => ({
    '& .MuiOutlinedInput-root': {
       borderRadius: '8px',
       padding: '0px 5px',
@@ -131,7 +95,7 @@ const StyledInput = styled(TextField)(() => ({
    },
 
    '& .MuiOutlinedInput-root input::placeholder': {
-      color: '#8D949E',
+      color: error ? 'red' : '#8D949E',
       opacity: 1,
    },
 
@@ -154,8 +118,7 @@ const StyledInput = styled(TextField)(() => ({
 const StyledFormHelperText = styled(FormHelperText)(() => ({
    '&.MuiFormHelperText-root': {
       color: 'red',
-      width: '290px',
-      textAlign: 'right',
+      textAlign: 'left',
       fontSize: '11px',
    },
 }))

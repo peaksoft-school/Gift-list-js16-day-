@@ -22,53 +22,59 @@ const authSlice = createSlice({
          state.role = 'GUEST'
          state.email = null
       },
+
       resetError: (state) => {
          state.error = null
       },
+
       resetPasswordStatus: (state) => {
          state.resetPasswordStatus = 'idle'
       },
    },
+
    extraReducers: (builder) => {
       builder
-         // Login
-         .addCase(AUTH_THUNK.login.pending, (state) => {
+         .addCase(AUTH_THUNK.signIn.pending, (state) => {
             state.isLoading = true
          })
-         .addCase(AUTH_THUNK.login.fulfilled, (state, action) => {
+
+         .addCase(AUTH_THUNK.signIn.fulfilled, (state, action) => {
             Object.assign(state, {
                ...action.payload,
                isAuth: true,
                isLoading: false,
             })
          })
-         .addCase(AUTH_THUNK.login.rejected, (state) => {
+
+         .addCase(AUTH_THUNK.signIn.rejected, (state) => {
             state.isLoading = false
          })
 
-         // Google Sign In
-         .addCase(AUTH_THUNK.googleSignIn.pending, (state) => {
+         .addCase(AUTH_THUNK.authWithGoogle.pending, (state) => {
             state.isLoading = true
          })
-         .addCase(AUTH_THUNK.googleSignIn.fulfilled, (state, action) => {
+
+         .addCase(AUTH_THUNK.authWithGoogle.fulfilled, (state, action) => {
             Object.assign(state, {
                ...action.payload,
                isAuth: true,
                isLoading: false,
             })
          })
-         .addCase(AUTH_THUNK.googleSignIn.rejected, (state) => {
+
+         .addCase(AUTH_THUNK.authWithGoogle.rejected, (state) => {
             state.isLoading = false
          })
 
-         // Forgot Password
          .addCase(AUTH_THUNK.forgotPassword.pending, (state) => {
             state.forgotPasswordStatus = 'loading'
             state.error = null
          })
+
          .addCase(AUTH_THUNK.forgotPassword.fulfilled, (state) => {
             state.forgotPasswordStatus = 'succeeded'
          })
+
          .addCase(AUTH_THUNK.forgotPassword.rejected, (state, action) => {
             state.forgotPasswordStatus = 'failed'
             state.error = action.payload?.message
@@ -78,9 +84,11 @@ const authSlice = createSlice({
             state.resetPasswordStatus = 'loading'
             state.error = null
          })
+
          .addCase(AUTH_THUNK.resetPassword.fulfilled, (state) => {
             state.resetPasswordStatus = 'succeeded'
          })
+
          .addCase(AUTH_THUNK.resetPassword.rejected, (state, action) => {
             state.resetPasswordStatus = 'failed'
             state.error = action.payload?.message
