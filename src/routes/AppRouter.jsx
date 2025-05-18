@@ -10,8 +10,8 @@ const Home = lazy(() => import('../pages/home/Home'))
 const ResetPassword = lazy(() => import('../pages/resetPassword/ResetPassword'))
 const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
 const SignUp = lazy(() => import('../pages/sign-up/SignUp'))
-const Admin = lazy(() => import('../layout/AdminLayout'))
-const User = lazy(() => import('../layout/UserLayout'))
+const Admin = lazy(() => import('../layout/admin/AdminLayout'))
+const User = lazy(() => import('../layout/user/UserLayout'))
 
 const AppRouter = () => (
    <Routes>
