@@ -4,7 +4,7 @@ import UserCard from './UI/UserCard'
 import Button from './UI/Button'
 import { DeleteOutlineOutlined } from '@mui/icons-material'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { USERS_THUNK } from '../store/slices/admin/users/usersThunk'
 
 const UserList = () => {
@@ -19,7 +19,7 @@ const UserList = () => {
          text: 'желаемых подарков',
       },
    ])
-
+   const dispatch = useDispatch()
    const [open, setOpen] = useState(false)
    const [selectedUserId, setSelectedUserId] = useState(null)
 
@@ -42,7 +42,7 @@ const UserList = () => {
       dispatch(USERS_THUNK.deleteUsers({ id }))
    }
 
-   const selectedUser = users.find((user) => user.id === selectedUserId)
+   // const selectedUser = users.find((user) => user.id === selectedUserId)
 
    return (
       <StyledBox>
@@ -80,7 +80,7 @@ const UserList = () => {
                   </Button>
                   <Button
                      variant="contained"
-                     onClick={() => handleDeleteUser(id)}
+                     onClick={() => handleDeleteUser(selectedUserId)}
                      sx={{ width: '232px', height: '37px' }}
                   >
                      Удалить

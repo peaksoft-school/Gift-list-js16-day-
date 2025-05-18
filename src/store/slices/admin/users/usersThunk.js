@@ -7,7 +7,7 @@ const deleteUsers = createAsyncThunk(
       try {
          console.log(axiosInstance)
          const { data } = await axiosInstance.delete(
-            '/api/users/delete/{userId}',
+            `/api/users/delete/${userId}`,
             values
          )
 
