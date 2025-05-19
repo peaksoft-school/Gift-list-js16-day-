@@ -4,20 +4,21 @@ import { Box, DialogContent, styled, Typography } from '@mui/material'
 import ImageIcon from '@mui/icons-material/Image'
 import { MAILING_THUNK } from '../../../store/slices/mailing/mailingThunk'
 import { FILES_THUNK } from '../../../store/slices/file/filesThunk'
-import Button from '../Button'
-import Modal from '../Modal'
-import Input from '../Input'
-import MailingCards from '../card/MailingCards'
+import Button from '../../../components/UI/Button'
+import Modal from '../../../components/UI/Modal'
+import Input from '../../../components/UI/Input'
+import MailingCards from '../../../components/UI/card/MailingCard'
 import Message from '../../../assets/images/Message.png'
+import NoMailings from '../../../assets/images/EmptyState.png'
+import { FILES_ACTIONS } from '../../../store/slices/file/filesSlice'
 
 const MailingList = memo(() => {
    const { mailings } = useSelector((state) => state.mailing)
-   const { fileUrl } = useSelector((state) => state.files)
+   const { fileUrl, isLoading } = useSelector((state) => state.files)
 
    const [openModal, setOpenModal] = useState(false)
    const [subject, setSubject] = useState('')
    const [message, setMessage] = useState('')
-   const [image, setImage] = useState(null)
    const [preview, setPreview] = useState(null)
    const [abortController, setAbortController] = useState(null)
 
@@ -34,38 +35,30 @@ const MailingList = memo(() => {
          abortController.abort()
       }
 
-      setOpenModal(false)
       resetForm()
+      setOpenModal(false)
    }
 
    const resetForm = () => {
       setSubject('')
       setMessage('')
-      setImage(null)
       setPreview(null)
+      dispatch(FILES_ACTIONS.clearFile())
    }
 
    const handleFileChange = (e) => {
       const file = e.target.files[0]
 
-      setImage(file)
+      if (!file) return
 
-      if (file) {
-         const reader = new FileReader()
+      const reader = new FileReader()
+      reader.onloadend = () => setPreview(reader.result)
+      reader.readAsDataURL(file)
 
-         reader.onloadend = () => {
-            setPreview(reader.result)
-         }
-         reader.readAsDataURL(file)
-      }
-
-      dispatch(
-         FILES_THUNK.addFile({ file: image, signal: abortController.signal })
-      )
+      dispatch(FILES_THUNK.addFile({ file }))
    }
 
    const handleSubjectChange = (e) => setSubject(e.target.value)
-
    const handleMessageChange = (e) => setMessage(e.target.value)
 
    useEffect(() => {
@@ -83,6 +76,8 @@ const MailingList = memo(() => {
          MAILING_THUNK.createMailings({ values, resetForm, setOpenModal })
       )
    }
+
+   const isDisabled = !subject.trim() || !message.trim() || isLoading
 
    return (
       <BlockContainer>
@@ -107,17 +102,16 @@ const MailingList = memo(() => {
                <DialogContent>
                   <label htmlFor="upload-file">
                      <UploadBox preview={preview}>
-                        {preview !== null ? (
+                        {preview ? (
                            <Box
                               component="img"
                               src={preview}
-                              alt="photo"
+                              alt="preview"
                               className="photo"
                            />
                         ) : (
                            <>
                               <ImageIcon />
-
                               <Typography>Выберите файл</Typography>
                            </>
                         )}
@@ -169,14 +163,25 @@ const MailingList = memo(() => {
                      color="primary"
                      type="button"
                      onClick={handleSubmit}
+                     disabled={isDisabled}
                   >
-                     ОТПРАВИТЬ
+                     {isLoading ? 'ЗАГРУЗКА...' : 'ОТПРАВИТЬ'}
                   </StyledButton>
                </ButtonContainer>
             </Modal>
 
             <FlexContainer>
-               <MailingCards mailings={mailings} />
+               {mailings?.length === 0 ? (
+                  <StyledNotBlockBox>
+                     <img src={NoMailings} alt="icon" />
+
+                     <h1>Нет рассылок!</h1>
+                  </StyledNotBlockBox>
+               ) : (
+                  mailings?.map((mailing) => (
+                     <MailingCards mailing={mailing} key={mailing.id} />
+                  ))
+               )}
             </FlexContainer>
          </StyledMain>
       </BlockContainer>
@@ -203,7 +208,7 @@ const StyledMainButton = styled(Button)(() => ({
 }))
 
 const StyledMain = styled(Box)(() => ({
-   margin: '65px 0 0 0',
+   margin: '65px 0 0 17.8rem',
    background: '#F7F8FA',
    width: '100%',
 
@@ -283,4 +288,16 @@ const ButtonContainer = styled(Box)(() => ({
    display: 'flex',
    justifyContent: 'center',
    gap: '16px',
+}))
+
+const StyledNotBlockBox = styled(Box)(() => ({
+   display: 'flex',
+   justifyContent: 'center',
+   flexDirection: 'column',
+   alignItems: 'center',
+   margin: 'auto',
+
+   '& img': {
+      width: '300px',
+   },
 }))

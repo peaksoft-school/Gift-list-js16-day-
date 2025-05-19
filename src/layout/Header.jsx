@@ -2,7 +2,7 @@ import { useLocation } from 'react-router'
 import { AppBar, Toolbar, Box, styled, Typography } from '@mui/material'
 import Input from '../components/UI/Input'
 import MeatBalls from '../components/UI/MeetBalls'
-import InputSearch from '../components/UI/InputSearch'
+import SearchInput from '../components/UI/SearchInput'
 import { PROFILE_OPTIONS } from '../utils/helpers'
 import Notification from '../assets/icons/notification.svg'
 
@@ -49,7 +49,7 @@ const StyledBox = styled(Box)(() => ({
    },
 }))
 
-const StyledInputSearch = styled(InputSearch)(() => ({
+const StyledInputSearch = styled(SearchInput)(() => ({
    width: '821px',
 }))
 
@@ -61,8 +61,8 @@ const StyledInput = styled(Input)(() => ({
 }))
 
 const StyledCustomAppBar = styled(AppBar)(() => ({
-   backgroundColor: 'transparent',
-   width: '83%',
+   backgroundColor: 'white',
+   width: '81.35%',
 }))
 
 const StyledNotificationIcon = styled('img')(() => ({

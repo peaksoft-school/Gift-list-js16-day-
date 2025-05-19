@@ -2,14 +2,18 @@ import { createSlice } from '@reduxjs/toolkit'
 import { FILES_THUNK } from './filesThunk'
 
 const initialState = {
-   fileUrl: '',
+   fileUrl: null,
    isLoading: false,
 }
 
 const filesSlice = createSlice({
    name: 'files',
    initialState,
-   reducers: {},
+   reducers: {
+      clearFile: (state) => {
+         state.fileUrl = null
+      },
+   },
 
    extraReducers: (builder) => {
       builder

@@ -1,17 +1,17 @@
 import { lazy, Suspense } from 'react'
-import { Navigate, Route, Routes, useLocation } from 'react-router'
+import { Navigate, Route, Routes } from 'react-router'
 import { ROLES } from './routes'
 import Blago from '../pages/user/Blago'
 import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
-import DescriptionCard from '../components/UI/mailing/DescriptionCard'
-import MailingList from '../components/UI/mailing/MailingList'
+import InnerMailing from '../components/admin/mailing/InnerMailing'
+import MailingList from '../pages/admin/mailing/MailingList'
 
 const Home = lazy(() => import('../pages/home/Home'))
 const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
 const SignUp = lazy(() => import('../pages/sign-up/SignUp'))
-const Admin = lazy(() => import('../layout/AdminLayout'))
-const User = lazy(() => import('../layout/UserLayout'))
+const Admin = lazy(() => import('../layout/admin/AdminLayout'))
+const User = lazy(() => import('../layout/user/UserLayout'))
 
 const AppRouter = () => (
    <Routes>
@@ -67,7 +67,7 @@ const AppRouter = () => (
          <Route path="charity" element={<Blago />} />
          <Route path="complaints" element={<h1>complaints</h1>} />
          <Route path="newsletter" element={<MailingList />} />
-         <Route path="newsletter/:id" element={<DescriptionCard />} />
+         <Route path="newsletter/:id" element={<InnerMailing />} />
       </Route>
 
       <Route

@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { MAILING_THUNK } from '../../../store/slices/mailing/mailingThunk'
 import { useParams } from 'react-router'
 import { memo, useEffect } from 'react'
-import BreadCrumbs from '../BreadCrumbs'
-import links from '../../../utils/helpers/links'
+import BreadCrumbs from '../../UI/BreadCrumbs'
 
-const DescriptionCard = () => {
+const InnerMailing = () => {
    const { mailing } = useSelector((state) => state.mailing)
 
    const { id } = useParams()
@@ -16,6 +15,11 @@ const DescriptionCard = () => {
    useEffect(() => {
       dispatch(MAILING_THUNK.getById(id))
    }, [dispatch])
+
+   const links = [
+      { href: '/admin/newsletter', label: 'Рассылка' },
+      { href: `/admin/newsletter/${id}`, label: `${mailing.subject}` },
+   ]
 
    return (
       <FlexContainer>
@@ -48,46 +52,53 @@ const DescriptionCard = () => {
    )
 }
 
-export default memo(DescriptionCard)
+export default memo(InnerMailing)
 
 const FlexContainer = styled(Box)(() => ({
    display: 'flex',
    justifyContent: 'center',
+   width: '100%',
 }))
+
 const BlockContainer = styled(Box)(() => ({
-   width: '1250px',
    background: '#F7F8FA',
-   margin: '80px 0 0 0px',
+   margin: '65px 0 0 17.8rem',
    padding: '20px',
+   width: '100%',
 }))
 
 const StyledBox = styled(Box)(() => ({
    display: 'flex',
-   justifyContent: 'space-between',
    alignItems: 'start',
+   gap: '3rem',
    padding: '30px',
    marginTop: '30px',
-   width: '1100px',
    height: '100%',
    background: '#FFFFFF',
    borderRadius: '10px',
    border: '1px solid #f1efef ',
+   width: '100%',
+
+   '& img': {
+      width: '420px',
+      borderRadius: '10px',
+   },
 }))
 
 const StyledText = styled(Box)(() => ({
    display: 'flex',
    flexDirection: 'column',
+   gap: '1.25rem',
+   padding: '30px 0',
 }))
 
 const StyledParagraf = styled('h1')(() => ({
    fontFamily: 'Inter',
-   fontWeight: '500',
+   fontWeight: '600',
    fontSize: '18px',
    lineHeight: '130%',
    letterSpacing: '0px',
    verticalAlign: 'middle',
-   paddingTop: '50px',
-   paddingLeft: '20px',
 }))
 
 const StyledContent = styled('h6')(() => ({
@@ -98,15 +109,15 @@ const StyledContent = styled('h6')(() => ({
    letterSpacing: '0px',
    verticalAlign: 'middle',
    width: '483px',
-   paddingTop: '30px',
-   paddingLeft: '20px',
+   // paddingTop: '30px',
+   // paddingLeft: '20px',
    color: '#000000',
 }))
 
 const StyledData = styled(Box)(() => ({
    color: '#5C5C5C',
-   paddingLeft: '20px',
-   paddingTop: '30px',
+   // paddingLeft: '20px',
+   // paddingTop: '30px',
 
    '& .MuiTypography-root': {
       fontSize: '14px',
