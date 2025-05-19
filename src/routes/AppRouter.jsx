@@ -4,6 +4,8 @@ import { ROLES } from './routes'
 import Blago from '../pages/user/Blago'
 import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
+import InnerMailing from '../components/admin/mailing/InnerMailing'
+import MailingList from '../pages/admin/mailing/MailingList'
 
 const Home = lazy(() => import('../pages/home/Home'))
 const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
@@ -64,7 +66,8 @@ const AppRouter = () => (
          <Route path="users" element={<h1>Users</h1>} />
          <Route path="charity" element={<Blago />} />
          <Route path="complaints" element={<h1>complaints</h1>} />
-         <Route path="newsletter" element={<h1>newsletter</h1>} />
+         <Route path="newsletter" element={<MailingList />} />
+         <Route path="newsletter/:id" element={<InnerMailing />} />
       </Route>
 
       <Route

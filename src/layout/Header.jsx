@@ -1,10 +1,10 @@
-import Notification from '../assets/icons/notification.svg'
-import InputSearch from '../components/UI/SearchInput'
-import Input from '../components/UI/Input'
-import { AppBar, Toolbar, Box, styled, Typography } from '@mui/material'
-import MeatBalls from '../components/UI/MeetBalls'
-import { PROFILE_OPTIONS } from '../utils/helpers'
 import { useLocation } from 'react-router'
+import { AppBar, Toolbar, Box, styled, Typography } from '@mui/material'
+import Input from '../components/UI/Input'
+import MeatBalls from '../components/UI/MeetBalls'
+import SearchInput from '../components/UI/SearchInput'
+import { PROFILE_OPTIONS } from '../utils/helpers'
+import Notification from '../assets/icons/notification.svg'
 
 const Header = () => {
    const { pathname } = useLocation()
@@ -41,9 +41,7 @@ const StyledBox = styled(Box)(() => ({
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'space-evenly',
-   height: '40px',
    top: '33px',
-   marginLeft: '280px',
    width: '100%',
 
    '& .user-name': {
@@ -51,7 +49,7 @@ const StyledBox = styled(Box)(() => ({
    },
 }))
 
-const StyledInputSearch = styled(InputSearch)(() => ({
+const StyledInputSearch = styled(SearchInput)(() => ({
    width: '821px',
 }))
 
@@ -63,8 +61,8 @@ const StyledInput = styled(Input)(() => ({
 }))
 
 const StyledCustomAppBar = styled(AppBar)(() => ({
-   backgroundColor: 'transparent',
-   boxShadow: 'none',
+   backgroundColor: 'white',
+   width: '81.35%',
 }))
 
 const StyledNotificationIcon = styled('img')(() => ({
