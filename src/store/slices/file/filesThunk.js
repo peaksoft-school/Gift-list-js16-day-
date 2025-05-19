@@ -22,10 +22,11 @@ const addFile = createAsyncThunk(
          return response.data
       } catch (error) {
          if (signal?.aborted) return rejectWithValue({ message: error.message })
+
+         return rejectWithValue({
+            message: error.response?.data?.message || error.message,
+         })
       }
-      return rejectWithValue({
-         message: error.response?.data?.message || error.message,
-      })
    }
 )
 export const FILES_THUNK = { addFile }

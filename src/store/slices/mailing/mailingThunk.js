@@ -40,19 +40,26 @@ const getById = createAsyncThunk(
 const createMailings = createAsyncThunk(
    'mailing/createMailings',
 
-   async (values, { rejectWithValue, signal }) => {
+   async (
+      { values, resetForm, setOpenModal },
+      { rejectWithValue, signal, dispatch }
+   ) => {
       try {
          const { data } = await axiosInstance.post('/api/mailing', values, {
             signal,
          })
 
-         console.log('mailing', data)
+         resetForm()
+         setOpenModal(false)
+
+         dispatch(getAllMailings())
 
          return data
       } catch (error) {
          if (signal.aborted) {
             return rejectWithValue({ message: 'Запрос отменён' })
          }
+
          return rejectWithValue({ message: error.response?.data?.message })
       }
    }

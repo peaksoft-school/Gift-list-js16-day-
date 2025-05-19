@@ -1,9 +1,9 @@
 import { memo, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { MAILING_THUNK } from '../../../store/slices/mailing/mailingThunk'
-import { FILES_THUNK } from '../../../store/slices/file/filesThunk'
 import { Box, DialogContent, styled, Typography } from '@mui/material'
 import ImageIcon from '@mui/icons-material/Image'
+import { MAILING_THUNK } from '../../../store/slices/mailing/mailingThunk'
+import { FILES_THUNK } from '../../../store/slices/file/filesThunk'
 import Button from '../Button'
 import Modal from '../Modal'
 import Input from '../Input'
@@ -12,6 +12,7 @@ import Message from '../../../assets/images/Message.png'
 
 const MailingList = memo(() => {
    const { mailings } = useSelector((state) => state.mailing)
+   const { fileUrl } = useSelector((state) => state.files)
 
    const [openModal, setOpenModal] = useState(false)
    const [subject, setSubject] = useState('')
@@ -24,15 +25,19 @@ const MailingList = memo(() => {
 
    const handleOpenModal = () => {
       setOpenModal(true)
+
       setAbortController(new AbortController())
    }
+
    const handleCloseModal = () => {
       if (abortController) {
          abortController.abort()
       }
+
       setOpenModal(false)
       resetForm()
    }
+
    const resetForm = () => {
       setSubject('')
       setMessage('')
@@ -40,43 +45,51 @@ const MailingList = memo(() => {
       setPreview(null)
    }
 
+   const handleFileChange = (e) => {
+      const file = e.target.files[0]
+
+      setImage(file)
+
+      if (file) {
+         const reader = new FileReader()
+
+         reader.onloadend = () => {
+            setPreview(reader.result)
+         }
+         reader.readAsDataURL(file)
+      }
+
+      dispatch(
+         FILES_THUNK.addFile({ file: image, signal: abortController.signal })
+      )
+   }
+
+   const handleSubjectChange = (e) => setSubject(e.target.value)
+
+   const handleMessageChange = (e) => setMessage(e.target.value)
+
    useEffect(() => {
       dispatch(MAILING_THUNK.getAllMailings())
    }, [dispatch])
 
-   const handleSubmit = async () => {
-      try {
-         const result = await dispatch(
-            FILES_THUNK.addFile({ file: image, signal: abortController.signal })
-         ).unwrap()
-
-         const imageUrl = result.link
-
-         const newMailing = {
-            subject,
-            message,
-            image: imageUrl,
-         }
-
-         await dispatch(MAILING_THUNK.createMailings(newMailing))
-         await dispatch(MAILING_THUNK.getAllMailings())
-
-         resetForm()
-         setOpenModal(false)
-      } catch (error) {
-         if (error.name === 'AbortError') {
-            console.log('Запрос был отменен')
-         } else {
-            console.error('Ошибка при создании рассылки:', error)
-         }
+   const handleSubmit = () => {
+      const values = {
+         subject,
+         message,
+         image: fileUrl,
       }
+
+      dispatch(
+         MAILING_THUNK.createMailings({ values, resetForm, setOpenModal })
+      )
    }
 
    return (
       <BlockContainer>
          <StyledMain>
             <HeaderRow>
-               <h3>Рассылка</h3>
+               <Typography variant="h5">Рассылка</Typography>
+
                <StyledMainButton
                   variant="outlined"
                   color="primary"
@@ -87,56 +100,61 @@ const MailingList = memo(() => {
                   Отправить рассылку
                </StyledMainButton>
             </HeaderRow>
+
             <Modal open={openModal} onClose={handleCloseModal}>
                <StyledDialogTitle>Создание рассылки</StyledDialogTitle>
+
                <DialogContent>
                   <label htmlFor="upload-file">
-                     <UploadBox>
-                        <ImageIcon />
-                        <Typography>Выберите файл</Typography>
-                        {preview && (
-                           <Box component="img" src={preview} alt="photo" />
+                     <UploadBox preview={preview}>
+                        {preview !== null ? (
+                           <Box
+                              component="img"
+                              src={preview}
+                              alt="photo"
+                              className="photo"
+                           />
+                        ) : (
+                           <>
+                              <ImageIcon />
+
+                              <Typography>Выберите файл</Typography>
+                           </>
                         )}
                      </UploadBox>
                   </label>
+
                   <input
                      type="file"
                      id="upload-file"
                      accept="image/*"
                      hidden
-                     onChange={(e) => {
-                        const file = e.target.files[0]
-                        setImage(file)
-
-                        if (file) {
-                           const reader = new FileReader()
-                           reader.onloadend = () => {
-                              setPreview(reader.result)
-                           }
-                           reader.readAsDataURL(file)
-                        }
-                     }}
+                     onChange={handleFileChange}
                   />
                </DialogContent>
 
-               <label htmlFor="newsletter-input" style={{ color: '#676767' }}>
+               <label htmlFor="newsletter-input" className="newsletter-input">
                   Тема
                </label>
+
                <StyledInput
                   id="newsletter-input"
                   placeholder="Введите тему рассылки"
                   value={subject}
-                  onChange={(e) => setSubject(e.target.value)}
+                  onChange={handleSubjectChange}
                />
-               <label htmlFor="newsletter2-input" style={{ color: '#585858' }}>
+
+               <label htmlFor="newsletter2-input" className="newsletter-input">
                   Текст рассылки
                </label>
+
                <StyledInput
                   id="newsletter2-input"
                   placeholder="Введите текст рассылки"
                   value={message}
-                  onChange={(e) => setMessage(e.target.value)}
+                  onChange={handleMessageChange}
                />
+
                <ButtonContainer>
                   <StyledButton
                      variant="warning"
@@ -145,6 +163,7 @@ const MailingList = memo(() => {
                   >
                      ОТМЕНА
                   </StyledButton>
+
                   <StyledButton
                      variant="outlined"
                      color="primary"
@@ -155,6 +174,7 @@ const MailingList = memo(() => {
                   </StyledButton>
                </ButtonContainer>
             </Modal>
+
             <FlexContainer>
                <MailingCards mailings={mailings} />
             </FlexContainer>
@@ -169,19 +189,29 @@ const BlockContainer = styled(Box)(() => ({
    display: 'flex',
    width: '100%',
 }))
+
 const StyledMainButton = styled(Button)(() => ({
    '&.MuiButton-root': {
       width: '280px',
       height: '40px',
       fontSize: '14px',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: '1rem',
    },
 }))
 
 const StyledMain = styled(Box)(() => ({
-   margin: '100px 0 0 0px',
+   margin: '65px 0 0 0',
    background: '#F7F8FA',
    width: '100%',
+
+   '& .newsletter-input': {
+      color: '#676767',
+   },
 }))
+
 const HeaderRow = styled(Box)(() => ({
    display: 'flex',
    justifyContent: 'space-between',
@@ -207,8 +237,8 @@ const StyledDialogTitle = styled(Box)(() => ({
    color: '#23262F',
 }))
 
-const UploadBox = styled(Box)(() => ({
-   border: '2px dashed #ccc',
+const UploadBox = styled(Box)(({ preview }) => ({
+   border: preview !== null ? 'none' : '2px dashed #ccc',
    width: '217px',
    height: ' 217px',
    display: 'flex',
@@ -216,15 +246,21 @@ const UploadBox = styled(Box)(() => ({
    alignItems: 'center',
    justifyContent: 'center',
    cursor: 'pointer',
-   marginLeft: '120px',
    color: '#8E8EA9',
+   margin: 'auto',
+
    '&:hover': {
-      backgroundColor: ' #DCDCE4',
+      backgroundColor: preview !== null ? 'none' : ' #DCDCE4',
    },
+
    '& .MuiTypography-root': {
       fontSize: '12px',
       width: '150px',
       textAlign: 'center',
+   },
+
+   '& .photo': {
+      width: '260px',
    },
 }))
 
@@ -234,13 +270,16 @@ const StyledInput = styled(Input)(() => ({
       borderRadius: '6px',
    },
 }))
+
 const StyledButton = styled(Button)(() => ({
    width: '232px',
 }))
+
 const ButtonContainer = styled(Box)(() => ({
    '& .MuiButton-root': {
       height: '37px',
    },
+
    display: 'flex',
    justifyContent: 'center',
    gap: '16px',

@@ -1,31 +1,29 @@
-import NoMailings from '../../../assets/images/NoMailings.png'
-import { Box, styled, Typography } from '@mui/material'
 import { memo } from 'react'
 import { useNavigate } from 'react-router'
+import { Box, styled, Typography } from '@mui/material'
+import NoMailings from '../../../assets/images/EmptyState.png'
 
 const MailingCards = ({ mailings }) => {
    const navigate = useNavigate()
 
-   const handleNavigate = (id) => {
-      navigate(`/admin/newsletter/${id}`)
-   }
+   const handleNavigate = (id) => navigate(`/admin/newsletter/${id}`)
+
    return (
       <>
          {mailings?.length === 0 ? (
             <StyledNotBlockBox>
                <img src={NoMailings} alt="icon" />
+
                <h1>Нет рассылок!</h1>
             </StyledNotBlockBox>
          ) : (
-            mailings?.map((mailing) => (
-               <StyledBox
-                  key={mailing.id}
-                  mailing={mailing}
-                  onClick={() => handleNavigate(mailing.id)}
-               >
-                  <img src={mailing.image} alt="card" />
-                  <StyledText>{mailing.subject}</StyledText>
-                  <StyledData>{mailing.createdAt}</StyledData>
+            mailings?.map(({ id, image, subject, createdAt }) => (
+               <StyledBox key={id} onClick={() => handleNavigate(id)}>
+                  <img src={image} alt="card" />
+
+                  <StyledText>{subject}</StyledText>
+
+                  <StyledData>{createdAt}</StyledData>
                </StyledBox>
             ))
          )}
@@ -40,20 +38,22 @@ const StyledNotBlockBox = styled(Box)(() => ({
    justifyContent: 'center',
    flexDirection: 'column',
    alignItems: 'center',
+   margin: 'auto',
+
    '& img': {
-      width: '200px',
-      marginLeft: '400px',
+      width: '300px',
    },
-   '& h1': {
-      marginLeft: '400px',
-   },
+
+   '& h1': {},
 }))
+
 const StyledBox = styled(Box)(() => ({
    padding: '10px ',
    borderRadius: '10px',
    background: '#ffffff',
    border: '1px solid #f1efef ',
 }))
+
 const StyledText = styled(Typography)(() => ({
    marginTop: '30px',
    fontFamily: ' Inter',
@@ -63,6 +63,7 @@ const StyledText = styled(Typography)(() => ({
    letterSpacing: ' 0%',
    color: '#000000',
 }))
+
 const StyledData = styled(Typography)(() => ({
    fontFamily: ' Inter',
    fontWeight: '400',

@@ -1,10 +1,10 @@
-import Notification from '../assets/icons/notification.svg'
-import InputSearch from '../components/UI/InputSearch'
-import Input from '../components/UI/Input'
-import { AppBar, Toolbar, Box, styled, Typography } from '@mui/material'
-import MeatBalls from '../components/UI/MeetBalls'
-import { PROFILE_OPTIONS } from '../utils/helpers'
 import { useLocation } from 'react-router'
+import { AppBar, Toolbar, Box, styled, Typography } from '@mui/material'
+import Input from '../components/UI/Input'
+import MeatBalls from '../components/UI/MeetBalls'
+import InputSearch from '../components/UI/InputSearch'
+import { PROFILE_OPTIONS } from '../utils/helpers'
+import Notification from '../assets/icons/notification.svg'
 
 const Header = () => {
    const { pathname } = useLocation()
@@ -41,9 +41,7 @@ const StyledBox = styled(Box)(() => ({
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'space-evenly',
-   height: '40px',
    top: '33px',
-   marginLeft: '280px',
    width: '100%',
 
    '& .user-name': {
@@ -64,7 +62,7 @@ const StyledInput = styled(Input)(() => ({
 
 const StyledCustomAppBar = styled(AppBar)(() => ({
    backgroundColor: 'transparent',
-   boxShadow: 'none',
+   width: '83%',
 }))
 
 const StyledNotificationIcon = styled('img')(() => ({

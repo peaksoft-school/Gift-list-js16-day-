@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { MAILING_THUNK } from '../../../store/slices/mailing/mailingThunk'
 import { useParams } from 'react-router'
 import { memo, useEffect } from 'react'
-import BreadCrumbs from './BreadCrumbs'
+import BreadCrumbs from '../BreadCrumbs'
 import links from '../../../utils/helpers/links'
 
 const DescriptionCard = () => {
    const { mailing } = useSelector((state) => state.mailing)
 
    const { id } = useParams()
+
    const dispatch = useDispatch()
 
    useEffect(() => {
@@ -20,18 +21,23 @@ const DescriptionCard = () => {
       <FlexContainer>
          <BlockContainer>
             <BreadCrumbs links={links} />
+
             {mailing && (
                <StyledBox>
                   <img src={mailing.image} alt="photo" />
+
                   <StyledText>
                      <StyledParagraf variant="h5">
                         {mailing.subject}
                      </StyledParagraf>
+
                      <StyledContent variant="h6">
                         {mailing.message}
                      </StyledContent>
+
                      <StyledData>
                         <Typography variant="h6">Дата добавления:</Typography>
+
                         <Typography>{mailing.createdAt}</Typography>
                      </StyledData>
                   </StyledText>
