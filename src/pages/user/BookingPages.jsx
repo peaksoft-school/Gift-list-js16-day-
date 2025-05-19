@@ -1,8 +1,5 @@
-// src/pages/user/BookingPage.jsx
-
 import { Box } from '@mui/material'
 import BookedsCard from '../../components/UI/BookedsCard'
-
 
 const CARDS = [
    {
