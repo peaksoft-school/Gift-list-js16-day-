@@ -10,6 +10,11 @@ import { useNavigate } from 'react-router'
 
 const Intro = () => {
    const navigate = useNavigate()
+
+   const handleNavigateSignIn = () => navigate('/sign-in')
+
+   const handleNavigateSignUp = () => navigate('/sign-up')
+
    return (
       <StyledContiner>
          <StyledMain>
@@ -50,11 +55,11 @@ const Intro = () => {
                   твои желания
                </Box>
 
-               <StyledButton onClick={() => navigate('/sign-in')}>
-                  Войти
-               </StyledButton>
+               <StyledButton onClick={handleNavigateSignIn}>Войти</StyledButton>
 
-               <StyledButton variant="outlined" onClick={() => navigate('/sign-up')}>Регистрация</StyledButton>
+               <StyledButton variant="outlined" onClick={handleNavigateSignUp}>
+                  Регистрация
+               </StyledButton>
             </CenterContent>
 
             <DowmText>
