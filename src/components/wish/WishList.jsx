@@ -133,7 +133,7 @@ const WishList = () => {
                      render={({ field }) => (
                         <InputStyled
                            {...field}
-                           type="date"
+                           // type="date"
                            placeholder="Укажите дату праздника"
                            label="Дата праздника"
                            error={!!errors.holidayDate}
