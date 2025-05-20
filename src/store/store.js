@@ -3,9 +3,11 @@ import { authSlise } from './slices/auth/authSlice'
 import persistReducer from 'redux-persist/es/persistReducer'
 import persistStore from 'redux-persist/es/persistStore'
 import storage from 'redux-persist/lib/storage'
+import wishSlice from './wish/wishSlice'
 
 const rootReducer = combineReducers({
    [authSlise.name]: authSlise.reducer,
+   wish: wishSlice,
 })
 
 const persistConfig = {
