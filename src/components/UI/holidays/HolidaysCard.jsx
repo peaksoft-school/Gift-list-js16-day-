@@ -4,23 +4,31 @@ import Holidays from '../../../assets/images/holidays.png'
 import { USER_CARD_OPTIONS } from '../../../utils/helpers'
 import MeetBalls from '../MeetBalls'
 import { useNavigate } from 'react-router'
+import { useSelector } from 'react-redux'
 
-const HolidaysCard = () => {
+const HolidaysCard = ({ holidays }) => {
    const navigate = useNavigate()
-   const id = '1'
 
    const handleNavigate = (id) => {
       navigate(`/user/my-part/${id}`)
    }
    return (
-      <StyledBox>
-         <img src={Holidays} alt="icon" onClick={() => handleNavigate(id)} />
-         <StyledText>День матери</StyledText>
-         <StyledBlock>
-            <Typography>17.05.2025</Typography>
-            <MeetBalls options={USER_CARD_OPTIONS} />
-         </StyledBlock>
-      </StyledBox>
+      <>
+         {holidays.map((item) => (
+            <StyledBox key={item.id} onClick={() => handleNavigate(item.id)}>
+               <img
+                  src={item.image}
+                  alt="icon"
+                  // onClick={() => handleNavigate(id)}
+               />
+               <StyledText>{item.name}</StyledText>
+               <StyledBlock>
+                  <Typography>{item.date}</Typography>
+                  <MeetBalls options={USER_CARD_OPTIONS} />
+               </StyledBlock>
+            </StyledBox>
+         ))}
+      </>
    )
 }
 
@@ -46,7 +54,7 @@ const StyledBlock = styled(Box)(() => ({
    display: 'flex',
    justifyContent: 'space-between',
    paddingTop: '20px',
-  
+
    '& .MuiTypography-body1': {
       color: '#636C84',
    },

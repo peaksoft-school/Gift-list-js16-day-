@@ -1,15 +1,21 @@
 import { Box, DialogContent, styled, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import Button from '../Button'
 import HolidaysCard from './HolidaysCard'
 import Pluse from '../../../assets/images/pluse.png'
 import Modal from '../Modal'
 import Input from '../Input'
+import { useDispatch, useSelector } from 'react-redux'
+import { HOLIDAYS_THUNK } from '../../../store/slices/auth/holidays/holidaysThunk'
 
 const HolidaysList = () => {
+   const { holidays } = useSelector((state) => state.holidays)
+
    const [openModal, setOpenModal] = useState(false)
    const [preview, setPreview] = useState(null)
    const [image, setImage] = useState(null)
+   const [title, setTitle] = useState('')
+   const [date, setDate] = useState('')
 
    const handleOpenModal = () => {
       setOpenModal(true)
@@ -17,6 +23,35 @@ const HolidaysList = () => {
    const handleCloseModal = () => {
       setOpenModal(false)
    }
+
+   const dispatch = useDispatch()
+
+   const handleSubmit = () => {
+      const formData = new FormData()
+
+      formData.append('title', title)
+      formData.append('date', date)
+      formData.append('image', image)
+
+      dispatch(HOLIDAYS_THUNK.createHoliday(formData))
+         .unwrap()
+         .then((res) => {
+            if (res.status === 'OK') {
+               dispatch(HOLIDAYS_THUNK.getAllHolidays())
+
+               setOpenModal(false)
+               setTitle('')
+               setDate('')
+               setImage(null)
+               setPreview(null)
+            }
+         })
+   }
+
+   useEffect(() => {
+      dispatch(HOLIDAYS_THUNK.getAllHolidays())
+   }, [dispatch])
+
    return (
       <StyledBox>
          <HeaderRow>
@@ -32,12 +67,12 @@ const HolidaysList = () => {
                Добавить праздник
             </StyledMainButton>
          </HeaderRow>
+
          <StyledModal open={openModal} onClose={handleCloseModal}>
+            <StyledTypograhpy>Добавление праздника</StyledTypograhpy>
             <DialogContent>
-               <Typography>Добавление праздника</Typography>
                <label htmlFor="upload-file">
                   <UploadBox>
-                     {/* <ImageIcon /> */}
                      <Typography>Выберите файл</Typography>
                      {preview && (
                         <Box component="img" src={preview} alt="photo" />
@@ -47,7 +82,6 @@ const HolidaysList = () => {
                <input
                   type="file"
                   id="upload-file"
-                  accept="image/*"
                   hidden
                   onChange={(e) => {
                      const file = e.target.files[0]
@@ -68,8 +102,8 @@ const HolidaysList = () => {
                labelText="Название праздника"
                id="holidays-input"
                placeholder="Введите название праздника"
-               //  value={subject}
-               //  onChange={(e) => setSubject(e.target.value)}
+               value={title}
+               onChange={(e) => setTitle(e.target.value)}
             />
 
             <StyledInput
@@ -77,8 +111,8 @@ const HolidaysList = () => {
                id="holidays2-input"
                placeholder="Укажите дату праздника"
                type="date"
-               //  value={message}
-               //  onChange={(e) => setMessage(e.target.value)}
+               value={date}
+               onChange={(e) => setDate(e.target.value)}
             />
             <ButtonContainer>
                <Button
@@ -92,14 +126,14 @@ const HolidaysList = () => {
                   variant="outlined"
                   color="primary"
                   type="button"
-                  // onClick={handleSubmit}
+                  onClick={handleSubmit}
                >
                   ОТПРАВИТЬ
                </Button>
             </ButtonContainer>
          </StyledModal>
 
-         <HolidaysCard />
+         <HolidaysCard holidays={holidays} />
       </StyledBox>
    )
 }
@@ -127,6 +161,12 @@ const HeaderRow = styled(Box)(() => ({
       marginRight: '10px',
       color: '#FFFFFF',
    },
+}))
+
+const StyledTypograhpy = styled(Typography)(() => ({
+   marginLeft: '110px',
+   width: '278px',
+   fontSize: '24px',
 }))
 const StyledInput = styled(Input)(() => ({
    '& .MuiOutlinedInput-root ': {
@@ -157,11 +197,11 @@ const StyledModal = styled(Modal)(() => ({
       width: '544px',
       height: '574px',
    },
-  
 }))
 const UploadBox = styled(Box)(() => ({
    border: '2px dashed #ccc',
-   width: '217px',
+   width: '280px',
+
    height: ' 217px',
    display: 'flex',
    flexDirection: 'column',
@@ -170,6 +210,7 @@ const UploadBox = styled(Box)(() => ({
    cursor: 'pointer',
    marginLeft: '120px',
    color: '#8E8EA9',
+
    '&:hover': {
       backgroundColor: ' #DCDCE4',
    },

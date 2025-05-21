@@ -1,29 +1,43 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import links from '../../../utils/helpers/links'
 import BreadCrumbs from './BreadCrumbs'
 import { Box, styled, Typography } from '@mui/material'
 import Books from '../../../assets/images/bookss.png'
 import { USER_CARD_OPTIONS } from '../../../utils/helpers'
 import MeetBalls from '../MeetBalls'
+import {  useParams } from 'react-router'
+import { useDispatch, useSelector } from 'react-redux'
+import { HOLIDAYS_THUNK } from '../../../store/slices/auth/holidays/holidaysThunk'
 
 const HolidaysDescription = () => {
+   const { holidaysss } = useSelector((state) => state.holidays)
+
+   const { id } = useParams()
+   const dispatch = useDispatch()
+ 
+   useEffect(() => {
+      dispatch(HOLIDAYS_THUNK.getById({ id }))
+   }, [dispatch])
+
    return (
       <FlexContainer>
          <BreadCrumbs links={links} />
-         <BlockContainer>
-            <img src={Books} alt="icon" />
-            <StyledText>
-               <Typography>Название подарка</Typography>
-               <Typography>Кадыр тун</Typography>
-            </StyledText>
-            <StyledFooterCard>
-               <Typography>17.05.2025</Typography>
-               <StyledSmallBlock>
-                  <Typography>В ожидании</Typography>
-                  <MeetBalls options={USER_CARD_OPTIONS} />
-               </StyledSmallBlock>
-            </StyledFooterCard>
-         </BlockContainer>
+         {holidaysss && (
+            <BlockContainer>
+               <img src={holidaysss.image} alt="icon" />
+               <StyledText>
+                  <Typography>Название подарка</Typography>
+                  <Typography>{holidaysss.name}</Typography>
+               </StyledText>
+               <StyledFooterCard>
+                  <Typography>{holidaysss.date}</Typography>
+                  <StyledSmallBlock>
+                     <Typography>В ожидании</Typography>
+                     <MeetBalls options={USER_CARD_OPTIONS} />
+                  </StyledSmallBlock>
+               </StyledFooterCard>
+            </BlockContainer>
+         )}
       </FlexContainer>
    )
 }
@@ -43,6 +57,10 @@ const BlockContainer = styled(Box)(() => ({
    padding: '20px',
    borderRadius: '10px',
    marginLeft: '20px',
+   '& img': {
+      width: '300px',
+      height: '147px',
+   },
 }))
 const StyledText = styled(Box)(() => ({
    display: 'flex',
