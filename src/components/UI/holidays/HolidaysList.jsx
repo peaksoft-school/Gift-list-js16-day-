@@ -1,5 +1,5 @@
 import { Box, DialogContent, styled, Typography } from '@mui/material'
-import React, { memo, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '../Button'
 import HolidaysCard from './HolidaysCard'
 import Pluse from '../../../assets/images/pluse.png'
@@ -208,7 +208,7 @@ const UploadBox = styled(Box)(() => ({
    alignItems: 'center',
    justifyContent: 'center',
    cursor: 'pointer',
-   marginLeft: '120px',
+   marginLeft: '90px',
    color: '#8E8EA9',
 
    '&:hover': {

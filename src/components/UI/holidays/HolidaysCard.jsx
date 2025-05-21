@@ -19,7 +19,7 @@ const HolidaysCard = ({ holidays }) => {
                <img
                   src={item.image}
                   alt="icon"
-                  // onClick={() => handleNavigate(id)}
+                  
                />
                <StyledText>{item.name}</StyledText>
                <StyledBlock>
