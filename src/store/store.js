@@ -1,13 +1,16 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { authSlise } from './slices/auth/authSlice'
+
 import persistReducer from 'redux-persist/es/persistReducer'
 import persistStore from 'redux-persist/es/persistStore'
 import storage from 'redux-persist/lib/storage'
-import { holidaysSlice } from './slices/auth/holidays/holidaysSlice'
+import { holidaysSlice } from './slices/holidays/holidaysSlice'
+import { filesSlice } from './slices/file/filesSlice'
+import { authSlise } from './slices/auth/authSlice'
 
 const rootReducer = combineReducers({
    [authSlise.name]: authSlise.reducer,
    [holidaysSlice.name]: holidaysSlice.reducer,
+   [filesSlice.name]: filesSlice.reducer,
 })
 
 const persistConfig = {

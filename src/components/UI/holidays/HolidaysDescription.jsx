@@ -1,24 +1,26 @@
 import React, { useEffect } from 'react'
-import links from '../../../utils/helpers/links'
 import BreadCrumbs from './BreadCrumbs'
 import { Box, styled, Typography } from '@mui/material'
-import Books from '../../../assets/images/bookss.png'
 import { USER_CARD_OPTIONS } from '../../../utils/helpers'
 import MeetBalls from '../MeetBalls'
-import {  useParams } from 'react-router'
+import { useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-import { HOLIDAYS_THUNK } from '../../../store/slices/auth/holidays/holidaysThunk'
+import { HOLIDAYS_THUNK } from '../../../store/slices/holidays/holidaysThunk'
 
 const HolidaysDescription = () => {
    const { holidaysss } = useSelector((state) => state.holidays)
 
    const { id } = useParams()
    const dispatch = useDispatch()
- 
+
    useEffect(() => {
-      dispatch(HOLIDAYS_THUNK.getById({ id }))
+      dispatch(HOLIDAYS_THUNK.getById(id))
    }, [dispatch])
 
+   const links = [
+      { href: '/user/my-part', label: 'Мои праздники' },
+      { href: `/user/my-part/${id}`, label: `${holidaysss.name}` },
+   ]
    return (
       <FlexContainer>
          <BreadCrumbs links={links} />

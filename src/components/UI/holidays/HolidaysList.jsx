@@ -6,7 +6,7 @@ import Pluse from '../../../assets/images/pluse.png'
 import Modal from '../Modal'
 import Input from '../Input'
 import { useDispatch, useSelector } from 'react-redux'
-import { HOLIDAYS_THUNK } from '../../../store/slices/auth/holidays/holidaysThunk'
+import { HOLIDAYS_THUNK } from '../../../store/slices/holidays/holidaysThunk'
 import { FILES_ACTIONS } from '../../../store/slices/file/filesSlice'
 import { FILES_THUNK } from '../../../store/slices/file/filesThunk'
 
@@ -50,7 +50,7 @@ const HolidaysList = () => {
       reader.onloadend = () => setPreview(reader.result)
       reader.readAsDataURL(file)
 
-      dispatch(FILES_THUNK.addfile({ file }))
+      dispatch(FILES_THUNK.addFile({ file }))
    }
    const handleTitleChange = (e) => setTitle(e.target.value)
    const handleDateChange = (e) => setDate(e.target.value)
@@ -70,28 +70,6 @@ const HolidaysList = () => {
       )
    }
    const isDisabled = !title.trim() || !date.trim() || isloading
-
-   // const handleSubmit = () => {
-   //    const formData = new FormData()
-
-   //    formData.append('title', title)
-   //    formData.append('date', date)
-   //    formData.append('image', image)
-
-   //    dispatch(HOLIDAYS_THUNK.createHoliday(formData))
-   //       .unwrap()
-   //       .then((res) => {
-   //          if (res.status === 'OK') {
-   //             dispatch(HOLIDAYS_THUNK.getAllHolidays())
-
-   //             setOpenModal(false)
-   //             setTitle('')
-   //             setDate('')
-   //             setImage(null)
-   //             setPreview(null)
-   //          }
-   //       })
-   // }
 
    return (
       <StyledBox>
@@ -164,7 +142,11 @@ const HolidaysList = () => {
             </ButtonContainer>
          </StyledModal>
 
-         <HolidaysCard holidays={holidays} />
+         <FlexContainer>
+            {holidays?.map((item) => (
+               <HolidaysCard holidays={holidays} key={item.id} />
+            ))}
+         </FlexContainer>
       </StyledBox>
    )
 }
@@ -250,4 +232,11 @@ const UploadBox = styled(Box)(() => ({
       width: '150px',
       textAlign: 'center',
    },
+}))
+
+const FlexContainer = styled(Box)(() => ({
+   display: 'flex',
+   flexWrap: 'wrap',
+   marginLeft: '10px',
+   gap: '1rem',
 }))

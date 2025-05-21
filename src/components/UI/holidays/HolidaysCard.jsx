@@ -7,28 +7,21 @@ import { useNavigate } from 'react-router'
 import { useSelector } from 'react-redux'
 
 const HolidaysCard = ({ holidays }) => {
+   const { id, image, name, date } = holidays
+
    const navigate = useNavigate()
 
-   const handleNavigate = (id) => {
-      navigate(`/user/my-part/${id}`)
-   }
+   const handleNavigate = (id) => navigate(`/user/my-part/${id}`)
+
    return (
-      <>
-         {holidays.map((item) => (
-            <StyledBox key={item.id} onClick={() => handleNavigate(item.id)}>
-               <img
-                  src={item.image}
-                  alt="icon"
-                  
-               />
-               <StyledText>{item.name}</StyledText>
-               <StyledBlock>
-                  <Typography>{item.date}</Typography>
-                  <MeetBalls options={USER_CARD_OPTIONS} />
-               </StyledBlock>
-            </StyledBox>
-         ))}
-      </>
+      <StyledBox key={id} onClick={() => handleNavigate(id)}>
+         <img src={image} alt="icon" />
+         <StyledText>{name}</StyledText>
+         <StyledBlock>
+            <Typography>{date}</Typography>
+            <MeetBalls options={USER_CARD_OPTIONS} />
+         </StyledBlock>
+      </StyledBox>
    )
 }
 
