@@ -7,50 +7,91 @@ import Modal from '../Modal'
 import Input from '../Input'
 import { useDispatch, useSelector } from 'react-redux'
 import { HOLIDAYS_THUNK } from '../../../store/slices/auth/holidays/holidaysThunk'
+import { FILES_ACTIONS } from '../../../store/slices/file/filesSlice'
+import { FILES_THUNK } from '../../../store/slices/file/filesThunk'
 
 const HolidaysList = () => {
    const { holidays } = useSelector((state) => state.holidays)
+   const { fileUrl, isloading } = useSelector((state) => state.files)
 
+   const [abortController, setAbortController] = useState(null)
    const [openModal, setOpenModal] = useState(false)
    const [preview, setPreview] = useState(null)
    const [image, setImage] = useState(null)
    const [title, setTitle] = useState('')
    const [date, setDate] = useState('')
 
+   const dispatch = useDispatch()
+
    const handleOpenModal = () => {
       setOpenModal(true)
+
+      setAbortController(new AbortController())
    }
    const handleCloseModal = () => {
+      if (abortController) {
+         abortController.abort()
+      }
+      resetForm
       setOpenModal(false)
    }
 
-   const dispatch = useDispatch()
-
-   const handleSubmit = () => {
-      const formData = new FormData()
-
-      formData.append('title', title)
-      formData.append('date', date)
-      formData.append('image', image)
-
-      dispatch(HOLIDAYS_THUNK.createHoliday(formData))
-         .unwrap()
-         .then((res) => {
-            if (res.status === 'OK') {
-               dispatch(HOLIDAYS_THUNK.getAllHolidays())
-
-               setOpenModal(false)
-               setTitle('')
-               setDate('')
-               setImage(null)
-               setPreview(null)
-            }
-         })
+   const resetForm = () => {
+      setTitle('')
+      setDate('')
+      setPreview(null)
+      dispatch(FILES_ACTIONS.clearFile())
    }
+   const handleFileChange = (e) => {
+      const file = e.target.files[0]
+
+      if (!file) return
+      const reader = new FileReader()
+      reader.onloadend = () => setPreview(reader.result)
+      reader.readAsDataURL(file)
+
+      dispatch(FILES_THUNK.addfile({ file }))
+   }
+   const handleTitleChange = (e) => setTitle(e.target.value)
+   const handleDateChange = (e) => setDate(e.target.value)
 
    useEffect(() => {
       dispatch(HOLIDAYS_THUNK.getAllHolidays())
    }, [dispatch])
+
+   const handleSubmit = () => {
+      const values = {
+         title,
+         date,
+         image: fileUrl,
+      }
+      dispatch(
+         HOLIDAYS_THUNK.createHoliday({ values, resetForm, setOpenModal })
+      )
+   }
+   const isDisabled = !title.trim() || !date.trim() || isloading
+
+   // const handleSubmit = () => {
+   //    const formData = new FormData()
+
+   //    formData.append('title', title)
+   //    formData.append('date', date)
+   //    formData.append('image', image)
+
+   //    dispatch(HOLIDAYS_THUNK.createHoliday(formData))
+   //       .unwrap()
+   //       .then((res) => {
+   //          if (res.status === 'OK') {
+   //             dispatch(HOLIDAYS_THUNK.getAllHolidays())
+
+   //             setOpenModal(false)
+   //             setTitle('')
+   //             setDate('')
+   //             setImage(null)
+   //             setPreview(null)
+   //          }
+   //       })
+   // }
 
    return (
       <StyledBox>
@@ -83,18 +124,7 @@ const HolidaysList = () => {
                   type="file"
                   id="upload-file"
                   hidden
-                  onChange={(e) => {
-                     const file = e.target.files[0]
-                     setImage(file)
-
-                     if (file) {
-                        const reader = new FileReader()
-                        reader.onloadend = () => {
-                           setPreview(reader.result)
-                        }
-                        reader.readAsDataURL(file)
-                     }
-                  }}
+                  onChange={handleFileChange}
                />
             </DialogContent>
 
@@ -103,7 +133,7 @@ const HolidaysList = () => {
                id="holidays-input"
                placeholder="Введите название праздника"
                value={title}
-               onChange={(e) => setTitle(e.target.value)}
+               onChange={handleTitleChange}
             />
 
             <StyledInput
@@ -112,7 +142,7 @@ const HolidaysList = () => {
                placeholder="Укажите дату праздника"
                type="date"
                value={date}
-               onChange={(e) => setDate(e.target.value)}
+               onChange={handleDateChange}
             />
             <ButtonContainer>
                <Button
@@ -127,8 +157,9 @@ const HolidaysList = () => {
                   color="primary"
                   type="button"
                   onClick={handleSubmit}
+                  disabled={isDisabled}
                >
-                  ОТПРАВИТЬ
+                  {isloading ? 'загрузка...' : 'ОТПРАВИТЬ'}
                </Button>
             </ButtonContainer>
          </StyledModal>
