@@ -15,7 +15,6 @@ const addFile = createAsyncThunk(
 
             formData
          )
-
          return response.data
       } catch (error) {
          if (signal?.aborted) return rejectWithValue({ message: error.message })
