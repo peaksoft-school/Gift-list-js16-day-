@@ -1,6 +1,6 @@
 import { Box, styled, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { MAILING_THUNK } from '../../../store/slices/mailing/mailingThunk'
+import { MAILING_THUNK } from '../../../store/slices/admin/mailing/mailingThunk'
 import { useParams } from 'react-router'
 import { memo, useEffect } from 'react'
 import BreadCrumbs from '../../UI/BreadCrumbs'
