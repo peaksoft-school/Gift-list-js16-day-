@@ -1,19 +1,19 @@
 import { Box, styled, Typography } from '@mui/material'
-import MeetBalls from './MeetBalls'
-import { USER_CARD_OPTIONS } from '../../utils/helpers/index'
+import MeetBalls from '../MeetBalls'
+import { USER_CARD_OPTIONS } from '../../../utils/helpers/index'
 
-const UserCard = ({ user, onVisibleModal }) => {
-   const { image, fullName, amount } = user
+const UserCard = ({ user, onVisibleModal, onNavigate }) => {
+   const { image, fullName, wishCount, id } = user
 
    return (
-      <FlexContainer>
+      <FlexContainer onClick={() => onNavigate(id)}>
          <StyledCard>
             <StyledImage src={image} />
 
             <StyledText> {fullName}</StyledText>
 
             <StyledBox>
-               <Typography>{amount}</Typography>
+               <Typography>{wishCount}</Typography>
 
                <Typography align="center" fontSize="12px">
                   желаемых
@@ -22,9 +22,9 @@ const UserCard = ({ user, onVisibleModal }) => {
                </Typography>
 
                <MeetBalls
+                  className="meetballs"
                   options={USER_CARD_OPTIONS}
                   onChange={onVisibleModal}
-                  
                />
             </StyledBox>
          </StyledCard>
@@ -38,10 +38,6 @@ const FlexContainer = styled(Box)(() => ({
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'space-between',
-   gap: '24px',
-   marginTop: '12px',
-   width: '100%',
-   marginLeft: '50px',
 }))
 
 const StyledCard = styled(Box)(() => ({
@@ -52,6 +48,7 @@ const StyledCard = styled(Box)(() => ({
    borderRadius: '12px',
    padding: '16px',
    textAlign: 'center',
+   position: 'relative',
 }))
 
 const StyledImage = styled('img')({
@@ -75,10 +72,16 @@ const StyledBox = styled(Box)(() => ({
    display: 'flex',
    flexDirection: 'column',
    alignItems: 'center',
-   gap: '5px',
-   paddingTop: '20px',
+   gap: '1px',
+   paddingTop: '10px',
    fontFamily: 'Inter',
    fontWeight: '400',
    fontSize: '16px',
    color: '#020202',
+
+   '& .MuiButtonBase-root': {
+      position: 'absolute',
+      right: '0',
+      bottom: '0',
+   },
 }))

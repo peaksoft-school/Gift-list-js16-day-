@@ -1,63 +1,49 @@
-import { Box, DialogTitle, Stack, styled, Typography } from '@mui/material'
-import Modal from './UI/Modal'
-import UserCard from './UI/UserCard'
-import Button from './UI/Button'
-import { DeleteOutlineOutlined } from '@mui/icons-material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { USERS_THUNK } from '../store/slices/admin/users/usersThunk'
+import { Box, DialogTitle, Stack, styled, Typography } from '@mui/material'
+import { DeleteOutlineOutlined } from '@mui/icons-material'
+import Modal from '../../../components/UI/Modal'
+import UserCard from '../../../components/UI/card/UserCard'
+import Button from '../../../components/UI/Button'
+import { USERS_THUNK } from '../../../store/slices/admin/users/usersThunk'
+import { useNavigate } from 'react-router'
 
-const UserList = () => {
-   const { selectedUsers } = useSelector((state) => state.user)
-
-   const [users, setUsers] = useState([
-      {
-         id: 1,
-         image: 'https://99px.ru/sstorage/56/2020/04/12604201733508710.jpg',
-         fullName: 'Annet Black',
-         amout: '12',
-         text: 'желаемых подарков',
-      },
-   ])
-   const dispatch = useDispatch()
+const Users = () => {
+   const { users } = useSelector((state) => state.users)
    const [open, setOpen] = useState(false)
-   const [selectedUserId, setSelectedUserId] = useState(null)
 
-   const handleOpenModal = (id) => {
-      setSelectedUserId(id)
-      setOpen(true)
-   }
+   const dispatch = useDispatch()
+   const navigate = useNavigate()
 
-   const handleCloseModal = () => {
-      setOpen(false)
-      setSelectedUserId(null)
-   }
+   const handleVisbleModal = () => setOpen((prev) => !prev)
 
-   // const handleDeleteUser = () => {
-   //    setUsers((prev) => prev.filter((user) => user.id !== selectedUserId))
-   //    handleCloseModal()
-   // }
+   useEffect(() => {
+      dispatch(USERS_THUNK.getAllUsers())
+   }, [])
 
    const handleDeleteUser = (id) => {
       dispatch(USERS_THUNK.deleteUsers({ id }))
    }
 
-   // const selectedUser = users.find((user) => user.id === selectedUserId)
+   const handleNavigate = (id) => navigate(`/admin/users/${id}`)
 
    return (
       <StyledBox>
-         <Typography>Пользователи</Typography>
+         <Typography variant="h5">Пользователи</Typography>
 
-         {users.map((user) => (
-            <UserCard
-               key={user.id}
-               variant="horiz"
-               user={user}
-               onVisibleModal={() => handleOpenModal(user.id)}
-            />
-         ))}
+         <Box className="users-container">
+            {users?.map((user) => (
+               <UserCard
+                  key={user.id}
+                  variant="horiz"
+                  user={user}
+                  onVisibleModal={() => handleVisbleModal}
+                  onNavigate={handleNavigate}
+               />
+            ))}
+         </Box>
 
-         <Modal open={open} onClose={handleCloseModal}>
+         <Modal open={open} onClose={handleVisbleModal}>
             <StyledStack>
                <CustomBox>
                   <StyledDialogTitle>
@@ -73,7 +59,7 @@ const UserList = () => {
                <BoxContainer>
                   <Button
                      variant="warning"
-                     onClick={handleCloseModal}
+                     onClick={handleVisbleModal}
                      sx={{ width: '232px', height: '37px' }}
                   >
                      Отмена
@@ -92,12 +78,23 @@ const UserList = () => {
    )
 }
 
-export default UserList
+export default Users
 
 const StyledBox = styled(Box)(() => ({
-   marginTop: '90px',
-   marginLeft: '40px',
+   padding: '110px 0 0 18rem',
    fontFamily: 'Inter',
+   display: 'flex',
+   flexDirection: 'column',
+   gap: '31px',
+   backgroundColor: '#F7F8FA',
+   height: '100vh',
+   margin: '0 0 0 20px',
+
+   '& .users-container': {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '3rem',
+   },
 }))
 
 const StyledStack = styled(Stack)(() => ({

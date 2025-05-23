@@ -27,11 +27,7 @@ const style = {
    top: '50%',
    left: '50%',
    transform: 'translate(-50%, -50%)',
-<<<<<<< HEAD
-
-=======
    width: 544,
->>>>>>> development
    bgcolor: 'background.paper',
    boxShadow: 24,
    p: 4,

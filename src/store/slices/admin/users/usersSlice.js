@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit'
 import { USERS_THUNK } from './usersThunk'
 
 const initialState = {
-   selectedUsers: [],
+   users: [],
    user: {},
-   loading: false,
+   isLoading: false,
 }
 
 const usersSlice = createSlice({
@@ -14,16 +14,28 @@ const usersSlice = createSlice({
 
    extraReducers: (builder) => {
       builder
+         .addCase(USERS_THUNK.getAllUsers.fulfilled, (state, { payload }) => {
+            state.users = payload
+            state.isLoading = false
+         })
+
+         .addCase(USERS_THUNK.getAllUsers.pending, (state) => {
+            state.isLoading = false
+         })
+
+         .addCase(USERS_THUNK.getAllUsers.rejected, (state) => {
+            state.isLoading = false
+         })
 
          .addCase(USERS_THUNK.deleteUsers.fulfilled, (state, { payload }) => {
             state.selectedUsers = payload
-            state.loading = false
+            state.isLoading = false
          })
          .addCase(USERS_THUNK.deleteUsers.pending, (state) => {
-            state.loading = true
+            state.isLoading = true
          })
          .addCase(USERS_THUNK.deleteUsers.rejected, (state) => {
-            state.loading = false
+            state.isLoading = false
          })
    },
 })
