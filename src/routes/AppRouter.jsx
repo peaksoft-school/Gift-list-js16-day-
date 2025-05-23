@@ -4,6 +4,7 @@ import { ROLES } from './routes'
 import Blago from '../pages/user/Blago'
 import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
+import Complaint from '../components/UI/Complaint'
 
 const Home = lazy(() => import('../pages/home/Home'))
 const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
@@ -63,7 +64,7 @@ const AppRouter = () => (
          <Route index element={<Navigate to="users" />} />
          <Route path="users" element={<h1>Users</h1>} />
          <Route path="charity" element={<Blago />} />
-         <Route path="complaints" element={<h1>complaints</h1>} />
+         <Route path="complaints" element={<Complaint />} />
          <Route path="newsletter" element={<h1>newsletter</h1>} />
       </Route>
 
