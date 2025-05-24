@@ -7,7 +7,7 @@ import wishSlice from './wish/wishSlice'
 
 const rootReducer = combineReducers({
    [authSlise.name]: authSlise.reducer,
-   wish: wishSlice,
+   wish: wishSlice.reducer,   
 })
 
 const persistConfig = {

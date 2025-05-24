@@ -1,35 +1,34 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { styled } from '@mui/material'
 import Input from '../UI/Input'
 import Button from '../UI/Button'
 import { WISH_THUNK } from '../../store/wish/wishThunk'
-import { Outlet } from 'react-router'
+import { WISH_ACTIONS } from '../../store/wish/wishSlice'
 
-const WishList = () => {
+const EditWish = ({ wish, onClose }) => {
    const dispatch = useDispatch()
    const { isLoading, error } = useSelector((state) => state.wish)
 
    const {
       control,
       handleSubmit,
-      reset,
       formState: { errors },
       setValue,
       watch,
    } = useForm({
-      values: {
-         name: '',
-         image: '',
-         link: '',
-         holidayId: 50,
-         holidayDate: '',
-         description: '',
+      defaultValues: {
+         name: wish.name || '',
+         link: wish.link || '',
+         holidayName: wish.holidayName || '',
+         holidayDate: wish.holidayDate || '',
+         description: wish.description || '',
+         image: wish.image || '',
       },
    })
 
-   const [imagePreview, setImagePreview] = useState(null)
+   const [imagePreview, setImagePreview] = useState(wish.image || null)
    const imageValue = watch('image')
 
    const onFileChange = (e) => {
@@ -45,17 +44,27 @@ const WishList = () => {
    }
 
    const onSubmit = async (data) => {
-      const resultAction = await dispatch(WISH_THUNK.addWish(data))
+      const resultAction = await dispatch(
+         WISH_THUNK.updateWish({
+            id: wish.id,
+            values: data,
+         })
+      )
 
-      reset()
-      setImagePreview(null)
+      if (WISH_THUNK.updateWish.fulfilled.match(resultAction)) {
+         onClose()
+      }
    }
 
    return (
       <MainStyled>
-         {/* <Outlet /> */}
+         <TitleRow>
+            <Title>Редактирование желания</Title>
+            <Button variant="outlined" onClick={onClose}>
+               Вернуться к списку
+            </Button>
+         </TitleRow>
 
-         <Title>Список желаний</Title>
          <FormWrapper onSubmit={handleSubmit(onSubmit)}>
             <ImageUpload>
                <ImageLabel htmlFor="upload-photo">
@@ -87,7 +96,7 @@ const WishList = () => {
             </ImageUpload>
 
             <FormFields>
-               <FormTitle>Добавление желаемого подарка</FormTitle>
+               <FormTitle>Редактирование желаемого подарка</FormTitle>
 
                <Row>
                   <Controller
@@ -146,6 +155,7 @@ const WishList = () => {
                      )}
                   />
                </Row>
+
                {errors.holidayName && (
                   <ErrorText>{errors.holidayName.message}</ErrorText>
                )}
@@ -168,17 +178,13 @@ const WishList = () => {
                   <Button
                      variant="warning"
                      type="button"
-                     onClick={() => {
-                        reset()
-                        setImagePreview(null)
-                        dispatch(clearError())
-                     }}
+                     onClick={onClose}
                      disabled={isLoading}
                   >
                      ОТМЕНА
                   </Button>
                   <Button variant="outlined" type="submit" disabled={isLoading}>
-                     {isLoading ? 'СОХРАНЕНИЕ...' : 'ДОБАВИТЬ'}
+                     {isLoading ? 'СОХРАНЕНИЕ...' : 'СОХРАНИТЬ ИЗМЕНЕНИЯ'}
                   </Button>
                </ButtonRow>
             </FormFields>
@@ -187,8 +193,7 @@ const WishList = () => {
    )
 }
 
-export default WishList
-
+export default EditWish
 
 const MainStyled = styled('div')({
    padding: '32px',
@@ -196,10 +201,17 @@ const MainStyled = styled('div')({
    minHeight: '100vh',
 })
 
+const TitleRow = styled('div')({
+   display: 'flex',
+   justifyContent: 'space-between',
+   alignItems: 'center',
+   marginBottom: '24px',
+})
+
 const Title = styled('h2')({
    fontWeight: 700,
    fontSize: '20px',
-   marginBottom: '24px',
+   margin: 0,
 })
 
 const FormWrapper = styled('form')({
@@ -239,6 +251,7 @@ const ImageText = styled('span')({
    color: '#b0b7c3',
    fontSize: '14px',
    textAlign: 'center',
+   padding: '0 8px',
 })
 
 const FormFields = styled('div')({
