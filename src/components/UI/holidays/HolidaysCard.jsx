@@ -1,10 +1,7 @@
 import { Box, styled, Typography } from '@mui/material'
-import React from 'react'
-import Holidays from '../../../assets/images/holidays.png'
 import { USER_CARD_OPTIONS } from '../../../utils/helpers'
 import MeetBalls from '../MeetBalls'
 import { useNavigate } from 'react-router'
-import { useSelector } from 'react-redux'
 
 const HolidaysCard = ({ holidays }) => {
    const { id, image, name, date } = holidays

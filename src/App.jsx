@@ -1,8 +1,10 @@
+import CharityForm from './components/UI/userCarity/CharityForm'
 import AppRouter from './routes/AppRouter'
 
 const App = () => (
    <>
-      <AppRouter />
+      <CharityForm />
+      {/* <AppRouter /> */}
    </>
 )
 
