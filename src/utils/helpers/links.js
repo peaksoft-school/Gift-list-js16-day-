@@ -1,6 +1,4 @@
 const links = [
-   { href: '/admin/charity ', label: 'Благотворительность ' },
-   { href: '/description', label: 'Iphone 13 Pro ' },
+   { href: '/newsletter', label: 'Рассылка' },
+   { href: '/description', label: 'Тема рассылки' },
 ]
-
-export default links
