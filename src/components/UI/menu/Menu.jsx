@@ -21,6 +21,7 @@ const Menu = ({ items }) => {
          <IconButton onClick={handleClick} sx={{ left: '90px' }}>
             <img src={MenuIcon} alt="menu" />
          </IconButton>
+
          <MuiMenu anchorEl={block} open={Boolean(block)} onClose={handleClose}>
             {items.map((item, index) => (
                <StyledMenuItem

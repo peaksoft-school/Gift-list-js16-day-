@@ -11,21 +11,35 @@ import { useNavigate } from 'react-router'
 const Users = () => {
    const { users } = useSelector((state) => state.users)
    const [open, setOpen] = useState(false)
+   const [selectedUserId, setSelectedUserId] = useState(null)
 
    const dispatch = useDispatch()
    const navigate = useNavigate()
 
-   const handleVisbleModal = () => setOpen((prev) => !prev)
+   const handleVisibleModal = (id) => {
+      setSelectedUserId(id)
+      setOpen(true)
+   }
+
+   const handleCloseModal = () => {
+      setOpen(false)
+      setSelectedUserId(null)
+   }
 
    useEffect(() => {
       dispatch(USERS_THUNK.getAllUsers())
    }, [])
 
-   const handleDeleteUser = (id) => {
-      dispatch(USERS_THUNK.deleteUsers({ id }))
+   const handleDeleteUser = () => {
+      if (selectedUserId) {
+         dispatch(USERS_THUNK.deleteUser({ id: selectedUserId }))
+         handleCloseModal()
+      }
    }
 
    const handleNavigate = (id) => navigate(`/admin/users/${id}`)
+
+   const selectedUser = users.find((user) => user.id === selectedUserId)
 
    return (
       <StyledBox>
@@ -37,36 +51,41 @@ const Users = () => {
                   key={user.id}
                   variant="horiz"
                   user={user}
-                  onVisibleModal={() => handleVisbleModal}
+                  onVisibleModal={() => handleVisibleModal(user.id)}
                   onNavigate={handleNavigate}
                />
             ))}
          </Box>
 
-         <Modal open={open} onClose={handleVisbleModal}>
+         <Modal open={open} onClose={handleVisibleModal}>
             <StyledStack>
                <CustomBox>
                   <StyledDialogTitle>
                      <StyledDeleteOutlineOutlined />
-                     <Typography>Удаление</Typography>
                   </StyledDialogTitle>
 
-                  <StyledTypography>
-                     Вы уверены, что хотите удалить Annet Black?
-                  </StyledTypography>
+                  <Box>
+                     <Typography>Удаление</Typography>
+
+                     <StyledTypography>
+                        Вы уверены, что хотите удалить {selectedUser?.firstname}
+                        {selectedUser?.lastname}?
+                     </StyledTypography>
+                  </Box>
                </CustomBox>
 
                <BoxContainer>
                   <Button
                      variant="warning"
-                     onClick={handleVisbleModal}
+                     onClick={handleCloseModal}
                      sx={{ width: '232px', height: '37px' }}
                   >
                      Отмена
                   </Button>
+
                   <Button
                      variant="contained"
-                     onClick={() => handleDeleteUser(selectedUserId)}
+                     onClick={handleDeleteUser}
                      sx={{ width: '232px', height: '37px' }}
                   >
                      Удалить
@@ -87,7 +106,6 @@ const StyledBox = styled(Box)(() => ({
    flexDirection: 'column',
    gap: '31px',
    backgroundColor: '#F7F8FA',
-   height: '100vh',
    margin: '0 0 0 20px',
 
    '& .users-container': {
@@ -101,12 +119,11 @@ const StyledStack = styled(Stack)(() => ({
    display: 'flex',
    justifyContent: 'center',
    alignItems: 'center',
-   width: '544px',
-   paddingBottom: '30px',
 }))
 
 const CustomBox = styled(Box)(() => ({
-   marginRight: '60px',
+   display: 'flex',
+   alignItems: 'center',
 }))
 
 const StyledDeleteOutlineOutlined = styled(DeleteOutlineOutlined)(() => ({
@@ -124,8 +141,6 @@ const StyledTypography = styled(Typography)(() => ({
    color: '#87898E',
    fontWeight: '400',
    fontSize: '14px',
-   paddingLeft: '65px',
-   paddingBottom: '30px',
 }))
 
 const BoxContainer = styled(Box)(() => ({
@@ -138,5 +153,4 @@ const StyledDialogTitle = styled(DialogTitle)(() => ({
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'start',
-   paddingBottom: '20px',
 }))
