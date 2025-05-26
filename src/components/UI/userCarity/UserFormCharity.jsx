@@ -9,7 +9,7 @@ import React, { useState } from 'react'
 import Input from '../Input'
 import Button from '../Button'
 
-const CharityForm = () => {
+const UserFormCharity = () => {
    const [preview, setPreview] = useState()
    return (
       <>
@@ -68,7 +68,8 @@ const CharityForm = () => {
    )
 }
 
-export default CharityForm
+export default UserFormCharity
+
 const UploadBox = styled(Box)(() => ({}))
 const FlexContainer = styled(Box)(() => ({
    display: 'flex',

@@ -6,6 +6,7 @@ import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
 import HolidaysList from '../components/UI/holidays/HolidaysList'
 import HolidaysDescription from '../components/UI/holidays/HolidaysDescription'
+import UserListCharity from '../components/UI/userCarity/UserListCharity'
 
 const Home = lazy(() => import('../pages/home/Home'))
 const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
@@ -89,7 +90,7 @@ const AppRouter = () => (
          <Route path="booking" element={<h1>Friends</h1>} />
          <Route path="my-part" element={<HolidaysList />} />
          <Route path="my-part/:id" element={<HolidaysDescription />} />
-         <Route path="charity" element={<Blago />} />
+         <Route path="charity" element={<UserListCharity />} />
       </Route>
    </Routes>
 )
