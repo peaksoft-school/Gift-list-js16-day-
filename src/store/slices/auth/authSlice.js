@@ -97,4 +97,4 @@ const authSlice = createSlice({
 })
 
 export const AUTH_ACTIONS = authSlice.actions
-export const authReducer = authSlice.reducer
+export { AUTH_THUNK, authSlice }

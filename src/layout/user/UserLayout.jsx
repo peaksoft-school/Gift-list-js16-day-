@@ -8,6 +8,7 @@ const UserLayout = () => {
       <StyledMain>
          <SideBar role="USER" />
          <Header role="USER" />
+
          <StyledOutlet>
             <Outlet />
          </StyledOutlet>

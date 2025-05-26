@@ -31,13 +31,12 @@ const Mainh1 = styled('div')({
    color: '#fff',
    width: '284px',
    height: '100vh',
-   '& .MuiButtonBase-root': {
-      textTransform: 'lowercase',
-   },
+   position: 'fixed',
 
    '& .MuiButtonBase-root': {
       textTransform: 'none',
    },
+
    '& .MuiTouchRipple-root': {
       fontWeight: 300,
    },
