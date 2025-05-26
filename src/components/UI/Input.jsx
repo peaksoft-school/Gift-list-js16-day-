@@ -82,7 +82,7 @@ const StyledInput = styled(TextField)(({ error }) => ({
       },
 
       '&:hover fieldset': {
-         border: '1px solid grey',
+         border: '1px solid #8639B5',
       },
 
       '&.Mui-focused fieldset': {

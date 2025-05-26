@@ -4,6 +4,8 @@ import { ROLES } from './routes'
 import Blago from '../pages/user/Blago'
 import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
+import HolidaysList from '../components/UI/holidays/HolidaysList'
+import HolidaysDescription from '../components/UI/holidays/HolidaysDescription'
 import ForgotRassword from '../pages/forgotPassword/ForgotRassword'
 import Users from '../pages/admin/users/Users'
 import InnerMailing from '../components/admin/mailings/InnerMailing'
@@ -108,9 +110,10 @@ const AppRouter = () => (
       >
          <Route path="lenta" index element={<h1>lenta</h1>} />
          <Route path="friends" element={<h1>Friends</h1>} />
-         <Route path="list" element={<h1>list</h1>} />
-         <Route path="booking" element={<h1>booking</h1>} />
-         <Route path="my-part" element={<h1>my part</h1>} />
+         <Route path="list" element={<h1>Friends</h1>} />
+         <Route path="booking" element={<h1>Friends</h1>} />
+         <Route path="my-part" element={<HolidaysList />} />
+         <Route path="my-part/:id" element={<HolidaysDescription />} />
          <Route path="charity" element={<Blago />} />
       </Route>
    </Routes>
