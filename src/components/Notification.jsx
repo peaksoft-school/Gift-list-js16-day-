@@ -19,13 +19,13 @@ export default Notification
 const StyledToastContainer = styled(ToastContainer)({
    '.Toastify__toast': {
       minWidth: '500px',
-      height: '98px',
       borderRadius: '2px',
       fontFamily: 'Inter, sans-serif',
       padding: '30px 15px',
       display: 'flex',
       fontSize: '14px',
-
+      minHeight: 'auto',
+      alignItems: 'flex-start',
       boxShadow: '0px 4px 10px rgba(20, 18, 18, 0.1)',
    },
 

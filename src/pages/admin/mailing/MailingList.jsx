@@ -16,10 +16,10 @@ const MailingList = memo(() => {
    const { mailings } = useSelector((state) => state.mailing)
    const { fileUrl, isLoading } = useSelector((state) => state.files)
 
-   const [openModal, setOpenModal] = useState(false)
    const [subject, setSubject] = useState('')
    const [message, setMessage] = useState('')
    const [preview, setPreview] = useState(null)
+   const [openModal, setOpenModal] = useState(false)
    const [abortController, setAbortController] = useState(null)
 
    const dispatch = useDispatch()

@@ -3,17 +3,25 @@ import { styled, Box } from '@mui/material'
 import SideBar from '../../components/UI/SideBar'
 import Header from '../Header'
 
-const AdminLayout = () => (
-   <StyledMain>
-      <SideBar role="ADMIN" />
-      <Header role="ADMIN" />
+const AdminLayout = () => {
+   return (
+      <StyledMain>
+         <SideBar role="ADMIN" />
+         <Header role="ADMIN" />
 
-      <Outlet />
-   </StyledMain>
-)
+         <StyledOutlet>
+            <Outlet />
+         </StyledOutlet>
+      </StyledMain>
+   )
+}
 
 export default AdminLayout
 
 const StyledMain = styled(Box)(() => ({
    display: 'flex',
+}))
+
+const StyledOutlet = styled('div')(() => ({
+   marginTop: '40px',
 }))

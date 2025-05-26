@@ -5,6 +5,7 @@ import {
    InputLabel,
    TextField,
    styled,
+   IconButton,
 } from '@mui/material'
 import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded'
 import UnionIcon from '../../assets/icons/Union.svg'
@@ -27,7 +28,7 @@ const Input = forwardRef(
       ref
    ) => (
       <>
-         <StyledInputLabel error={error}>{labelText}</StyledInputLabel>
+         <StyledInputLabel error={Boolean(error)}>{labelText}</StyledInputLabel>
 
          <StyledInput
             type={type}
@@ -59,6 +60,7 @@ const Input = forwardRef(
       </>
    )
 )
+
 export default Input
 
 const StyledInputLabel = styled(InputLabel)(({ error }) => ({
@@ -69,12 +71,10 @@ const StyledInputLabel = styled(InputLabel)(({ error }) => ({
    },
 }))
 
-const StyledInput = styled(TextField)(() => ({
+const StyledInput = styled(TextField)(({ error }) => ({
    '& .MuiOutlinedInput-root': {
       borderRadius: '8px',
       padding: '0px 5px',
-      width: '290px',
-      height: '50px',
       marginTop: '4.5px',
 
       '& fieldset': {
@@ -82,7 +82,7 @@ const StyledInput = styled(TextField)(() => ({
       },
 
       '&:hover fieldset': {
-         border: '1px solid grey',
+         border: '1px solid #8639B5',
       },
 
       '&.Mui-focused fieldset': {
@@ -95,7 +95,7 @@ const StyledInput = styled(TextField)(() => ({
    },
 
    '& .MuiOutlinedInput-root input::placeholder': {
-      color: '#8D949E',
+      color: error ? 'red' : '#8D949E',
       opacity: 1,
    },
 
@@ -118,8 +118,7 @@ const StyledInput = styled(TextField)(() => ({
 const StyledFormHelperText = styled(FormHelperText)(() => ({
    '&.MuiFormHelperText-root': {
       color: 'red',
-      width: '290px',
-      textAlign: 'right',
+      textAlign: 'left',
       fontSize: '11px',
    },
 }))
