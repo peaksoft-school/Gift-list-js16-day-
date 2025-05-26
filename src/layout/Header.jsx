@@ -55,8 +55,8 @@ const StyledInputSearch = styled(SearchInput)(() => ({
 
 const StyledInput = styled(Input)(() => ({
    '& .MuiInputBase-root': {
-      padding: '30px 10px',
-      width: '90%',
+      padding: '2px 10px',
+      width: '800px',
    },
 }))
 

@@ -4,12 +4,14 @@ import { ROLES } from './routes'
 import Blago from '../pages/user/Blago'
 import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
+import ForgotRassword from '../pages/forgotPassword/ForgotRassword'
 import Users from '../pages/admin/users/Users'
 import InnerMailing from '../components/admin/mailings/InnerMailing'
 import MailingList from '../pages/admin/mailing/MailingList'
 import InnerUser from '../components/admin/users/InnerUser'
 
 const Home = lazy(() => import('../pages/home/Home'))
+const ResetPassword = lazy(() => import('../pages/resetPassword/ResetPassword'))
 const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
 const SignUp = lazy(() => import('../pages/sign-up/SignUp'))
 const Admin = lazy(() => import('../layout/admin/AdminLayout'))
@@ -40,12 +42,29 @@ const AppRouter = () => (
             </Suspense>
          }
       />
+      <Route
+         path="/forgot-password"
+         element={
+            <Suspense fallback={<Loading />}>
+               <ForgotRassword />
+            </Suspense>
+         }
+      ></Route>
 
       <Route
          path="/sign-up"
          element={
             <Suspense fallback={<Loading />}>
                <SignUp />
+            </Suspense>
+         }
+      />
+
+      <Route
+         path="/reset-password"
+         element={
+            <Suspense fallback={<Loading />}>
+               <ResetPassword />
             </Suspense>
          }
       />
@@ -87,11 +106,11 @@ const AppRouter = () => (
             />
          }
       >
-         <Route path="lenta" index element={<h1>Friends</h1>} />
+         <Route path="lenta" index element={<h1>lenta</h1>} />
          <Route path="friends" element={<h1>Friends</h1>} />
-         <Route path="list" element={<h1>Friends</h1>} />
-         <Route path="booking" element={<h1>Friends</h1>} />
-         <Route path="my-part" element={<h1>Friends</h1>} />
+         <Route path="list" element={<h1>list</h1>} />
+         <Route path="booking" element={<h1>booking</h1>} />
+         <Route path="my-part" element={<h1>my part</h1>} />
          <Route path="charity" element={<Blago />} />
       </Route>
    </Routes>
