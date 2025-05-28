@@ -3,7 +3,7 @@ import { axiosInstance } from '../../configs/axiosInstance'
 
 const addWish = createAsyncThunk(
    'wish/addWish',
-   async ( values , { rejectWithValue }) => {
+   async (values, { rejectWithValue }) => {
       console.log(values, 'aliahn')
 
       try {
@@ -62,5 +62,23 @@ const updateWish = createAsyncThunk(
       }
    }
 )
-
-export const WISH_THUNK = { addWish, getWishes, getWishById, updateWish }
+const getHolidays = createAsyncThunk(
+   'wish/getHolidays',
+   async (_, { rejectWithValue }) => {
+      try {
+         const { data } = await axiosInstance.get('/api/holidays')
+         return data
+      } catch (error) {
+         return rejectWithValue({
+            message: error.response?.data?.message || error.message,
+         })
+      }
+   }
+)
+export const WISH_THUNK = {
+   addWish,
+   getWishes,
+   getWishById,
+   updateWish,
+   getHolidays,
+}

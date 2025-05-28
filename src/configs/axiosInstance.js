@@ -24,7 +24,7 @@ axiosInstance.interceptors.request.use(
       console.log(token)
 
       if (token) {
-         updateConfig.headers.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NDc5ODMxNTgsImV4cCI6MTc0ODU4Nzk1OH0.2KD6xAKpAQORohTNtGUddDjj9O4bWEInGCbvUI-AvBY`
+         updateConfig.headers.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NDgzNDQwMTMsImV4cCI6MTc0ODk0ODgxM30.LDd8ryp0WlvUw0WG1sfRlW5KwH1moZOa15Gl6_BAOqE`
       }
 
       return updateConfig

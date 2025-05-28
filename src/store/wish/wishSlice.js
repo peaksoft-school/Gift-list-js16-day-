@@ -3,6 +3,7 @@ import { WISH_THUNK } from './wishThunk'
 
 const initialState = {
    wishes: [],
+   holidays: [],
    selectedWish: null,
    isLoading: false,
    error: null,
@@ -76,6 +77,17 @@ const wishSlice = createSlice({
          .addCase(WISH_THUNK.updateWish.rejected, (state, { payload }) => {
             state.isLoading = false
             state.error = payload?.message || 'Ошибка при обновлении желания'
+         })
+         .addCase(WISH_THUNK.getHolidays.pending, (state) => {
+            state.isLoading = true
+         })
+         .addCase(WISH_THUNK.getHolidays.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.holidays = action.payload
+         })
+         .addCase(WISH_THUNK.getHolidays.rejected, (state, action) => {
+            state.isLoading = false
+            state.error = action.payload.message
          })
    },
 })

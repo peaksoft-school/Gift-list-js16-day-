@@ -1,14 +1,14 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
-import { styled } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import Input from '../UI/Input'
 import Button from '../UI/Button'
 import { WISH_THUNK } from '../../store/wish/wishThunk'
-import { Outlet } from 'react-router'
 
 const WishList = () => {
    const dispatch = useDispatch()
+   const holidays = useSelector((state) => state.wish.holidays)
    const { isLoading, error } = useSelector((state) => state.wish)
 
    const {
@@ -19,11 +19,11 @@ const WishList = () => {
       setValue,
       watch,
    } = useForm({
-      values: {
+      defaultValues: {
          name: '',
          image: '',
          link: '',
-         holidayId: 50,
+         holidayId: 0,
          holidayDate: '',
          description: '',
       },
@@ -45,31 +45,31 @@ const WishList = () => {
    }
 
    const onSubmit = async (data) => {
-      const resultAction = await dispatch(WISH_THUNK.addWish(data))
+      const resultAction = await dispatch(
+         WISH_THUNK.addWish({
+            ...data,
+            holidayId: Number(data.holidayId),
+         })
+      )
 
-      reset()
-      setImagePreview(null)
+      if (WISH_THUNK.addWish.fulfilled.match(resultAction)) {
+         reset()
+         setImagePreview(null)
+      }
    }
+
+   useEffect(() => {
+      dispatch(WISH_THUNK.getHolidays())
+   }, [dispatch])
 
    return (
       <MainStyled>
-         {/* <Outlet /> */}
-
          <Title>Список желаний</Title>
          <FormWrapper onSubmit={handleSubmit(onSubmit)}>
             <ImageUpload>
                <ImageLabel htmlFor="upload-photo">
                   {imagePreview ? (
-                     <img
-                        src={imagePreview}
-                        alt="Выбранное фото"
-                        style={{
-                           width: '100%',
-                           height: '100%',
-                           borderRadius: 12,
-                           objectFit: 'cover',
-                        }}
-                     />
+                     <PreviewImage src={imagePreview} alt="Выбранное фото" />
                   ) : (
                      <>
                         <ImageIcon>+</ImageIcon>
@@ -119,18 +119,25 @@ const WishList = () => {
 
                <Row>
                   <Controller
-                     name="holidayName"
+                     name="holidayId"
                      control={control}
                      rules={{ required: 'Выберите праздник' }}
                      render={({ field }) => (
                         <SelectStyled {...field}>
                            <option value="">Выберите праздник</option>
-                           <option value="День рождения">День рождения</option>
-                           <option value="Новый год">Новый год</option>
-                           <option value="8 марта">8 марта</option>
+                           {holidays.map((holiday) => (
+                              <option key={holiday.id} value={holiday.id}>
+                                 {holiday.name}
+                              </option>
+                           ))}
+                           <option value="new">+ Создать новый праздник</option>
                         </SelectStyled>
                      )}
                   />
+                  {errors.holidayId && (
+                     <ErrorText>{errors.holidayId.message}</ErrorText>
+                  )}
+
                   <Controller
                      name="holidayDate"
                      control={control}
@@ -146,9 +153,6 @@ const WishList = () => {
                      )}
                   />
                </Row>
-               {errors.holidayName && (
-                  <ErrorText>{errors.holidayName.message}</ErrorText>
-               )}
 
                <Controller
                   name="description"
@@ -189,7 +193,7 @@ const WishList = () => {
 
 export default WishList
 
-
+// СТИЛИ
 const MainStyled = styled('div')({
    padding: '32px',
    background: '#fafbfc',
@@ -239,6 +243,13 @@ const ImageText = styled('span')({
    color: '#b0b7c3',
    fontSize: '14px',
    textAlign: 'center',
+})
+
+const PreviewImage = styled('img')({
+   width: '100%',
+   height: '100%',
+   objectFit: 'cover',
+   borderRadius: 12,
 })
 
 const FormFields = styled('div')({
