@@ -51,6 +51,7 @@ const Mainh1 = styled('div')({
    '& .MuiButtonBase-root': {
       textTransform: 'none',
    },
+
    '& .MuiTouchRipple-root': {
       fontWeight: 300,
    },

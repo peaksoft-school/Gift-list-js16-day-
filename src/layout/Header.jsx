@@ -1,10 +1,10 @@
 import Notification from '../assets/icons/notification.svg'
-import InputSearch from '../components/UI/InputSearch'
 import Input from '../components/UI/Input'
 import { AppBar, Toolbar, Box, styled, Typography } from '@mui/material'
 import MeatBalls from '../components/UI/MeetBalls'
 import { PROFILE_OPTIONS } from '../utils/helpers'
 import { useLocation } from 'react-router'
+import InputSearch from '../components/UI/Input-search/InputSearch'
 
 const Header = () => {
    const { pathname } = useLocation()
@@ -43,9 +43,8 @@ const StyledBox = styled(Box)(() => ({
    justifyContent: 'space-evenly',
    height: '40px',
    top: '33px',
-   marginLeft: '260px',
+   marginLeft: '270px',
    width: '100%',
-   padding: '35px',
 
    '& .user-name': {
       width: '140px',
@@ -58,7 +57,7 @@ const StyledInputSearch = styled(InputSearch)(() => ({
 
 const StyledInput = styled(Input)(() => ({
    '& .MuiInputBase-root': {
-      padding: '30px 10px',
+      padding: '2px 10px',
       width: '90%',
    },
 }))
