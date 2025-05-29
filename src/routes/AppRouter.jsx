@@ -7,6 +7,8 @@ import Loading from '../components/Loading'
 import HolidaysList from '../components/UI/holidays/HolidaysList'
 import HolidaysDescription from '../components/UI/holidays/HolidaysDescription'
 import UserListCharity from '../components/UI/userCarity/UserListCharity'
+import UserFormCharity from '../components/UI/userCarity/UserFormCharity'
+import UserInnerCharity from '../components/UI/userCarity/UserInnerCharity'
 
 const Home = lazy(() => import('../pages/home/Home'))
 const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
@@ -91,6 +93,8 @@ const AppRouter = () => (
          <Route path="my-part" element={<HolidaysList />} />
          <Route path="my-part/:id" element={<HolidaysDescription />} />
          <Route path="charity" element={<UserListCharity />} />
+         <Route path="charity/form" element={<UserFormCharity />} />
+         <Route path="charity/innerpage/:id" element={<UserInnerCharity />} />
       </Route>
    </Routes>
 )

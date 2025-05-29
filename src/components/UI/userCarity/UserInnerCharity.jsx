@@ -1,71 +1,77 @@
 import React, { useEffect } from 'react'
-import BreadCrumbs from './BreadCrumbs'
+// import BreadCrumbs from './BreadCrumbs'
 import { Avatar, Box, styled, Typography } from '@mui/material'
 import Button from '../Button'
 import { useDispatch, useSelector } from 'react-redux'
-import { CHARITY_THUNK } from '../../../store/slices/charity/charityThunk'
-import links from '../../../utils/helpers/links'
+
+// import links from '../../../utils/helpers/links'
 import { useNavigate, useParams } from 'react-router'
+import { USERCHARITY_THUNK } from '../../../store/slices/userCharity/userCharityThunk'
 
 const UserInnerCharity = () => {
-   const { selectedCharity } = useSelector((state) => state.charity)
+   const { selectedUserCharity } = useSelector((state) => state.userCharity)
 
    const { id } = useParams()
    const dispatch = useDispatch()
    const navigate = useNavigate()
 
    const handleDeleteCharity = (id) => {
-      dispatch(CHARITY_THUNK.deleteCharity({ id, navigate }))
+      dispatch(USERCHARITY_THUNK.deleteCharity({ id, navigate }))
    }
 
    useEffect(() => {
-      dispatch(CHARITY_THUNK.getById({ id }))
+      dispatch(USERCHARITY_THUNK.getById({ id }))
    }, [dispatch])
 
    return (
       <StyledBlockList>
-         <BreadCrumbs links={links} />
-         {selectedCharity && (
+         {/* <BreadCrumbs links={links} /> */}
+         {selectedUserCharity && (
             <StyledContainer1>
                <StyledBlockMain>
-                  <img src={selectedCharity.ownerProfilePhoto} alt="photo" />
+                  <img
+                     src={selectedUserCharity.ownerProfilePhoto}
+                     alt="photo"
+                  />
                   <StyledTextBlock>
                      <StyledAva>
                         <Avatar
-                           src={selectedCharity.bookedByProfilePhoto}
+                           src={selectedUserCharity.bookedByProfilePhoto}
                         ></Avatar>
                         <StyledData>
                            <Typography variant="paragraf">
-                              {selectedCharity.ownerFullName}
+                              {selectedUserCharity.ownerFullName}
                            </Typography>
-                           <Typography>{selectedCharity.ownerPhone}</Typography>
+                           <Typography>
+                              {selectedUserCharity.ownerPhone}
+                           </Typography>
                         </StyledData>
                         <Typography variant="p">
-                           {selectedCharity.statusMessage}
+                           {selectedUserCharity.statusMessage}
                         </Typography>
                      </StyledAva>
 
                      <Typography variant="h6">
-                        {selectedCharity.giftName}
+                        {selectedUserCharity.giftName}
                      </Typography>
                      <Typography variant="p">
-                        {selectedCharity.description}
+                        {selectedUserCharity.description}
                      </Typography>
                      <StyledBlockLi>
                         <Box>
-                           <Value>{selectedCharity.category}</Value>
+                           <Value>{selectedUserCharity.category}</Value>
                            <Label>Школьные</Label>
                            <br />
-                           <Value>{selectedCharity.subCategory}</Value>
+                           <Value>{selectedUserCharity.subCategory}</Value>
                            <Label>Сумка</Label>
                         </Box>
 
                         <StyledState>
                            <Value>Состояние:</Value>
-                           <Label>{selectedCharity.condition}</Label>
+                           <Label>{selectedUserCharity.condition}</Label>
                            <br />
                            <Value>Дата добавления:</Value>
-                           <Label>{selectedCharity.createdAt}</Label>
+                           <Label>{selectedUserCharity.createdAt}</Label>
                         </StyledState>
                      </StyledBlockLi>
                   </StyledTextBlock>

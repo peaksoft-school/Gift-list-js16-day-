@@ -1,6 +1,7 @@
 import {
    Box,
    DialogContent,
+   MenuItem,
    styled,
    TextField,
    Typography,
@@ -11,16 +12,16 @@ import Button from '../Button'
 
 const UserFormCharity = () => {
    const [preview, setPreview] = useState()
+   const [condition, setCondition] = useState('')
+   const [category, setCategory] = useState('')
+   const [subCategory, setSubCategory] = useState('')
    return (
-      <>
-         <FlexContainer>
+      <BlockContainer>
+         <Typography>Благотворительность/ Добавить подарок </Typography>
+         <FormContainer>
             <DialogContent>
                <label htmlFor="upload-file">
-                  <UploadBox>
-                     {preview && (
-                        <Box component="img" src={preview} alt="photo" />
-                     )}
-                  </UploadBox>
+                  <UploadBox> Нажмите для добавления фотографии</UploadBox>
                </label>
                <input
                   type="file"
@@ -38,54 +39,113 @@ const UserFormCharity = () => {
                   labelText="Название подарка"
                   placeholder="Введите название подарка"
                />
-               <StyledInput
-                  labelText="Категория"
-                  placeholder="Выберите категорию"
+               <TextField
+                  select
+                  label="Выберите категорию"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  fullWidth
+                  sx={{ width: '396px', mt: 2 }}
+               >
+                  <MenuItem value="electronics">Электроника</MenuItem>
+                  <MenuItem value="clothing">Одежда</MenuItem>
+                  <MenuItem value="school">Школа</MenuItem>
+                  <MenuItem value="home_garden">Дом и сад</MenuItem>
+                  <MenuItem value="shoes">Обувь</MenuItem>
+                  <MenuItem value="transport">Транспорт</MenuItem>
+               </TextField>
+
+               <StyledInputState>
+                  <TextField
+                     select
+                     label="Укожите состояние"
+                     placeholder="Укожите состояние"
+                     value={condition}
+                     onChange={(e) => setCondition(e.target.value)}
+                     fullWidth
+                     sx={{ width: '396px', mt: 2 }}
+                  >
+                     <MenuItem value="all">Все</MenuItem>
+                     <MenuItem value="used">Б/У</MenuItem>
+                     <MenuItem value="new">Новое</MenuItem>
+                  </TextField>
+
+                  <TextField
+                     select
+                     label="подкатегория"
+                     value={subCategory}
+                     onChange={(e) => setSubCategory(e.target.value)}
+                     fullWidth
+                     sx={{ width: '396px', mt: 2 }}
+                  >
+                     <MenuItem value="" disabled>
+                        Выберите подкатегорию
+                     </MenuItem>
+                     <MenuItem value="phones">Смартфоны и телефоны</MenuItem>
+                     <MenuItem value="audio">Аудиотехника</MenuItem>
+                     <MenuItem value="camera">Фото и видеокамеры</MenuItem>
+                     <MenuItem value="car_electronics">
+                        Автоэлектроника
+                     </MenuItem>
+                     <MenuItem value="tv_video">ТВ и видео</MenuItem>
+                     <MenuItem value="computers">
+                        Компьютеры, ноутбуки и планшеты
+                     </MenuItem>
+                  </TextField>
+               </StyledInputState>
+               <StyledTextField
+                  label="Описание"
+                  placeholder="Введите описание подарка"
+                  multiline
+                  rows={4}
                />
+               <StyledButton>
+                  <Button variant="warning">ОТМЕНА</Button>
+                  <Button variant="outlined">ДОБАВИТЬ</Button>
+               </StyledButton>
             </StyledInputGift>
-            <StyledInputState>
-               <StyledInput
-                  labelText="Состояние"
-                  placeholder="Укажите состояние"
-               />
-               <StyledInput
-                  labelText="Подкатегория"
-                  placeholder="Выберите подкатегорию"
-               />
-            </StyledInputState>
-            {/* <StyledTextField
-               labelText="Описание"
-               placeholder="Введите описание подарка"
-               multiline
-               rows={4}
-            /> */}
-         </FlexContainer>
-         <StyledButton>
-            <Button variant="warning" />
-            <Button variant="contained" />
-         </StyledButton>
-      </>
+         </FormContainer>
+
+         <BlockForm></BlockForm>
+      </BlockContainer>
    )
 }
 
 export default UserFormCharity
 
-const UploadBox = styled(Box)(() => ({}))
-const FlexContainer = styled(Box)(() => ({
-   display: 'flex',
-   alignItems: 'center',
-   justifyContent: 'center',
-   // flexWrap: 'wrap',
+const BlockContainer = styled(Box)(() => ({
+   marginTop: '100px',
+   background: '#F7F8FA',
+   width: '100%',
 }))
 
-const StyledInputGift = styled(Box)(() => ({}))
-const StyledInputState = styled(Box)(() => ({
-   marginTop: '23px',
-   marginLeft: '10px',
+const UploadBox = styled(Box)(() => ({
+   border: '1px solid #BDBDBD',
+   padding: '20px',
+   width: '200px',
+   textAlign: 'center',
+   borderRadius: '8px',
+   cursor: 'pointer',
+   backgroundColor: '#f9f9f9',
+   marginBottom: '20px',
 }))
+const FormContainer = styled(Box)(() => ({
+   display: 'flex',
+   borderRadius: '10px',
+   width: '100%',
+   background: '#ffffff',
+}))
+
+const StyledInputGift = styled(Box)(() => ({
+   display: 'flex',
+   flexDirection: 'column',
+}))
+const StyledInputState = styled(Box)(() => ({}))
+const BlockForm = styled(Box)(() => ({}))
+
 const StyledTextField = styled(TextField)(() => ({
    width: '808px',
-   marginLeft: '40px',
+
    marginTop: '30px',
    borderRadius: '6px',
    border: '1px solid #BDBDBD',
@@ -97,7 +157,12 @@ const StyledInput = styled(Input)(() => ({
 }))
 const StyledButton = styled(Box)(() => ({
    marginLeft: '700px',
-   '& Button': {
-      width: '131px',
+   marginTop: '20px',
+
+   // '& Button': {
+   //    width: '131px',
+   // },
+   '& .MuiButtonBase-root': {
+      height: '37px',
    },
 }))
