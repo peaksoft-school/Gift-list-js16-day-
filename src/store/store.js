@@ -6,11 +6,13 @@ import storage from 'redux-persist/lib/storage'
 import { holidaysSlice } from './slices/holidays/holidaysSlice'
 import { filesSlice } from './slices/file/filesSlice'
 import { authSlise } from './slices/auth/authSlice'
+import { userCharitySlice } from './slices/userCharity/userCharitySlice'
 
 const rootReducer = combineReducers({
    [authSlise.name]: authSlise.reducer,
    [holidaysSlice.name]: holidaysSlice.reducer,
    [filesSlice.name]: filesSlice.reducer,
+   [userCharitySlice.name]: userCharitySlice.reducer,
 })
 
 const persistConfig = {

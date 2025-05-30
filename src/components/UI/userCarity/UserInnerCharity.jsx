@@ -10,6 +10,7 @@ import { USERCHARITY_THUNK } from '../../../store/slices/userCharity/userCharity
 
 const UserInnerCharity = () => {
    const { selectedUserCharity } = useSelector((state) => state.userCharity)
+   const status = selectedUserCharity?.status
 
    const { id } = useParams()
    const dispatch = useDispatch()
@@ -76,22 +77,49 @@ const UserInnerCharity = () => {
                      </StyledBlockLi>
                   </StyledTextBlock>
                </StyledBlockMain>
-               <ButtonContainer>
-                  <StyledButton
-                     variant="warning"
-                     type="button"
-                     onClick={() => handleDeleteCharity(id)}
-                  >
-                     Удалить
-                  </StyledButton>
-                  <StyledButton2
-                     variant="outlined"
-                     color="primary"
-                     type="button"
-                  >
-                     Редактировать
-                  </StyledButton2>
-               </ButtonContainer>
+
+               {status === 'WAITING' && (
+                  <ButtonContainer>
+                     <StyledButton
+                        variant="warning"
+                        type="button"
+                        onClick={() => handleDeleteCharity(id)}
+                     >
+                        Удалить
+                     </StyledButton>
+                     <StyledButton2
+                        variant="outlined"
+                        color="primary"
+                        type="button"
+                     >
+                        Редактировать
+                     </StyledButton2>
+                  </ButtonContainer>
+               )}
+
+               {status === 'BOOKED' && (
+                  <StyledAva>
+                     <Avatar src={selectedUserCharity.bookedByProfilePhoto} />
+                     <StyledData>
+                        <Typography>
+                           {selectedUserCharity.statusMessage}
+                        </Typography>
+                     </StyledData>
+                  </StyledAva>
+               )}
+
+               {status === 'NEW' && (
+                  <ButtonContainer>
+                     <StyledButton variant="warning" type="button">
+                        Забронировать анонимно
+                     </StyledButton>
+                     <StyledButton2 variant="outlined" type="button">
+                        Забронировать
+                     </StyledButton2>
+                  </ButtonContainer>
+               )}
+
+             
             </StyledContainer1>
          )}
       </StyledBlockList>

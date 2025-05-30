@@ -8,7 +8,7 @@ const UserCharityCard = ({ usersCharity }) => {
    const navigate = useNavigate()
 
    const handleNavigate = (id) => {
-      navigate(`/charity/innerpage/${id}`)
+      navigate(`/user/charity/innerpage/${id}`)
    }
    return (
       <StyledCard>
@@ -38,7 +38,7 @@ const UserCharityCard = ({ usersCharity }) => {
                   <StyledSmallBlock>
                      <Avatar src={item.ownerProfilePhoto} />
                      <Typography>{item.statusMessage}</Typography>
-                     {/* <img src={Menu} alt="icon" /> */}
+
                      <MeetBalls options={USER_CARD_OPTIONS} />
                   </StyledSmallBlock>
                </StyledUpBox>

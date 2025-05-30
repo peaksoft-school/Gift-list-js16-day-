@@ -12,43 +12,45 @@ import { useNavigate } from 'react-router'
 
 const UserListCharity = () => {
    const navigate = useNavigate()
-   // const { userCharity } = useSelector((state) => state.userCharity)
-   const usersCharity = [
-      {
-         id: 0,
-         name: 'Иван Иванов',
-         holidayName: 'День Победы',
-         status: 'NEW',
-         image: Bookss,
-         massage: 'С праздником! ',
-         createdAt: '2025-05-26',
-         imageProfile: Holidays,
-      },
-      {
-         id: 1,
-         name: 'Мария Смирнова',
-         holidayName: 'Новый год',
-         status: 'NEW',
-         image: Bookss,
-         massage: 'С Новым годом! ',
-         createdAt: '2025-05-26',
-         imageProfile: Holidays,
-      },
-      {
-         id: 2,
-         name: 'Алексей Кузнецов',
-         holidayName: '8 Марта',
-         status: 'USED',
-         image: Bookss,
-         massage: 'Поздравляю!',
-         createdAt: '2025-05-26',
-         imageProfile: Holidays,
-      },
-   ]
+
+   const { usersCharity } = useSelector((state) => state.userCharity)
+   
+   // const usersCharity = [
+   //    {
+   //       id: 0,
+   //       name: 'Иван Иванов',
+   //       holidayName: 'День Победы',
+   //       status: 'NEW',
+   //       image: Bookss,
+   //       massage: 'С праздником! ',
+   //       createdAt: '2025-05-26',
+   //       imageProfile: Holidays,
+   //    },
+   //    {
+   //       id: 1,
+   //       name: 'Мария Смирнова',
+   //       holidayName: 'Новый год',
+   //       status: 'NEW',
+   //       image: Bookss,
+   //       massage: 'С Новым годом! ',
+   //       createdAt: '2025-05-26',
+   //       imageProfile: Holidays,
+   //    },
+   //    {
+   //       id: 2,
+   //       name: 'Алексей Кузнецов',
+   //       holidayName: '8 Марта',
+   //       status: 'USED',
+   //       image: Bookss,
+   //       massage: 'Поздравляю!',
+   //       createdAt: '2025-05-26',
+   //       imageProfile: Holidays,
+   //    },
+   // ]
 
    const dispatch = useDispatch()
 
-   //    console.log(charity)
+  
 
    useEffect(() => {
       dispatch(USERCHARITY_THUNK.getAllUserCharity())

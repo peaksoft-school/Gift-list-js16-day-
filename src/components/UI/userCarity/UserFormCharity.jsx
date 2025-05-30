@@ -2,6 +2,7 @@ import {
    Box,
    DialogContent,
    MenuItem,
+   Select,
    styled,
    TextField,
    Typography,
@@ -12,6 +13,7 @@ import Button from '../Button'
 
 const UserFormCharity = () => {
    const [preview, setPreview] = useState()
+   const [giftName, setGiftName] = useState()
    const [condition, setCondition] = useState('')
    const [category, setCategory] = useState('')
    const [subCategory, setSubCategory] = useState('')
@@ -35,9 +37,12 @@ const UserFormCharity = () => {
                <Box>
                   <Typography>Добавление вещи</Typography>
                </Box>
+               <label htmlFor="giftname">Название подарка</label>
                <StyledInput
-                  labelText="Название подарка"
+                  value={giftName}
+                  id="gitname"
                   placeholder="Введите название подарка"
+                  onChange={(e) => setGiftName(e.target.value)}
                />
                <TextField
                   select
@@ -55,24 +60,24 @@ const UserFormCharity = () => {
                   <MenuItem value="transport">Транспорт</MenuItem>
                </TextField>
 
-               <StyledInputState>
+               <TextField
+                  select
+                  label="Укожите состояние"
+                  placeholder="Укожите состояние"
+                  value={condition}
+                  onChange={(e) => setCondition(e.target.value)}
+                  fullWidth
+                  sx={{ width: '396px', mt: 2 }}
+               >
+                  <MenuItem value="all">Все</MenuItem>
+                  <MenuItem value="used">Б/У</MenuItem>
+                  <MenuItem value="new">Новое</MenuItem>
+               </TextField>
+               <label htmlFor="sub-category">
+                  Подкатегория
                   <TextField
                      select
-                     label="Укожите состояние"
-                     placeholder="Укожите состояние"
-                     value={condition}
-                     onChange={(e) => setCondition(e.target.value)}
-                     fullWidth
-                     sx={{ width: '396px', mt: 2 }}
-                  >
-                     <MenuItem value="all">Все</MenuItem>
-                     <MenuItem value="used">Б/У</MenuItem>
-                     <MenuItem value="new">Новое</MenuItem>
-                  </TextField>
-
-                  <TextField
-                     select
-                     label="подкатегория"
+                     id="sub-category"
                      value={subCategory}
                      onChange={(e) => setSubCategory(e.target.value)}
                      fullWidth
@@ -92,7 +97,8 @@ const UserFormCharity = () => {
                         Компьютеры, ноутбуки и планшеты
                      </MenuItem>
                   </TextField>
-               </StyledInputState>
+               </label>
+
                <StyledTextField
                   label="Описание"
                   placeholder="Введите описание подарка"
@@ -140,7 +146,7 @@ const StyledInputGift = styled(Box)(() => ({
    display: 'flex',
    flexDirection: 'column',
 }))
-const StyledInputState = styled(Box)(() => ({}))
+
 const BlockForm = styled(Box)(() => ({}))
 
 const StyledTextField = styled(TextField)(() => ({
