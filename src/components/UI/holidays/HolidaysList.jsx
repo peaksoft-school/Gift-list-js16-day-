@@ -17,6 +17,7 @@ const HolidaysList = () => {
    const [abortController, setAbortController] = useState(null)
    const [openModal, setOpenModal] = useState(false)
    const [preview, setPreview] = useState(null)
+
    const [title, setTitle] = useState('')
    const [date, setDate] = useState('')
 
