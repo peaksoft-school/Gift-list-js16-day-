@@ -1,75 +1,96 @@
 import { Box, Container, Stack, Typography, styled } from '@mui/material'
 import { Favorite, ThumbUp, VolunteerActivism } from '@mui/icons-material'
 import Button from '../UI/Button'
+import { useNavigate } from 'react-router'
 
-const Advantage = () => (
-   <StyledBox>
-      <StyledContainer>
-         <StyledStack>
-            <ContainerBox>
-               <IconWrapper>
-                  <Favorite />
-               </IconWrapper>
+const Advantage = () => {
+   const navigate = useNavigate()
 
-               <StyledTitle>Дари то, что необходимо</StyledTitle>
-            </ContainerBox>
+   return (
+      <StyledBox>
+         <StyledContainer>
+            <StyledStack>
+               <ContainerBox>
+                  <IconWrapper>
+                     <Favorite />
+                  </IconWrapper>
 
-            <StyledText>
-               <li>Находи своих близких</li>
-               <li>Просматривай их списки желаний</li>
-               <li>Узнавай о ближайших мероприятиях</li>
-            </StyledText>
-         </StyledStack>
+                  <Box className="text-content">
+                     <StyledTitle>Дари то, что необходимо</StyledTitle>
 
-         <StyledStack>
-            <ContainerBox>
-               <IconWrapper>
-                  <ThumbUp />
-               </IconWrapper>
+                     <StyledText>
+                        <li>Находи своих близких</li>
+                        <li>Просматривай их списки желаний</li>
+                        <li>Узнавай о ближайших мероприятиях</li>
+                     </StyledText>
+                  </Box>
+               </ContainerBox>
+            </StyledStack>
 
-               <StyledTitle>Удобство в использовании</StyledTitle>
-            </ContainerBox>
+            <StyledStack>
+               <ContainerBox>
+                  <IconWrapper>
+                     <ThumbUp />
+                  </IconWrapper>
 
-            <StyledText>
-               <li>Создавай неограниченное количество желаний</li>
-               <li>Добавляй подарки которые ты действительно хочешь</li>
-               <li>Делись своими желаниями с другими</li>
-            </StyledText>
-         </StyledStack>
+                  <Box className="text-content">
+                     <StyledTitle>Удобство в использовании</StyledTitle>
 
-         <StyledStack>
-            <ContainerBox>
-               <IconWrapper>
-                  <VolunteerActivism />
-               </IconWrapper>
+                     <StyledText>
+                        <li>Создавай неограниченное количество желаний</li>
+                        <li>
+                           Добавляй подарки которые ты действительно хочешь
+                        </li>
+                        <li>Делись своими желаниями с другими</li>
+                     </StyledText>
+                  </Box>
+               </ContainerBox>
+            </StyledStack>
 
-               <StyledTitle>Твори добро</StyledTitle>
-            </ContainerBox>
+            <StyledStack>
+               <ContainerBox>
+                  <IconWrapper>
+                     <VolunteerActivism />
+                  </IconWrapper>
 
-            <StyledText>
-               <li>Дари благотворительные подарки</li>
-               <li>Делись своими вещами</li>
-               <li>Помогай другим приобрести необходимое</li>
-            </StyledText>
-         </StyledStack>
-      </StyledContainer>
+                  <Box className="text-content">
+                     <StyledTitle>Твори добро</StyledTitle>
 
-      <Button variant="outlined">ЗАРЕГИСТРИРОВАТЬСЯ</Button>
-   </StyledBox>
-)
+                     <StyledText>
+                        <li>Дари благотворительные подарки</li>
+                        <li>Делись своими вещами</li>
+                        <li>Помогай другим приобрести необходимое</li>
+                     </StyledText>
+                  </Box>
+               </ContainerBox>
+            </StyledStack>
+         </StyledContainer>
+
+         <Button variant="outlined" onClick={() => navigate('/sign-up')}>
+            ЗАРЕГИСТРИРОВАТЬСЯ
+         </Button>
+      </StyledBox>
+   )
+}
 
 export default Advantage
 
 const StyledBox = styled(Box)({
-   padding: '60px 20px',
    backgroundColor: '#fff',
    textAlign: ' center ',
+   margin: '0 135px 135px 120px',
+   display: 'flex',
+   flexDirection: 'column',
+   justifyContent: 'center',
+   alignItems: 'center',
+   gap: '105px',
 })
 
 const StyledContainer = styled(Container)({
    display: 'flex',
-   justifyContent: 'space-around',
-   marginBottom: '40px',
+   justifyContent: 'center',
+   alignItems: 'start',
+   gap: '2rem',
 })
 
 const StyledTitle = styled(Typography)({
@@ -78,7 +99,6 @@ const StyledTitle = styled(Typography)({
    fontSize: '20px',
    lineHeight: '150%',
    fontWeight: 'bold',
-   marginBottom: '10px',
 })
 
 const StyledText = styled(Typography)({
@@ -87,14 +107,24 @@ const StyledText = styled(Typography)({
    fontSize: '14px',
    lineHeight: '170%',
    listStyle: 'disc',
-   paddingLeft: '20px',
    textAlign: 'left',
+   width: '290px',
 })
 
 const ContainerBox = styled(Box)({
    display: 'flex',
-   justifyContent: 'flex-start',
-   gap: '30px',
+   justifyContent: 'center',
+   alignItems: 'start',
+   gap: '20px',
+   textAlign: 'center',
+
+   '& .text-content': {
+      textAlign: 'start',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '1.5rem',
+      marginTop: '0.5rem',
+   },
 })
 
 const IconWrapper = styled(Box)({

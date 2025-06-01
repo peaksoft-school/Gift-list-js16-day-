@@ -4,13 +4,13 @@ import { ROLES } from './routes'
 import Blago from '../pages/user/Blago'
 import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
-import Complaint from '../components/UI/Complaint'
 
 const Home = lazy(() => import('../pages/home/Home'))
+const ResetPassword = lazy(() => import('../pages/resetPassword/ResetPassword'))
 const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
 const SignUp = lazy(() => import('../pages/sign-up/SignUp'))
-const Admin = lazy(() => import('../layout/AdminLayout'))
-const User = lazy(() => import('../layout/UserLayout'))
+const Admin = lazy(() => import('../layout/admin/AdminLayout'))
+const User = lazy(() => import('../layout/user/UserLayout'))
 
 const AppRouter = () => (
    <Routes>
@@ -37,12 +37,29 @@ const AppRouter = () => (
             </Suspense>
          }
       />
+      <Route
+         path="/forgot-password"
+         element={
+            <Suspense fallback={<Loading />}>
+               <ForgotRassword />
+            </Suspense>
+         }
+      ></Route>
 
       <Route
          path="/sign-up"
          element={
             <Suspense fallback={<Loading />}>
                <SignUp />
+            </Suspense>
+         }
+      />
+
+      <Route
+         path="/reset-password"
+         element={
+            <Suspense fallback={<Loading />}>
+               <ResetPassword />
             </Suspense>
          }
       />
@@ -62,9 +79,10 @@ const AppRouter = () => (
          }
       >
          <Route index element={<Navigate to="users" />} />
-         <Route path="users" element={<h1>Users</h1>} />
+         <Route path="users" element={<Users />} />
+         <Route path="users/:id" element={<InnerUser />} />
          <Route path="charity" element={<Blago />} />
-         <Route path="complaints" element={<Complaint />} />
+         <Route path="complaints" element={<h1>complaints</h1>} />
          <Route path="newsletter" element={<h1>newsletter</h1>} />
       </Route>
 
@@ -82,11 +100,12 @@ const AppRouter = () => (
             />
          }
       >
-         <Route path="lenta" index element={<h1>Friends</h1>} />
+         <Route path="lenta" index element={<h1>lenta</h1>} />
          <Route path="friends" element={<h1>Friends</h1>} />
          <Route path="list" element={<h1>Friends</h1>} />
          <Route path="booking" element={<h1>Friends</h1>} />
-         <Route path="my-part" element={<h1>Friends</h1>} />
+         <Route path="my-part" element={<HolidaysList />} />
+         <Route path="my-part/:id" element={<HolidaysDescription />} />
          <Route path="charity" element={<Blago />} />
       </Route>
    </Routes>
