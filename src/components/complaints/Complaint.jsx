@@ -1,7 +1,8 @@
 // import { Typography } from '@mui/material'
 import { Avatar, Box, styled, Typography } from '@mui/material'
-import MeatBalls from './MeetBalls'
+import MeatBalls from '../UI/MeetBalls'
 import { USER_CARD_OPTIONS } from '../../utils/helpers'
+import InnerUser from '../admin/users/InnerUser'
 
 const Complaint = ({ card ={} }) => {
    const { fullName, event, title, date, image, avatar } = card
@@ -11,6 +12,7 @@ const Complaint = ({ card ={} }) => {
    // )
    return (
       <StyledBox>
+         <InnerUser/>
          <StyledCard>
             <BoxContainer>
                <ContainerBox>
