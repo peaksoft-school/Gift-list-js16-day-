@@ -5,6 +5,7 @@ import TelegramIcon from '@mui/icons-material/Telegram'
 import { styled } from '@mui/system'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import Button from './UI/Button'
+import { Link } from 'react-router'
 
 const ProfileUser = () => {
    return (
@@ -79,7 +80,11 @@ const ProfileUser = () => {
          </Header>
          <BoxContainer>
             <Box mb={4}>
-               <SectionText>Желаемые подарки</SectionText>
+               <HeaderBox>
+                  <SectionText>Желаемые подарки</SectionText>
+                  <Link className="link">Смотреть все</Link>
+               </HeaderBox>
+
                <Grid container spacing={2}>
                   {[1, 2, 3].map((_, i) => (
                      <Grid item key={i}>
@@ -110,11 +115,14 @@ const ProfileUser = () => {
                      </Grid>
                   ))}
                </Grid>
-               <MoreLink>Смотреть все</MoreLink>
             </Box>
 
             <Box mb={4}>
-               <SectionText>Праздники</SectionText>
+               <HeaderBox>
+                  <SectionText>Праздники</SectionText>
+                  <Link className="link">Смотреть все</Link>
+               </HeaderBox>
+
                <Grid container spacing={2}>
                   {[
                      {
@@ -148,11 +156,14 @@ const ProfileUser = () => {
                      </Grid>
                   ))}
                </Grid>
-               <MoreLink>Смотреть все</MoreLink>
             </Box>
 
             <Box mb={4}>
-               <SectionText>Благотворительность</SectionText>
+               <HeaderBox>
+                  <SectionText>Благотворительность</SectionText>
+                  <Link className="link">Смотреть все</Link>
+               </HeaderBox>
+
                <Grid container spacing={2}>
                   {[
                      {
@@ -201,7 +212,6 @@ const ProfileUser = () => {
                      </Grid>
                   ))}
                </Grid>
-               <MoreLink>Смотреть все</MoreLink>
             </Box>
          </BoxContainer>
       </Box>
@@ -333,10 +343,15 @@ const SectionBox = styled(Box)({
    },
 })
 
-const MoreLink = styled(Typography)({
-   textAlign: 'right',
-   marginTop: '8px',
-   fontSize: '14px',
-   color: '#3772FF',
-   cursor: 'pointer',
+const HeaderBox = styled(Box)({
+   display: 'flex',
+   justifyContent: 'space-between',
+   alignItems: 'center',
+   marginBottom: '12px',
+
+   '& .link': {
+      fontSize: '14px',
+      color: '#3772FF',
+      cursor: 'pointer',
+   },
 })
