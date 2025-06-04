@@ -3,54 +3,18 @@ import { Box, styled, Typography } from '@mui/material'
 
 import { useDispatch, useSelector } from 'react-redux'
 import UserCharityCard from './UserCharityCard'
-import Pluse from '../../../assets/images/pluse.png'
-import Bookss from '../../../assets/images/bookss.png'
-import Holidays from '../../../assets/images/holidays.png'
-import { USERCHARITY_THUNK } from '../../../store/slices/userCharity/userCharityThunk'
-import Button from '../Button'
+import Pluse from '../../assets/images/pluse.png'
+
+import { USERCHARITY_THUNK } from '../../store/slices/userCharity/userCharityThunk'
+import Button from '../UI/Button'
 import { useNavigate } from 'react-router'
 
 const UserListCharity = () => {
    const navigate = useNavigate()
 
    const { usersCharity } = useSelector((state) => state.userCharity)
-   
-   // const usersCharity = [
-   //    {
-   //       id: 0,
-   //       name: 'Иван Иванов',
-   //       holidayName: 'День Победы',
-   //       status: 'NEW',
-   //       image: Bookss,
-   //       massage: 'С праздником! ',
-   //       createdAt: '2025-05-26',
-   //       imageProfile: Holidays,
-   //    },
-   //    {
-   //       id: 1,
-   //       name: 'Мария Смирнова',
-   //       holidayName: 'Новый год',
-   //       status: 'NEW',
-   //       image: Bookss,
-   //       massage: 'С Новым годом! ',
-   //       createdAt: '2025-05-26',
-   //       imageProfile: Holidays,
-   //    },
-   //    {
-   //       id: 2,
-   //       name: 'Алексей Кузнецов',
-   //       holidayName: '8 Марта',
-   //       status: 'USED',
-   //       image: Bookss,
-   //       massage: 'Поздравляю!',
-   //       createdAt: '2025-05-26',
-   //       imageProfile: Holidays,
-   //    },
-   // ]
 
    const dispatch = useDispatch()
-
-  
 
    useEffect(() => {
       dispatch(USERCHARITY_THUNK.getAllUserCharity())
@@ -81,9 +45,8 @@ export default UserListCharity
 
 const StyledBlockList = styled(Box)(() => ({
    background: '#F7F8FA',
-   width: '100%',
-   padding: ' 10px',
-   marginTop: '80px ',
+   paddingTop: '30px',
+   marginLeft: '230px',
 }))
 const StyledTypography = styled(Typography)(() => ({
    fontFamily: 'Inter',

@@ -37,7 +37,10 @@ const Users = () => {
       }
    }
 
-   const handleNavigate = (id) => navigate(`/admin/users/${id}`)
+   const handleNavigate = (id) => {
+      dispatch(USERS_THUNK.getUser({ id }))
+      navigate(`/admin/users/${id}`)
+   }
 
    const selectedUser = users.find((user) => user.id === selectedUserId)
 

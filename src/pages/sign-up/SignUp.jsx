@@ -89,7 +89,7 @@ const SignUp = () => {
       }
 
       try {
-         await dispatch(AUTH_THUNK.signUp(data)).unwrap()
+         await dispatch(AUTH_THUNK.signUp({data})).unwrap()
 
          ToastifyNotify({
             title: 'Успешно',

@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react'
-// import BreadCrumbs from './BreadCrumbs'
 import { Avatar, Box, styled, Typography } from '@mui/material'
-import Button from '../Button'
+import Button from '../UI/Button'
 import { useDispatch, useSelector } from 'react-redux'
-
-// import links from '../../../utils/helpers/links'
 import { useNavigate, useParams } from 'react-router'
-import { USERCHARITY_THUNK } from '../../../store/slices/userCharity/userCharityThunk'
+import { USERCHARITY_THUNK } from '../../store/slices/userCharity/userCharityThunk'
+import BreadCrumbs from '../UI/BreadCrumbs'
 
 const UserInnerCharity = () => {
    const { selectedUserCharity } = useSelector((state) => state.userCharity)
-   const status = selectedUserCharity?.status
+   const statusMessage = selectedUserCharity?.statusMessage
 
    const { id } = useParams()
    const dispatch = useDispatch()
@@ -21,23 +19,33 @@ const UserInnerCharity = () => {
    }
 
    useEffect(() => {
-      dispatch(USERCHARITY_THUNK.getById({ id }))
-   }, [dispatch])
+      if (id) {
+         dispatch(USERCHARITY_THUNK.getById({ id }))
+      }
+   }, [dispatch, id])
+
+   const links = [
+      { href: '/user/charity', label: 'Благотворительность' },
+      {
+         href: `/user/charity/${id}`,
+         label: selectedUserCharity?.giftName || 'Загрузка...',
+      },
+   ]
 
    return (
       <StyledBlockList>
-         {/* <BreadCrumbs links={links} /> */}
-         {selectedUserCharity && (
+         <BreadCrumbs links={links} />
+         {selectedUserCharity?.statusMessage && (
             <StyledContainer1>
                <StyledBlockMain>
                   <img
-                     src={selectedUserCharity.ownerProfilePhoto}
+                     src={selectedUserCharity.bookedByProfilePhoto}
                      alt="photo"
                   />
                   <StyledTextBlock>
                      <StyledAva>
                         <Avatar
-                           src={selectedUserCharity.bookedByProfilePhoto}
+                           src={selectedUserCharity.ownerProfilePhoto}
                         ></Avatar>
                         <StyledData>
                            <Typography variant="paragraf">
@@ -47,9 +55,18 @@ const UserInnerCharity = () => {
                               {selectedUserCharity.ownerPhone}
                            </Typography>
                         </StyledData>
-                        <Typography variant="p">
-                           {selectedUserCharity.statusMessage}
-                        </Typography>
+                        {statusMessage === 'Забронирован' && (
+                           <StyledAva sx={{ marginLeft: '300px' }}>
+                              <Avatar
+                                 src={selectedUserCharity.bookedByProfilePhoto}
+                              />
+                              <StyledData>
+                                 <Typography>
+                                    {selectedUserCharity.statusMessage}
+                                 </Typography>
+                              </StyledData>
+                           </StyledAva>
+                        )}
                      </StyledAva>
 
                      <Typography variant="h6">
@@ -78,7 +95,7 @@ const UserInnerCharity = () => {
                   </StyledTextBlock>
                </StyledBlockMain>
 
-               {status === 'WAITING' && (
+               {selectedUserCharity.ownerFullName === 'rabiya aiylchieva' ? (
                   <ButtonContainer>
                      <StyledButton
                         variant="warning"
@@ -95,20 +112,7 @@ const UserInnerCharity = () => {
                         Редактировать
                      </StyledButton2>
                   </ButtonContainer>
-               )}
-
-               {status === 'BOOKED' && (
-                  <StyledAva>
-                     <Avatar src={selectedUserCharity.bookedByProfilePhoto} />
-                     <StyledData>
-                        <Typography>
-                           {selectedUserCharity.statusMessage}
-                        </Typography>
-                     </StyledData>
-                  </StyledAva>
-               )}
-
-               {status === 'NEW' && (
+               ) : statusMessage !== 'Забронирован' ? (
                   <ButtonContainer>
                      <StyledButton variant="warning" type="button">
                         Забронировать анонимно
@@ -117,9 +121,7 @@ const UserInnerCharity = () => {
                         Забронировать
                      </StyledButton2>
                   </ButtonContainer>
-               )}
-
-             
+               ) : null}
             </StyledContainer1>
          )}
       </StyledBlockList>
@@ -130,16 +132,16 @@ export default UserInnerCharity
 
 const StyledBlockList = styled(Box)(() => ({
    background: '#F7F8FA',
-   width: '100%',
-   marginTop: '80px',
-   padding: '20px 20px',
+   paddingTop: '30px ',
+   marginLeft: '230px',
 }))
 const StyledContainer1 = styled(Box)(() => ({
    background: '#ffffff',
-   width: '1086px',
+   width: '1200px',
    height: '100%',
    padding: '20px',
    borderRadius: '10px',
+   marginTop: '40px',
 }))
 const StyledBlockMain = styled(Box)(() => ({
    display: 'flex',
@@ -161,6 +163,7 @@ const StyledTextBlock = styled(Box)(() => ({
 const StyledAva = styled(Box)(() => ({
    display: 'flex',
    alignItems: 'center',
+
    '& .MuiTypography-p': {
       marginLeft: '400px',
       fontSize: '14px',

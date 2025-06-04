@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
-import BreadCrumbs from './BreadCrumbs'
+
 import { Box, styled, Typography } from '@mui/material'
 import { USER_CARD_OPTIONS } from '../../../utils/helpers'
 import MeetBalls from '../MeetBalls'
 import { useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { HOLIDAYS_THUNK } from '../../../store/slices/holidays/holidaysThunk'
+import BreadCrumbs from '../BreadCrumbs'
 
 const HolidaysDescription = () => {
    const { holidaysss } = useSelector((state) => state.holidays)

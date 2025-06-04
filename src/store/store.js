@@ -7,6 +7,7 @@ import { filesSlice } from './slices/file/filesSlice'
 import { mailingSlice } from './slices/admin/mailing/mailingSlice'
 import { usersSlice } from './slices/admin/users/usersSlice'
 import { authSlice } from './slices/auth/authSlice'
+import { userCharitySlice } from './slices/userCharity/userCharitySlice'
 
 const rootReducer = combineReducers({
    [authSlice.name]: authSlice.reducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
    [filesSlice.name]: filesSlice.reducer,
    [mailingSlice.name]: mailingSlice.reducer,
    [usersSlice.name]: usersSlice.reducer,
+   [userCharitySlice.name]: userCharitySlice.reducer,
 })
 
 const persistConfig = {

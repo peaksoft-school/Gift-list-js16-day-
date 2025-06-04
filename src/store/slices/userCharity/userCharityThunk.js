@@ -43,5 +43,21 @@ const deleteCharity = createAsyncThunk(
       }
    }
 )
+const createCharity = createAsyncThunk(
+   'userCharity/create-charity',
+   async (formData, { rejectWithValue }) => {
+      try {
+         const { data } = await axiosInstance.post('/api/charity', formData)
+         return data
+      } catch (error) {
+         return rejectWithValue({ message: error.response.data.message })
+      }
+   }
+)
 
-export const USERCHARITY_THUNK = { getAllUserCharity, getById, deleteCharity }
+export const USERCHARITY_THUNK = {
+   getAllUserCharity,
+   getById,
+   deleteCharity,
+   createCharity,
+}

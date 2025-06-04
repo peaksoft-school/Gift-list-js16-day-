@@ -6,11 +6,14 @@ import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
 import HolidaysList from '../components/UI/holidays/HolidaysList'
 import HolidaysDescription from '../components/UI/holidays/HolidaysDescription'
-import ForgotRassword from '../pages/forgotPassword/ForgotRassword'
+import ForgotPassword from '../pages/forgotPassword/ForgotPassword'
 import Users from '../pages/admin/users/Users'
 import InnerMailing from '../components/admin/mailings/InnerMailing'
 import MailingList from '../pages/admin/mailing/MailingList'
-import InnerUser from '../components/admin/users/InnerUser'
+import InnerUser from '../components/admin/mailings/users/InnerUser'
+import UserListCharity from '../components/userCarity/UserListCharity'
+import UserFormCharity from '../components/userCarity/UserFormCharity'
+import UserInnerCharity from '../components/userCarity/UserInnerCharity'
 
 const Home = lazy(() => import('../pages/home/Home'))
 const ResetPassword = lazy(() => import('../pages/resetPassword/ResetPassword'))
@@ -48,7 +51,7 @@ const AppRouter = () => (
          path="/forgot-password"
          element={
             <Suspense fallback={<Loading />}>
-               <ForgotRassword />
+               <ForgotPassword />
             </Suspense>
          }
       ></Route>

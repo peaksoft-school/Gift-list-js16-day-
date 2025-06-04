@@ -9,6 +9,7 @@ import ProfileIcon from '../../assets/icons/profile.svg'
 import LogoutIcon from '../../assets/icons/exit.svg'
 import Block from '../../assets/images/Block.png'
 import Delete from '../../assets/images/Delete.png'
+import BOOK from '../../assets/images/BOOK.png'
 
 const ROLES_SIDEBAR = {
    users: [
@@ -44,4 +45,12 @@ const USER_CARD_OPTIONS = [
    },
 ]
 
-export { ROLES_SIDEBAR, PROFILE_OPTIONS, USER_CARD_OPTIONS }
+const USER_BOOK_OPTIONS = [
+   {
+      title: 'Забронировать',
+      icon: Block,
+   },
+   { title: 'Забронировать анонимно', icon: BOOK },
+]
+
+export { ROLES_SIDEBAR, PROFILE_OPTIONS, USER_CARD_OPTIONS, USER_BOOK_OPTIONS }

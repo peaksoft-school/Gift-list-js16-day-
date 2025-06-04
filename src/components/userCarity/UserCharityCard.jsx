@@ -1,8 +1,8 @@
 import { Avatar, Box, styled, Typography } from '@mui/material'
 import React from 'react'
 import { useNavigate } from 'react-router'
-import MeetBalls from '../MeetBalls'
-import { USER_CARD_OPTIONS } from '../../../utils/helpers'
+import MeetBalls from '../UI/MeetBalls'
+import { USER_BOOK_OPTIONS,  } from '../../utils/helpers'
 
 const UserCharityCard = ({ usersCharity }) => {
    const navigate = useNavigate()
@@ -30,8 +30,9 @@ const UserCharityCard = ({ usersCharity }) => {
                </StyledParagraph>
                <img
                   src={item.bookedByProfilePhoto}
-                  alt="book"
+                  alt="icon"
                   onClick={() => handleNavigate(item.giftId)}
+                  className="image"
                />
                <StyledUpBox>
                   <Typography>{item.createdAt}</Typography>
@@ -39,7 +40,7 @@ const UserCharityCard = ({ usersCharity }) => {
                      <Avatar src={item.ownerProfilePhoto} />
                      <Typography>{item.statusMessage}</Typography>
 
-                     <MeetBalls options={USER_CARD_OPTIONS} />
+                     <MeetBalls options={USER_BOOK_OPTIONS} />
                   </StyledSmallBlock>
                </StyledUpBox>
             </BoxCard>
@@ -49,10 +50,12 @@ const UserCharityCard = ({ usersCharity }) => {
 }
 
 export default UserCharityCard
+
 const StyledCard = styled(Box)(() => ({
    display: 'flex',
    flexWrap: 'wrap',
 }))
+
 const BoxCard = styled(Box)(() => ({
    display: 'flex',
    flexDirection: 'column',
@@ -62,6 +65,10 @@ const BoxCard = styled(Box)(() => ({
    borderRadius: '10px',
    backgroundColor: '#ffffff',
    margin: '30px 20px',
+
+   '& .image': {
+      width: '165px',
+   },
 }))
 const StyledBoxAvatar = styled(Box)(() => ({
    display: 'flex',

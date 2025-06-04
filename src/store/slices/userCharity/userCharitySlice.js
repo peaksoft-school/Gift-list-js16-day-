@@ -51,6 +51,24 @@ const userCharitySlice = createSlice({
          .addCase(USERCHARITY_THUNK.deleteCharity.rejected, (state) => {
             state.loading = false
          })
+
+         .addCase(
+            USERCHARITY_THUNK.createCharity.fulfilled,
+            (state, { payload }) => {
+               state.usersCharity.push(payload)
+               state.loading = false
+            }
+         )
+         .addCase(USERCHARITY_THUNK.createCharity.pending, (state) => {
+            state.loading = true
+         })
+         .addCase(
+            USERCHARITY_THUNK.createCharity.rejected,
+            (state, { error }) => {
+               state.loading = false
+               state.error = error.message
+            }
+         )
    },
 })
 

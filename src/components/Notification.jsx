@@ -1,6 +1,6 @@
-import { ToastContainer } from 'react-toastify'
 import { styled } from '@mui/material/styles'
-import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify'
+// import 'react-toastify/dist/ReactToastify'
 
 const Notification = () => {
    return (

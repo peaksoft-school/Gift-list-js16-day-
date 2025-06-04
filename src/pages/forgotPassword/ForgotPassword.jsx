@@ -1,14 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { AUTH_THUNK } from '../../store/slices/auth/authThunk'
-import { Formik, Form, Field } from 'formik'
+import { Formik, Form, Field }from 'formik'
 import Button from '../../components/UI/Button'
 import { ForgotPasswordSchema } from '../../utils/constants/validation'
 import Input from '../../components/UI/Input'
 import LightIcon from '../../assets/icons/light.svg'
 import { useNavigate } from 'react-router'
 import Notification from '../../components/Notification'
-import ToastifyNotify from '../../utils/helpers/ToastifyNotify'
 import { styled } from '@mui/material'
+import toastifyNotify from '../../utils/helpers/ToastifyNotify'
+
 
 const ForgotPassword = () => {
    const dispatch = useDispatch()
@@ -19,7 +20,7 @@ const ForgotPassword = () => {
       dispatch(AUTH_THUNK.forgotPassword(values.email))
          .unwrap()
          .then(() => {
-            ToastifyNotify({
+            toastifyNotify({
                title: 'Успешно',
                message: 'Ссылка отправлено на ваш Email',
                autoClose: 3000,
@@ -80,7 +81,7 @@ const ForgotPassword = () => {
                      onClick={() => {
                         errors.email &&
                            touched.email &&
-                           ToastifyNotify({
+                           toastifyNotify({
                               title: 'Ошибка',
                               message: 'Заполните поле!',
                               autoClose: 3000,
