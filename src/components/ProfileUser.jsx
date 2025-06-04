@@ -5,7 +5,6 @@ import TelegramIcon from '@mui/icons-material/Telegram'
 import { styled } from '@mui/system'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import Button from './UI/Button'
-import { useState } from 'react'
 
 const ProfileUser = () => {
    return (
@@ -18,7 +17,7 @@ const ProfileUser = () => {
                />
                <Typography variant="h6">Аида Каримова</Typography>
 
-               <Button variant="warning" >Удалить из друзей</Button>
+               <Button variant="warning">Удалить из друзей</Button>
 
                <Box>
                   <IconButton>
@@ -240,7 +239,7 @@ const LeftColumn = styled(Box)({
 const RightColumn = styled(Box)({
    flex: 1,
    display: 'grid',
-   gridTemplateColumns: '1fr 1fr',
+   gridTemplateColumns: '50% 50%',
    gap: '16px',
 })
 

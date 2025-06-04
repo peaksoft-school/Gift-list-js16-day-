@@ -3,6 +3,7 @@ import { axiosInstance } from '../../../../configs/axiosInstance'
 
 const getProfileUserById = createAsyncThunk(
    'profileUser/getProfileUserById',
+   
    async (id, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(`/api/users/profile/${id}`)
