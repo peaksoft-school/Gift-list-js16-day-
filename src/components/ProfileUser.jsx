@@ -2,7 +2,7 @@ import { Box, Typography, Grid, IconButton } from '@mui/material'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import TelegramIcon from '@mui/icons-material/Telegram'
-import { styled } from '@mui/system'
+import { padding, styled } from '@mui/system'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import Button from './UI/Button'
 import { Link } from 'react-router'
@@ -108,8 +108,9 @@ const ProfileUser = () => {
                            <ContainerBox>
                               <StyledDate>12.04.22</StyledDate>
                               <Typography className="text">
-                                 В ожидании <MoreHorizIcon />
+                                 В ожидании
                               </Typography>
+                              <MoreHorizIcon className="icon" />
                            </ContainerBox>
                         </StyledCard>
                      </Grid>
@@ -201,13 +202,13 @@ const ProfileUser = () => {
                               </StyledText>
                            </BoxSection>
 
-                           <SectionBox>
+                           <ContainerBox>
                               <StyledDate>12.04.22</StyledDate>
                               <Typography className="text">
                                  {item.status}
-                                 <MoreHorizIcon />
                               </Typography>
-                           </SectionBox>
+                              <MoreHorizIcon className="icon" />
+                           </ContainerBox>
                         </StyledCard>
                      </Grid>
                   ))}
@@ -319,8 +320,13 @@ const ContainerBox = styled(Box)({
    justifyContent: 'space-between',
 
    '& .text': {
-      paddingTop: '8px',
+      paddingTop: '4px',
       color: ' #636C84',
+      paddingLeft: '115px',
+   },
+
+   '& .icon': {
+      paddingTop: '5px',
    },
 })
 
@@ -330,16 +336,6 @@ const BoxSection = styled(Box)({
 
    '& .thing': {
       color: ' #FD5200',
-   },
-})
-
-const SectionBox = styled(Box)({
-   display: 'flex',
-   justifyContent: 'space-between',
-
-   '& .text': {
-      paddingTop: '8px',
-      color: ' #636C84',
    },
 })
 
