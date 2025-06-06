@@ -72,6 +72,7 @@ const UserFormCharity = () => {
                            alt="preview"
                            className="photo"
                         />
+                        
                      ) : (
                         <>
                            <ImageIcon />
