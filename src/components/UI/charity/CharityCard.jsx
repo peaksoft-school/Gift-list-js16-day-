@@ -2,7 +2,7 @@ import { Avatar, Box, styled, Typography } from '@mui/material'
 import React from 'react'
 import { useNavigate } from 'react-router'
 import MeetBalls from '../MeetBalls'
-import { CHARITY_CARD_OPTIONS,  } from '../../../utils/helpers'
+import { CHARITY_CARD_OPTIONS } from '../../../utils/helpers'
 
 const CharityCard = ({ charity }) => {
    const navigate = useNavigate()
@@ -18,24 +18,27 @@ const CharityCard = ({ charity }) => {
                   <Avatar src={item.ownerProfilePhoto} />
                   <Typography>{item.ownerFullName}</Typography>
                </StyledBoxAvatar>
-               <StyledParagraph >
+               <StyledParagraph>
                   <Typography>{item.giftName}</Typography>
                   <Typography
                      sx={{
-                        color:
-                           item.condition === 'NEW' ? '#3CBA92' : '#FD5200',
+                        color: item.condition === 'NEW' ? '#3CBA92' : '#FD5200',
                      }}
                   >
                      {item.condition}
                   </Typography>
                </StyledParagraph>
-               <img src={item.bookedByProfilePhoto} alt="book" onClick={() => handleNavigate(item.giftId)}/>
+               <img
+                  src={item.bookedByProfilePhoto}
+                  alt="book"
+                  onClick={() => handleNavigate(item.giftId)}
+               />
                <StyledUpBox>
                   <Typography>{item.createdAt}</Typography>
                   <StyledSmallBlock>
                      <Avatar src={item.ownerProfilePhoto} />
                      <Typography>{item.statusMessage}</Typography>
-                     {/* <img src={Menu} alt="icon" /> */}
+
                      <MeetBalls options={CHARITY_CARD_OPTIONS} />
                   </StyledSmallBlock>
                </StyledUpBox>

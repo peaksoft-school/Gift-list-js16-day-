@@ -2,7 +2,7 @@ import { Navigate, Route } from 'react-router'
 import { lazy, Suspense } from 'react'
 
 const Users = lazy(() => import('../pages/admin/users/Users'))
-const InnerUser = lazy(() => import('../components/admin/users/InnerUser'))
+
 const Blago = lazy(() => import('../pages/user/Blago'))
 const MailingList = lazy(() => import('../pages/admin/mailing/MailingList'))
 const InnerMailing = lazy(
