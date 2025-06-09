@@ -1,4 +1,4 @@
-import { Button, styled } from '@mui/material'
+import { Box, Button, styled } from '@mui/material'
 import { ROLES_SIDEBAR } from '../../utils/helpers'
 import { useNavigate } from 'react-router'
 
@@ -13,6 +13,7 @@ const SideBar = ({ role }) => {
 
    return (
       <Mainh1>
+         {/* <Box className="position"> */}
          <h1>GIFT LIST</h1>
 
          {menuItems.map(({ title, icon, link }, index) => (
@@ -20,6 +21,7 @@ const SideBar = ({ role }) => {
                <img src={icon} alt={title} /> <span>{title}</span>
             </Button>
          ))}
+         {/* </Box> */}
       </Mainh1>
    )
 }
@@ -31,7 +33,11 @@ const Mainh1 = styled('div')({
    color: '#fff',
    width: '284px',
    height: '100vh',
-   position: 'fixed',
+   position: 'relative',
+
+   '& .position': {
+      position: 'fixed',
+   },
 
    '& .MuiButtonBase-root': {
       textTransform: 'none',

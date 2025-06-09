@@ -7,11 +7,12 @@ const AdminLayout = () => {
    return (
       <StyledMain>
          <SideBar role="ADMIN" />
-         <Header role="ADMIN" />
 
-         <StyledOutlet>
+         <Box>
+            <Header role="ADMIN" />
+
             <Outlet />
-         </StyledOutlet>
+         </Box>
       </StyledMain>
    )
 }
@@ -20,8 +21,4 @@ export default AdminLayout
 
 const StyledMain = styled(Box)(() => ({
    display: 'flex',
-}))
-
-const StyledOutlet = styled('div')(() => ({
-   marginTop: '40px',
 }))

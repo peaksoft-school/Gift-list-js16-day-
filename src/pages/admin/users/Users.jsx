@@ -100,7 +100,6 @@ const Users = () => {
 export default Users
 
 const StyledBox = styled(Box)(() => ({
-   padding: '110px 0 0 18rem',
    fontFamily: 'Inter',
    display: 'flex',
    flexDirection: 'column',

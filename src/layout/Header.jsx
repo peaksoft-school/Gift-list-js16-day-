@@ -11,7 +11,7 @@ const Header = () => {
 
    return (
       <StyledCustomAppBar>
-         <Toolbar>
+         <Box>
             <StyledBox>
                {pathname === '/admin/charity' ||
                pathname === '/user/charity' ? (
@@ -32,7 +32,7 @@ const Header = () => {
                   <MeatBalls variant="profile" options={PROFILE_OPTIONS} />
                </>
             </StyledBox>
-         </Toolbar>
+         </Box>
       </StyledCustomAppBar>
    )
 }
@@ -60,9 +60,9 @@ const StyledInput = styled(Input)(() => ({
    },
 }))
 
-const StyledCustomAppBar = styled(AppBar)(() => ({
+const StyledCustomAppBar = styled(Box)(() => ({
    backgroundColor: 'white',
-   width: '81.35%',
+   // width: '81.35%',
 }))
 
 const StyledNotificationIcon = styled('img')(() => ({
