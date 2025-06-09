@@ -3,7 +3,7 @@ import { Container, Grid, Typography, Avatar, Box, styled } from '@mui/material'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { OUR_TEAM } from '../../utils/constants/index'
-import MackBook from '../../assets/images/MackBookPro.svg'
+import MackBook from '../../assets/icons/mackbook-pro.svg'
 
 const sliderSettings = {
    infinite: true,

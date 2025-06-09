@@ -1,6 +1,6 @@
-import AigerimEje from '../../assets/images/aigerim-eje.png'
-import NurgulEje from '../../assets/images/nurgulEje.png'
-import NargizaEje from '../../assets/images/nargizaEje.jpg'
+import Aigerim from '../../assets/images/aigerim.png'
+import Nurgul from '../../assets/images/nurgul.png'
+import Nargiza from '../../assets/images/nargiza.jpg'
 
 const conditions = [
    { value: '1', name: 'Все' },
@@ -45,7 +45,7 @@ const STATISTICS = [
 const OUR_TEAM = [
    {
       id: 1,
-      img: NurgulEje,
+      img: Nurgul,
       name: 'Нургуль Маданбекова',
       role: 'Front-end developer',
       borderRadius: '0 0 0 50%',
@@ -60,7 +60,7 @@ const OUR_TEAM = [
    },
    {
       id: 4,
-      img: AigerimEje,
+      img: Aigerim,
       name: 'Маматтойчуева Айгерим',
       role: 'Front-end developer',
       borderRadius: '50% 0 0  0',
@@ -74,7 +74,7 @@ const OUR_TEAM = [
    },
    {
       id: 6,
-      img: NargizaEje,
+      img: Nargiza,
       name: 'Наргиза Нааматбекова',
       role: 'Front-end developer',
       borderRadius: '50% 0',

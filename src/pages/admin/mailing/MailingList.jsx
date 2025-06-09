@@ -9,7 +9,7 @@ import Modal from '../../../components/UI/Modal'
 import Input from '../../../components/UI/Input'
 import MailingCards from '../../../components/UI/card/MailingCard'
 import Message from '../../../assets/images/Message.png'
-import NoMailings from '../../../assets/images/EmptyState.png'
+import NoMailings from '../../../assets/images/empty-state.png'
 import { FILES_ACTIONS } from '../../../store/slices/file/filesSlice'
 
 const MailingList = memo(() => {

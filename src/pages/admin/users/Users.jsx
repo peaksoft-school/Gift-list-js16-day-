@@ -33,6 +33,7 @@ const Users = () => {
    const handleDeleteUser = () => {
       if (selectedUserId) {
          dispatch(USERS_THUNK.deleteUser({ id: selectedUserId }))
+
          handleCloseModal()
       }
    }
@@ -100,6 +101,8 @@ const Users = () => {
 export default Users
 
 const StyledBox = styled(Box)(() => ({
+   width: '100vw',
+   height: '100vh',
    padding: '110px 0 0 18rem',
    fontFamily: 'Inter',
    display: 'flex',
