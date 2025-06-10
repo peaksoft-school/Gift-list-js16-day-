@@ -56,7 +56,7 @@ const SignIn = () => {
          rememberMe: false,
       }
 
-      dispatch(AUTH_THUNK.signIn(loginValues, navigate))
+      dispatch(AUTH_THUNK.signIn({ loginValues, navigate }))
    }
 
    const { values, handleChange, handleSubmit, handleBlur, touched, errors } =

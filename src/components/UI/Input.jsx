@@ -5,7 +5,6 @@ import {
    InputLabel,
    TextField,
    styled,
-   IconButton,
 } from '@mui/material'
 import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded'
 import UnionIcon from '../../assets/icons/Union.svg'

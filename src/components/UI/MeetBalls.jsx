@@ -19,11 +19,13 @@ const MeatBalls = ({
 
       setAnchorEl(e.currentTarget)
    }
+
    const handleClose = (e) => {
       e.stopPropagation()
 
       setAnchorEl(null)
    }
+
    return (
       <>
          <IconButton onClick={handleClick}>
@@ -45,12 +47,10 @@ const MeatBalls = ({
                   onClick={(e) => {
                      e.stopPropagation()
                      handleClose(e)
-                     onChange(e)
+                     if (onChange) onChange(title)
                   }}
-                  value={title}
                >
-                  <img src={Icon} alt="${title}-icon" />
-
+                  <img src={Icon} alt={`${title}-icon`} />
                   {title}
                </StyledMenuItem>
             ))}
