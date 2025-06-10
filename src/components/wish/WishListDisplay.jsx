@@ -9,12 +9,13 @@ import { Outlet, useNavigate } from 'react-router'
 const WishListDisplay = () => {
    const navigate = useNavigate()
    const dispatch = useDispatch()
-   const { wishes, isLoading, error } = useSelector((state) => state.wish)
+   const { wishes = [], isLoading, error } = useSelector((state) => state.wish || {})
+
    const [editingWish, setEditingWish] = useState(null)
 
    useEffect(() => {
       dispatch(WISH_THUNK.getWishes())
-   }, [dispatch])
+   }, [dispatch]) 
 
    const handleEditClick = (wish) => {
       setEditingWish(wish)

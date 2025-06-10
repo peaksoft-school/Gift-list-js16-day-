@@ -3,17 +3,14 @@ import { axiosInstance } from '../../configs/axiosInstance'
 
 const addWish = createAsyncThunk(
    'wish/addWish',
-   async (values, { rejectWithValue }) => {
-      console.log(values, 'aliahn')
-
+   async (wishData, { rejectWithValue }) => {
       try {
-         const { data } = await axiosInstance.post('/api/wish', values)
-
-         return data
+         const response = await axiosInstance.post('/api/wish', wishData)
+         return response.data
       } catch (error) {
-         return rejectWithValue({
-            message: error.response?.data?.message || error.message,
-         })
+         return rejectWithValue(
+            error.response?.data?.message || 'Ошибка при добавлении желания'
+         )
       }
    }
 )
@@ -22,12 +19,12 @@ const getWishes = createAsyncThunk(
    'wish/getWishes',
    async (_, { rejectWithValue }) => {
       try {
-         const { data } = await axiosInstance.get('/api/wish/list')
-         return data
+         const response = await axiosInstance.get('/api/wish')
+         return response.data
       } catch (error) {
-         return rejectWithValue({
-            message: error.response?.data?.message || error.message,
-         })
+         return rejectWithValue(
+            error.response?.data?.message || 'Ошибка при загрузке желаний'
+         )
       }
    }
 )
@@ -36,45 +33,48 @@ const getWishById = createAsyncThunk(
    'wish/getWishById',
    async (id, { rejectWithValue }) => {
       try {
-         const { data } = await axiosInstance.get(`/api/wish/${id}`)
-         return data
+         const response = await axiosInstance.get(`/api/wish/${id}`)
+         return response.data
       } catch (error) {
-         return rejectWithValue({
-            message: error.response?.data?.message || error.message,
-         })
+         return rejectWithValue(
+            error.response?.data?.message || 'Ошибка при загрузке желания'
+         )
       }
    }
 )
 
 const updateWish = createAsyncThunk(
    'wish/updateWish',
-   async ({ id, values }, { rejectWithValue }) => {
+   async ({ wishId, wishData }, { rejectWithValue }) => {
       try {
-         const { data } = await axiosInstance.put(`/api/wish`, {
-            id,
-            ...values,
-         })
-         return data
+         const response = await axiosInstance.put(
+            `/api/wish/${wishId}`,
+            wishData
+         )
+         return response.data
       } catch (error) {
-         return rejectWithValue({
-            message: error.response?.data?.message || error.message,
-         })
+         return rejectWithValue(
+            error.response?.data?.message || 'Ошибка при обновлении желания'
+         )
       }
    }
 )
+
+// GET запрос для получения праздников
 const getHolidays = createAsyncThunk(
    'wish/getHolidays',
    async (_, { rejectWithValue }) => {
       try {
-         const { data } = await axiosInstance.get('/api/holidays')
-         return data
+         const response = await axiosInstance.get('/api/holidays')
+         return response.data
       } catch (error) {
-         return rejectWithValue({
-            message: error.response?.data?.message || error.message,
-         })
+         return rejectWithValue(
+            error.response?.data?.message || 'Ошибка при загрузке праздников'
+         )
       }
    }
 )
+
 export const WISH_THUNK = {
    addWish,
    getWishes,

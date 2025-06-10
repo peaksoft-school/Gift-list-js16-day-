@@ -1,64 +1,84 @@
-import React from 'react'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { styled } from '@mui/material'
+import Button from '../UI/Button'
+import { WISH_THUNK } from '../../store/wish/wishThunk'
 
-const WishCard = ({ wish }) => {
-   const formatDate = (dateString) => {
-      try {
-         if (!dateString) return ''
+const WishCard = ({ wish, onEdit }) => {
+   const dispatch = useDispatch()
+   const [isDeleting, setIsDeleting] = useState(false)
 
-         const date = new Date(dateString)
-
-         if (isNaN(date.getTime())) return dateString
-
-         const day = date.getDate().toString().padStart(2, '0')
-         const month = (date.getMonth() + 1).toString().padStart(2, '0')
-         const year = date.getFullYear().toString().slice(2)
-
-         return `${day}.${month}.${year}`
-      } catch (e) {
-         return dateString
+   const handleDeleteClick = async () => {
+      if (window.confirm('Вы уверены, что хотите удалить это желание?')) {
+         setIsDeleting(true)
+         try {
+            await dispatch(WISH_THUNK.deleteWish(wish.id)).unwrap()
+         } catch (error) {
+            console.error('Ошибка при удалении желания:', error)
+         } finally {
+            setIsDeleting(false)
+         }
       }
    }
 
-   const getStatusText = (status) => {
-      const statusMap = {
-         pending: 'В ожидании',
-         fulfilled: 'Исполнено',
-         cancelled: 'Отменено',
-      }
-      return statusMap[status] || 'В ожидании'
+   const handleEditClick = () => {
+      onEdit(wish)
    }
 
    return (
       <CardContainer>
-         <CardImageContainer>
+         <ImageContainer>
             {wish.image ? (
-               <CardImage src={wish.image} alt={wish.name} />
+               <WishImage src={wish.image} alt={wish.name} />
             ) : (
-               <CardPlaceholder>
-                  <CardPlaceholderText>Нет изображения</CardPlaceholderText>
-               </CardPlaceholder>
+               <NoImage>Нет изображения</NoImage>
             )}
-         </CardImageContainer>
+         </ImageContainer>
 
          <CardContent>
-            <CardTitle>{wish.name || 'Название подарка'}</CardTitle>
+            <WishName>{wish.name}</WishName>
 
-            <CardMeta>
-               <CardMetaItem>
-                  <CardMetaLabel>
-                     {wish.holidayName || 'День рождения'}
-                  </CardMetaLabel>
-                  <CardMetaDate>
-                     {formatDate(wish.holidayDate) || '01.01.23'}
-                  </CardMetaDate>
-               </CardMetaItem>
+            <MetaSection>
+               <MetaItem>
+                  <MetaLabel>Праздник:</MetaLabel>
+                  <MetaValue>{wish.holidayName || 'Не указан'}</MetaValue>
+               </MetaItem>
+               <MetaItem>
+                  <MetaLabel>Дата:</MetaLabel>
+                  <MetaValue>{wish.holidayDate || 'Не указана'}</MetaValue>
+               </MetaItem>
+            </MetaSection>
 
-               <CardStatusContainer>
-                  <CardStatus>{getStatusText(wish.status)}</CardStatus>
-                  <CardMenu>•••</CardMenu>
-               </CardStatusContainer>
-            </CardMeta>
+            {wish.description && <Description>{wish.description}</Description>}
+
+            {wish.link && (
+               <ProductLink
+                  href={wish.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+               >
+                  Посмотреть товар
+               </ProductLink>
+            )}
+
+            <ActionButtons>
+               <Button
+                  variant="outlined"
+                  onClick={handleEditClick}
+                  size="small"
+               >
+                  Редактировать
+               </Button>
+               <Button
+                  variant="outlined"
+                  color="error"
+                  onClick={handleDeleteClick}
+                  disabled={isDeleting}
+                  size="small"
+               >
+                  {isDeleting ? 'Удаление...' : 'Удалить'}
+               </Button>
+            </ActionButtons>
          </CardContent>
       </CardContainer>
    )
@@ -66,107 +86,108 @@ const WishCard = ({ wish }) => {
 
 export default WishCard
 
+// Styles
 const CardContainer = styled('div')({
-   width: '100%',
-   borderRadius: '8px',
-   overflow: 'hidden',
    backgroundColor: '#fff',
-   boxShadow: '0 2px 6px rgba(0, 0, 0, 0.08)',
+   borderRadius: '12px',
+   overflow: 'hidden',
+   boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
+   display: 'flex',
+   flexDirection: 'column',
    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
    '&:hover': {
-      transform: 'translateY(-4px)',
-      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.12)',
+      transform: 'translateY(-2px)',
+      boxShadow: '0 4px 16px rgba(0, 0, 0, 0.12)',
    },
 })
 
-const CardImageContainer = styled('div')({
-   width: '100%',
+const ImageContainer = styled('div')({
    height: '180px',
+   overflow: 'hidden',
+   backgroundColor: '#f3f4f8',
    position: 'relative',
-   backgroundColor: '#f5f6f8',
 })
 
-const CardImage = styled('img')({
+const WishImage = styled('img')({
    width: '100%',
    height: '100%',
    objectFit: 'cover',
-   objectPosition: 'center',
+   transition: 'transform 0.2s ease',
+   '&:hover': {
+      transform: 'scale(1.05)',
+   },
 })
 
-const CardPlaceholder = styled('div')({
+const NoImage = styled('div')({
    width: '100%',
    height: '100%',
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'center',
-})
-
-const CardPlaceholderText = styled('span')({
    color: '#b0b7c3',
    fontSize: '14px',
+   fontWeight: 500,
 })
 
 const CardContent = styled('div')({
    padding: '16px',
-})
-
-const CardTitle = styled('h3')({
-   fontSize: '16px',
-   fontWeight: '500',
-   margin: '0 0 8px 0',
-   color: '#333',
-   overflow: 'hidden',
-   textOverflow: 'ellipsis',
-   whiteSpace: 'nowrap',
-})
-
-const CardMeta = styled('div')({
-   display: 'flex',
-   justifyContent: 'space-between',
-   alignItems: 'center',
-})
-
-const CardMetaItem = styled('div')({
    display: 'flex',
    flexDirection: 'column',
+   flexGrow: 1,
 })
 
-const CardMetaLabel = styled('span')({
+const WishName = styled('h3')({
+   fontSize: '16px',
+   fontWeight: 600,
+   marginTop: 0,
+   marginBottom: '12px',
+   color: '#333',
+   lineHeight: '1.4',
+})
+
+const MetaSection = styled('div')({
+   marginBottom: '12px',
+})
+
+const MetaItem = styled('div')({
+   display: 'flex',
    fontSize: '14px',
-   color: '#2ecc71',
-   marginBottom: '2px',
+   marginBottom: '4px',
+   alignItems: 'center',
 })
 
-const CardMetaDate = styled('span')({
+const MetaLabel = styled('span')({
+   fontWeight: 500,
+   marginRight: '8px',
+   color: '#666',
+   minWidth: '70px',
+})
+
+const MetaValue = styled('span')({
+   color: '#333',
+})
+
+const Description = styled('p')({
    fontSize: '14px',
    color: '#666',
+   margin: '12px 0',
+   lineHeight: '1.5',
 })
 
-const CardStatusContainer = styled('div')({
-   display: 'flex',
-   alignItems: 'center',
-   gap: '8px',
-})
-
-const CardStatus = styled('span')({
+const ProductLink = styled('a')({
    fontSize: '14px',
-   color: '#777',
-})
-
-const CardMenu = styled('button')({
-   background: 'none',
-   border: 'none',
-   color: '#777',
-   cursor: 'pointer',
-   fontSize: '14px',
-   fontWeight: 'bold',
-   padding: '0',
-   display: 'flex',
-   alignItems: 'center',
-   justifyContent: 'center',
-   width: '24px',
-   height: '24px',
+   color: '#2196f3',
+   textDecoration: 'none',
+   marginBottom: '16px',
+   fontWeight: 500,
    '&:hover': {
-      color: '#333',
+      textDecoration: 'underline',
    },
+})
+
+const ActionButtons = styled('div')({
+   display: 'flex',
+   gap: '8px',
+   marginTop: 'auto',
+   justifyContent: 'flex-end',
 })

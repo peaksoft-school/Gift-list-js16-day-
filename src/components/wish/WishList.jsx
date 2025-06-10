@@ -8,8 +8,9 @@ import { WISH_THUNK } from '../../store/wish/wishThunk'
 
 const WishList = () => {
    const dispatch = useDispatch()
-   const holidays = useSelector((state) => state.wish.holidays)
-   const { isLoading, error } = useSelector((state) => state.wish)
+   const holidays = useSelector((state) => state.wish?.holidays ?? [])
+   const { isLoading, error } = useSelector((state) => state.wish ?? {});
+
 
    const {
       control,
@@ -23,7 +24,7 @@ const WishList = () => {
          name: '',
          image: '',
          link: '',
-         holidayId: 0,
+         holidayId: 1,
          holidayDate: '',
          description: '',
       },

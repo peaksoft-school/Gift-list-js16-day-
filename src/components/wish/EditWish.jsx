@@ -1,311 +1,272 @@
 import { useState, useEffect } from 'react'
-import { useForm, Controller } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { styled } from '@mui/material'
-import Input from '../UI/Input'
 import Button from '../UI/Button'
 import { WISH_THUNK } from '../../store/wish/wishThunk'
-import { WISH_ACTIONS } from '../../store/wish/wishSlice'
 
 const EditWish = ({ wish, onClose }) => {
    const dispatch = useDispatch()
-   const { isLoading, error } = useSelector((state) => state.wish)
+   const { holidays, isLoading } = useSelector((state) => state.wish || {})
 
-   const {
-      control,
-      handleSubmit,
-      formState: { errors },
-      setValue,
-      watch,
-   } = useForm({
-      defaultValues: {
-         name: wish.name || '',
-         link: wish.link || '',
-         holidayName: wish.holidayName || '',
-         holidayDate: wish.holidayDate || '',
-         description: wish.description || '',
-         image: wish.image || '',
-      },
+   const [formData, setFormData] = useState({
+      name: wish?.name || '',
+      description: wish?.description || '',
+      image: wish?.image || '',
+      link: wish?.link || '',
+      holidayName: wish?.holidayName || '',
+      holidayDate: wish?.holidayDate || '',
    })
 
-   const [imagePreview, setImagePreview] = useState(wish.image || null)
-   const imageValue = watch('image')
+   useEffect(() => {
+      dispatch(WISH_THUNK.getHolidays())
+   }, [dispatch])
 
-   const onFileChange = (e) => {
-      const file = e.target.files[0]
-      if (!file) return
-
-      const reader = new FileReader()
-      reader.onloadend = () => {
-         setValue('image', reader.result, { shouldValidate: true })
-         setImagePreview(reader.result)
-      }
-      reader.readAsDataURL(file)
+   const handleInputChange = (e) => {
+      const { name, value } = e.target
+      setFormData((prev) => ({
+         ...prev,
+         [name]: value,
+      }))
    }
 
-   const onSubmit = async (data) => {
-      const resultAction = await dispatch(
-         WISH_THUNK.updateWish({
-            id: wish.id,
-            values: data,
-         })
-      )
-
-      if (WISH_THUNK.updateWish.fulfilled.match(resultAction)) {
+   const handleSubmit = async (e) => {
+      e.preventDefault()
+      try {
+         await dispatch(
+            WISH_THUNK.updateWish({
+               wishId: wish.id,
+               wishData: formData,
+            })
+         ).unwrap()
          onClose()
+      } catch (error) {
+         console.error('Ошибка при обновлении желания:', error)
       }
    }
 
    return (
-      <MainStyled>
-         <TitleRow>
-            <Title>Редактирование желания</Title>
-            <Button variant="outlined" onClick={onClose}>
-               Вернуться к списку
-            </Button>
-         </TitleRow>
+      <ModalOverlay>
+         <ModalContent>
+            <ModalHeader>
+               <ModalTitle>Редактировать желание</ModalTitle>
+               <CloseButton onClick={onClose}>×</CloseButton>
+            </ModalHeader>
 
-         <FormWrapper onSubmit={handleSubmit(onSubmit)}>
-            <ImageUpload>
-               <ImageLabel htmlFor="upload-photo">
-                  {imagePreview ? (
-                     <img
-                        src={imagePreview}
-                        alt="Выбранное фото"
-                        style={{
-                           width: '100%',
-                           height: '100%',
-                           borderRadius: 12,
-                           objectFit: 'cover',
-                        }}
-                     />
-                  ) : (
-                     <>
-                        <ImageIcon>+</ImageIcon>
-                        <ImageText>Нажмите для добавления фотографии</ImageText>
-                     </>
-                  )}
-                  <input
-                     type="file"
-                     id="upload-photo"
-                     style={{ display: 'none' }}
-                     accept="image/*"
-                     onChange={onFileChange}
-                  />
-               </ImageLabel>
-            </ImageUpload>
-
-            <FormFields>
-               <FormTitle>Редактирование желаемого подарка</FormTitle>
-
-               <Row>
-                  <Controller
+            <Form onSubmit={handleSubmit}>
+               <FormGroup>
+                  <Label htmlFor="name">Название желания *</Label>
+                  <Input
+                     id="name"
                      name="name"
-                     control={control}
-                     rules={{ required: 'Введите название подарка' }}
-                     render={({ field }) => (
-                        <InputStyled
-                           {...field}
-                           placeholder="Введите название подарка"
-                           label="Название подарка"
-                           error={!!errors.name}
-                           helperText={errors.name?.message}
-                        />
-                     )}
+                     type="text"
+                     value={formData.name}
+                     onChange={handleInputChange}
+                     required
+                     placeholder="Введите название желания"
                   />
-                  <Controller
+               </FormGroup>
+
+               <FormGroup>
+                  <Label htmlFor="description">Описание</Label>
+                  <Textarea
+                     id="description"
+                     name="description"
+                     value={formData.description}
+                     onChange={handleInputChange}
+                     placeholder="Опишите ваше желание"
+                     rows={3}
+                  />
+               </FormGroup>
+
+               <FormGroup>
+                  <Label htmlFor="image">Изображение (URL)</Label>
+                  <Input
+                     id="image"
+                     name="image"
+                     type="url"
+                     value={formData.image}
+                     onChange={handleInputChange}
+                     placeholder="Ссылка на изображение"
+                  />
+               </FormGroup>
+
+               <FormGroup>
+                  <Label htmlFor="link">Ссылка на товар</Label>
+                  <Input
+                     id="link"
                      name="link"
-                     control={control}
-                     render={({ field }) => (
-                        <InputStyled
-                           {...field}
-                           placeholder="Вставьте ссылку на подарок"
-                           label="Ссылка на подарок"
-                        />
-                     )}
+                     type="url"
+                     value={formData.link}
+                     onChange={handleInputChange}
+                     placeholder="Ссылка где можно купить"
                   />
-               </Row>
+               </FormGroup>
 
-               <Row>
-                  <Controller
-                     name="holidayName"
-                     control={control}
-                     rules={{ required: 'Выберите праздник' }}
-                     render={({ field }) => (
-                        <SelectStyled {...field}>
-                           <option value="">Выберите праздник</option>
-                           <option value="День рождения">День рождения</option>
-                           <option value="Новый год">Новый год</option>
-                           <option value="8 марта">8 марта</option>
-                        </SelectStyled>
-                     )}
-                  />
-                  <Controller
-                     name="holidayDate"
-                     control={control}
-                     rules={{ required: 'Укажите дату праздника' }}
-                     render={({ field }) => (
-                        <InputStyled
-                           {...field}
-                           placeholder="Укажите дату праздника"
-                           label="Дата праздника"
-                           error={!!errors.holidayDate}
-                           helperText={errors.holidayDate?.message}
-                        />
-                     )}
-                  />
-               </Row>
+               <FormRow>
+                  <FormGroup>
+                     <Label htmlFor="holidayName">Праздник</Label>
+                     <Select
+                        id="holidayName"
+                        name="holidayName"
+                        value={formData.holidayName}
+                        onChange={handleInputChange}
+                     >
+                        <option value="">Выберите праздник</option>
+                        {holidays.map((holiday) => (
+                           <option key={holiday.id} value={holiday.name}>
+                              {holiday.name}
+                           </option>
+                        ))}
+                     </Select>
+                  </FormGroup>
 
-               {errors.holidayName && (
-                  <ErrorText>{errors.holidayName.message}</ErrorText>
-               )}
-
-               <Controller
-                  name="description"
-                  control={control}
-                  render={({ field }) => (
-                     <DescriptionInput
-                        {...field}
-                        placeholder="Введите описание подарка"
-                        rows={4}
+                  <FormGroup>
+                     <Label htmlFor="holidayDate">Дата праздника</Label>
+                     <Input
+                        id="holidayDate"
+                        name="holidayDate"
+                        type="date"
+                        value={formData.holidayDate}
+                        onChange={handleInputChange}
                      />
-                  )}
-               />
-
-               {error && <ErrorText>{error}</ErrorText>}
+                  </FormGroup>
+               </FormRow>
 
                <ButtonRow>
-                  <Button
-                     variant="warning"
-                     type="button"
-                     onClick={onClose}
-                     disabled={isLoading}
-                  >
-                     ОТМЕНА
+                  <Button type="button" variant="outlined" onClick={onClose}>
+                     Отмена
                   </Button>
-                  <Button variant="outlined" type="submit" disabled={isLoading}>
-                     {isLoading ? 'СОХРАНЕНИЕ...' : 'СОХРАНИТЬ ИЗМЕНЕНИЯ'}
+                  <Button
+                     type="submit"
+                     variant="contained"
+                     disabled={isLoading || !formData.name.trim()}
+                  >
+                     {isLoading ? 'Сохранение...' : 'Сохранить'}
                   </Button>
                </ButtonRow>
-            </FormFields>
-         </FormWrapper>
-      </MainStyled>
+            </Form>
+         </ModalContent>
+      </ModalOverlay>
    )
 }
 
 export default EditWish
 
-const MainStyled = styled('div')({
-   padding: '32px',
-   background: '#fafbfc',
-   minHeight: '100vh',
+// Styles
+const ModalOverlay = styled('div')({
+   position: 'fixed',
+   top: 0,
+   left: 0,
+   right: 0,
+   bottom: 0,
+   backgroundColor: 'rgba(0, 0, 0, 0.5)',
+   display: 'flex',
+   alignItems: 'center',
+   justifyContent: 'center',
+   zIndex: 1000,
 })
 
-const TitleRow = styled('div')({
+const ModalContent = styled('div')({
+   backgroundColor: '#fff',
+   borderRadius: '12px',
+   padding: '24px',
+   width: '90%',
+   maxWidth: '600px',
+   maxHeight: '90vh',
+   overflow: 'auto',
+})
+
+const ModalHeader = styled('div')({
    display: 'flex',
    justifyContent: 'space-between',
    alignItems: 'center',
    marginBottom: '24px',
 })
 
-const Title = styled('h2')({
-   fontWeight: 700,
-   fontSize: '20px',
+const ModalTitle = styled('h2')({
    margin: 0,
-})
-
-const FormWrapper = styled('form')({
-   display: 'flex',
-   gap: '32px',
-   alignItems: 'flex-start',
-})
-
-const ImageUpload = styled('div')({
-   width: '160px',
-   height: '160px',
-   background: '#f3f4f8',
-   borderRadius: '12px',
-   display: 'flex',
-   alignItems: 'center',
-   justifyContent: 'center',
-   border: '1px dashed #cfd8dc',
-   overflow: 'hidden',
-})
-
-const ImageLabel = styled('label')({
-   display: 'flex',
-   flexDirection: 'column',
-   alignItems: 'center',
-   cursor: 'pointer',
-   width: '100%',
-   height: '100%',
-})
-
-const ImageIcon = styled('div')({
-   fontSize: '32px',
-   color: '#b0b7c3',
-   marginBottom: '8px',
-})
-
-const ImageText = styled('span')({
-   color: '#b0b7c3',
-   fontSize: '14px',
-   textAlign: 'center',
-   padding: '0 8px',
-})
-
-const FormFields = styled('div')({
-   flex: 1,
-   display: 'flex',
-   flexDirection: 'column',
-   gap: '16px',
-})
-
-const FormTitle = styled('div')({
+   fontSize: '20px',
    fontWeight: 600,
-   fontSize: '16px',
-   marginBottom: '8px',
 })
 
-const Row = styled('div')({
+const CloseButton = styled('button')({
+   background: 'none',
+   border: 'none',
+   fontSize: '24px',
+   cursor: 'pointer',
+   padding: '4px',
+   color: '#666',
+   '&:hover': {
+      color: '#333',
+   },
+})
+
+const Form = styled('form')({
    display: 'flex',
+   flexDirection: 'column',
    gap: '16px',
-   alignItems: 'center',
 })
 
-const InputStyled = styled(Input)({
-   flex: 1,
+const FormGroup = styled('div')({
+   display: 'flex',
+   flexDirection: 'column',
+   gap: '8px',
 })
 
-const SelectStyled = styled('select')({
-   flex: 1,
-   padding: '10px',
-   borderRadius: '6px',
-   border: '1px solid #e0e3e6',
+const FormRow = styled('div')({
+   display: 'grid',
+   gridTemplateColumns: '1fr 1fr',
+   gap: '16px',
+   '@media (max-width: 600px)': {
+      gridTemplateColumns: '1fr',
+   },
+})
+
+const Label = styled('label')({
    fontSize: '14px',
-   background: '#fff',
+   fontWeight: 500,
+   color: '#333',
 })
 
-const DescriptionInput = styled('textarea')({
-   width: '100%',
+const Input = styled('input')({
    padding: '12px',
-   borderRadius: '6px',
-   border: '1px solid #e0e3e6',
+   border: '1px solid #ddd',
+   borderRadius: '8px',
+   fontSize: '14px',
+   '&:focus': {
+      outline: 'none',
+      borderColor: '#2196f3',
+   },
+})
+
+const Textarea = styled('textarea')({
+   padding: '12px',
+   border: '1px solid #ddd',
+   borderRadius: '8px',
    fontSize: '14px',
    resize: 'vertical',
-   minHeight: '80px',
+   fontFamily: 'inherit',
+   '&:focus': {
+      outline: 'none',
+      borderColor: '#2196f3',
+   },
+})
+
+const Select = styled('select')({
+   padding: '12px',
+   border: '1px solid #ddd',
+   borderRadius: '8px',
+   fontSize: '14px',
+   backgroundColor: '#fff',
+   '&:focus': {
+      outline: 'none',
+      borderColor: '#2196f3',
+   },
 })
 
 const ButtonRow = styled('div')({
    display: 'flex',
-   gap: '16px',
    justifyContent: 'flex-end',
-   marginTop: '16px',
-})
-
-const ErrorText = styled('span')({
-   color: 'red',
-   fontSize: '12px',
-   marginLeft: 8,
-   alignSelf: 'flex-start',
+   gap: '12px',
+   marginTop: '24px',
 })

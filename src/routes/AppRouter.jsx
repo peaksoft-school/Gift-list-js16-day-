@@ -10,6 +10,8 @@ import MailingList from '../pages/admin/mailing/MailingList'
 import InnerMailing from '../components/admin/mailings/InnerMailing'
 import HolidaysList from '../components/UI/holidays/HolidaysList'
 import HolidaysDescription from '../components/UI/holidays/HolidaysDescription'
+import WishList from '../components/wish/WishList'
+import WishListDisplay from '../components/wish/WishListDisplay'
 
 const Home = lazy(() => import('../pages/home/Home'))
 const ResetPassword = lazy(() => import('../pages/resetPassword/ResetPassword'))
@@ -17,7 +19,9 @@ const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
 const SignUp = lazy(() => import('../pages/sign-up/SignUp'))
 const Admin = lazy(() => import('../layout/admin/AdminLayout'))
 const User = lazy(() => import('../layout/user/UserLayout'))
-const ForgotPassword = lazy(() => import('../pages/forgotPassword/ForgotRassword'))
+const ForgotPassword = lazy(
+   () => import('../pages/forgotPassword/ForgotRassword')
+)
 
 const AppRouter = () => (
    <Routes>
@@ -110,11 +114,12 @@ const AppRouter = () => (
       >
          <Route path="lenta" index element={<h1>Friends</h1>} />
          <Route path="friends" element={<h1>Friends</h1>} />
-         <Route path="list" element={<h1>Friends</h1>} />
+         <Route path="list" element={<WishListDisplay />} />
          <Route path="booking" element={<h1>Friends</h1>} />
          <Route path="my-part" element={<HolidaysList />} />
          <Route path="my-part/:id" element={<HolidaysDescription />} />
          <Route path="charity" element={<Blago />} />
+         <Route path="list/create-wish" element={<WishList />} />
       </Route>
    </Routes>
 )
