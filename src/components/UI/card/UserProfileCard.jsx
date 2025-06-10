@@ -4,8 +4,11 @@ import TelegramIcon from '../../../assets/icons/telegram.svg'
 import FacebookIcon from '../../../assets/icons/facebook.svg'
 import WKIcon from '../../../assets/icons/telegram-1.svg'
 import Button from '../../UI/Button'
+import DeleteModal from '../modal/DeleteModal'
+import { set } from 'react-hook-form'
+import { useState } from 'react'
 
-const UserProfileCard = ({ user }) => {
+const UserProfileCard = ({ user, onDelete }) => {
    const {
       firstname,
       lastname,
@@ -18,12 +21,17 @@ const UserProfileCard = ({ user }) => {
       shoeSize,
       hobby,
       importantNotes,
+      id,
    } = user
 
    const newDateOfBirth = dateOfBirth.split('-').reverse().join('.')
 
+   const [isVisible, setIsVisible] = useState(false)
+
+   const handleIsVisible = () => setIsVisible((prev) => !prev)
+
    return (
-      <StyledContent>
+      <StyledContent key={id}>
          <Box className="user-content">
             <Box className="image-container">
                <img
@@ -118,9 +126,20 @@ const UserProfileCard = ({ user }) => {
          </Box>
 
          <Box className="buttons-container">
-            <Button variant="warning">Удалить</Button>
+            <Button variant="warning" onClick={() => handleIsVisible()}>
+               Удалить
+            </Button>
+
             <Button variant="outlined">Заблокировать</Button>
          </Box>
+
+         <DeleteModal
+            open={isVisible}
+            onClose={handleIsVisible}
+            onDelete={onDelete}
+            selectedUser={user}
+            selectedUserId={id}
+         />
       </StyledContent>
    )
 }

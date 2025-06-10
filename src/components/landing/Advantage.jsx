@@ -1,10 +1,12 @@
+import { useNavigate } from 'react-router'
 import { Box, Container, Stack, Typography, styled } from '@mui/material'
 import { Favorite, ThumbUp, VolunteerActivism } from '@mui/icons-material'
 import Button from '../UI/Button'
-import { useNavigate } from 'react-router'
 
 const Advantage = () => {
    const navigate = useNavigate()
+
+   const handleNavigate = () => navigate('/sign-up')
 
    return (
       <StyledBox>
@@ -66,7 +68,7 @@ const Advantage = () => {
             </StyledStack>
          </StyledContainer>
 
-         <Button variant="outlined" onClick={() => navigate('/sign-up')}>
+         <Button variant="outlined" onClick={handleNavigate}>
             ЗАРЕГИСТРИРОВАТЬСЯ
          </Button>
       </StyledBox>

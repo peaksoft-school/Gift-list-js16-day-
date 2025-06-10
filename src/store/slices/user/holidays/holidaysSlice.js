@@ -3,7 +3,7 @@ import { HOLIDAYS_THUNK } from './holidaysThunk'
 
 const initialState = {
    holidays: [],
-   holidaysss: {},
+   holiday: {},
    loading: false,
    error: null,
 }
@@ -12,6 +12,7 @@ const holidaysSlice = createSlice({
    name: 'holidays',
    initialState,
    reducers: {},
+
    extraReducers: (builder) => {
       builder
          .addCase(
@@ -21,26 +22,31 @@ const holidaysSlice = createSlice({
                state.loading = false
             }
          )
+
          .addCase(HOLIDAYS_THUNK.getAllHolidays.pending, (state) => {
             state.loading = true
          })
+
          .addCase(HOLIDAYS_THUNK.getAllHolidays.rejected, (state) => {
             state.loading = false
          })
 
          .addCase(HOLIDAYS_THUNK.getById.fulfilled, (state, { payload }) => {
-            state.holidaysss = payload
+            state.holiday = payload
             state.loading = false
          })
+
          .addCase(HOLIDAYS_THUNK.getById.pending, (state) => {
             state.loading = true
          })
+
          .addCase(HOLIDAYS_THUNK.getById.rejected, (state) => {
             state.loading = false
          })
 
          .addCase(
-            HOLIDAYS_THUNK.createHoliday.fulfilled, (state, { payload }) => {
+            HOLIDAYS_THUNK.createHoliday.fulfilled,
+            (state, { payload }) => {
                state.holidays.push(payload)
                state.loading = false
             }
@@ -55,8 +61,6 @@ const holidaysSlice = createSlice({
    },
 })
 
-const HOLIDAYS_ACTIONS = holidaysSlice.HOLIDAYS_ACTIONS
+const HOLIDAYS_ACTIONS = holidaysSlice.actions
 
 export { holidaysSlice, HOLIDAYS_ACTIONS }
-
-export default holidaysSlice.reducer

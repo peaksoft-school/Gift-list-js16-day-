@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { axiosInstance } from '../../../configs/axiosInstance'
-
+import { axiosInstance } from '../../../../configs/axiosInstance'
 
 const getAllHolidays = createAsyncThunk(
    'holidays/getAllHolidays',
@@ -19,9 +18,11 @@ const getAllHolidays = createAsyncThunk(
 const getById = createAsyncThunk(
    'holidays/getById',
 
-   async ({ id }, { rejectWithValue }) => {
+   async ({ id, navigate }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(`/api/holidays/${id}`)
+
+         navigate(`/user/holiday/${id}`)
 
          return data
       } catch (error) {
@@ -32,13 +33,13 @@ const getById = createAsyncThunk(
 
 const createHoliday = createAsyncThunk(
    'holidays/createHoliday',
-   async (formData, { rejectWithValue }) => {
+
+   async ({ values, resetForm, handleCloseModal }, { rejectWithValue }) => {
       try {
-         const { data } = await axiosInstance.post(
-            `/api/holidays/new`,
-            formData,
-          
-         )
+         const { data } = await axiosInstance.post(`/api/holidays/new`, values)
+
+         resetForm()
+         handleCloseModal()
 
          return data
       } catch (error) {

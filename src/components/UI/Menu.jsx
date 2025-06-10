@@ -1,20 +1,19 @@
-import React, { useState } from 'react'
-import IconButton from '@mui/material/IconButton'
-import { Menu as MuiMenu } from '@mui/material'
-import MenuItem from '@mui/material/MenuItem'
-import { Box, styled } from '@mui/material'
+import { useState } from 'react'
+import {
+   Menu as MuiMenu,
+   Box,
+   styled,
+   MenuItem,
+   IconButton,
+} from '@mui/material'
 import MenuIcon from '../../../assets/images/MenuIcon.png'
 
 const Menu = ({ items }) => {
    const [block, setBlock] = useState(null)
 
-   const handleClick = (event) => {
-      setBlock(event.currentTarget)
-   }
+   const handleClick = (event) => setBlock(event.currentTarget)
 
-   const handleClose = () => {
-      setBlock(null)
-   }
+   const handleClose = () => setBlock(null)
 
    return (
       <Box>
@@ -23,14 +22,15 @@ const Menu = ({ items }) => {
          </IconButton>
 
          <MuiMenu anchorEl={block} open={Boolean(block)} onClose={handleClose}>
-            {items.map((item, index) => (
+            {items.map((item, i) => (
                <StyledMenuItem
-                  key={index}
+                  key={i}
                   onClick={() => {
                      item.onClick?.(), handleClose()
                   }}
                >
                   {item.icon && <img src={item.icon} alt="block,delete" />}
+
                   {item.label}
                </StyledMenuItem>
             ))}

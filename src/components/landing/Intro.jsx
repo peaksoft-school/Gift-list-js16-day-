@@ -73,6 +73,8 @@ const Intro = () => {
    )
 }
 
+export default Intro
+
 const StyledContiner = styled(Box)(() => ({
    display: 'flex',
    alignItems: 'center',
@@ -190,10 +192,11 @@ const StyledBorderBox = styled(Box)({
    },
 })
 
-const MainBorderBox2 = styled('div')({
+const MainBorderBox2 = styled(Box)({
    position: 'relative',
    width: '260px',
    height: '320px',
+
    '&::after': {
       content: '""',
       position: 'absolute',
@@ -214,7 +217,7 @@ const MainBorderBox2 = styled('div')({
       zIndex: 2,
    },
 })
-const DowmText = styled('div')(() => ({
+const DowmText = styled(Box)(() => ({
    writingMode: 'sideways-lr',
    marginLeft: '1140px',
    fontSize: '14px',
@@ -225,5 +228,3 @@ const DowmText = styled('div')(() => ({
       marginTop: '15px',
    },
 }))
-
-export default Intro

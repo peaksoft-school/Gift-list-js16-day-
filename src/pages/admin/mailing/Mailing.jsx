@@ -5,16 +5,19 @@ import ImageIcon from '@mui/icons-material/Image'
 import { MAILING_THUNK } from '../../../store/slices/admin/mailing/mailingThunk'
 import { FILES_THUNK } from '../../../store/slices/file/filesThunk'
 import Button from '../../../components/UI/Button'
-import Modal from '../../../components/UI/Modal'
+import Modal from '../../../components/UI/modal/Modal'
 import Input from '../../../components/UI/Input'
 import MailingCards from '../../../components/UI/card/MailingCard'
 import Message from '../../../assets/images/Message.png'
 import NoMailings from '../../../assets/images/empty-state.png'
 import { FILES_ACTIONS } from '../../../store/slices/file/filesSlice'
 
-const MailingList = memo(() => {
-   const { mailings } = useSelector((state) => state.mailing)
+const Mailing = memo(() => {
+   const { mailings, loading } = useSelector((state) => state.mailing)
+
    const { fileUrl, isLoading } = useSelector((state) => state.files)
+
+   console.log(loading, isLoading)
 
    const [subject, setSubject] = useState('')
    const [message, setMessage] = useState('')
@@ -36,6 +39,7 @@ const MailingList = memo(() => {
       }
 
       resetForm()
+
       setOpenModal(false)
    }
 
@@ -52,6 +56,7 @@ const MailingList = memo(() => {
       if (!file) return
 
       const reader = new FileReader()
+
       reader.onloadend = () => setPreview(reader.result)
       reader.readAsDataURL(file)
 
@@ -80,120 +85,114 @@ const MailingList = memo(() => {
    const isDisabled = !subject.trim() || !message.trim() || isLoading
 
    return (
-      <BlockContainer>
-         <StyledMain>
-            <HeaderRow>
-               <Typography variant="h5">Рассылка</Typography>
+      <StyledMain>
+         <HeaderRow>
+            <Typography variant="h5">Рассылка</Typography>
 
-               <StyledMainButton
+            <StyledMainButton
+               variant="outlined"
+               color="primary"
+               type="button"
+               onClick={handleOpenModal}
+            >
+               <img src={Message} alt="icon" />
+               Отправить рассылку
+            </StyledMainButton>
+         </HeaderRow>
+
+         <Modal open={openModal} onClose={handleCloseModal}>
+            <StyledDialogTitle>Создание рассылки</StyledDialogTitle>
+
+            <DialogContent>
+               <label htmlFor="upload-file">
+                  <UploadBox preview={preview}>
+                     {preview ? (
+                        <Box
+                           component="img"
+                           src={preview}
+                           alt="preview"
+                           className="photo"
+                        />
+                     ) : (
+                        <>
+                           <ImageIcon />
+
+                           <Typography>Выберите файл</Typography>
+                        </>
+                     )}
+                  </UploadBox>
+               </label>
+
+               <input
+                  type="file"
+                  id="upload-file"
+                  accept="image/*"
+                  hidden
+                  onChange={handleFileChange}
+               />
+            </DialogContent>
+
+            <label htmlFor="newsletter-input" className="newsletter-input">
+               Тема
+            </label>
+
+            <StyledInput
+               id="newsletter-input"
+               placeholder="Введите тему рассылки"
+               value={subject}
+               onChange={handleSubjectChange}
+            />
+
+            <label htmlFor="newsletter2-input" className="newsletter-input">
+               Текст рассылки
+            </label>
+
+            <StyledInput
+               id="newsletter2-input"
+               placeholder="Введите текст рассылки"
+               value={message}
+               onChange={handleMessageChange}
+            />
+
+            <ButtonContainer>
+               <StyledButton
+                  variant="warning"
+                  type="button"
+                  onClick={handleCloseModal}
+               >
+                  ОТМЕНА
+               </StyledButton>
+
+               <StyledButton
                   variant="outlined"
                   color="primary"
                   type="button"
-                  onClick={handleOpenModal}
+                  onClick={handleSubmit}
+                  disabled={isDisabled}
                >
-                  <img src={Message} alt="icon" />
-                  Отправить рассылку
-               </StyledMainButton>
-            </HeaderRow>
+                  {isLoading && loading ? 'ЗАГРУЗКА...' : 'ОТПРАВИТЬ'}
+               </StyledButton>
+            </ButtonContainer>
+         </Modal>
 
-            <Modal open={openModal} onClose={handleCloseModal}>
-               <StyledDialogTitle>Создание рассылки</StyledDialogTitle>
+         <FlexContainer>
+            {mailings?.length === 0 ? (
+               <StyledNotBlockBox>
+                  <img src={NoMailings} alt="icon" />
 
-               <DialogContent>
-                  <label htmlFor="upload-file">
-                     <UploadBox preview={preview}>
-                        {preview ? (
-                           <Box
-                              component="img"
-                              src={preview}
-                              alt="preview"
-                              className="photo"
-                           />
-                        ) : (
-                           <>
-                              <ImageIcon />
-                              <Typography>Выберите файл</Typography>
-                           </>
-                        )}
-                     </UploadBox>
-                  </label>
-
-                  <input
-                     type="file"
-                     id="upload-file"
-                     accept="image/*"
-                     hidden
-                     onChange={handleFileChange}
-                  />
-               </DialogContent>
-
-               <label htmlFor="newsletter-input" className="newsletter-input">
-                  Тема
-               </label>
-
-               <StyledInput
-                  id="newsletter-input"
-                  placeholder="Введите тему рассылки"
-                  value={subject}
-                  onChange={handleSubjectChange}
-               />
-
-               <label htmlFor="newsletter2-input" className="newsletter-input">
-                  Текст рассылки
-               </label>
-
-               <StyledInput
-                  id="newsletter2-input"
-                  placeholder="Введите текст рассылки"
-                  value={message}
-                  onChange={handleMessageChange}
-               />
-
-               <ButtonContainer>
-                  <StyledButton
-                     variant="warning"
-                     type="button"
-                     onClick={handleCloseModal}
-                  >
-                     ОТМЕНА
-                  </StyledButton>
-
-                  <StyledButton
-                     variant="outlined"
-                     color="primary"
-                     type="button"
-                     onClick={handleSubmit}
-                     disabled={isDisabled}
-                  >
-                     {isLoading ? 'ЗАГРУЗКА...' : 'ОТПРАВИТЬ'}
-                  </StyledButton>
-               </ButtonContainer>
-            </Modal>
-
-            <FlexContainer>
-               {mailings?.length === 0 ? (
-                  <StyledNotBlockBox>
-                     <img src={NoMailings} alt="icon" />
-
-                     <h1>Нет рассылок!</h1>
-                  </StyledNotBlockBox>
-               ) : (
-                  mailings?.map((mailing) => (
-                     <MailingCards mailing={mailing} key={mailing.id} />
-                  ))
-               )}
-            </FlexContainer>
-         </StyledMain>
-      </BlockContainer>
+                  <h1>Нет рассылок!</h1>
+               </StyledNotBlockBox>
+            ) : (
+               mailings?.map((mailing) => (
+                  <MailingCards mailing={mailing} key={mailing.id} />
+               ))
+            )}
+         </FlexContainer>
+      </StyledMain>
    )
 })
 
-export default MailingList
-
-const BlockContainer = styled(Box)(() => ({
-   display: 'flex',
-   width: '100%',
-}))
+export default Mailing
 
 const StyledMainButton = styled(Button)(() => ({
    '&.MuiButton-root': {
@@ -208,9 +207,8 @@ const StyledMainButton = styled(Button)(() => ({
 }))
 
 const StyledMain = styled(Box)(() => ({
-   margin: '65px 0 0 17.8rem',
    background: '#F7F8FA',
-   width: '100%',
+   margin: '0 20px',
 
    '& .newsletter-input': {
       color: '#676767',
@@ -221,8 +219,6 @@ const HeaderRow = styled(Box)(() => ({
    display: 'flex',
    justifyContent: 'space-between',
    alignItems: 'center',
-   marginBottom: '16px',
-   padding: '10px',
 }))
 
 const FlexContainer = styled(Box)(() => ({

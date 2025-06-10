@@ -62,6 +62,7 @@ const AboutUs = () => (
                               borderRadius={borderRadius}
                            />
                         </AvatarWrapper>
+
                         <TeamName>
                            {name},<br /> {role} <br />
                            {company}

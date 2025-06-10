@@ -14,7 +14,7 @@ const Modal = ({ open, onClose, children }) => (
    >
       <Fade in={open}>
          <Box sx={style}>
-            <Box mt={2}>{children}</Box>
+            <Box>{children}</Box>
          </Box>
       </Fade>
    </MuiModal>

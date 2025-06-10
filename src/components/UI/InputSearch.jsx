@@ -7,7 +7,7 @@ import {
    conditions,
    countries,
    subcategories,
-} from '../../../utils/constants/index'
+} from '../../utils/constants/index'
 import Select from './Select'
 
 const InputSearch = () => {
@@ -73,6 +73,8 @@ const InputSearch = () => {
    )
 }
 
+export default InputSearch
+
 const MainBox = styled(Box)({
    display: 'flex',
    alignItems: 'center',
@@ -98,5 +100,3 @@ const MainInputSearch = styled(TextField)({
    padding: '6px 12px',
    '& input::placeholder': { color: 'gray', opacity: 1 },
 })
-
-export default InputSearch

@@ -3,20 +3,22 @@ import MeatBalls from '../MeetBalls'
 import { USER_CARD_OPTIONS } from '../../../utils/helpers'
 
 const Card = ({ wish }) => {
-   const { name, image, createdAt, holidayName, massage, id } = wish
+   const { name, image, createdAt, holidayName, massage, id, date } = wish
 
    return (
       <StyledCard key={id}>
-         {/* <img src={wish.image} alt={wish.name} /> */}
-         <img
+         <img src={image} alt={name} />
+         {/* <img
             src="https://i.pinimg.com/originals/ab/a8/40/aba84049818f9e61a1c7982cefa0403a.jpg"
             alt={name}
-         />
+         /> */}
 
          <Box className="text-content">
             <Box>
                <Typography className="title">{name}</Typography>
-               <Typography className="grey-text">{createdAt}</Typography>
+               <Typography className="grey-text">
+                  {createdAt || date}
+               </Typography>
             </Box>
 
             <Box>
@@ -37,7 +39,10 @@ export default Card
 
 const StyledCard = styled(Box)(() => ({
    backgroundColor: 'white',
-   width: '349px',
+   maxWidth: '349px',
+   width: '100%',
+   maxHeight: '260px',
+   height: '100%',
    padding: '1rem',
    borderRadius: '8px',
    display: 'flex',
@@ -46,7 +51,8 @@ const StyledCard = styled(Box)(() => ({
    fontSize: '14px',
 
    '& img': {
-      width: '-webkit-fill-available',
+      width: '300px',
+      height: '147px',
       borderRadius: '6px',
    },
 
