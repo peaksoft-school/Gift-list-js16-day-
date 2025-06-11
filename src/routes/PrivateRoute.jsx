@@ -1,7 +1,8 @@
-import { Navigate, Outlet } from 'react-router'
+import { useSelector } from 'react-redux'
+import { Navigate } from 'react-router'
 
 const PrivateRoute = ({ roles, Component, fallbackPath }) => {
-   const role = 'ADMIN'
+   const { role } = useSelector((state) => state.auth)
 
    const allowerRole = roles.includes(role)
 

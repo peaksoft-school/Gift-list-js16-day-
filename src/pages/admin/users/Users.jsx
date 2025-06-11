@@ -1,31 +1,45 @@
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Box, DialogTitle, Stack, styled, Typography } from '@mui/material'
-import { DeleteOutlineOutlined } from '@mui/icons-material'
-import Modal from '../../../components/UI/Modal'
-import UserCard from '../../../components/UI/card/UserCard'
-import Button from '../../../components/UI/Button'
-import { USERS_THUNK } from '../../../store/slices/admin/users/usersThunk'
 import { useNavigate } from 'react-router'
+import { useDispatch, useSelector } from 'react-redux'
+import { Box, styled, Typography } from '@mui/material'
+import UserCard from '../../../components/UI/card/UserCard'
+import DeleteModal from '../../../components/UI/modal/DeleteModal'
+import { USERS_THUNK } from '../../../store/slices/admin/users/usersThunk'
 
 const Users = () => {
    const { users } = useSelector((state) => state.users)
+
    const [open, setOpen] = useState(false)
+   const [selectedUserId, setSelectedUserId] = useState(null)
 
    const dispatch = useDispatch()
    const navigate = useNavigate()
 
-   const handleVisbleModal = () => setOpen((prev) => !prev)
+   const handleVisibleModal = (id) => {
+      setSelectedUserId(id)
+      setOpen(true)
+   }
+
+   const handleCloseModal = () => {
+      setOpen(false)
+      setSelectedUserId(null)
+   }
 
    useEffect(() => {
       dispatch(USERS_THUNK.getAllUsers())
    }, [])
 
    const handleDeleteUser = (id) => {
-      dispatch(USERS_THUNK.deleteUsers({ id }))
+      console.log(id)
+
+      dispatch(USERS_THUNK.deleteUser({ userId: id, handleCloseModal }))
    }
 
-   const handleNavigate = (id) => navigate(`/admin/users/${id}`)
+   const handleNavigate = (id) => {
+      dispatch(USERS_THUNK.getUser({ id, navigate }))
+   }
+
+   const selectedUser = users.find((user) => user.id === selectedUserId)
 
    return (
       <StyledBox>
@@ -37,43 +51,19 @@ const Users = () => {
                   key={user.id}
                   variant="horiz"
                   user={user}
-                  onVisibleModal={() => handleVisbleModal}
+                  onVisibleModal={() => handleVisibleModal(user.id)}
                   onNavigate={handleNavigate}
                />
             ))}
          </Box>
 
-         <Modal open={open} onClose={handleVisbleModal}>
-            <StyledStack>
-               <CustomBox>
-                  <StyledDialogTitle>
-                     <StyledDeleteOutlineOutlined />
-                     <Typography>Удаление</Typography>
-                  </StyledDialogTitle>
-
-                  <StyledTypography>
-                     Вы уверены, что хотите удалить Annet Black?
-                  </StyledTypography>
-               </CustomBox>
-
-               <BoxContainer>
-                  <Button
-                     variant="warning"
-                     onClick={handleVisbleModal}
-                     sx={{ width: '232px', height: '37px' }}
-                  >
-                     Отмена
-                  </Button>
-                  <Button
-                     variant="contained"
-                     onClick={() => handleDeleteUser(selectedUserId)}
-                     sx={{ width: '232px', height: '37px' }}
-                  >
-                     Удалить
-                  </Button>
-               </BoxContainer>
-            </StyledStack>
-         </Modal>
+         <DeleteModal
+            open={open}
+            onClose={handleCloseModal}
+            onDelete={handleDeleteUser}
+            selectedUser={selectedUser}
+            selectedUserId={selectedUserId}
+         />
       </StyledBox>
    )
 }
@@ -81,13 +71,11 @@ const Users = () => {
 export default Users
 
 const StyledBox = styled(Box)(() => ({
-   padding: '110px 0 0 18rem',
    fontFamily: 'Inter',
    display: 'flex',
    flexDirection: 'column',
    gap: '31px',
    backgroundColor: '#F7F8FA',
-   height: '100vh',
    margin: '0 0 0 20px',
 
    '& .users-container': {
@@ -95,48 +83,4 @@ const StyledBox = styled(Box)(() => ({
       flexWrap: 'wrap',
       gap: '3rem',
    },
-}))
-
-const StyledStack = styled(Stack)(() => ({
-   display: 'flex',
-   justifyContent: 'center',
-   alignItems: 'center',
-   width: '544px',
-   paddingBottom: '30px',
-}))
-
-const CustomBox = styled(Box)(() => ({
-   marginRight: '60px',
-}))
-
-const StyledDeleteOutlineOutlined = styled(DeleteOutlineOutlined)(() => ({
-   backgroundColor: '#FFEBEB',
-   color: 'red',
-   width: ' 45px',
-   height: ' 45px',
-   gap: '10px',
-   borderRadius: '35px',
-   padding: '10px',
-}))
-
-const StyledTypography = styled(Typography)(() => ({
-   fontFamily: 'Inter',
-   color: '#87898E',
-   fontWeight: '400',
-   fontSize: '14px',
-   paddingLeft: '65px',
-   paddingBottom: '30px',
-}))
-
-const BoxContainer = styled(Box)(() => ({
-   gap: '15px',
-   borderRadius: '12px',
-   display: 'flex',
-}))
-
-const StyledDialogTitle = styled(DialogTitle)(() => ({
-   display: 'flex',
-   alignItems: 'center',
-   justifyContent: 'start',
-   paddingBottom: '20px',
 }))

@@ -2,30 +2,28 @@ import { ToastContainer } from 'react-toastify'
 import { styled } from '@mui/material/styles'
 import 'react-toastify/dist/ReactToastify.css'
 
-const Notification = () => {
-   return (
-      <StyledToastContainer
-         position="top-right"
-         closeOnClick
-         draggable
-         hideProgressBar
-         limit={1}
-      />
-   )
-}
+const Notification = () => (
+   <StyledToastContainer
+      position="top-right"
+      closeOnClick
+      draggable
+      hideProgressBar
+      limit={1}
+   />
+)
 
 export default Notification
 
 const StyledToastContainer = styled(ToastContainer)({
    '.Toastify__toast': {
       minWidth: '500px',
-      height: '98px',
       borderRadius: '2px',
       fontFamily: 'Inter, sans-serif',
       padding: '30px 15px',
       display: 'flex',
       fontSize: '14px',
-
+      minHeight: 'auto',
+      alignItems: 'flex-start',
       boxShadow: '0px 4px 10px rgba(20, 18, 18, 0.1)',
    },
 

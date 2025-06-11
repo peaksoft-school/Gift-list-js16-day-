@@ -29,6 +29,7 @@ const SearchInput = () => {
    return (
       <MainBox tabIndex={0}>
          <StyledUnionIcon src={UnionIcon} alt="" />
+
          <MainInputSearch
             variant="standard"
             placeholder="Поиск"
@@ -77,7 +78,7 @@ const MainBox = styled(Box)({
    borderRadius: '8px',
    border: '1px solid #ddd',
    width: '100%',
-   maxWidth: '72%',
+   maxWidth: '76.5%',
    marginRight: '90px',
 
    '.MuiInputBase-input-MuiInput-input': {

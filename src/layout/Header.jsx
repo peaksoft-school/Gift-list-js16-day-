@@ -1,17 +1,29 @@
 import { useLocation } from 'react-router'
-import { AppBar, Toolbar, Box, styled, Typography } from '@mui/material'
+import { Box, styled, Typography } from '@mui/material'
 import Input from '../components/UI/Input'
 import MeatBalls from '../components/UI/MeetBalls'
 import SearchInput from '../components/UI/SearchInput'
 import { PROFILE_OPTIONS } from '../utils/helpers'
 import Notification from '../assets/icons/notification.svg'
+import { useDispatch } from 'react-redux'
+import { AUTH_ACTIONS } from '../store/slices/auth/authSlice'
 
 const Header = () => {
    const { pathname } = useLocation()
 
+   const dispatch = useDispatch()
+
+   const handleProfileOption = (option) => {
+      if (option === 'Выход') {
+         dispatch(AUTH_ACTIONS.logOut())
+      } else if (option === 'Профиль') {
+         console.log('Переход в профиль')
+      }
+   }
+
    return (
       <StyledCustomAppBar>
-         <Toolbar>
+         <Box>
             <StyledBox>
                {pathname === '/admin/charity' ||
                pathname === '/user/charity' ? (
@@ -26,16 +38,20 @@ const Header = () => {
 
                <>
                   <StyledNotificationIcon src={Notification} alt="" />
-
                   <Typography className="user-name">Naruto Uzumaki</Typography>
-
-                  <MeatBalls variant="profile" options={PROFILE_OPTIONS} />
+                  <MeatBalls
+                     variant="profile"
+                     options={PROFILE_OPTIONS}
+                     onChange={handleProfileOption}
+                  />
                </>
             </StyledBox>
-         </Toolbar>
+         </Box>
       </StyledCustomAppBar>
    )
 }
+
+export default Header
 
 const StyledBox = styled(Box)(() => ({
    display: 'flex',
@@ -55,20 +71,19 @@ const StyledInputSearch = styled(SearchInput)(() => ({
 
 const StyledInput = styled(Input)(() => ({
    '& .MuiInputBase-root': {
-      padding: '30px 10px',
-      width: '90%',
+      width: '99%',
    },
 }))
 
-const StyledCustomAppBar = styled(AppBar)(() => ({
+const StyledCustomAppBar = styled(Box)(() => ({
    backgroundColor: 'white',
-   width: '81.35%',
+   width: '100%',
+   boxShadow: '0 4px 10px #0000001A',
+   marginBottom: '40px',
+   padding: '5px 20px',
 }))
 
 const StyledNotificationIcon = styled('img')(() => ({
    width: '24px',
-   margin: '-50px',
-   marginRight: '30px',
+   marginRight: '20px',
 }))
-
-export default Header
