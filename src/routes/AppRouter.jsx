@@ -23,7 +23,9 @@ const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
 const SignUp = lazy(() => import('../pages/sign-up/SignUp'))
 const Admin = lazy(() => import('../layout/admin/AdminLayout'))
 const User = lazy(() => import('../layout/user/UserLayout'))
-const InnerUser = lazy(() => import('../components/admin/users/InnerUser'))
+const InnerUser = lazy(
+   () => import('../components/admin/mailings/users/InnerUser')
+)
 
 const AppRouter = () => (
    <Routes>
