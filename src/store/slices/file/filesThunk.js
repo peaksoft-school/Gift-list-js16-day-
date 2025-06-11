@@ -5,6 +5,7 @@ import toastifyNotify from '../../../utils/helpers/ToastifyNotify'
 
 const addFile = createAsyncThunk(
    'files/addFile',
+   
    async ({ file, signal }, { rejectWithValue }) => {
       try {
          const formData = new FormData()

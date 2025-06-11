@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { axiosInstance } from '../../../../configs/axiosInstance'
+import toastifyNotify from '../../../../utils/helpers/ToastifyNotify'
 
 const getAllUsers = createAsyncThunk(
    'users/getAllUsers',
@@ -18,9 +19,11 @@ const getAllUsers = createAsyncThunk(
 const getUser = createAsyncThunk(
    'users/getUserById',
 
-   async ({ id }, { rejectWithValue }) => {
+   async ({ id, navigate }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(`/api/users/${id}`)
+
+         navigate(`/admin/users/${id}`)
 
          return data
       } catch (error) {
@@ -80,9 +83,19 @@ const getUserCharity = createAsyncThunk(
 const deleteUser = createAsyncThunk(
    'users/deleteUser',
 
-   async ({ id }, { rejectWithValue }) => {
+   async ({ userId, handleCloseModal }, { rejectWithValue }) => {
       try {
-         const { data } = await axiosInstance.delete(`/api/users/delete/${id}`)
+         const { data } = await axiosInstance.delete(
+            `/api/users/delete/${userId}`
+         )
+
+         handleCloseModal()
+
+         toastifyNotify({
+            title: 'Пользователь удален',
+            type: 'success',
+            message: data.message,
+         })
 
          return data
       } catch (error) {

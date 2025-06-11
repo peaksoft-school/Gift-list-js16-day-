@@ -1,6 +1,6 @@
-import AigerimEje from '../../assets/images/aigerim-eje.png'
-import NurgulEje from '../../assets/images/nurgulEje.png'
-import NargizaEje from '../../assets/images/nargizaEje.jpg'
+import Aigerim from '../../assets/images/aigerim.png'
+import Nurgul from '../../assets/images/nurgul.png'
+import Nargiza from '../../assets/images/nargiza.jpg'
 
 const conditions = [
    { value: '1', name: 'Все' },
@@ -42,10 +42,17 @@ const STATISTICS = [
    { end: 9, label: 'K+', text: 'Реализованной благотворительной помощи' },
 ]
 
+const COUNTER = [
+   { end: 100, label: 'K+', text: 'Пользователей' },
+   { end: 10, label: 'K+', text: 'Размещенных подарков' },
+   { end: 15, label: 'K+', text: 'Подаренных подарков' },
+   { end: 9, label: 'K+', text: 'Реализованной благотворительной помощи' },
+]
+
 const OUR_TEAM = [
    {
       id: 1,
-      img: NurgulEje,
+      img: Nurgul,
       name: 'Нургуль Маданбекова',
       role: 'Front-end developer',
       borderRadius: '0 0 0 50%',
@@ -60,7 +67,7 @@ const OUR_TEAM = [
    },
    {
       id: 4,
-      img: AigerimEje,
+      img: Aigerim,
       name: 'Маматтойчуева Айгерим',
       role: 'Front-end developer',
       borderRadius: '50% 0 0  0',
@@ -74,7 +81,7 @@ const OUR_TEAM = [
    },
    {
       id: 6,
-      img: NargizaEje,
+      img: Nargiza,
       name: 'Наргиза Нааматбекова',
       role: 'Front-end developer',
       borderRadius: '50% 0',
@@ -88,6 +95,38 @@ const OUR_TEAM = [
    },
 ]
 
+const FRIENDS = [
+   {
+      id: 1,
+      image: 'https://i.pinimg.com/736x/b8/25/f8/b825f8aca31785c9165e18a279771100.jpg',
+      fullName: 'Annette Black',
+      desires: 12,
+      holidays: 10,
+   },
+
+   {
+      id: 2,
+      image: 'https://masterpiecer-images.s3.yandex.net/541b62ae9ccf11ee9c107acfd41307a6:upscaled',
+      fullName: 'Annette Black',
+      desires: 12,
+      holidays: 10,
+   },
+   {
+      id: 3,
+      image: 'https://masterpiecer-images.s3.yandex.net/4b2b37aba11711eebb734a50f1b511f1:upscaled',
+      fullName: 'Annette Black',
+      desires: 12,
+      holidays: 10,
+   },
+   {
+      id: 4,
+      image: 'https://klev.club/uploads/posts/2023-10/1697480887_klev-club-p-kartinki-krasivie-lyudi-40.jpg',
+      fullName: 'Annette Black',
+      desires: 12,
+      holidays: 10,
+   },
+]
+
 export {
    conditions,
    categories,
@@ -95,4 +134,6 @@ export {
    countries,
    OUR_TEAM,
    STATISTICS,
+   FRIENDS,
+   COUNTER,
 }
