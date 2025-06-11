@@ -1,18 +1,18 @@
 import { Box, styled } from '@mui/material'
-
-import Header from '../Header'
 import { Outlet } from 'react-router'
 import SideBar from '../../components/UI/SideBar'
+import Header from '../Header'
 
 const UserLayout = () => {
    return (
       <StyledMain>
          <SideBar role="USER" />
-         <Header role="USER" />
 
-         <StyledOutlet>
+         <Box className="content">
+            <Header role="USER" />
+
             <Outlet />
-         </StyledOutlet>
+         </Box>
       </StyledMain>
    )
 }
@@ -21,8 +21,14 @@ export default UserLayout
 
 const StyledMain = styled(Box)(() => ({
    display: 'flex',
-}))
+   backgroundColor: '#F7F8FA',
+   width: '100%',
+   height: '100vh',
 
-const StyledOutlet = styled('div')(() => ({
-   margin: '50px',
+   '& .content': {
+      flex: 1,
+      overflowY: 'auto',
+      overflowX: 'auto',
+      marginBottom: '20px',
+   },
 }))

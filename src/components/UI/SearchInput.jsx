@@ -29,6 +29,7 @@ const SearchInput = () => {
    return (
       <MainBox tabIndex={0}>
          <StyledUnionIcon src={UnionIcon} alt="" />
+
          <MainInputSearch
             variant="standard"
             placeholder="Поиск"

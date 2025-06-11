@@ -10,7 +10,7 @@ const UserCard = ({ user, onVisibleModal, onNavigate }) => {
          <StyledCard>
             <StyledImage src={image} />
 
-            <StyledText> {fullName}</StyledText>
+            <StyledText>{fullName}</StyledText>
 
             <StyledBox>
                <Typography>{wishCount}</Typography>

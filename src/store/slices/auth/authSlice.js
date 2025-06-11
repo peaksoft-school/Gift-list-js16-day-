@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { AUTH_THUNK } from './authThunk'
 
-
 const initialState = {
    role: 'GUEST',
    email: null,
@@ -98,4 +97,5 @@ const authSlice = createSlice({
 })
 
 export const AUTH_ACTIONS = authSlice.actions
+
 export { AUTH_THUNK, authSlice }
