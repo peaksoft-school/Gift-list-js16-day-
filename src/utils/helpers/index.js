@@ -15,7 +15,7 @@ const ROLES_SIDEBAR = {
       { title: 'Лента', icon: TapeIcon, link: 'lenta' },
       { title: 'Друзья', icon: UsersIcon, link: 'friends' },
       { title: 'Список желании ', icon: ListIcon, link: 'list' },
-      { title: 'Забронирование', icon: GiftIcon, link: 'booking' },
+      { title: 'Забронирование', icon: GiftIcon, link: 'bookeds' },
       { title: 'Мои праздники', icon: HolydaysIcon, link: 'holidays' },
       { title: 'Благовторительность', icon: UsersLikeIcon, link: 'charity' },
    ],

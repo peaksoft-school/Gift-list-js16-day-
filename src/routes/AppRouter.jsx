@@ -4,9 +4,20 @@ import { ROLES } from './routes'
 import Blago from '../pages/user/Blago'
 import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
-import InnerMailing from '../components/admin/mailing/InnerMailing'
-import MailingList from '../pages/admin/mailing/MailingList'
 
+const Bookeds = lazy(() => import('../pages/user/bookeds/Bookeds'))
+const Holidays = lazy(() => import('../pages/user/holidays/Holidays'))
+const InnerHoliday = lazy(
+   () => import('../components/user/holidays/InnerHoliday')
+)
+const ForgotRassword = lazy(
+   () => import('../pages/forgotPassword/ForgotRassword')
+)
+const Users = lazy(() => import('../pages/admin/users/Users'))
+const InnerMailing = lazy(
+   () => import('../components/admin/mailings/InnerMailing')
+)
+const Mailing = lazy(() => import('../pages/admin/mailing/Mailing'))
 const Home = lazy(() => import('../pages/home/Home'))
 const ResetPassword = lazy(() => import('../pages/resetPassword/ResetPassword'))
 const SignIn = lazy(() => import('../pages/sign-in/SignIn'))
@@ -128,15 +139,35 @@ const AppRouter = () => (
                      <User />
                   </Suspense>
                }
-               fallbackPath={'/user'}
+               fallbackPath={'/'}
             />
          }
       >
          <Route path="lenta" index element={<h1>lenta</h1>} />
          <Route path="friends" element={<h1>Friends</h1>} />
          <Route path="list" element={<h1>Friends</h1>} />
-         <Route path="booking" element={<h1>Friends</h1>} />
+<<<<<<<<< Temporary merge branch 1
+         <Route path="booking" element={<BookingPage />} />
          <Route path="my-part" element={<h1>Friends</h1>} />
+=========
+         <Route path="booking" element={<h1>Friends</h1>} />
+         <Route
+            path="holidays"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <Holidays />
+               </Suspense>
+            }
+         />
+         <Route
+            path="holiday/:id"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <HolidaysDescription />
+               </Suspense>
+            }
+         />
+>>>>>>>>> Temporary merge branch 2
          <Route path="charity" element={<Blago />} />
       </Route>
    </Routes>

@@ -187,7 +187,6 @@ const Holidays = () => {
 export default Holidays
 
 const StyledBox = styled(Box)(() => ({
-   background: '#F7F8FA',
    width: '100%',
    display: 'flex',
    flexDirection: 'column',
