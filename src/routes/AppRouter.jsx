@@ -146,10 +146,8 @@ const AppRouter = () => (
          <Route path="lenta" index element={<h1>lenta</h1>} />
          <Route path="friends" element={<h1>Friends</h1>} />
          <Route path="list" element={<h1>Friends</h1>} />
-<<<<<<<<< Temporary merge branch 1
          <Route path="booking" element={<BookingPage />} />
          <Route path="my-part" element={<h1>Friends</h1>} />
-=========
          <Route path="booking" element={<h1>Friends</h1>} />
          <Route
             path="holidays"
@@ -167,7 +165,6 @@ const AppRouter = () => (
                </Suspense>
             }
          />
->>>>>>>>> Temporary merge branch 2
          <Route path="charity" element={<Blago />} />
       </Route>
    </Routes>

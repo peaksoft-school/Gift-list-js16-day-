@@ -1,10 +1,21 @@
 import { Box, styled, Typography } from '@mui/material'
+import BookedCard from '../../../components/UI/card/BookedCard'
 
 const Bookeds = () => {
    return (
       <StyledContainer>
          <Typography>Забронированные</Typography>
+
+         <Typography>Желание</Typography>
+
+         <Box>
+            {cards.map((card) => (
+               <BookedCard key={id}/>
+            ))}
+         </Box>
       </StyledContainer>
+
+   
    )
 }
 
