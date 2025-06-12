@@ -32,10 +32,7 @@ const StyledButton = styled(MuiButton)(({ variant }) => {
    const buttonStyles = {
       '&.MuiButton-root': {
          borderRadius: '10px',
-         height: '53px',
-         padding: '14px 32px',
-         marginTop: '20px',
-         fontSize: '18px',
+         padding: '10px 20px',
       },
    }
 

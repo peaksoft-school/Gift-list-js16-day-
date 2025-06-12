@@ -1,3 +1,7 @@
+import Aigerim from '../../assets/images/aigerim.png'
+import Nurgul from '../../assets/images/nurgul.png'
+import Nargiza from '../../assets/images/nargiza.jpg'
+
 const conditions = [
    { value: '1', name: 'Все' },
    { value: '2', name: 'Б/У' },
@@ -38,6 +42,59 @@ const STATISTICS = [
    { end: 9, label: 'K+', text: 'Реализованной благотворительной помощи' },
 ]
 
+const COUNTER = [
+   { end: 100, label: 'K+', text: 'Пользователей' },
+   { end: 10, label: 'K+', text: 'Размещенных подарков' },
+   { end: 15, label: 'K+', text: 'Подаренных подарков' },
+   { end: 9, label: 'K+', text: 'Реализованной благотворительной помощи' },
+]
+
+const OUR_TEAM = [
+   {
+      id: 1,
+      img: Nurgul,
+      name: 'Нургуль Маданбекова',
+      role: 'Front-end developer',
+      borderRadius: '0 0 0 50%',
+   },
+
+   {
+      id: 2,
+      img: '',
+      name: 'Бекмырза Абулвакиров',
+      role: 'Frontend - Leader',
+      borderRadius: '50% 0',
+   },
+   {
+      id: 4,
+      img: Aigerim,
+      name: 'Маматтойчуева Айгерим',
+      role: 'Front-end developer',
+      borderRadius: '50% 0 0  0',
+   },
+   {
+      id: 3,
+      img: '',
+      name: 'Курманбек',
+      role: 'Backend developer',
+      borderRadius: '0 0 50% 0',
+   },
+   {
+      id: 6,
+      img: Nargiza,
+      name: 'Наргиза Нааматбекова',
+      role: 'Front-end developer',
+      borderRadius: '50% 0',
+   },
+   {
+      id: 7,
+      img: '',
+      name: 'Annette Black',
+      role: '',
+      borderRadius: '0 50% 0 0',
+   },
+]
+
 const FRIENDS = [
    {
       id: 1,
@@ -70,4 +127,13 @@ const FRIENDS = [
    },
 ]
 
-export { conditions, categories, subcategories, countries, STATISTICS, FRIENDS }
+export {
+   conditions,
+   categories,
+   subcategories,
+   countries,
+   OUR_TEAM,
+   STATISTICS,
+   FRIENDS,
+   COUNTER,
+}

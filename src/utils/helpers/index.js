@@ -7,9 +7,9 @@ import UsersLikeIcon from '../../assets/icons/users-like.svg'
 import Mailings from '../../assets/icons/mailings.svg'
 import ProfileIcon from '../../assets/icons/profile.svg'
 import LogoutIcon from '../../assets/icons/exit.svg'
-import Block from '../../assets/images/Block.png'
-import Delete from '../../assets/images/Delete.png'
-import Baran from '../../assets/images/Baran.jpg'
+import Block from '../../assets/images/block.png'
+import Delete from '../../assets/images/delete.png'
+import Baran from '../../assets/images/baran.jpg'
 
 const ROLES_SIDEBAR = {
    users: [
@@ -17,7 +17,7 @@ const ROLES_SIDEBAR = {
       { title: 'Друзья', icon: UsersIcon, link: 'friends' },
       { title: 'Список желании ', icon: ListIcon, link: 'list' },
       { title: 'Забронирование', icon: GiftIcon, link: 'booking' },
-      { title: 'Мои праздники', icon: HolydaysIcon, link: 'my-part' },
+      { title: 'Мои праздники', icon: HolydaysIcon, link: 'holidays' },
       { title: 'Благовторительность', icon: UsersLikeIcon, link: 'charity' },
    ],
 

@@ -11,7 +11,7 @@ const FriendCard = forwardRef(({ friend = {}, request = false }, ref) => {
             <StyledImage src={image} />
             <StyledText> {fullName}</StyledText>
 
-            <StyledBox>
+            <StyledBox> 
                <Typography>{desires}</Typography>
                <Typography>{holidays}</Typography>
             </StyledBox>

@@ -1,15 +1,20 @@
 import { Box, styled, Typography } from '@mui/material'
 import Button from '../UI/Button'
 import VK from '../../assets/icons/vk.svg'
-import Facebook from '../../assets/icons/facebook.svg'
-import Instagram from '../../assets/icons/instagram.svg'
+import Facebook from '../../assets/icons/white-facebook.svg'
+import Instagram from '../../assets/icons/white-instagram.svg'
 import DownIcon from '../../assets/images/down.png'
-import Friends from '../../assets/images/Friends.svg'
-import Friends2 from '../../assets/images/Friends2.png'
+import Friends from '../../assets/icons/friends.svg'
+import Friends2 from '../../assets/images/friends.png'
 import { useNavigate } from 'react-router'
 
 const Intro = () => {
    const navigate = useNavigate()
+
+   const handleNavigateSignIn = () => navigate('/sign-in')
+
+   const handleNavigateSignUp = () => navigate('/sign-up')
+
    return (
       <StyledContiner>
          <StyledMain>
@@ -50,11 +55,11 @@ const Intro = () => {
                   твои желания
                </Box>
 
-               <StyledButton onClick={() => navigate('/sign-in')}>
-                  Войти
-               </StyledButton>
+               <StyledButton onClick={handleNavigateSignIn}>Войти</StyledButton>
 
-               <StyledButton variant="outlined" onClick={() => navigate('/sign-up')}>Регистрация</StyledButton>
+               <StyledButton variant="outlined" onClick={handleNavigateSignUp}>
+                  Регистрация
+               </StyledButton>
             </CenterContent>
 
             <DowmText>
@@ -67,6 +72,8 @@ const Intro = () => {
       </StyledContiner>
    )
 }
+
+export default Intro
 
 const StyledContiner = styled(Box)(() => ({
    display: 'flex',
@@ -185,10 +192,11 @@ const StyledBorderBox = styled(Box)({
    },
 })
 
-const MainBorderBox2 = styled('div')({
+const MainBorderBox2 = styled(Box)({
    position: 'relative',
    width: '260px',
    height: '320px',
+
    '&::after': {
       content: '""',
       position: 'absolute',
@@ -209,7 +217,7 @@ const MainBorderBox2 = styled('div')({
       zIndex: 2,
    },
 })
-const DowmText = styled('div')(() => ({
+const DowmText = styled(Box)(() => ({
    writingMode: 'sideways-lr',
    marginLeft: '1140px',
    fontSize: '14px',
@@ -220,5 +228,3 @@ const DowmText = styled('div')(() => ({
       marginTop: '15px',
    },
 }))
-
-export default Intro
