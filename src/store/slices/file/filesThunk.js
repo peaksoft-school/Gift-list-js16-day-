@@ -1,9 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { axiosInstanceFile } from '../../../configs/axiosInstanceFile'
+
 import toastifyNotify from '../../../utils/helpers/ToastifyNotify'
 
 const addFile = createAsyncThunk(
    'files/addFile',
+   
    async ({ file, signal }, { rejectWithValue }) => {
       try {
          const formData = new FormData()
@@ -22,6 +24,7 @@ const addFile = createAsyncThunk(
 
          console.log(error)
 
+         
          toastifyNotify({
             title: 'Ошибка',
             message: error.response.data.message,

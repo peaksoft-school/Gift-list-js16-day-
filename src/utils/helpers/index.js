@@ -7,16 +7,16 @@ import UsersLikeIcon from '../../assets/icons/users-like.svg'
 import Mailings from '../../assets/icons/mailings.svg'
 import ProfileIcon from '../../assets/icons/profile.svg'
 import LogoutIcon from '../../assets/icons/exit.svg'
-import Block from '../../assets/images/Block.png'
-import Delete from '../../assets/images/Delete.png'
+import Block from '../../assets/images/block.png'
+import Delete from '../../assets/images/delete.png'
 
 const ROLES_SIDEBAR = {
    users: [
       { title: 'Лента', icon: TapeIcon, link: 'lenta' },
       { title: 'Друзья', icon: UsersIcon, link: 'friends' },
       { title: 'Список желании ', icon: ListIcon, link: 'list' },
-      { title: 'Забронирование', icon: GiftIcon, link: 'booking' },
-      { title: 'Мои праздники', icon: HolydaysIcon, link: 'my-part' },
+      { title: 'Забронирование', icon: GiftIcon, link: 'bookeds' },
+      { title: 'Мои праздники', icon: HolydaysIcon, link: 'holidays' },
       { title: 'Благовторительность', icon: UsersLikeIcon, link: 'charity' },
    ],
 
