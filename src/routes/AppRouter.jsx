@@ -139,7 +139,7 @@ const AppRouter = () => (
                      <User />
                   </Suspense>
                }
-               fallbackPath={'/user'}
+               fallbackPath={'/'}
             />
          }
       >
