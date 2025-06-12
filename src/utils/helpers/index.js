@@ -54,28 +54,4 @@ const HOLIDAYS = [
    { name: 'Кадр тун', img: Baran },
 ]
 
-const GIFTS = [
-   {
-      name: 'Книга',
-      date: '12.04.24',
-      img: Baran,
-   },
-   {
-      name: 'Часы',
-      date: '12.04.24',
-      img: Baran,
-   },
-   {
-      name: 'Сумка',
-      date: '12.04.24',
-      img: Baran,
-   },
-]
-
-export {
-   ROLES_SIDEBAR,
-   PROFILE_OPTIONS,
-   USER_CARD_OPTIONS,
-   HOLIDAYS,
-   GIFTS,
-}
+export { ROLES_SIDEBAR, PROFILE_OPTIONS, USER_CARD_OPTIONS, HOLIDAYS }
