@@ -5,6 +5,7 @@ import Blago from '../pages/user/Blago'
 import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
 
+const Friends = lazy(() => import('../pages/user/friends/Friends'))
 const Holidays = lazy(() => import('../pages/user/holidays/Holidays'))
 const HolidaysDescription = lazy(
    () => import('../components/user/holidays/InnerHoliday')
@@ -142,8 +143,15 @@ const AppRouter = () => (
             />
          }
       >
-         <Route path="lenta" index element={<h1>lenta</h1>} />
-         <Route path="friends" element={<h1>Friends</h1>} />
+         <Route path="lenta" index element={<h1>Friends</h1>} />
+         <Route
+            path="friends"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <Friends />
+               </Suspense>
+            }
+         />
          <Route path="list" element={<h1>Friends</h1>} />
          <Route path="booking" element={<h1>Friends</h1>} />
          <Route
