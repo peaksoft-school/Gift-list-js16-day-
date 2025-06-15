@@ -1,7 +1,7 @@
 import { Box, styled, Typography } from '@mui/material'
 import BookedCard from '../../../components/UI/card/BookedCard'
 import { NavLink } from 'react-router'
-import { BOOKEDS_THUNK } from '../../../store/slices/user/booked/bookedsThunk'
+import { BOOKEDS_THUNK } from '../../../store/slices/user/bookeds/bookedsThunk'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import NoMailings from '../../../assets/images/empty-state.png'

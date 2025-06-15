@@ -19,6 +19,7 @@ const bookedsSlice = createSlice({
          .addCase(BOOKEDS_THUNK.getAllBookedWishList.pending, (state) => {
             state.loading = true
          })
+
          .addCase(
             BOOKEDS_THUNK.getAllBookedWishList.fulfilled,
             (state, { payload }) => {
@@ -26,6 +27,7 @@ const bookedsSlice = createSlice({
                state.loading = false
             }
          )
+
          .addCase(
             BOOKEDS_THUNK.getAllBookedWishList.rejected,
             (state, action) => {
@@ -37,6 +39,7 @@ const bookedsSlice = createSlice({
          .addCase(BOOKEDS_THUNK.getAllBookedHolidayGift.pending, (state) => {
             state.loading = true
          })
+
          .addCase(
             BOOKEDS_THUNK.getAllBookedHolidayGift.fulfilled,
             (state, { payload }) => {
@@ -44,6 +47,7 @@ const bookedsSlice = createSlice({
                state.loading = false
             }
          )
+
          .addCase(
             BOOKEDS_THUNK.getAllBookedHolidayGift.rejected,
             (state, action) => {
@@ -54,5 +58,6 @@ const bookedsSlice = createSlice({
    },
 })
 
-export const BOOKEDS_ACTIONS = bookedsSlice.actions
-export default bookedsSlice
+const BOOKEDS_ACTIONS = bookedsSlice.actions
+
+export { bookedsSlice, BOOKEDS_ACTIONS }
