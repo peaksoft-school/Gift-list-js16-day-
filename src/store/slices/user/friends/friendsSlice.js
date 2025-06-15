@@ -21,6 +21,7 @@ const friendsSlice = createSlice({
             FRIENDS_THUNK.getAllMyFriends.fulfilled,
             (state, { payload }) => {
                state.friends = payload
+
                state.isLoading = false
             }
          )
