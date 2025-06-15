@@ -72,12 +72,15 @@ const StyledBox = styled(Box)(() => ({
 }))
 
 const StyledInputSearch = styled(SearchInput)(() => ({
-   width: '821px',
+   '& .MuiInputBase-root': {
+      width: '99%',
+   },
 }))
 
 const StyledInput = styled(Input)(() => ({
    '& .MuiInputBase-root': {
       width: '99%',
+      margin: '10px 0',
    },
 }))
 
@@ -91,5 +94,5 @@ const StyledCustomAppBar = styled(Box)(() => ({
 
 const StyledNotificationIcon = styled('img')(() => ({
    width: '24px',
-   marginRight: '20px',
+   marginRight: '10px',
 }))

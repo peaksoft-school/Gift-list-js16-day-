@@ -10,6 +10,7 @@ import LogoutIcon from '../../assets/icons/exit.svg'
 import Block from '../../assets/images/block.png'
 import Delete from '../../assets/images/delete.png'
 import Baran from '../../assets/images/baran.jpg'
+import Book from '../../assets/images/book.png'
 
 const ROLES_SIDEBAR = {
    users: [
@@ -51,6 +52,15 @@ const CHARITY_CARD_OPTIONS = [
    },
 ]
 
+const USER_BOOK_OPTIONS = [
+   {
+      title: 'Забронировать',
+      icon: Block,
+   },
+
+   { title: 'Забронировать анонимно', icon: Book },
+]
+
 const HOLIDAYS = [
    {
       name: 'День матери',
@@ -68,4 +78,5 @@ export {
    USER_CARD_OPTIONS,
    CHARITY_CARD_OPTIONS,
    HOLIDAYS,
+   USER_BOOK_OPTIONS,
 }

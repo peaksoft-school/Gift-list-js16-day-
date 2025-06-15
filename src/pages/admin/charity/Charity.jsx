@@ -3,15 +3,27 @@ import { Box, styled, Typography } from '@mui/material'
 import CharityCard from '../../../components/UI/card/CharityCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { CHARITY_THUNK } from '../../../store/slices/admin/charity/charityThunk'
+import { useNavigate } from 'react-router'
 
 const Charity = () => {
    const { charity } = useSelector((state) => state.charity)
 
+   const navigate = useNavigate()
    const dispatch = useDispatch()
 
    useEffect(() => {
       dispatch(CHARITY_THUNK.getAllCharity())
    }, [])
+
+   const handleNavigate = (id) => {
+      dispatch(CHARITY_THUNK.getById({ id, navigate }))
+   }
+
+   const handleChangeOption = (option) => {
+      if (option === 'Удалить') {
+         dispatch(CHARITY_THUNK.deleteCharity({ id: giftId, navigate }))
+      }
+   }
 
    return (
       <StyledBlockList>
@@ -19,7 +31,12 @@ const Charity = () => {
 
          <Box className="charity-list">
             {charity.map((charity) => (
-               <CharityCard key={charity.giftId} charity={charity} />
+               <CharityCard
+                  key={charity.giftId}
+                  charity={charity}
+                  onNavigate={handleNavigate}
+                  onChangeOption={handleChangeOption}
+               />
             ))}
          </Box>
       </StyledBlockList>

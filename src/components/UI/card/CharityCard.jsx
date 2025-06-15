@@ -1,11 +1,8 @@
 import { Avatar, Box, styled, Typography } from '@mui/material'
-import { useNavigate } from 'react-router'
 import MeetBalls from '../MeetBalls'
 import { CHARITY_CARD_OPTIONS } from '../../../utils/helpers'
-import { useDispatch } from 'react-redux'
-import { CHARITY_THUNK } from '../../../store/slices/admin/charity/charityThunk'
 
-const CharityCard = ({ charity }) => {
+const CharityCard = ({ charity, onNavigate, onChangeOption }) => {
    const {
       ownerProfilePhoto,
       ownerFullName,
@@ -17,22 +14,8 @@ const CharityCard = ({ charity }) => {
       statusMessage,
    } = charity
 
-   const navigate = useNavigate()
-
-   const dispatch = useDispatch()
-
-   const handleNavigate = (id) => {
-      dispatch(CHARITY_THUNK.getById({ id, navigate }))
-   }
-
-   const handleChangeOption = (option) => {
-      if (option === 'Удалить') {
-         dispatch(CHARITY_THUNK.deleteCharity({ id: giftId, navigate }))
-      }
-   }
-
    return (
-      <BoxCard onClick={() => handleNavigate(giftId)}>
+      <BoxCard onClick={() => onNavigate(giftId)}>
          <StyledBoxAvatar>
             <Avatar src={ownerProfilePhoto} />
 
@@ -58,7 +41,7 @@ const CharityCard = ({ charity }) => {
 
                <MeetBalls
                   options={CHARITY_CARD_OPTIONS}
-                  onChange={handleChangeOption}
+                  onChange={onChangeOption}
                />
             </StyledSmallBlock>
          </StyledUpBox>

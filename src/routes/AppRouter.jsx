@@ -1,22 +1,28 @@
 import { lazy, Suspense } from 'react'
 import { Navigate, Route, Routes } from 'react-router'
 import { ROLES } from './routes'
-import Blago from '../pages/user/Blago'
 import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
 
+const CreateCharity = lazy(
+   () => import('../pages/user/charity/create-charity/CreateCharity')
+)
+const InnerUserCharity = lazy(
+   () => import('../components/user/charity/InnerCharity')
+)
+const UserCharity = lazy(() => import('../pages/user/charity/Charity'))
 const Bookeds = lazy(() => import('../pages/user/bookeds/Bookeds'))
 const InnerCharity = lazy(
    () => import('../components/admin/charity/InnerCharity')
 )
-const Charity = lazy(() => import('../pages/admin/charity/Charity'))
+const AdminCharity = lazy(() => import('../pages/admin/charity/Charity'))
 const MyFriends = lazy(() => import('../pages/user/my-friends/MyFriends'))
 const Holidays = lazy(() => import('../pages/user/holidays/Holidays'))
 const InnerHoliday = lazy(
    () => import('../components/user/holidays/InnerHoliday')
 )
 const ForgotRassword = lazy(
-   () => import('../pages/forgotPassword/ForgotRassword')
+   () => import('../pages/forgotPassword/ForgotPassword')
 )
 const Users = lazy(() => import('../pages/admin/users/Users'))
 const InnerMailing = lazy(
@@ -123,7 +129,7 @@ const AppRouter = () => (
             path="charity"
             element={
                <Suspense fallback={<Loading />}>
-                  <Charity />
+                  <AdminCharity />
                </Suspense>
             }
          />
@@ -208,7 +214,32 @@ const AppRouter = () => (
             }
          />
 
-         <Route path="charity" element={<Blago />} />
+         <Route
+            path="charity"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <UserCharity />
+               </Suspense>
+            }
+         />
+
+         <Route
+            path="charity/:id"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <InnerUserCharity />
+               </Suspense>
+            }
+         />
+
+         <Route
+            path="charity/create"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <CreateCharity />
+               </Suspense>
+            }
+         />
       </Route>
    </Routes>
 )

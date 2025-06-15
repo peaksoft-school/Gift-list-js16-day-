@@ -5,13 +5,9 @@ import { ROUTES } from '../../../routes/routes'
 
 const signUp = createAsyncThunk(
    'auth/signUp',
-
-   async (formData, { rejectWithValue }) => {
+   async ({ data: values }, { rejectWithValue }) => {
       try {
-         const { data } = await axiosInstance.post(
-            '/api/auth/sign-up',
-            formData
-         )
+         const { data } = await axiosInstance.post('/api/auth/sign-up', values)
 
          return data
       } catch (error) {

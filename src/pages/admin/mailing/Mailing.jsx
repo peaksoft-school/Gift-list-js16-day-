@@ -17,8 +17,6 @@ const Mailing = memo(() => {
 
    const { fileUrl, isLoading } = useSelector((state) => state.files)
 
-   console.log(loading, isLoading)
-
    const [subject, setSubject] = useState('')
    const [message, setMessage] = useState('')
    const [preview, setPreview] = useState(null)
