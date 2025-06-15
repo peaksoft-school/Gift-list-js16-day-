@@ -9,6 +9,7 @@ import ProfileIcon from '../../assets/icons/profile.svg'
 import LogoutIcon from '../../assets/icons/exit.svg'
 import Block from '../../assets/images/block.png'
 import Delete from '../../assets/images/delete.png'
+import Baran from '../../assets/images/baran.jpg'
 
 const ROLES_SIDEBAR = {
    users: [
@@ -45,13 +46,26 @@ const USER_CARD_OPTIONS = [
 ]
 const CHARITY_CARD_OPTIONS = [
    {
-      title: 'Редактировать',
-      icon: Block,
-   },
-   {
       title: 'Удалить',
       icon: Delete,
    },
 ]
 
-export { ROLES_SIDEBAR, PROFILE_OPTIONS, USER_CARD_OPTIONS, CHARITY_CARD_OPTIONS }
+const HOLIDAYS = [
+   {
+      name: 'День матери',
+      img: Baran,
+   },
+
+   { name: 'Курбан айт', img: Baran },
+
+   { name: 'Кадр тун', img: Baran },
+]
+
+export {
+   ROLES_SIDEBAR,
+   PROFILE_OPTIONS,
+   USER_CARD_OPTIONS,
+   CHARITY_CARD_OPTIONS,
+   HOLIDAYS,
+}

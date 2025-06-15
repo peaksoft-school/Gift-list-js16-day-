@@ -5,13 +5,13 @@ const initialState = {
    charity: [],
    selectedCharity: {},
    loading: false,
-   error: null,
 }
 
 const charitySlice = createSlice({
    name: 'charity',
    initialState,
    reducers: {},
+
    extraReducers: (builder) => {
       builder
          .addCase(
@@ -21,9 +21,11 @@ const charitySlice = createSlice({
                state.loading = false
             }
          )
+
          .addCase(CHARITY_THUNK.getAllCharity.pending, (state) => {
             state.loading = true
          })
+
          .addCase(CHARITY_THUNK.getAllCharity.rejected, (state) => {
             state.loading = false
          })
@@ -32,30 +34,29 @@ const charitySlice = createSlice({
             state.selectedCharity = payload
             state.loading = false
          })
+
          .addCase(CHARITY_THUNK.getById.pending, (state) => {
             state.loading = true
          })
+
          .addCase(CHARITY_THUNK.getById.rejected, (state) => {
             state.loading = false
          })
-         .addCase(
-            CHARITY_THUNK.deleteCharity.fulfilled,
-            (state, { payload }) => {
-               state.delete = payload
-               state.loading = false
-            }
-         )
+
+         .addCase(CHARITY_THUNK.deleteCharity.fulfilled, (state) => {
+            state.loading = false
+         })
+
          .addCase(CHARITY_THUNK.deleteCharity.pending, (state) => {
             state.loading = true
          })
+
          .addCase(CHARITY_THUNK.deleteCharity.rejected, (state) => {
             state.loading = false
          })
    },
 })
 
-const CHARITY_ACTIONS = charitySlice.CHARITY_ACTIONS
+const CHARITY_ACTIONS = charitySlice.actions
 
 export { charitySlice, CHARITY_ACTIONS }
-
-export default charitySlice.reducer

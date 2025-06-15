@@ -222,7 +222,7 @@ const HeaderRow = styled(Box)(() => ({
 }))
 
 const FlexContainer = styled(Box)(() => ({
-   marginLeft: '10px',
+   marginTop: '24px',
    display: 'flex',
    flexWrap: 'wrap',
    gap: '1rem',

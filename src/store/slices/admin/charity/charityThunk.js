@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { axiosInstance } from '../../../configs/axiosInstance'
+import { axiosInstance } from '../../../../configs/axiosInstance'
 
 const getAllCharity = createAsyncThunk(
    'charity/getAllCharity',
@@ -18,9 +18,11 @@ const getAllCharity = createAsyncThunk(
 const getById = createAsyncThunk(
    'charity/getById',
 
-   async ({ id }, { rejectWithValue }) => {
+   async ({ id, navigate }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(`/api/charity/${id}`)
+
+         navigate(`/admin/charity/${id}`)
 
          return data
       } catch (error) {
@@ -32,11 +34,12 @@ const getById = createAsyncThunk(
 const deleteCharity = createAsyncThunk(
    'charity/delete-сharity',
 
-   async ({ id }, { rejectWithValue }) => {
+   async ({ id, navigate }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.delete(`/api/charity/${id}`)
 
          navigate('/admin/charity')
+
          return data
       } catch (error) {
          return rejectWithValue({ message: error.response.data.message })

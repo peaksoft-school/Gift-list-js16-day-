@@ -36,7 +36,7 @@ const Mainh1 = styled(Box)({
    color: '#fff',
    width: '284px',
    height: '100vh',
-   position: 'sticky', // 👈 sticky внутри grid/flex — хорошо работает
+   position: 'sticky', 
    top: 0,
    overflowY: 'auto',
 
