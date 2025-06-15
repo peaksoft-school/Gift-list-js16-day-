@@ -104,6 +104,6 @@ const usersSlice = createSlice({
    },
 })
 
-const USERS_ACTIONS = usersSlice.USERS_ACTIONS
+const USERS_ACTIONS = usersSlice.actions
 
 export { usersSlice, USERS_ACTIONS }

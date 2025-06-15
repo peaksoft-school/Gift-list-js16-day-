@@ -5,13 +5,14 @@ import Blago from '../pages/user/Blago'
 import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
 
+const Bookeds = lazy(() => import('../pages/user/bookeds/Bookeds'))
 const InnerCharity = lazy(
    () => import('../components/admin/charity/InnerCharity')
 )
 const Charity = lazy(() => import('../pages/admin/charity/Charity'))
 const Friends = lazy(() => import('../pages/user/friends/Friends'))
 const Holidays = lazy(() => import('../pages/user/holidays/Holidays'))
-const HolidaysDescription = lazy(
+const InnerHoliday = lazy(
    () => import('../components/user/holidays/InnerHoliday')
 )
 const ForgotRassword = lazy(
@@ -168,7 +169,7 @@ const AppRouter = () => (
                      <User />
                   </Suspense>
                }
-               fallbackPath={'/admin'}
+               fallbackPath={'/'}
             />
          }
       >
@@ -182,7 +183,8 @@ const AppRouter = () => (
             }
          />
          <Route path="list" element={<h1>Friends</h1>} />
-         <Route path="booking" element={<h1>Friends</h1>} />
+         <Route path="bookeds" element={<Bookeds />} />
+         <Route path="my-part" element={<h1>Friends</h1>} />
          <Route
             path="holidays"
             element={
@@ -195,7 +197,7 @@ const AppRouter = () => (
             path="holiday/:id"
             element={
                <Suspense fallback={<Loading />}>
-                  <HolidaysDescription />
+                  <InnerHoliday />
                </Suspense>
             }
          />
