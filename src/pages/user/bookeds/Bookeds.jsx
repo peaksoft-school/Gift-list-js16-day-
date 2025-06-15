@@ -79,6 +79,7 @@ const StyledContainer = styled(Box)({
       alignItems: 'center',
    },
 })
+
 const StyledNotBlockBox = styled(Box)(() => ({
    display: 'flex',
    justifyContent: 'center',

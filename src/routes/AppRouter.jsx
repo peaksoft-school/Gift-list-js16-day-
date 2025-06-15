@@ -10,7 +10,7 @@ const InnerCharity = lazy(
    () => import('../components/admin/charity/InnerCharity')
 )
 const Charity = lazy(() => import('../pages/admin/charity/Charity'))
-const Friends = lazy(() => import('../pages/user/friends/Friends'))
+const MyFriends = lazy(() => import('../pages/user/my-friends/MyFriends'))
 const Holidays = lazy(() => import('../pages/user/holidays/Holidays'))
 const InnerHoliday = lazy(
    () => import('../components/user/holidays/InnerHoliday')
@@ -173,18 +173,23 @@ const AppRouter = () => (
             />
          }
       >
-         <Route path="lenta" index element={<h1>Friends</h1>} />
+         <Route index element={<Navigate to="ribbon" />} />
+
+         <Route path="ribbon" index element={<h1>Ribbon</h1>} />
+
          <Route
             path="friends"
             element={
                <Suspense fallback={<Loading />}>
-                  <Friends />
+                  <MyFriends />
                </Suspense>
             }
          />
-         <Route path="list" element={<h1>Friends</h1>} />
+
+         <Route path="wish-list" element={<h1>Wish list</h1>} />
+
          <Route path="bookeds" element={<Bookeds />} />
-         <Route path="my-part" element={<h1>Friends</h1>} />
+
          <Route
             path="holidays"
             element={
@@ -193,6 +198,7 @@ const AppRouter = () => (
                </Suspense>
             }
          />
+
          <Route
             path="holiday/:id"
             element={
@@ -201,6 +207,7 @@ const AppRouter = () => (
                </Suspense>
             }
          />
+
          <Route path="charity" element={<Blago />} />
       </Route>
    </Routes>

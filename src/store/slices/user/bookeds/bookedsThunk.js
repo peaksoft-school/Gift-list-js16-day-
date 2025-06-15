@@ -23,6 +23,7 @@ const getAllBookedHolidayGift = createAsyncThunk(
    async (_, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get('/api/booking/booked/gifts')
+
          return data
       } catch (error) {
          return rejectWithValue({
