@@ -19,32 +19,41 @@ const Bookeds = () => {
    return (
       <StyledContainer>
          <Typography>Забронированные</Typography>
-         <Box>
+
+         <Box className="title-content">
             <Typography>Желание</Typography>
             <NavLink>Смотреть все</NavLink>
          </Box>
 
          <Box>
-            {wishList.mailings?.length === 0 ? (
+            {wishList?.length === 0 ? (
                <StyledNotBlockBox>
                   <img src={NoMailings} alt="icon" />
                   <h1>Нет желаний!</h1>
                </StyledNotBlockBox>
-            ) : null}
+            ) : (
+               wishList.map((wish) => (
+                  <BookedCard card={wish} key={wish.giftId} />
+               ))
+            )}
          </Box>
 
-         <Box>
+         <Box className="title-content">
             <Typography>Подарки</Typography>
             <NavLink>Смотреть все</NavLink>
          </Box>
 
          <Box>
-            {holidayGifts.mailings?.length === 0 ? (
+            {holidayGifts?.length === 0 ? (
                <StyledNotBlockBox>
                   <img src={NoMailings} alt="icon" />
                   <h1>Нет подарков!</h1>
                </StyledNotBlockBox>
-            ) : null}
+            ) : (
+               holidayGifts.map((holiday) => (
+                  <BookedCard card={holiday} key={holiday.giftId} />
+               ))
+            )}
          </Box>
       </StyledContainer>
    )
@@ -54,11 +63,20 @@ export default Bookeds
 
 const StyledContainer = styled(Box)({
    padding: '0 20px',
+   display: 'flex',
+   flexDirection: 'column',
+   gap: '31px',
 
    '& .MuiTypography-body1': {
       color: '#020202',
       fontSize: '20px',
       fontWeight: '500',
+   },
+
+   '& .title-content': {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
    },
 })
 const StyledNotBlockBox = styled(Box)(() => ({

@@ -277,7 +277,7 @@ const UploadBox = styled(Box)(({ preview }) => ({
 const FlexContainer = styled(Box)(() => ({
    display: 'flex',
    flexWrap: 'wrap',
-   gap: '1rem',
+   gap: '2rem',
 }))
 
 const StyledNotBlockBox = styled(Box)(() => ({
