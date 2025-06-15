@@ -24,6 +24,7 @@ const CharityCard = ({ charity }) => {
    const handleNavigate = (id) => {
       dispatch(CHARITY_THUNK.getById({ id, navigate }))
    }
+
    const handleChangeOption = (option) => {
       if (option === 'Удалить') {
          dispatch(CHARITY_THUNK.deleteCharity({ id: giftId, navigate }))
