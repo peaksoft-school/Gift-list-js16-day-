@@ -44,14 +44,28 @@ const USER_CARD_OPTIONS = [
       icon: Delete,
    },
 ]
+const CHARITY_CARD_OPTIONS = [
+   {
+      title: 'Удалить',
+      icon: Delete,
+   },
+]
 
 const HOLIDAYS = [
    {
       name: 'День матери',
       img: Baran,
    },
+
    { name: 'Курбан айт', img: Baran },
+
    { name: 'Кадр тун', img: Baran },
 ]
 
-export { ROLES_SIDEBAR, PROFILE_OPTIONS, USER_CARD_OPTIONS, HOLIDAYS }
+export {
+   ROLES_SIDEBAR,
+   PROFILE_OPTIONS,
+   USER_CARD_OPTIONS,
+   CHARITY_CARD_OPTIONS,
+   HOLIDAYS,
+}

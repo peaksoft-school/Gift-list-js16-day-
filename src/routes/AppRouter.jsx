@@ -5,6 +5,10 @@ import Blago from '../pages/user/Blago'
 import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
 
+const InnerCharity = lazy(
+   () => import('../components/admin/charity/InnerCharity')
+)
+const Charity = lazy(() => import('../pages/admin/charity/Charity'))
 const Friends = lazy(() => import('../pages/user/friends/Friends'))
 const Holidays = lazy(() => import('../pages/user/holidays/Holidays'))
 const HolidaysDescription = lazy(
@@ -78,6 +82,8 @@ const AppRouter = () => (
          }
       />
 
+      {/* ADMIN */}
+
       <Route
          path="/admin"
          element={
@@ -93,6 +99,7 @@ const AppRouter = () => (
          }
       >
          <Route index element={<Navigate to="users" />} />
+
          <Route
             path="users"
             element={
@@ -101,6 +108,7 @@ const AppRouter = () => (
                </Suspense>
             }
          />
+
          <Route
             path="users/:id"
             element={
@@ -109,8 +117,27 @@ const AppRouter = () => (
                </Suspense>
             }
          />
-         <Route path="charity" element={<Blago />} />
+
+         <Route
+            path="charity"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <Charity />
+               </Suspense>
+            }
+         />
+
+         <Route
+            path="charity/:id"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <InnerCharity />
+               </Suspense>
+            }
+         />
+
          <Route path="complaints" element={<h1>complaints</h1>} />
+
          <Route
             path="newsletter"
             element={
@@ -128,6 +155,8 @@ const AppRouter = () => (
             }
          />
       </Route>
+
+      {/* USER */}
 
       <Route
          path="/user"

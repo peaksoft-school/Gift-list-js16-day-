@@ -5,10 +5,12 @@ import MeatBalls from '../components/UI/MeetBalls'
 import SearchInput from '../components/UI/SearchInput'
 import { PROFILE_OPTIONS } from '../utils/helpers'
 import Notification from '../assets/icons/notification.svg'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { AUTH_ACTIONS } from '../store/slices/auth/authSlice'
 
 const Header = () => {
+   const { role } = useSelector((state) => state.auth)
+
    const { pathname } = useLocation()
 
    const dispatch = useDispatch()
@@ -38,7 +40,11 @@ const Header = () => {
 
                <>
                   <StyledNotificationIcon src={Notification} alt="" />
-                  <Typography className="user-name">Naruto Uzumaki</Typography>
+
+                  <Typography className="user-name">
+                     {role === 'ADMIN' ? 'Adminstrator' : 'Naruto Uzumaki'}
+                  </Typography>
+
                   <MeatBalls
                      variant="profile"
                      options={PROFILE_OPTIONS}
