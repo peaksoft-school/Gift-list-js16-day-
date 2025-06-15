@@ -1,7 +1,7 @@
 import { Typography, Box, styled } from '@mui/material'
-import facebook from '../assets/icons/facebook.svg'
+import facebook from '../assets/icons/grey-facebook.svg'
 import wk from '../assets/icons/wk.svg'
-import instagram from '../assets/icons/instagram.svg'
+import instagram from '../assets/icons/grey-instagram.svg'
 import inactive from '../assets/icons/inactive.svg'
 import Input from '../components/UI/Input'
 
@@ -78,12 +78,12 @@ const StyledContainer = styled(Box)({
    width: '100%',
 })
 
-const StyledBoxBlock = styled(Box)(() => ({
+const StyledBoxBlock = styled(Box)({
    letterSpacing: '100%',
    display: 'flex',
    flexDirection: 'column',
    gap: '16px',
-}))
+})
 
 const StyledTitle = styled(Typography)({
    fontFamily: 'Inter',

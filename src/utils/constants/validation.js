@@ -5,6 +5,7 @@ export const ForgotPasswordSchema = Yup.object().shape({
       .email('Некорректный email')
       .required('Обязательное поле'),
 })
+
 export const ResetPasswordSchema = Yup.object().shape({
    password: Yup.string()
       .min(8, 'Минимум 8 символов')

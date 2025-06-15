@@ -1,32 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { AUTH_THUNK } from '../../store/slices/auth/authThunk'
-import { Formik, Form, Field }from 'formik'
-import Button from '../../components/UI/Button'
-import { ForgotPasswordSchema } from '../../utils/constants/validation'
-import Input from '../../components/UI/Input'
-import LightIcon from '../../assets/icons/light.svg'
 import { useNavigate } from 'react-router'
+import { Formik, Form, Field } from 'formik'
+import { styled, Typography } from '@mui/material'
+import Button from '../../components/UI/Button'
+import Input from '../../components/UI/Input'
 import Notification from '../../components/Notification'
-import { styled } from '@mui/material'
+import LightIcon from '../../assets/icons/light.svg'
+import { ForgotPasswordSchema } from '../../utils/constants/validation'
+import { AUTH_THUNK } from '../../store/slices/auth/authThunk'
 import toastifyNotify from '../../utils/helpers/ToastifyNotify'
 
-
 const ForgotPassword = () => {
+   const { forgotPasswordStatus } = useSelector((state) => state.auth)
+
    const dispatch = useDispatch()
    const navigate = useNavigate()
-   const { forgotPasswordStatus } = useSelector((state) => state.auth)
 
    const handleSubmit = (values) => {
       dispatch(AUTH_THUNK.forgotPassword(values.email))
-         .unwrap()
-         .then(() => {
-            toastifyNotify({
-               title: 'Успешно',
-               message: 'Ссылка отправлено на ваш Email',
-               autoClose: 3000,
-               type: 'success',
-            })
-         })
    }
 
    return (
@@ -38,9 +29,13 @@ const ForgotPassword = () => {
          {({ errors, touched }) => (
             <MainBlock>
                <MainHeader>
-                  <h2 style={{ fontSize: '24px', fontWeight: 500 }}>
+                  <Typography
+                     variant="h2"
+                     style={{ fontSize: '24px', fontWeight: 500 }}
+                  >
                      Забыли пароль?
-                  </h2>
+                  </Typography>
+
                   <img
                      src={LightIcon}
                      alt=""
@@ -51,7 +46,7 @@ const ForgotPassword = () => {
                <Notification />
 
                <StyledMainContent>
-                  <p
+                  <Typography
                      style={{
                         fontSize: '14px',
                         fontWeight: 400,
@@ -60,7 +55,8 @@ const ForgotPassword = () => {
                      }}
                   >
                      Вам будет отправлена ссылка для сброса пароля
-                  </p>
+                  </Typography>
+
                   <Field name="email">
                      {({ field }) => (
                         <StyledInput
@@ -89,14 +85,15 @@ const ForgotPassword = () => {
                            })
                      }}
                   >
-                     <span
+                     <Typography
+                        variant="span"
                         style={{
                            textTransform: 'uppercase',
                            paddingBottom: '2px',
                         }}
                      >
                         О
-                     </span>
+                     </Typography>
                      тправить
                   </StyledButton>
 
@@ -118,7 +115,6 @@ export default ForgotPassword
 const MainBlock = styled(Form)(() => ({
    display: 'flex',
    justifyContent: 'center',
-   flexDirection: 'column',
    flexDirection: 'column',
    alignItems: 'center',
    marginTop: '70px',

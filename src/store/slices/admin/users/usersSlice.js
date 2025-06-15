@@ -33,9 +33,11 @@ const usersSlice = createSlice({
          .addCase(USERS_THUNK.deleteUser.fulfilled, (state) => {
             state.isLoading = false
          })
+
          .addCase(USERS_THUNK.deleteUser.pending, (state) => {
             state.isLoading = true
          })
+
          .addCase(USERS_THUNK.deleteUser.rejected, (state) => {
             state.isLoading = false
          })
@@ -102,6 +104,6 @@ const usersSlice = createSlice({
    },
 })
 
-const USERS_ACTIONS = usersSlice.USERS_ACTIONS
+const USERS_ACTIONS = usersSlice.actions
 
 export { usersSlice, USERS_ACTIONS }

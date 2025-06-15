@@ -2,10 +2,9 @@ import { forwardRef } from 'react'
 import {
    FormHelperText,
    InputAdornment,
-   InputLabel,
    TextField,
+   Typography,
    styled,
-   IconButton,
 } from '@mui/material'
 import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded'
 import UnionIcon from '../../assets/icons/Union.svg'
@@ -27,8 +26,10 @@ const Input = forwardRef(
       },
       ref
    ) => (
-      <>
-         <StyledInputLabel error={Boolean(error)}>{labelText}</StyledInputLabel>
+      <InputContainer>
+         {labelText && (
+            <InputLabelText error={error}>{labelText}</InputLabelText>
+         )}
 
          <StyledInput
             type={type}
@@ -39,13 +40,13 @@ const Input = forwardRef(
             name={name}
             ref={ref}
             fullWidth
+            variant="outlined"
             InputProps={{
                startAdornment: icon ? (
                   <InputAdornment position="start">
                      <img src={UnionIcon} alt="notification" />
                   </InputAdornment>
                ) : null,
-
                endAdornment: error ? (
                   <InputAdornment position="end">
                      <ErrorOutlineRoundedIcon className="error-icon" />
@@ -57,28 +58,30 @@ const Input = forwardRef(
          />
 
          {error && <StyledFormHelperText>{errorText}</StyledFormHelperText>}
-      </>
+      </InputContainer>
    )
 )
 
 export default Input
 
-const StyledInputLabel = styled(InputLabel)(({ error }) => ({
-   '&.MuiFormLabel-root': {
-      fontWeight: '100',
-      lineHeight: '100%',
-      color: error ? 'red' : '#8D949E',
-   },
+const InputContainer = styled('div')({
+   width: '100%',
+})
+
+const InputLabelText = styled(Typography)(({ error }) => ({
+   fontSize: '14px',
+   color: error ? 'red' : '#464444',
+   marginBottom: '6px',
+   fontWeight: 400,
+   lineHeight: '100%',
 }))
 
 const StyledInput = styled(TextField)(({ error }) => ({
    '& .MuiOutlinedInput-root': {
       borderRadius: '8px',
-      padding: '0px 5px',
-      marginTop: '4.5px',
 
       '& fieldset': {
-         margin: '8px 0',
+         border: '1px solid #D4D0D0',
       },
 
       '&:hover fieldset': {
@@ -86,39 +89,22 @@ const StyledInput = styled(TextField)(({ error }) => ({
       },
 
       '&.Mui-focused fieldset': {
-         border: '1px solid grey',
-      },
-
-      '& .error-icon': {
-         color: 'red',
+         border: '1px solid #8639B5',
       },
    },
 
-   '& .MuiOutlinedInput-root input::placeholder': {
-      color: error ? 'red' : '#8D949E',
-      opacity: 1,
+   '& .MuiOutlinedInput-input': {
+      padding: '12px 14px',
    },
 
-   '& .MuiOutlinedInput-root.Mui-focused input': {
-      caretColor: '#8639B5',
-      color: 'black',
-   },
-
-   '& .MuiOutlinedInput-root.Mui-error': {
-      '& fieldset': {
-         borderColor: 'red',
-      },
-
-      '& input': {
-         color: 'red',
-      },
+   '& .MuiOutlinedInput-root.Mui-error fieldset': {
+      borderColor: 'red',
    },
 }))
 
-const StyledFormHelperText = styled(FormHelperText)(() => ({
-   '&.MuiFormHelperText-root': {
-      color: 'red',
-      textAlign: 'left',
-      fontSize: '11px',
-   },
-}))
+const StyledFormHelperText = styled(FormHelperText)({
+   color: 'red',
+   fontSize: '12px',
+   margin: '4px 0 0 0',
+   textAlign: 'left',
+})

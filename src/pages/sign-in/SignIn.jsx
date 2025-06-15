@@ -53,10 +53,9 @@ const SignIn = () => {
       const loginValues = {
          email: values.email.trim(),
          password: values.password,
-         rememberMe: false,
       }
 
-      dispatch(AUTH_THUNK.signIn({loginValues, navigate}))
+      dispatch(AUTH_THUNK.signIn({ loginValues, navigate }))
    }
 
    const { values, handleChange, handleSubmit, handleBlur, touched, errors } =

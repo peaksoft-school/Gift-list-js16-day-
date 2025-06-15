@@ -2,17 +2,15 @@ import { styled } from '@mui/material/styles'
 import { ToastContainer } from 'react-toastify'
 // import 'react-toastify/dist/ReactToastify'
 
-const Notification = () => {
-   return (
-      <StyledToastContainer
-         position="top-right"
-         closeOnClick
-         draggable
-         hideProgressBar
-         limit={1}
-      />
-   )
-}
+const Notification = () => (
+   <StyledToastContainer
+      position="top-right"
+      closeOnClick
+      draggable
+      hideProgressBar
+      limit={1}
+   />
+)
 
 export default Notification
 

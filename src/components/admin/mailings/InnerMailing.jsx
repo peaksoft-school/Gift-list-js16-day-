@@ -8,6 +8,8 @@ import BreadCrumbs from '../../UI/BreadCrumbs'
 const InnerMailing = () => {
    const { mailing } = useSelector((state) => state.mailing)
 
+   const { image, subject, message, createdAt } = mailing
+
    const { id } = useParams()
 
    const dispatch = useDispatch()
@@ -18,7 +20,7 @@ const InnerMailing = () => {
 
    const links = [
       { href: '/admin/newsletter', label: 'Рассылка' },
-      { href: `/admin/newsletter/${id}`, label: `${mailing.subject}` },
+      { href: `/admin/newsletter/${id}`, label: `${subject}` },
    ]
 
    return (
@@ -28,21 +30,17 @@ const InnerMailing = () => {
 
             {mailing && (
                <StyledBox>
-                  <img src={mailing.image} alt="photo" />
+                  <img src={image} alt="photo" />
 
                   <StyledText>
-                     <StyledParagraf variant="h5">
-                        {mailing.subject}
-                     </StyledParagraf>
+                     <StyledParagraf variant="h5">{subject}</StyledParagraf>
 
-                     <StyledContent variant="h6">
-                        {mailing.message}
-                     </StyledContent>
+                     <StyledContent variant="h6">{message}</StyledContent>
 
                      <StyledData>
                         <Typography variant="h6">Дата добавления:</Typography>
 
-                        <Typography>{mailing.createdAt}</Typography>
+                        <Typography>{createdAt}</Typography>
                      </StyledData>
                   </StyledText>
                </StyledBox>
@@ -62,8 +60,7 @@ const FlexContainer = styled(Box)(() => ({
 
 const BlockContainer = styled(Box)(() => ({
    background: '#F7F8FA',
-   margin: '65px 0 0 17.8rem',
-   padding: '20px',
+   padding: '0 20px',
    width: '100%',
 }))
 
@@ -109,15 +106,11 @@ const StyledContent = styled('h6')(() => ({
    letterSpacing: '0px',
    verticalAlign: 'middle',
    width: '483px',
-   // paddingTop: '30px',
-   // paddingLeft: '20px',
    color: '#000000',
 }))
 
 const StyledData = styled(Box)(() => ({
    color: '#5C5C5C',
-   // paddingLeft: '20px',
-   // paddingTop: '30px',
 
    '& .MuiTypography-root': {
       fontSize: '14px',
