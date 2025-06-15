@@ -53,7 +53,6 @@ const SignIn = () => {
       const loginValues = {
          email: values.email.trim(),
          password: values.password,
-         rememberMe: false,
       }
 
       dispatch(AUTH_THUNK.signIn({ loginValues, navigate }))

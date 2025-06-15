@@ -146,9 +146,8 @@ const AppRouter = () => (
          <Route path="lenta" index element={<h1>lenta</h1>} />
          <Route path="friends" element={<h1>Friends</h1>} />
          <Route path="list" element={<h1>Friends</h1>} />
-         <Route path="booking" element={<BookingPage />} />
+         <Route path="bookeds" element={<Bookeds />} />
          <Route path="my-part" element={<h1>Friends</h1>} />
-         <Route path="booking" element={<h1>Friends</h1>} />
          <Route
             path="holidays"
             element={
@@ -159,11 +158,7 @@ const AppRouter = () => (
          />
          <Route
             path="holiday/:id"
-            element={
-               <Suspense fallback={<Loading />}>
-                  <HolidaysDescription />
-               </Suspense>
-            }
+            element={<Suspense fallback={<Loading />}></Suspense>}
          />
          <Route path="charity" element={<Blago />} />
       </Route>
