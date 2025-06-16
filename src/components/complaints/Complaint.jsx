@@ -1,18 +1,23 @@
 // import { Typography } from '@mui/material'
+import styled from 'styled-components'
 import { Avatar, Box, styled, Typography } from '@mui/material'
 import MeatBalls from '../UI/MeetBalls'
 import { USER_CARD_OPTIONS } from '../../utils/helpers'
 import InnerUser from '../admin/users/InnerUser'
+import { NavLink } from 'react-router'
 
-const Complaint = ({ card ={} }) => {
+const Complaint = ({ card = {} }) => {
    const { fullName, event, title, date, image, avatar } = card
+
+   // const Complaint = ({ card = {} }) => {
+   //    const { fullName, event, title, date, image, avatar } = card
    //    <div>
    //       <Typography>жалобы</Typography>
    //    </div>
    // )
    return (
       <StyledBox>
-         <InnerUser/>
+         <InnerUser />
          <StyledCard>
             <BoxContainer>
                <ContainerBox>
@@ -45,7 +50,7 @@ const StyledBox = styled(Box)(() => ({
 
 const StyledCard = styled(Box)({
    padding: '16px',
-   borderRadius: '12px',
+   borderRadius: '0px',
    boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
 
    width: '349px',

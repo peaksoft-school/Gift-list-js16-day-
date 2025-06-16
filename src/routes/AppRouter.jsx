@@ -41,7 +41,7 @@ const AppRouter = () => (
          path="/forgot-password"
          element={
             <Suspense fallback={<Loading />}>
-               <ForgotRassword />
+               {/* <ForgotRassword /> */}
             </Suspense>
          }
       ></Route>
@@ -79,8 +79,8 @@ const AppRouter = () => (
          }
       >
          <Route index element={<Navigate to="users" />} />
-         <Route path="users" element={<Users />} />
-         <Route path="users/:id" element={<InnerUser />} />
+         <Route path="users" element={<users />} />
+         <Route path="users/:id" element={<innerUser />} />
          <Route path="charity" element={<Blago />} />
          <Route path="complaints" element={<h1>complaints</h1>} />
          <Route path="newsletter" element={<h1>newsletter</h1>} />
@@ -104,8 +104,8 @@ const AppRouter = () => (
          <Route path="friends" element={<h1>Friends</h1>} />
          <Route path="list" element={<h1>Friends</h1>} />
          <Route path="booking" element={<h1>Friends</h1>} />
-         <Route path="my-part" element={<HolidaysList />} />
-         <Route path="my-part/:id" element={<HolidaysDescription />} />
+         <Route path="my-part" element={<holidaysList />} />
+         <Route path="my-part/:id" element={<holidaysDescription />} />
          <Route path="charity" element={<Blago />} />
       </Route>
    </Routes>

@@ -1,9 +1,8 @@
-import Loading from './components/Loading'
-import AppRouter from './routes/AppRouter'
+import AdminRoutes from './routes/AdminRoutes'
 
 const App = () => (
    <>
-      <AppRouter />
+      <AdminRoutes />
    </>
 )
 

@@ -8,6 +8,7 @@ const MailingList = lazy(() => import('../pages/admin/mailing/MailingList'))
 const InnerMailing = lazy(
    () => import('../components/admin/mailings/InnerMailing')
 )
+// const Complaint = lazy(() => import('../components/admin/complaints/Complaint'))
 
 const AdminRoutes = () => (
    <>
@@ -15,7 +16,7 @@ const AdminRoutes = () => (
       <Route path="users" element={<Users />} />
       <Route path="users/:id" element={<InnerUser />} />
       <Route path="charity" element={<Blago />} />
-      <Route path="complaints" element={<h1>complaints</h1>} />
+      <Route path="complaints" element={<Complaint />} />
       <Route path="newsletter" element={<MailingList />} />
       <Route path="newsletter/:id" element={<InnerMailing />} />
    </>

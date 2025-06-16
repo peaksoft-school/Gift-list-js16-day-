@@ -15,6 +15,7 @@
     "@mui/icons-material": "^6.4.9",
     "@mui/material": "^6.4.7",
     "@reduxjs/toolkit": "^2.7.0",
+    "a": "^3.0.1",
     "antd": "^5.24.9",
     "axios": "^1.9.0",
     "firebase": "^11.6.1",
@@ -31,7 +32,7 @@
     "react-toastify": "^11.0.5",
     "redux-persist": "^6.0.0",
     "slick-carousel": "^1.8.1",
-    "styled-components": "^6.1.15",
+    "styled-components": "^6.1.18",
     "yup": "^1.6.1"
   },
   "devDependencies": {
