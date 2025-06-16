@@ -1,16 +1,28 @@
 import { lazy, Suspense } from 'react'
 import { Navigate, Route, Routes } from 'react-router'
 import { ROLES } from './routes'
-import Blago from '../pages/user/Blago'
 import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
 
+const CreateCharity = lazy(
+   () => import('../pages/user/charity/create-charity/CreateCharity')
+)
+const InnerUserCharity = lazy(
+   () => import('../components/user/charity/InnerCharity')
+)
+const UserCharity = lazy(() => import('../pages/user/charity/Charity'))
+const Bookeds = lazy(() => import('../pages/user/bookeds/Bookeds'))
+const InnerCharity = lazy(
+   () => import('../components/admin/charity/InnerCharity')
+)
+const AdminCharity = lazy(() => import('../pages/admin/charity/Charity'))
+const MyFriends = lazy(() => import('../pages/user/my-friends/MyFriends'))
 const Holidays = lazy(() => import('../pages/user/holidays/Holidays'))
-const HolidaysDescription = lazy(
+const InnerHoliday = lazy(
    () => import('../components/user/holidays/InnerHoliday')
 )
 const ForgotRassword = lazy(
-   () => import('../pages/forgotPassword/ForgotRassword')
+   () => import('../pages/forgotPassword/ForgotPassword')
 )
 const Users = lazy(() => import('../pages/admin/users/Users'))
 const InnerMailing = lazy(
@@ -77,6 +89,8 @@ const AppRouter = () => (
          }
       />
 
+      {/* ADMIN */}
+
       <Route
          path="/admin"
          element={
@@ -92,6 +106,7 @@ const AppRouter = () => (
          }
       >
          <Route index element={<Navigate to="users" />} />
+
          <Route
             path="users"
             element={
@@ -100,6 +115,7 @@ const AppRouter = () => (
                </Suspense>
             }
          />
+
          <Route
             path="users/:id"
             element={
@@ -108,8 +124,27 @@ const AppRouter = () => (
                </Suspense>
             }
          />
-         <Route path="charity" element={<Blago />} />
+
+         <Route
+            path="charity"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <AdminCharity />
+               </Suspense>
+            }
+         />
+
+         <Route
+            path="charity/:id"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <InnerCharity />
+               </Suspense>
+            }
+         />
+
          <Route path="complaints" element={<h1>complaints</h1>} />
+
          <Route
             path="newsletter"
             element={
@@ -128,6 +163,8 @@ const AppRouter = () => (
          />
       </Route>
 
+      {/* USER */}
+
       <Route
          path="/user"
          element={
@@ -138,14 +175,27 @@ const AppRouter = () => (
                      <User />
                   </Suspense>
                }
-               fallbackPath={'/admin'}
+               fallbackPath={'/'}
             />
          }
       >
-         <Route path="lenta" index element={<h1>lenta</h1>} />
-         <Route path="friends" element={<h1>Friends</h1>} />
-         <Route path="list" element={<h1>Friends</h1>} />
-         <Route path="booking" element={<h1>Friends</h1>} />
+         <Route index element={<Navigate to="ribbon" />} />
+
+         <Route path="ribbon" index element={<h1>Ribbon</h1>} />
+
+         <Route
+            path="friends"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <MyFriends />
+               </Suspense>
+            }
+         />
+
+         <Route path="wish-list" element={<h1>Wish list</h1>} />
+
+         <Route path="bookeds" element={<Bookeds />} />
+
          <Route
             path="holidays"
             element={
@@ -154,15 +204,42 @@ const AppRouter = () => (
                </Suspense>
             }
          />
+
          <Route
             path="holiday/:id"
             element={
                <Suspense fallback={<Loading />}>
-                  <HolidaysDescription />
+                  <InnerHoliday />
                </Suspense>
             }
          />
-         <Route path="charity" element={<Blago />} />
+
+         <Route
+            path="charity"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <UserCharity />
+               </Suspense>
+            }
+         />
+
+         <Route
+            path="charity/:id"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <InnerUserCharity />
+               </Suspense>
+            }
+         />
+
+         <Route
+            path="charity/create"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <CreateCharity />
+               </Suspense>
+            }
+         />
       </Route>
    </Routes>
 )

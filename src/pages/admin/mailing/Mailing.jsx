@@ -17,8 +17,6 @@ const Mailing = memo(() => {
 
    const { fileUrl, isLoading } = useSelector((state) => state.files)
 
-   console.log(loading, isLoading)
-
    const [subject, setSubject] = useState('')
    const [message, setMessage] = useState('')
    const [preview, setPreview] = useState(null)
@@ -222,7 +220,7 @@ const HeaderRow = styled(Box)(() => ({
 }))
 
 const FlexContainer = styled(Box)(() => ({
-   marginLeft: '10px',
+   marginTop: '24px',
    display: 'flex',
    flexWrap: 'wrap',
    gap: '1rem',

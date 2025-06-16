@@ -1,8 +1,8 @@
 import { Box, styled, Typography } from '@mui/material'
-import Button from './Button'
 import { forwardRef } from 'react'
+import Button from '../Button'
 
-const FriendCard = forwardRef(({ friend, request = false }, ref) => {
+const FriendCard = forwardRef(({ friend = {}, request = false }, ref) => {
    const { image, fullName, desires, holidays } = friend
 
    return (

@@ -7,6 +7,10 @@ import { mailingSlice } from './slices/admin/mailing/mailingSlice'
 import { usersSlice } from './slices/admin/users/usersSlice'
 import { authSlice } from './slices/auth/authSlice'
 import { holidaysSlice } from './slices/user/holidays/holidaysSlice'
+import { friendsSlice } from './slices/user/friends/friendsSlice'
+import { charitySlice } from './slices/admin/charity/charitySlice'
+import { bookedsSlice } from './slices/user/bookeds/bookedsSlice'
+import { userCharitySlice } from './slices/user/charity/useCharitySlice'
 
 const rootReducer = combineReducers({
    [authSlice.name]: authSlice.reducer,
@@ -14,6 +18,10 @@ const rootReducer = combineReducers({
    [mailingSlice.name]: mailingSlice.reducer,
    [usersSlice.name]: usersSlice.reducer,
    [holidaysSlice.name]: holidaysSlice.reducer,
+   [friendsSlice.name]: friendsSlice.reducer,
+   [charitySlice.name]: charitySlice.reducer,
+   [bookedsSlice.name]: bookedsSlice.reducer,
+   [userCharitySlice.name]: userCharitySlice.reducer,
 })
 
 const persistConfig = {

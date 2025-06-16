@@ -5,10 +5,12 @@ import MeatBalls from '../components/UI/MeetBalls'
 import SearchInput from '../components/UI/SearchInput'
 import { PROFILE_OPTIONS } from '../utils/helpers'
 import Notification from '../assets/icons/notification.svg'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { AUTH_ACTIONS } from '../store/slices/auth/authSlice'
 
 const Header = () => {
+   const { role } = useSelector((state) => state.auth)
+
    const { pathname } = useLocation()
 
    const dispatch = useDispatch()
@@ -38,7 +40,11 @@ const Header = () => {
 
                <>
                   <StyledNotificationIcon src={Notification} alt="" />
-                  <Typography className="user-name">Naruto Uzumaki</Typography>
+
+                  <Typography className="user-name">
+                     {role === 'ADMIN' ? 'Adminstrator' : 'Naruto Uzumaki'}
+                  </Typography>
+
                   <MeatBalls
                      variant="profile"
                      options={PROFILE_OPTIONS}
@@ -66,12 +72,15 @@ const StyledBox = styled(Box)(() => ({
 }))
 
 const StyledInputSearch = styled(SearchInput)(() => ({
-   width: '821px',
+   '& .MuiInputBase-root': {
+      width: '99%',
+   },
 }))
 
 const StyledInput = styled(Input)(() => ({
    '& .MuiInputBase-root': {
       width: '99%',
+      margin: '10px 0',
    },
 }))
 
@@ -85,5 +94,5 @@ const StyledCustomAppBar = styled(Box)(() => ({
 
 const StyledNotificationIcon = styled('img')(() => ({
    width: '24px',
-   marginRight: '20px',
+   marginRight: '10px',
 }))

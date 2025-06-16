@@ -5,7 +5,6 @@ import FacebookIcon from '../../../assets/icons/facebook.svg'
 import WKIcon from '../../../assets/icons/telegram-1.svg'
 import Button from '../../UI/Button'
 import DeleteModal from '../modal/DeleteModal'
-import { set } from 'react-hook-form'
 import { useState } from 'react'
 
 const UserProfileCard = ({ user, onDelete }) => {
@@ -47,6 +46,30 @@ const UserProfileCard = ({ user, onDelete }) => {
                <Typography className="user-name">
                   {firstname} {lastname}
                </Typography>
+
+               {status === 'none' && (
+                  <Button variant="outlined" className="btn">
+                     Добавить в друзья
+                  </Button>
+               )}
+
+               {status === 'friends' && (
+                  <Button variant="warning" className="btn">
+                     Удалить из друзей
+                  </Button>
+               )}
+
+               {status === 'request' && (
+                  <Box className="friends-buttons-container">
+                     <Button variant="outlined" className="btn">
+                        Принять заявку
+                     </Button>
+
+                     <Button variant="warning" className="btn">
+                        Отклонить
+                     </Button>
+                  </Box>
+               )}
 
                <Box className="social-media">
                   <img src={FacebookIcon} alt="facebook" />
@@ -154,6 +177,18 @@ const StyledContent = styled(Box)(() => ({
    padding: '1.5rem',
    borderRadius: '10px',
    marginRight: '2.5rem',
+   marginTop: '31px',
+
+   '& .btn': {
+      width: '183px',
+   },
+
+   '& .friends-buttons-container': {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: '16px',
+   },
 
    '& .user-content': {
       display: 'flex',
