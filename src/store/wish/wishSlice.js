@@ -22,7 +22,6 @@ const wishSlice = createSlice({
    },
    extraReducers: (builder) => {
       builder
-         // ADD WISH
          .addCase(WISH_THUNK.addWish.pending, (state) => {
             state.isLoading = true
             state.error = null
@@ -37,7 +36,6 @@ const wishSlice = createSlice({
             state.error = payload || 'Ошибка при добавлении желания'
          })
 
-         // GET WISHES
          .addCase(WISH_THUNK.getWishes.pending, (state) => {
             state.isLoading = true
             state.error = null
@@ -52,7 +50,6 @@ const wishSlice = createSlice({
             state.error = payload || 'Ошибка при получении списка желаний'
          })
 
-         // GET WISH BY ID
          .addCase(WISH_THUNK.getWishById.pending, (state) => {
             state.isLoading = true
             state.error = null
@@ -67,7 +64,6 @@ const wishSlice = createSlice({
             state.error = payload || 'Ошибка при получении желания'
          })
 
-         // UPDATE WISH
          .addCase(WISH_THUNK.updateWish.pending, (state) => {
             state.isLoading = true
             state.error = null
@@ -85,16 +81,13 @@ const wishSlice = createSlice({
             state.error = payload || 'Ошибка при обновлении желания'
          })
 
-         // DELETE WISH
          .addCase(WISH_THUNK.deleteWish.pending, (state) => {
             state.isLoading = true
             state.error = null
          })
          .addCase(WISH_THUNK.deleteWish.fulfilled, (state, { payload }) => {
             state.isLoading = false
-            // Удаляем желание из массива по ID
             state.wishes = state.wishes.filter((wish) => wish.id !== payload)
-            // Если удаленное желание было выбранным, очищаем selectedWish
             if (state.selectedWish?.id === payload) {
                state.selectedWish = null
             }
@@ -105,7 +98,6 @@ const wishSlice = createSlice({
             state.error = payload || 'Ошибка при удалении желания'
          })
 
-         // GET HOLIDAYS
          .addCase(WISH_THUNK.getHolidays.pending, (state) => {
             state.isLoading = true
             state.error = null
@@ -122,5 +114,5 @@ const wishSlice = createSlice({
    },
 })
 
-export const WISH_ACTIONS = wishSlice.actions
-export default wishSlice
+const WISH_ACTIONS = wishSlice.actions
+export { wishSlice, WISH_ACTIONS }

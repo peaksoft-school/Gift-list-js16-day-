@@ -5,10 +5,8 @@ import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
 import Users from '../pages/admin/users/Users'
 import InnerUser from '../components/admin/users/InnerUser'
-import MailingList from '../pages/admin/mailing/MailingList'
-import InnerMailing from '../components/admin/mailings/InnerMailing'
-import HolidaysList from '../components/UI/holidays/HolidaysList'
-import HolidaysDescription from '../components/UI/holidays/HolidaysDescription'
+import MailingList from '../pages/admin/mailing/Mailing'
+import HolidaysList from '../pages/user/holidays/Holidays'
 import WishList from '../components/wish/WishList'
 import WishListDisplay from '../components/wish/WishListDisplay'
 
@@ -29,10 +27,6 @@ const Holidays = lazy(() => import('../pages/user/holidays/Holidays'))
 const InnerHoliday = lazy(
    () => import('../components/user/holidays/InnerHoliday')
 )
-const ForgotRassword = lazy(
-   () => import('../pages/forgotPassword/ForgotPassword')
-)
-const Users = lazy(() => import('../pages/admin/users/Users'))
 const InnerMailing = lazy(
    () => import('../components/admin/mailings/InnerMailing')
 )
@@ -44,7 +38,7 @@ const SignUp = lazy(() => import('../pages/sign-up/SignUp'))
 const Admin = lazy(() => import('../layout/admin/AdminLayout'))
 const User = lazy(() => import('../layout/user/UserLayout'))
 const ForgotPassword = lazy(
-   () => import('../pages/forgotPassword/ForgotRassword')
+   () => import('../pages/forgotPassword/ForgotPassword')
 )
 
 const AppRouter = () => (

@@ -6,7 +6,7 @@ import { filesSlice } from './slices/file/filesSlice'
 import { mailingSlice } from './slices/admin/mailing/mailingSlice'
 import { usersSlice } from './slices/admin/users/usersSlice'
 import { authSlice } from './slices/auth/authSlice'
-import wishSlice from './wish/wishSlice'
+import { wishSlice } from './wish/wishSlice'
 
 const rootReducer = combineReducers({
    [authSlice.name]: authSlice.reducer,
