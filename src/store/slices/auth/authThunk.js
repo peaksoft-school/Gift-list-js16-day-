@@ -5,12 +5,10 @@ import { ROUTES } from '../../../routes/routes'
 
 const signUp = createAsyncThunk(
    'auth/signUp',
-   async (formData, { rejectWithValue }) => {
+   async ({ data: values }, { rejectWithValue }) => {
       try {
-         const { data } = await axiosInstance.post(
-            '/api/auth/sign-up',
-            formData
-         )
+         const { data } = await axiosInstance.post('/api/auth/sign-up', values)
+
          return data
       } catch (error) {
          return rejectWithValue({
@@ -67,6 +65,7 @@ const authWithGoogle = createAsyncThunk(
          const { data } = await axiosInstance.post(
             `/api/auth/google?idToken=${idToken}`
          )
+
          navigate('/user')
 
          toastifyNotify({
@@ -94,9 +93,11 @@ const authWithGoogle = createAsyncThunk(
 
 const forgotPassword = createAsyncThunk(
    'auth/forgotPassword',
+
    async (email, { rejectWithValue }) => {
       try {
          const resetLinkBase = `${window.location.origin}/reset-password/`
+
          const { data } = await axiosInstance.post(
             '/api/auth/forgot-password',
             {
@@ -104,6 +105,14 @@ const forgotPassword = createAsyncThunk(
                link: resetLinkBase,
             }
          )
+
+         toastifyNotify({
+            title: 'Успешно',
+            message: 'Ссылка отправлено на ваш Email',
+            autoClose: 3000,
+            type: 'success',
+         })
+
          return data
       } catch (error) {
          return rejectWithValue({
@@ -117,12 +126,21 @@ const forgotPassword = createAsyncThunk(
 
 const resetPassword = createAsyncThunk(
    'auth/resetPassword',
+
    async ({ token, password }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.post('/api/auth/reset-password', {
             token,
             newPassword: password,
          })
+
+         toastifyNotify({
+            title: 'Успешно',
+            message: 'Пароль успешно сброшен',
+            autoClose: 3000,
+            type: 'success',
+         })
+
          return data
       } catch (error) {
          console.log(token)

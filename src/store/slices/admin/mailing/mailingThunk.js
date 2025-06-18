@@ -13,6 +13,7 @@ const getAllMailings = createAsyncThunk(
          if (signal.aborted) {
             return rejectWithValue({ message: 'Запрос отменён' })
          }
+
          return rejectWithValue({ message: error.response.data.message })
       }
    }
@@ -32,6 +33,7 @@ const getById = createAsyncThunk(
          if (signal.aborted) {
             return rejectWithValue({ message: 'Запрос отменён' })
          }
+
          return rejectWithValue({ message: error.response.data.message })
       }
    }

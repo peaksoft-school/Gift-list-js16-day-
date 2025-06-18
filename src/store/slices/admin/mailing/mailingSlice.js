@@ -12,6 +12,7 @@ const mailingSlice = createSlice({
    name: 'mailing',
    initialState,
    reducers: {},
+
    extraReducers: (builder) => {
       builder
          .addCase(
@@ -21,12 +22,15 @@ const mailingSlice = createSlice({
                state.loading = false
             }
          )
+
          .addCase(MAILING_THUNK.getAllMailings.pending, (state) => {
             state.loading = true
          })
+
          .addCase(MAILING_THUNK.getAllMailings.rejected, (state) => {
             state.loading = false
          })
+
          .addCase(
             MAILING_THUNK.createMailings.fulfilled,
             (state, { payload }) => {
@@ -34,9 +38,11 @@ const mailingSlice = createSlice({
                state.loading = false
             }
          )
+
          .addCase(MAILING_THUNK.createMailings.pending, (state) => {
             state.loading = true
          })
+
          .addCase(MAILING_THUNK.createMailings.rejected, (state) => {
             state.loading = false
          })
@@ -45,9 +51,11 @@ const mailingSlice = createSlice({
             state.mailing = payload
             state.loading = false
          })
+
          .addCase(MAILING_THUNK.getById.pending, (state) => {
             state.loading = true
          })
+
          .addCase(MAILING_THUNK.getById.rejected, (state) => {
             state.loading = false
          })
@@ -57,5 +65,3 @@ const mailingSlice = createSlice({
 const MAILING_ACTIONS = mailingSlice.MAILING_ACTIONS
 
 export { mailingSlice, MAILING_ACTIONS }
-
-export default mailingSlice.reducer

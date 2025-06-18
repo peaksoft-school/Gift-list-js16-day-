@@ -5,7 +5,7 @@ const BreadCrumbs = ({ links }) => {
    const location = useLocation()
 
    return (
-      <MuiBreadcrumbs aria-label="breadcrumb" sx={{ m: 2 }}>
+      <MuiBreadcrumbs aria-label="breadcrumb">
          {links.map(({ href, label }, i) =>
             i === links.length - 1 || location.pathname === href ? (
                <Typography color="black" key={href}>

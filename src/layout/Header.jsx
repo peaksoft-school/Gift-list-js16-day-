@@ -7,11 +7,23 @@ import { useLocation } from 'react-router'
 import InputSearch from '../components/UI/Input-search/InputSearch'
 
 const Header = () => {
+   const { role } = useSelector((state) => state.auth)
+
    const { pathname } = useLocation()
+
+   const dispatch = useDispatch()
+
+   const handleProfileOption = (option) => {
+      if (option === 'Выход') {
+         dispatch(AUTH_ACTIONS.logOut())
+      } else if (option === 'Профиль') {
+         console.log('Переход в профиль')
+      }
+   }
 
    return (
       <StyledCustomAppBar>
-         <Toolbar>
+         <Box>
             <StyledBox>
                {pathname === '/admin/charity' ||
                pathname === '/user/charity' ? (
@@ -27,15 +39,23 @@ const Header = () => {
                <>
                   <StyledNotificationIcon src={Notification} alt="" />
 
-                  <Typography className="user-name">Naruto Uzumaki</Typography>
+                  <Typography className="user-name">
+                     {role === 'ADMIN' ? 'Adminstrator' : 'Naruto Uzumaki'}
+                  </Typography>
 
-                  <MeatBalls variant="profile" options={PROFILE_OPTIONS} />
+                  <MeatBalls
+                     variant="profile"
+                     options={PROFILE_OPTIONS}
+                     onChange={handleProfileOption}
+                  />
                </>
             </StyledBox>
-         </Toolbar>
+         </Box>
       </StyledCustomAppBar>
    )
 }
+
+export default Header
 
 const StyledBox = styled(Box)(() => ({
    display: 'flex',
@@ -70,8 +90,5 @@ const StyledCustomAppBar = styled(AppBar)(() => ({
 
 const StyledNotificationIcon = styled('img')(() => ({
    width: '24px',
-   margin: '-50px',
-   marginRight: '30px',
+   marginRight: '10px',
 }))
-
-export default Header

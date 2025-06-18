@@ -4,8 +4,10 @@ import TelegramIcon from '../../../assets/icons/telegram.svg'
 import FacebookIcon from '../../../assets/icons/facebook.svg'
 import WKIcon from '../../../assets/icons/telegram-1.svg'
 import Button from '../../UI/Button'
+import DeleteModal from '../modal/DeleteModal'
+import { useState } from 'react'
 
-const UserProfileCard = ({ user }) => {
+const UserProfileCard = ({ user, onDelete }) => {
    const {
       firstname,
       lastname,
@@ -18,12 +20,17 @@ const UserProfileCard = ({ user }) => {
       shoeSize,
       hobby,
       importantNotes,
+      id,
    } = user
 
    const newDateOfBirth = dateOfBirth.split('-').reverse().join('.')
 
+   const [isVisible, setIsVisible] = useState(false)
+
+   const handleIsVisible = () => setIsVisible((prev) => !prev)
+
    return (
-      <StyledContent>
+      <StyledContent key={id}>
          <Box className="user-content">
             <Box className="image-container">
                <img
@@ -39,6 +46,30 @@ const UserProfileCard = ({ user }) => {
                <Typography className="user-name">
                   {firstname} {lastname}
                </Typography>
+
+               {status === 'none' && (
+                  <Button variant="outlined" className="btn">
+                     Добавить в друзья
+                  </Button>
+               )}
+
+               {status === 'friends' && (
+                  <Button variant="warning" className="btn">
+                     Удалить из друзей
+                  </Button>
+               )}
+
+               {status === 'request' && (
+                  <Box className="friends-buttons-container">
+                     <Button variant="outlined" className="btn">
+                        Принять заявку
+                     </Button>
+
+                     <Button variant="warning" className="btn">
+                        Отклонить
+                     </Button>
+                  </Box>
+               )}
 
                <Box className="social-media">
                   <img src={FacebookIcon} alt="facebook" />
@@ -118,9 +149,20 @@ const UserProfileCard = ({ user }) => {
          </Box>
 
          <Box className="buttons-container">
-            <Button variant="warning">Удалить</Button>
+            <Button variant="warning" onClick={() => handleIsVisible()}>
+               Удалить
+            </Button>
+
             <Button variant="outlined">Заблокировать</Button>
          </Box>
+
+         <DeleteModal
+            open={isVisible}
+            onClose={handleIsVisible}
+            onDelete={onDelete}
+            selectedUser={user}
+            selectedUserId={id}
+         />
       </StyledContent>
    )
 }
@@ -135,6 +177,18 @@ const StyledContent = styled(Box)(() => ({
    padding: '1.5rem',
    borderRadius: '10px',
    marginRight: '2.5rem',
+   marginTop: '31px',
+
+   '& .btn': {
+      width: '183px',
+   },
+
+   '& .friends-buttons-container': {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: '16px',
+   },
 
    '& .user-content': {
       display: 'flex',

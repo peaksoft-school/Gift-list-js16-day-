@@ -20,10 +20,10 @@ const UserLayout = () => {
 
 export default UserLayout
 
-const StyledMain = styled(Box)({
+const StyledMain = styled(Box)(() => ({
    display: 'flex',
    minHeight: '100vh',
-})
+}))
 
 const ContentWrapper = styled(Box)({
    flexGrow: 1,

@@ -5,6 +5,7 @@ import toastifyNotify from '../../../utils/helpers/ToastifyNotify'
 
 const addFile = createAsyncThunk(
    'files/addFile',
+   
    async ({ file, signal }, { rejectWithValue }) => {
       try {
          const formData = new FormData()
@@ -16,7 +17,6 @@ const addFile = createAsyncThunk(
 
             formData
          )
-
          return response.data
       } catch (error) {
          if (signal?.aborted) return rejectWithValue({ message: error.message })

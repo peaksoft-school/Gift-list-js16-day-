@@ -1,11 +1,11 @@
 import { Box, styled, Typography } from '@mui/material'
 import { useEffect } from 'react'
-import { USERS_THUNK } from '../../../store/slices/admin/users/usersThunk'
 import { useDispatch, useSelector } from 'react-redux'
-import BreadCrumbs from '../../UI/BreadCrumbs'
-import UserProfileCard from '../../UI/card/UserProfileCard'
-import Card from '../../UI/card/Card'
+import Card from '../../../UI/card/Card'
 import { NavLink } from 'react-router-dom'
+import { USERS_THUNK } from '../../../../store/slices/admin/users/usersThunk'
+import BreadCrumbs from '../../../UI/BreadCrumbs'
+import UserProfileCard from '../../../UI/card/UserProfileCard'
 
 const InnerUser = () => {
    const { user, wishList, holidays, charity } = useSelector(
@@ -24,20 +24,23 @@ const InnerUser = () => {
    const getAllBoolean = false
 
    useEffect(() => {
-      if (id) {
-         dispatch(USERS_THUNK.getUser({ id }))
-         dispatch(USERS_THUNK.getUserWishList({ id, getAllBoolean }))
-         dispatch(USERS_THUNK.getUserHolidays({ id, getAllBoolean }))
-         dispatch(USERS_THUNK.getUserCharity({ id, getAllBoolean }))
-      }
+      dispatch(USERS_THUNK.getUserWishList({ id, getAllBoolean }))
+      dispatch(USERS_THUNK.getUserHolidays({ id, getAllBoolean }))
+      dispatch(USERS_THUNK.getUserCharity({ id, getAllBoolean }))
    }, [id])
+
+   const handleDeleteUser = (id) => {
+      console.log(id)
+
+      dispatch(USERS_THUNK.deleteUser({ userId: id }))
+   }
 
    return (
       <StyledContainer>
          <Box>
             <BreadCrumbs links={links} />
 
-            <UserProfileCard user={user} />
+            <UserProfileCard user={user} onDelete={handleDeleteUser} />
          </Box>
 
          <Box>
@@ -46,9 +49,11 @@ const InnerUser = () => {
                <NavLink className="see-all">Смотреть все</NavLink>
             </Box>
 
-            {wishList.map((wish) => (
-               <Card wish={wish} key={wish.id} />
-            ))}
+            <Box className="wish-list">
+               {wishList.map((wish) => (
+                  <Card wish={wish} key={wish.id} />
+               ))}
+            </Box>
          </Box>
 
          <Box>
@@ -57,9 +62,11 @@ const InnerUser = () => {
                <NavLink className="see-all">Смотреть все</NavLink>
             </Box>
 
-            {holidays.map((wish) => (
-               <Card wish={wish} key={wish.id} />
-            ))}
+            <Box className="wish-list">
+               {holidays.map((wish) => (
+                  <Card wish={wish} key={wish.id} />
+               ))}
+            </Box>
          </Box>
 
          <Box>
@@ -68,9 +75,11 @@ const InnerUser = () => {
                <NavLink className="see-all">Смотреть все</NavLink>
             </Box>
 
-            {charity.map((wish) => (
-               <Card wish={wish} key={wish.id} />
-            ))}
+            <Box className="wish-list">
+               {charity.map((wish) => (
+                  <Card wish={wish} key={wish.id} />
+               ))}
+            </Box>
          </Box>
       </StyledContainer>
    )
@@ -79,12 +88,11 @@ const InnerUser = () => {
 export default InnerUser
 
 const StyledContainer = styled(Box)(() => ({
-   padding: '90px 0 90px 20rem',
    backgroundColor: '#f7f8fa',
-   width: '100%',
    display: 'flex',
    flexDirection: 'column',
    gap: '44px',
+   margin: '0 0 0 20px',
 
    '& .title-content': {
       display: 'flex',
@@ -102,5 +110,11 @@ const StyledContainer = styled(Box)(() => ({
       '& .see-all': {
          color: 'blue',
       },
+   },
+
+   '& .wish-list': {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '60px',
    },
 }))
