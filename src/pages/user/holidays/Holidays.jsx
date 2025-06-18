@@ -187,7 +187,6 @@ const Holidays = () => {
 export default Holidays
 
 const StyledBox = styled(Box)(() => ({
-   background: '#F7F8FA',
    width: '100%',
    display: 'flex',
    flexDirection: 'column',
@@ -278,7 +277,7 @@ const UploadBox = styled(Box)(({ preview }) => ({
 const FlexContainer = styled(Box)(() => ({
    display: 'flex',
    flexWrap: 'wrap',
-   gap: '1rem',
+   gap: '2rem',
 }))
 
 const StyledNotBlockBox = styled(Box)(() => ({

@@ -19,13 +19,8 @@ import Notification from '../../components/Notification'
 const SignUp = () => {
    const dispatch = useDispatch()
    const navigate = useNavigate()
-   const error = useSelector((state) => state.auth.error) // Для обработки ошибок из Redux
 
-   const {
-      register,
-      handleSubmit,
-      formState: { errors },
-   } = useForm({
+   const { register, handleSubmit } = useForm({
       defaultValues: {
          userName: '',
          lastName: '',
@@ -57,9 +52,7 @@ const SignUp = () => {
          const result = await signInWithPopup(auth, provider)
          const idToken = await result.user.getIdToken()
 
-         const response = await dispatch(
-            AUTH_THUNK.googleSignIn({ idToken, navigate })
-         ).unwrap()
+         await dispatch(AUTH_THUNK.googleSignIn({ idToken, navigate })).unwrap()
 
          ToastifyNotify({
             title: 'Успешно',
@@ -89,7 +82,7 @@ const SignUp = () => {
       }
 
       try {
-         await dispatch(AUTH_THUNK.signUp(data)).unwrap()
+         await dispatch(AUTH_THUNK.signUp({ data })).unwrap()
 
          ToastifyNotify({
             title: 'Успешно',

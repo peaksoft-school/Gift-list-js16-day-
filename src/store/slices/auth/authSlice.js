@@ -38,12 +38,12 @@ const authSlice = createSlice({
             state.isLoading = true
          })
 
-         .addCase(AUTH_THUNK.signIn.fulfilled, (state, action) => {
-            Object.assign(state, {
-               ...action.payload,
-               isAuth: true,
-               isLoading: false,
-            })
+         .addCase(AUTH_THUNK.signIn.fulfilled, (state, { payload }) => {
+            state.email = payload.email
+            state.role = payload.role
+            state.isAuth = true
+            state.isLoading = false
+            state.token = payload.token
          })
 
          .addCase(AUTH_THUNK.signIn.rejected, (state) => {
@@ -54,12 +54,12 @@ const authSlice = createSlice({
             state.isLoading = true
          })
 
-         .addCase(AUTH_THUNK.authWithGoogle.fulfilled, (state, action) => {
-            Object.assign(state, {
-               ...action.payload,
-               isAuth: true,
-               isLoading: false,
-            })
+         .addCase(AUTH_THUNK.authWithGoogle.fulfilled, (state, { payload }) => {
+            state.email = payload.email
+            state.role = payload.role
+            state.isAuth = true
+            state.isLoading = false
+            state.token = payload.token
          })
 
          .addCase(AUTH_THUNK.authWithGoogle.rejected, (state) => {

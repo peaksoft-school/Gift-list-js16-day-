@@ -1,12 +1,13 @@
 import { MenuItem, Select as MuiSelect, styled } from '@mui/material'
 
-const Select = ({ label, options, value, onChange }) => (
+const Select = ({ label, options, value, onChange, ...rest }) => (
    <Selecting
       value={value}
       onChange={onChange}
       displayEmpty
       variant="standard"
       disableUnderline
+      {...rest}
    >
       <MainItem value="">{label}</MainItem>
 

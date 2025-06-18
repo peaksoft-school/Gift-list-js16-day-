@@ -67,12 +67,12 @@ const CustomBox = styled(Box)(() => ({
 
 const StyledDeleteOutlineOutlined = styled(DeleteOutlineOutlined)(() => ({
    backgroundColor: '#FFEBEB',
-   color: 'red',
+   color: 'red',  
    width: ' 45px',
    height: ' 45px',
    gap: '10px',
    borderRadius: '35px',
-   padding: '10px',
+   padding: '10px',  
 }))
 
 const StyledTypography = styled(Typography)(() => ({

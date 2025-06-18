@@ -6,9 +6,9 @@ import Button from '../../components/UI/Button'
 import Input from '../../components/UI/Input'
 import Notification from '../../components/Notification'
 import LightIcon from '../../assets/icons/light.svg'
-import ToastifyNotify from '../../utils/helpers/ToastifyNotify'
 import { ForgotPasswordSchema } from '../../utils/constants/validation'
 import { AUTH_THUNK } from '../../store/slices/auth/authThunk'
+import toastifyNotify from '../../utils/helpers/ToastifyNotify'
 
 const ForgotPassword = () => {
    const { forgotPasswordStatus } = useSelector((state) => state.auth)
@@ -77,7 +77,7 @@ const ForgotPassword = () => {
                      onClick={() => {
                         errors.email &&
                            touched.email &&
-                           ToastifyNotify({
+                           toastifyNotify({
                               title: 'Ошибка',
                               message: 'Заполните поле!',
                               autoClose: 3000,

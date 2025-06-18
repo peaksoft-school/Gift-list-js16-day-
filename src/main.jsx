@@ -22,6 +22,7 @@ createRoot(document.getElementById('root')).render(
             <PersistGate persistor={persistor}>
                <ThemeProvider theme={theme}>
                   <Notification />
+
                   <App />
                </ThemeProvider>
             </PersistGate>

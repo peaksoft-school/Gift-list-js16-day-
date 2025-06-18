@@ -9,13 +9,15 @@ import ProfileIcon from '../../assets/icons/profile.svg'
 import LogoutIcon from '../../assets/icons/exit.svg'
 import Block from '../../assets/images/block.png'
 import Delete from '../../assets/images/delete.png'
+import Baran from '../../assets/images/baran.jpg'
+import Book from '../../assets/images/book.png'
 
 const ROLES_SIDEBAR = {
    users: [
-      { title: 'Лента', icon: TapeIcon, link: 'lenta' },
+      { title: 'Лента', icon: TapeIcon, link: 'ribbon' },
       { title: 'Друзья', icon: UsersIcon, link: 'friends' },
-      { title: 'Список желании ', icon: ListIcon, link: 'list' },
-      { title: 'Забронирование', icon: GiftIcon, link: 'booking' },
+      { title: 'Список желании ', icon: ListIcon, link: 'wish-list' },
+      { title: 'Забронирование', icon: GiftIcon, link: 'bookeds' },
       { title: 'Мои праздники', icon: HolydaysIcon, link: 'holidays' },
       { title: 'Благовторительность', icon: UsersLikeIcon, link: 'charity' },
    ],
@@ -43,5 +45,38 @@ const USER_CARD_OPTIONS = [
       icon: Delete,
    },
 ]
+const CHARITY_CARD_OPTIONS = [
+   {
+      title: 'Удалить',
+      icon: Delete,
+   },
+]
 
-export { ROLES_SIDEBAR, PROFILE_OPTIONS, USER_CARD_OPTIONS }
+const USER_BOOK_OPTIONS = [
+   {
+      title: 'Забронировать',
+      icon: Block,
+   },
+
+   { title: 'Забронировать анонимно', icon: Book },
+]
+
+const HOLIDAYS = [
+   {
+      name: 'День матери',
+      img: Baran,
+   },
+
+   { name: 'Курбан айт', img: Baran },
+
+   { name: 'Кадр тун', img: Baran },
+]
+
+export {
+   ROLES_SIDEBAR,
+   PROFILE_OPTIONS,
+   USER_CARD_OPTIONS,
+   CHARITY_CARD_OPTIONS,
+   HOLIDAYS,
+   USER_BOOK_OPTIONS,
+}
