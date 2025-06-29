@@ -101,6 +101,14 @@ const CreateCharity = () => {
 
    const handleGoBack = () => navigate(-1)
 
+   const isDisabled =
+      !formData.title.trim() ||
+      !formData.description.trim() ||
+      !formData.file ||
+      !formData.category ||
+      !formData.condition ||
+      !formData.subCategory
+
    return (
       <BlockContainer>
          <BreadCrumbs links={links} />
@@ -199,7 +207,11 @@ const CreateCharity = () => {
                      ОТМЕНА
                   </Button>
 
-                  <Button variant="outlined" onClick={handleSubmit}>
+                  <Button
+                     variant="outlined"
+                     onClick={handleSubmit}
+                     disabled={isDisabled}
+                  >
                      {isLoading ? 'ЗАГРУЗКА...' : 'ДОБАВИТЬ'}
                   </Button>
                </StyledButton>
@@ -210,8 +222,6 @@ const CreateCharity = () => {
 }
 
 export default CreateCharity
-
-// Styled components
 
 const BlockContainer = styled(Box)(() => ({
    padding: '0 20px',

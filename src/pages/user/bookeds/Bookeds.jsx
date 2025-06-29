@@ -22,14 +22,14 @@ const Bookeds = () => {
 
          <Box className="title-content">
             <Typography>Желание</Typography>
-            <NavLink>Смотреть все</NavLink>
+            <NavLink>{wishList?.length === 0 ? '' : 'Смотреть все'}</NavLink>
          </Box>
 
          <Box>
             {wishList?.length === 0 ? (
                <StyledNotBlockBox>
                   <img src={NoMailings} alt="icon" />
-                  <h1>Нет желаний!</h1>
+                  <Typography>Нет желаний!</Typography>
                </StyledNotBlockBox>
             ) : (
                wishList.map((wish) => (
@@ -40,14 +40,16 @@ const Bookeds = () => {
 
          <Box className="title-content">
             <Typography>Подарки</Typography>
-            <NavLink>Смотреть все</NavLink>
+            <NavLink>
+               {holidayGifts?.length === 0 ? '' : 'Смотреть все'}
+            </NavLink>
          </Box>
 
          <Box>
             {holidayGifts?.length === 0 ? (
                <StyledNotBlockBox>
                   <img src={NoMailings} alt="icon" />
-                  <h1>Нет подарков!</h1>
+                  <Typography>Нет подарков!</Typography>
                </StyledNotBlockBox>
             ) : (
                holidayGifts.map((holiday) => (

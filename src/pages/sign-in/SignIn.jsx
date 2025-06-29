@@ -191,6 +191,8 @@ const StyledContent = styled(Box)(() => ({
 
    '& .sign-up-content': {
       display: 'flex',
+      alignItems: 'center',
+      gap: '5px',
    },
 
    '& .end-content': {
@@ -203,11 +205,12 @@ const StyledContent = styled(Box)(() => ({
    },
 }))
 
-const StyledForm = styled('form')(({ errors }) => ({
+const StyledForm = styled('form')(() => ({
    display: 'flex',
    justifyContent: 'center',
    flexDirection: 'column',
    width: '100%',
+   gap: '10px',
 
    '& .title': {
       fontSize: '24px',
@@ -222,10 +225,7 @@ const StyledForm = styled('form')(({ errors }) => ({
       display: 'flex',
       flexDirection: 'column',
       margin: '20px 0 0 0',
-
-      '& .input': {
-         marginBottom: errors.password ? '0' : '20px',
-      },
+      gap: '25px',
 
       '& .eye-icon': {
          width: '20px',

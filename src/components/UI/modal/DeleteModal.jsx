@@ -86,6 +86,7 @@ const BoxContainer = styled(Box)(() => ({
    gap: '15px',
    borderRadius: '12px',
    display: 'flex',
+   marginTop: '20px',
 
    '& .cancel-btn': {
       width: '232px',

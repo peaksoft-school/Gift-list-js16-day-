@@ -9,7 +9,7 @@ const initialState = {
 }
 
 const userCharitySlice = createSlice({
-   name: 'charity',
+   name: 'user-charity',
    initialState,
    reducers: {},
 
