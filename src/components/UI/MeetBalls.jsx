@@ -51,6 +51,7 @@ const MeatBalls = ({
                   }}
                >
                   <img src={Icon} alt={`${title}-icon`} />
+
                   {title}
                </StyledMenuItem>
             ))}
