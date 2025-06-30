@@ -22,17 +22,14 @@ const SignIn = () => {
    const [isPasswordFieldActive, setIsPasswordFieldActive] = useState(false)
 
    const dispatch = useDispatch()
-
    const navigate = useNavigate()
 
    const togglePasswordVisibility = () => setShowPassword((prev) => !prev)
-
    const handlePasswordFieldFocus = () => setIsPasswordFieldActive(true)
 
    const handleGoogleSignIn = async () => {
       try {
          const provider = new GoogleAuthProvider()
-
          provider.addScope('email')
          provider.addScope('profile')
 
@@ -54,14 +51,12 @@ const SignIn = () => {
          email: values.email.trim(),
          password: values.password,
       }
-
       dispatch(AUTH_THUNK.signIn({ loginValues, navigate }))
    }
 
    const { values, handleChange, handleSubmit, handleBlur, touched, errors } =
       useFormik({
          initialValues: { email: '', password: '', rememberMe: false },
-
          validationSchema: VALIDATION_SIGN_IN,
          onSubmit,
       })
@@ -69,12 +64,11 @@ const SignIn = () => {
    return (
       <StyledContainer>
          <StyledContent>
-            <StyledForm onSubmit={handleSubmit} errors={errors}>
+            <StyledForm onSubmit={handleSubmit}>
                <StyledMainHeader>
                   <Typography typography="h3" className="title">
                      Вход
                   </Typography>
-
                   <img
                      src={LightIcon}
                      alt="exit-icon"
@@ -109,7 +103,7 @@ const SignIn = () => {
                      className="input"
                      InputProps={{
                         endAdornment: (
-                           <InputAdornment className="adornment" position="end">
+                           <InputAdornment position="end">
                               {isPasswordFieldActive && (
                                  <Box onClick={togglePasswordVisibility}>
                                     <img
@@ -126,8 +120,7 @@ const SignIn = () => {
                </Box>
 
                <StyledMainCheckbox>
-                  <Checkbox />
-
+                  <Checkbox name="rememberMe" onChange={handleChange} />
                   <Typography className="text">Запомнить меня</Typography>
                </StyledMainCheckbox>
 
@@ -143,9 +136,7 @@ const SignIn = () => {
 
                <StyledOrDivider>
                   <StyledLine />
-
                   <StyledText>или</StyledText>
-
                   <StyledLine />
                </StyledOrDivider>
 
@@ -156,7 +147,6 @@ const SignIn = () => {
 
                <Box className="sign-up-content">
                   <Typography>Нет аккаунта?</Typography>
-
                   <StyledNavLink to="/sign-up">
                      Зарегистрироваться
                   </StyledNavLink>
@@ -203,7 +193,7 @@ const StyledContent = styled(Box)(() => ({
    },
 }))
 
-const StyledForm = styled('form')(({ errors }) => ({
+const StyledForm = styled('form')(() => ({
    display: 'flex',
    justifyContent: 'center',
    flexDirection: 'column',
@@ -221,16 +211,15 @@ const StyledForm = styled('form')(({ errors }) => ({
    '& .inputs-content': {
       display: 'flex',
       flexDirection: 'column',
-      margin: '20px 0 0 0',
+      marginTop: '20px',
 
       '& .input': {
-         marginBottom: errors.password ? '0' : '20px',
+         marginBottom: '20px',
       },
 
       '& .eye-icon': {
          width: '20px',
          marginTop: 6,
-         border: '#ccc',
          cursor: 'pointer',
       },
    },
@@ -255,8 +244,8 @@ const StyledMainCheckbox = styled('div')(() => ({
 
 const StyledInput = styled(Input)(() => ({
    '&.MuiOutlinedInput-root': {
-      height: '35px',
-      backgroundColor: 'none',
+      borderRadius: '8px',
+      backgroundColor: '#F0F4FF',
    },
 }))
 

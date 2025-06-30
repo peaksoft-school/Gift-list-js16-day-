@@ -166,7 +166,7 @@ const AppRouter = () => (
          path="/user"
          element={
             <PrivateRoute
-            roles={[ROLES.USER]}
+               roles={[ROLES.USER]}
                Component={
                   <Suspense fallback={<Loading />}>
                      <User />
@@ -180,7 +180,7 @@ const AppRouter = () => (
 
          <Route path="ribbon" index element={<h1>Ribbon</h1>} />
 
-            <Route path="profile" element={<Profile />} />
+         <Route path="profile" element={<Profile />} />
          <Route
             path="friends"
             element={

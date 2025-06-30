@@ -9,12 +9,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AUTH_ACTIONS } from '../store/slices/auth/authSlice'
 
 const Header = () => {
-   const { role } = useSelector((state) => state.auth)
    const navigate = useNavigate()
-
+   const dispatch = useDispatch()
    const { pathname } = useLocation()
 
-   const dispatch = useDispatch()
+   // Получаем данные авторизованного пользователя
+   const { role, user } = useSelector((state) => state.auth)
 
    const handleProfileOption = (option) => {
       if (option === 'Выход') {
@@ -40,10 +40,15 @@ const Header = () => {
                )}
 
                <>
-                  <StyledNotificationIcon src={Notification} alt="" />
+                  <StyledNotificationIcon
+                     src={Notification}
+                     alt="notification"
+                  />
 
                   <Typography className="user-name">
-                     {role === 'ADMIN' ? 'Adminstrator' : 'Naruto Uzumaki'}
+                     {role === 'ADMIN'
+                        ? 'Administrator'
+                        : user?.name || 'Пользователь'}
                   </Typography>
 
                   <MeatBalls
@@ -66,7 +71,6 @@ const StyledBox = styled(Box)(() => ({
    justifyContent: 'space-evenly',
    top: '33px',
    width: '100%',
-
    '& .user-name': {
       width: '140px',
    },
