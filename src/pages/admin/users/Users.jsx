@@ -7,17 +7,16 @@ import DeleteModal from '../../../components/UI/modal/DeleteModal'
 import { USERS_THUNK } from '../../../store/slices/admin/users/usersThunk'
 
 const Users = () => {
-   const { users } = useSelector((state) => state.users) || []
+   const dispatch = useDispatch()
+   const navigate = useNavigate()
+   const { users } = useSelector((state) => state.users) || {}
 
    const [open, setOpen] = useState(false)
    const [selectedUserId, setSelectedUserId] = useState(null)
 
-   const dispatch = useDispatch()
-   const navigate = useNavigate()
-
    useEffect(() => {
       dispatch(USERS_THUNK.getAllUsers())
-   }, [])
+   }, [dispatch])
 
    const handleVisibleModal = (id) => {
       setSelectedUserId(id)
@@ -30,8 +29,7 @@ const Users = () => {
    }
 
    const handleDeleteUser = (id) => {
-      console.log(id)
-
+      if (!id) return
       dispatch(USERS_THUNK.deleteUser({ userId: id, handleCloseModal }))
    }
 

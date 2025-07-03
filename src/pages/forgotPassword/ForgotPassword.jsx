@@ -28,30 +28,31 @@ const ForgotPassword = () => {
       >
          {({ errors, touched }) => (
             <MainBlock>
-               <MainHeader>
-                  <Typography
-                     variant="h2"
-                     style={{ fontSize: '24px', fontWeight: 500 }}
-                  >
-                     Забыли пароль?
-                  </Typography>
-
-                  <img
-                     src={LightIcon}
-                     alt=""
-                     style={{ cursor: 'pointer' }}
-                     onClick={() => navigate('/sign-in')}
-                  />
-               </MainHeader>
                <Notification />
 
                <StyledMainContent>
+                  <MainHeader>
+                     <Typography
+                        variant="h2"
+                        style={{ fontSize: '24px', fontWeight: 500 }}
+                     >
+                        Забыли пароль?
+                     </Typography>
+
+                     <img
+                        src={LightIcon}
+                        alt=""
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => navigate('/sign-in')}
+                     />
+                  </MainHeader>
                   <Typography
                      style={{
                         fontSize: '14px',
                         fontWeight: 400,
                         color: '#87898E',
                         marginBottom: '14px',
+                        marginLeft: '30px',
                      }}
                   >
                      Вам будет отправлена ссылка для сброса пароля
@@ -113,11 +114,12 @@ const ForgotPassword = () => {
 export default ForgotPassword
 
 const MainBlock = styled(Form)(() => ({
+   background: 'linear-gradient(#8639B5, #092056)',
    display: 'flex',
    justifyContent: 'center',
    flexDirection: 'column',
    alignItems: 'center',
-   marginTop: '70px',
+   height: '100vh',
 }))
 
 const MainHeader = styled('div')(() => ({
@@ -128,19 +130,24 @@ const MainHeader = styled('div')(() => ({
 
 const StyledMainContent = styled('div')(() => ({
    display: 'flex',
+   background: '#fff',
    flexDirection: 'column',
+   padding: '20px',
+   borderRadius: '10px',
 }))
 
 const StyledInput = styled(Input)(() => ({
    width: 482,
    height: 35,
    marginBottom: '32px',
+   marginLeft: '30px',
 }))
 
 const StyledButton = styled(Button)(() => ({
    width: '482px',
    height: 39,
    textTransform: 'lowercase',
+   marginLeft: '30px',
 }))
 
 const StyleWarningdButton = styled('button')(() => ({

@@ -65,7 +65,7 @@ const Mailing = memo(() => {
    const handleMessageChange = (e) => setMessage(e.target.value)
 
    useEffect(() => {
-      dispatch(MAILING_THUNK.getAllMailings())
+      dispatch(MAILING_THUNK.getAllMailings({ page: 1, size: 10 }))
    }, [dispatch])
 
    const handleSubmit = () => {
@@ -267,6 +267,7 @@ const StyledInput = styled(Input)(() => ({
    '& .MuiOutlinedInput-root ': {
       width: '480px',
       borderRadius: '6px',
+      marginBottom: '10px',
    },
 }))
 
@@ -281,6 +282,7 @@ const ButtonContainer = styled(Box)(() => ({
 
    display: 'flex',
    justifyContent: 'center',
+   marginTop: '15px',
    gap: '16px',
 }))
 

@@ -7,44 +7,41 @@ import BreadCrumbs from '../../UI/BreadCrumbs'
 
 const InnerMailing = () => {
    const { mailing } = useSelector((state) => state.mailing)
-
-   const { image, subject, message, createdAt } = mailing
-
    const { id } = useParams()
-
    const dispatch = useDispatch()
 
    useEffect(() => {
       dispatch(MAILING_THUNK.getById(id))
-   }, [dispatch])
+   }, [dispatch, id])
 
    const links = [
       { href: '/admin/newsletter', label: 'Рассылка' },
-      { href: `/admin/newsletter/${id}`, label: `${subject}` },
+      { href: `/admin/newsletter/${id}`, label: mailing?.subject || '...' },
    ]
+
+   if (!mailing) return null
+
+   const { image, subject, message, createdAt } = mailing
 
    return (
       <FlexContainer>
          <BlockContainer>
             <BreadCrumbs links={links} />
 
-            {mailing && (
-               <StyledBox>
-                  <img src={image} alt="photo" />
+            <StyledBox>
+               <img src={image} alt="photo" />
 
-                  <StyledText>
-                     <StyledParagraf variant="h5">{subject}</StyledParagraf>
+               <StyledText>
+                  <StyledParagraf variant="h5">{subject}</StyledParagraf>
 
-                     <StyledContent variant="h6">{message}</StyledContent>
+                  <StyledContent variant="h6">{message}</StyledContent>
 
-                     <StyledData>
-                        <Typography variant="h6">Дата добавления:</Typography>
-
-                        <Typography>{createdAt}</Typography>
-                     </StyledData>
-                  </StyledText>
-               </StyledBox>
-            )}
+                  <StyledData>
+                     <Typography variant="h6">Дата добавления:</Typography>
+                     <Typography>{createdAt}</Typography>
+                  </StyledData>
+               </StyledText>
+            </StyledBox>
          </BlockContainer>
       </FlexContainer>
    )

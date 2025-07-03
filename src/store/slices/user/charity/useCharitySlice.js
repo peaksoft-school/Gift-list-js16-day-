@@ -2,89 +2,132 @@ import { createSlice } from '@reduxjs/toolkit'
 import { USER_CHARITY_THUNK } from './userCharityThunk'
 
 const initialState = {
-   charity: [],
-   selectedUserCharity: {},
-   loading: false,
+   allCharity: [],
+   myGifts: [],
+   oneCharity: null,
+   isLoading: false,
    error: null,
 }
 
 const userCharitySlice = createSlice({
-   name: 'charity',
+   name: 'userCharity',
    initialState,
-   reducers: {},
-
+   reducers: {
+      clearCharity: (state) => {
+         state.allCharity = []
+         state.oneCharity = null
+         state.myGifts = []
+         state.error = null
+      },
+   },
    extraReducers: (builder) => {
+      const {
+         getAllUserCharity,
+         getById,
+         deleteCharity,
+         createCharity,
+         updateCharity,
+         addGiftToMyGifts,
+         getMyCharityGifts,
+      } = USER_CHARITY_THUNK
+
       builder
-         .addCase(
-            USER_CHARITY_THUNK.getAllUserCharity.fulfilled,
-            (state, { payload }) => {
-               state.charity = payload
-               state.loading = false
-            }
-         )
-
-         .addCase(USER_CHARITY_THUNK.getAllUserCharity.pending, (state) => {
-            state.loading = true
+         .addCase(getAllUserCharity.pending, (state) => {
+            state.isLoading = true
+            state.error = null
+         })
+         .addCase(getAllUserCharity.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.allCharity = action.payload
+         })
+         .addCase(getAllUserCharity.rejected, (state, action) => {
+            state.isLoading = false
+            state.error = action.payload
          })
 
-         .addCase(USER_CHARITY_THUNK.getAllUserCharity.rejected, (state) => {
-            state.loading = false
+         .addCase(getById.pending, (state) => {
+            state.isLoading = true
+            state.error = null
+         })
+         .addCase(getById.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.oneCharity = action.payload
+         })
+         .addCase(getById.rejected, (state, action) => {
+            state.isLoading = false
+            state.error = action.payload
          })
 
-         .addCase(
-            USER_CHARITY_THUNK.getById.fulfilled,
-            (state, { payload }) => {
-               state.selectedUserCharity = payload
-               state.loading = false
-            }
-         )
-
-         .addCase(USER_CHARITY_THUNK.getById.pending, (state) => {
-            state.loading = true
+         .addCase(deleteCharity.pending, (state) => {
+            state.isLoading = true
+            state.error = null
+         })
+         .addCase(deleteCharity.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.allCharity = state.allCharity.filter(
+               (item) => item.id !== action.meta.arg.id
+            )
+         })
+         .addCase(deleteCharity.rejected, (state, action) => {
+            state.isLoading = false
+            state.error = action.payload
          })
 
-         .addCase(USER_CHARITY_THUNK.getById.rejected, (state) => {
-            state.loading = false
+         .addCase(createCharity.pending, (state) => {
+            state.isLoading = true
+            state.error = null
+         })
+         .addCase(createCharity.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.allCharity.push(action.payload)
+         })
+         .addCase(createCharity.rejected, (state, action) => {
+            state.isLoading = false
+            state.error = action.payload
          })
 
-         .addCase(
-            USER_CHARITY_THUNK.deleteCharity.fulfilled,
-            (state, { payload }) => {
-               state.delete = payload
-               state.loading = false
-            }
-         )
-
-         .addCase(USER_CHARITY_THUNK.deleteCharity.pending, (state) => {
-            state.loading = true
+         .addCase(updateCharity.pending, (state) => {
+            state.isLoading = true
+            state.error = null
+         })
+         .addCase(updateCharity.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.allCharity = state.allCharity.map((item) =>
+               item.id === action.meta.arg.id ? action.payload : item
+            )
+         })
+         .addCase(updateCharity.rejected, (state, action) => {
+            state.isLoading = false
+            state.error = action.payload
          })
 
-         .addCase(USER_CHARITY_THUNK.deleteCharity.rejected, (state) => {
-            state.loading = false
+         .addCase(addGiftToMyGifts.pending, (state) => {
+            state.isLoading = true
+            state.error = null
+         })
+         .addCase(addGiftToMyGifts.fulfilled, (state) => {
+            state.isLoading = false
+         })
+         .addCase(addGiftToMyGifts.rejected, (state, action) => {
+            state.isLoading = false
+            state.error = action.payload
          })
 
-         .addCase(
-            USER_CHARITY_THUNK.createCharity.fulfilled,
-            (state, { payload }) => {
-               state.charity.push(payload)
-               state.loading = false
-            }
-         )
-
-         .addCase(USER_CHARITY_THUNK.createCharity.pending, (state) => {
-            state.loading = true
+         .addCase(getMyCharityGifts.pending, (state) => {
+            state.isLoading = true
+            state.error = null
          })
-
-         .addCase(
-            USER_CHARITY_THUNK.createCharity.rejected,
-            (state, { error }) => {
-               state.loading = false
-               state.error = error.message
-            }
-         )
+         .addCase(getMyCharityGifts.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.myGifts = action.payload
+         })
+         .addCase(getMyCharityGifts.rejected, (state, action) => {
+            state.isLoading = false
+            state.error = action.payload
+         })
    },
 })
 
-const USER_CHARITY_ACTIONS = userCharitySlice.actions
+const CHARITY_ACTIONS = userCharitySlice.actions
 
-export { userCharitySlice, USER_CHARITY_ACTIONS }
+export { userCharitySlice, CHARITY_ACTIONS }

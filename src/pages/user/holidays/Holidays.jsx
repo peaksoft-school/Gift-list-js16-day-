@@ -218,6 +218,8 @@ const StyledTypograhpy = styled(Typography)(() => ({
 }))
 
 const StyledInput = styled(Input)(() => ({
+   marginBottom: '10px',
+
    '& .MuiOutlinedInput-root ': {
       width: '480px',
       borderRadius: '6px',
@@ -240,6 +242,7 @@ const ButtonContainer = styled(Box)(() => ({
    display: 'flex',
    justifyContent: 'center',
    gap: '16px',
+   marginTop: '20px',
 }))
 
 const StyledModal = styled(Modal)(() => ({

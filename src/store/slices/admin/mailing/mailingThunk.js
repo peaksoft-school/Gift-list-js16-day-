@@ -1,70 +1,84 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { axiosInstance } from '../../../../configs/axiosInstance'
 
+// Получение всех рассылок (с пагинацией)
 const getAllMailings = createAsyncThunk(
    'mailing/getAllMailings',
-
-   async (_, { rejectWithValue, signal }) => {
+   async (
+      { page = 1, size = 10 } = {}, // можно передавать параметры
+      { rejectWithValue, signal }
+   ) => {
       try {
-         const { data } = await axiosInstance.get('/api/mailing', { signal })
+         const response = await axiosInstance.get('/api/mailing', {
+            signal,
+            params: { page, size }, // пример: ?page=1&size=10
+         })
 
-         return data
+         return response.data
       } catch (error) {
          if (signal.aborted) {
             return rejectWithValue({ message: 'Запрос отменён' })
          }
 
-         return rejectWithValue({ message: error.response.data.message })
+         const message =
+            error.response?.data?.message || 'Ошибка получения рассылок'
+         return rejectWithValue({ message })
       }
    }
 )
 
 const getById = createAsyncThunk(
    'mailing/getById',
-
    async (id, { rejectWithValue, signal }) => {
       try {
-         const { data } = await axiosInstance.get(`/api/mailing/${id}`, {
+         const response = await axiosInstance.get(`/api/mailing/${id}`, {
             signal,
          })
 
-         return data
+         return response.data
       } catch (error) {
          if (signal.aborted) {
             return rejectWithValue({ message: 'Запрос отменён' })
          }
 
-         return rejectWithValue({ message: error.response.data.message })
+         const message =
+            error.response?.data?.message || 'Ошибка при получении рассылки'
+         return rejectWithValue({ message })
       }
    }
 )
 
 const createMailings = createAsyncThunk(
    'mailing/createMailings',
-
    async (
       { values, resetForm, setOpenModal },
       { rejectWithValue, signal, dispatch }
    ) => {
       try {
-         const { data } = await axiosInstance.post('/api/mailing', values, {
+         const response = await axiosInstance.post('/api/mailing', values, {
             signal,
          })
 
          resetForm()
          setOpenModal(false)
 
-         dispatch(getAllMailings())
+         dispatch(getAllMailings()) // можно передать { page: 1, size: 10 }
 
-         return data
+         return response.data
       } catch (error) {
          if (signal.aborted) {
             return rejectWithValue({ message: 'Запрос отменён' })
          }
 
-         return rejectWithValue({ message: error.response?.data?.message })
+         const message =
+            error.response?.data?.message || 'Ошибка при создании рассылки'
+         return rejectWithValue({ message })
       }
    }
 )
 
-export const MAILING_THUNK = { getAllMailings, createMailings, getById }
+export const MAILING_THUNK = {
+   getAllMailings,
+   getById,
+   createMailings,
+}

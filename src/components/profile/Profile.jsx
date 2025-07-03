@@ -1,4 +1,3 @@
-// Импорты
 import React, { useRef, useEffect, useState } from 'react'
 import { Box, Typography, CircularProgress } from '@mui/material'
 import { styled } from '@mui/system'
@@ -35,7 +34,6 @@ export default function Profile() {
    const [preview, setPreview] = useState(null)
    const [imageFile, setImageFile] = useState(null)
 
-   // Опции для селектов
    const clothingSizeOptions = [
       { value: 'XXS', name: 'XXS' },
       { value: 'XS', name: 'XS' },

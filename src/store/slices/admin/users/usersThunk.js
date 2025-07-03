@@ -34,62 +34,62 @@ const getUser = createAsyncThunk(
 
 const getUserWishList = createAsyncThunk(
    'users/getUserWishList',
-
    async ({ id, getAllBoolean }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(
             `/api/users/user/wish-list/${id}?getAll=${getAllBoolean}`
          )
-
          return data
       } catch (error) {
-         return rejectWithValue({ message: error.response.data.message })
+         console.error('WishList error:', error?.response)
+         return rejectWithValue({
+            message: error?.response?.data?.message || 'Server error',
+         })
       }
    }
 )
 
 const getUserHolidays = createAsyncThunk(
    'users/getUserHolidays',
-
    async ({ id, getAllBoolean }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(
             `/api/users/user/holidays/${id}?getAll=${getAllBoolean}`
          )
-
          return data
       } catch (error) {
-         return rejectWithValue({ message: error.response.data.message })
+         console.error('Holidays error:', error?.response)
+         return rejectWithValue({
+            message: error?.response?.data?.message || 'Server error',
+         })
       }
    }
 )
 
 const getUserCharity = createAsyncThunk(
    'users/getUserCharity',
-
    async ({ id, getAllBoolean }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(
             `/api/users/user/charity/${id}?getAll=${getAllBoolean}`
          )
-
          return data
       } catch (error) {
-         return rejectWithValue({ message: error.response.data.message })
+         console.error('Charity error:', error?.response)
+         return rejectWithValue({
+            message: error?.response?.data?.message || 'Server error',
+         })
       }
    }
 )
 
 const deleteUser = createAsyncThunk(
    'users/deleteUser',
-
    async ({ userId, handleCloseModal }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.delete(
             `/api/users/delete/${userId}`
          )
-
-         handleCloseModal()
 
          toastifyNotify({
             title: 'Пользователь удален',
@@ -97,9 +97,18 @@ const deleteUser = createAsyncThunk(
             message: data.message,
          })
 
+         handleCloseModal()
+
          return data
       } catch (error) {
-         return rejectWithValue({ message: error.response.data.message })
+         toastifyNotify({
+            title: 'Ошибка',
+            type: 'error',
+            message:
+               error?.response?.data?.message || 'Ошибка сервера при удалении',
+         })
+
+         return rejectWithValue({ message: error?.response?.data?.message })
       }
    }
 )
