@@ -65,7 +65,6 @@ const Input = forwardRef(
    )
 )
 
-// Добавляем Password-поле с кнопкой показать/скрыть
 Input.Password = forwardRef(
    ({ error, errorText, inputProps, ...props }, ref) => {
       const [showPassword, setShowPassword] = useState(false)

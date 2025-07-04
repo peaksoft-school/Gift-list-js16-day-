@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { Box, Typography, CircularProgress } from '@mui/material'
 import { styled } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,7 +6,7 @@ import { PROFILE_THUNK } from '../../store/slices/profile/profileThunk'
 import toastifyNotify from '../../utils/helpers/ToastifyNotify'
 import Input from '../UI/Input'
 import Button from '../UI/Button'
-import Select from '../UI/Select' 
+import Select from '../UI/Select'
 import PhotoUploadButton from './PhotoUploadButton'
 
 export default function Profile() {
@@ -15,12 +15,12 @@ export default function Profile() {
    const { data: profile, isLoading } = useSelector((state) => state.profile)
 
    const [formData, setFormData] = useState({
-      firstName: '',
+      firstName: 'Bekmyrza',
       lastName: '',
       country: '',
       birthDate: '',
       email: '',
-      phone: '',
+      phone: '+996',
       clothingSize: '',
       shoeSize: '',
       interests: '',
@@ -125,7 +125,9 @@ export default function Profile() {
             type: 'success',
             message: 'Профиль успешно обновлён!',
          })
-      } catch (error) {}
+      } catch (error) {
+         console.error('Error')
+      }
    }
 
    return (
@@ -137,41 +139,69 @@ export default function Profile() {
                   Основная информация
                </Typography>
                <Row>
-                  <StyledInput
-                     label="Имя"
-                     name="firstName"
-                     value={formData.firstName}
-                     onChange={handleChange}
-                  />
-                  <StyledInput
-                     label="Фамилия"
-                     name="lastName"
-                     value={formData.lastName}
-                     onChange={handleChange}
-                  />
+                  <Box>
+                     <span style={{ color: 'gray' }}>Имя</span>
+                     <StyledInput
+                        placeholder="Имя"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                     />
+                  </Box>
+                  <Box>
+                     <span style={{ color: 'gray' }}>Фамилия</span>
+                     <StyledInput
+                        placeholder="Фамилия"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                     />
+                  </Box>
                </Row>
                <Row>
-                  <StyledInput
-                     label="Страна"
-                     name="country"
-                     value={formData.country}
-                     onChange={handleChange}
-                  />
-                  <StyledInput
-                     label="Дата рождения"
-                     name="birthDate"
-                     value={formData.birthDate}
-                     onChange={handleChange}
-                  />
+                  <Box>
+                     <span style={{ color: 'gray' }}>Страна</span>
+
+                     <StyledInput
+                        placeholder="Страна"
+                        name="country"
+                        value={formData.country}
+                        onChange={handleChange}
+                     />
+                  </Box>
+
+                  <Box>
+                     <span style={{ color: 'gray' }}>Дата рождения</span>
+
+                     <StyledInput
+                        type="date"
+                        placeholder="Укажите дату рождения"
+                        name="birthDate"
+                        value={formData.birthDate}
+                        onChange={handleChange}
+                     />
+                  </Box>
                </Row>
                <Row>
-                  <StyledInput label="Email" value={formData.email} disabled />
-                  <StyledInput
-                     label="Телефон"
-                     name="phone"
-                     value={formData.phone}
-                     onChange={handleChange}
-                  />
+                  <Box>
+                     <span style={{ color: 'gray' }}>Email</span>
+
+                     <StyledInput
+                        placeholder="Email"
+                        value={formData.email}
+                        disabled
+                     />
+                  </Box>
+                  <Box>
+                     <span style={{ color: 'gray' }}>Телефон</span>
+
+                     <StyledInput
+                        placeholder="Введите номер телефона"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                     />
+                  </Box>
                </Row>
             </Box>
 
@@ -179,13 +209,13 @@ export default function Profile() {
                <Typography variant="h6" fontWeight={600} mb={1}>
                   Размеры
                </Typography>
-               <Row>
+               <Row style={{ marginRight: '45px' }}>
                   <SelectWrapper>
                      <Typography variant="body2" color="text.secondary" mb={1}>
                         Размер одежды
                      </Typography>
                      <HorizontalSelect
-                        label="Выберите размер одежды"
+                        placeholder="Выберите размер одежды"
                         options={clothingSizeOptions}
                         value={formData.clothingSize}
                         onChange={handleSelectChange('clothingSize')}
@@ -198,7 +228,7 @@ export default function Profile() {
                         Размер обуви
                      </Typography>
                      <HorizontalSelect
-                        label="Выберите размер обуви"
+                        placeholder="Выберите размер обуви"
                         options={shoeSizeOptions}
                         value={formData.shoeSize}
                         onChange={handleSelectChange('shoeSize')}
@@ -208,73 +238,88 @@ export default function Profile() {
                </Row>
             </Box>
 
-            <Box>
-               <Typography variant="h6" fontWeight={600} mb={1}>
-                  Интересы и хобби
-               </Typography>
-               <StyledInput
-                  name="interests"
-                  label="Опишите интересы"
-                  value={formData.interests}
-                  onChange={handleChange}
-                  multiline
-                  minRows={3}
-                  fullWidth
-               />
-            </Box>
+            <RowContent>
+               <div>
+                  <div>
+                     <h3>Интересы и хобби</h3>
+                     <br />
 
-            <Box>
-               <Typography variant="h6" fontWeight={600} mb={1}>
-                  Важно знать
-               </Typography>
-               <StyledInput
-                  name="importantInfo"
-                  label="Аллергии, особенности"
-                  value={formData.importantInfo}
-                  onChange={handleChange}
-                  multiline
-                  minRows={3}
-                  fullWidth
-               />
-            </Box>
+                     <p>Расскажите о своих интересах и хобби</p>
+                     <StyledBigInputs
+                        name="interests"
+                        placeholder="Опишите интересы"
+                        value={formData.interests}
+                        onChange={handleChange}
+                     />
+                  </div>
+
+                  <div>
+                     <h3>Важно знать</h3>
+                     <br />
+                     <p>О чем знать?</p>
+                     <StyledBigInputs
+                        name="importantInfo"
+                        placeholder="Аллергии, особенности"
+                        value={formData.importantInfo}
+                        onChange={handleChange}
+                     />
+                  </div>
+               </div>
+            </RowContent>
 
             <Box>
                <Typography variant="h6" fontWeight={600} mb={1}>
                   Социальные сети
                </Typography>
                <Row>
-                  <StyledInput
-                     label="Facebook"
-                     name="facebook"
-                     value={formData.facebook}
-                     onChange={handleChange}
-                  />
-                  <StyledInput
-                     label="ВКонтакте"
-                     name="vk"
-                     value={formData.vk}
-                     onChange={handleChange}
-                  />
+                  <div>
+                     <p style={{ color: 'grey' }}>Facebook</p>
+                     <StyledInput
+                        placeholder="Вставьте ссылку на фейсбук"
+                        name="facebook"
+                        value={formData.facebook}
+                        onChange={handleChange}
+                     />
+                  </div>
+                  <div>
+                     <p style={{ color: 'grey' }}>ВКонтакте</p>
+                     <StyledInput
+                        placeholder="Вставьте ссылку на в контакте"
+                        name="vk"
+                        value={formData.vk}
+                        onChange={handleChange}
+                     />
+                  </div>
                </Row>
                <Row>
-                  <StyledInput
-                     label="Instagram"
-                     name="instagram"
-                     value={formData.instagram}
-                     onChange={handleChange}
-                  />
-                  <StyledInput
-                     label="Telegram"
-                     name="telegram"
-                     value={formData.telegram}
-                     onChange={handleChange}
-                  />
+                  <div>
+                     <p style={{ color: 'grey' }}>Instagram</p>
+                     <StyledInput
+                        placeholder="Вставьте ссылку на инстаграме"
+                        name="instagram"
+                        value={formData.instagram}
+                        onChange={handleChange}
+                     />
+                  </div>
+                  <div>
+                     <p style={{ color: 'grey' }}>Telegram</p>
+                     <StyledInput
+                        placeholder="Вставьте ссылку на телеграме"
+                        name="telegram"
+                        value={formData.telegram}
+                        onChange={handleChange}
+                     />
+                  </div>
                </Row>
             </Box>
 
             <Box display="flex" justifyContent="flex-end" gap={2}>
-               <Button variant="outlined">Отмена</Button>
-               <Button onClick={handleSubmit} disabled={isLoading}>
+               <Button variant="warning">Отмена</Button>
+               <Button
+                  onClick={handleSubmit}
+                  disabled={isLoading}
+                  variant="outlined"
+               >
                   {isLoading ? (
                      <CircularProgress size={20} color="inherit" />
                   ) : (
@@ -288,8 +333,7 @@ export default function Profile() {
 }
 
 const Root = styled(Box)(({ theme }) => ({
-   maxWidth: '1000px',
-   margin: '40px auto',
+   margin: '40px',
    padding: '32px',
    background: '#fff',
    borderRadius: '16px',
@@ -303,23 +347,6 @@ const Root = styled(Box)(({ theme }) => ({
    },
 }))
 
-const UploadBox = styled(Box)({
-   width: '180px',
-   height: '180px',
-   border: '2px dashed #C1C1C1',
-   borderRadius: '12px',
-   display: 'flex',
-   justifyContent: 'center',
-   alignItems: 'center',
-   textAlign: 'center',
-   fontSize: '14px',
-   color: '#A1A1A1',
-   cursor: 'pointer',
-   overflow: 'hidden',
-   backgroundSize: 'cover',
-   backgroundPosition: 'center',
-})
-
 const FormBox = styled(Box)({
    flex: 1,
    display: 'flex',
@@ -329,25 +356,32 @@ const FormBox = styled(Box)({
 
 const Row = styled(Box)({
    display: 'flex',
-   flexWrap: 'wrap',
    gap: '20px',
 })
 
-const StyledInput = styled(Input)({
-   flex: 1,
-   minWidth: '220px',
+const RowContent = styled(Box)({
+   display: 'flex',
+   flexDirection: 'column',
 })
+
+const StyledInput = styled(Input)({
+   width: '370px',
+   height: '60px',
+})
+const StyledBigInputs = styled(Input)(() => ({
+   '& .MuiInputBase-input': {
+      padding: '10px 500px 120px 10px',
+   },
+}))
 
 const SelectWrapper = styled(Box)({
    flex: 1,
-   minWidth: '220px',
 })
 
 const HorizontalSelect = styled(Select)({
    width: '100%',
    border: '2px solid grey',
    '& .MuiSelect-select': {
-      padding: '12px 16px',
       borderRadius: '12px',
       backgroundColor: '#fff',
    },

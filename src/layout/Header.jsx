@@ -73,6 +73,7 @@ const StyledBox = styled(Box)(() => ({
    width: '100%',
    '& .user-name': {
       width: '140px',
+      paddingLeft: '20px',
    },
 }))
 
@@ -84,7 +85,7 @@ const StyledInputSearch = styled(SearchInput)(() => ({
 
 const StyledInput = styled(Input)(() => ({
    '& .MuiInputBase-root': {
-      width: '99%',
+      width: '91%',
       margin: '10px 0',
    },
 }))

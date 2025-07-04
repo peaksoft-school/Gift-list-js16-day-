@@ -139,21 +139,18 @@ const PhotoUploadButton = () => {
 export default PhotoUploadButton
 const containerStyle = {
    display: 'flex',
-   alignItems: 'center',
    justifyContent: 'center',
-   minHeight: '100vh',
-   backgroundColor: '#f5f5f5',
    padding: '16px',
 }
 
 const wrapperStyle = {
-      width: '100%',
-      maxWidth: '320px',
+   width: '100%',
+   maxWidth: '320px',
 }
 
 const uploadAreaStyle = {
-      display: 'block',
-      width: '100%',
+   display: 'block',
+   width: '100%',
    height: '192px',
    borderRadius: '8px',
    cursor: 'pointer',
@@ -182,7 +179,6 @@ const textStyle = {
    color: 'rgba(0, 0, 0, 0.6)',
    textAlign: 'center',
    lineHeight: '1.4',
-   fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
 }
 
 const imageContainerStyle = {
@@ -217,11 +213,6 @@ const removeButtonStyle = {
 }
 
 const overlayStyle = {
-   position: 'absolute',
-   top: 0,
-   left: 0,
-   right: 0,
-   bottom: 0,
    backgroundColor: 'transparent',
    cursor: 'pointer',
    transition: 'background-color 0.2s ease',
