@@ -36,22 +36,9 @@ const Mainh1 = styled(Box)({
    color: '#fff',
    width: '284px',
    height: '100vh',
-   zIndex: 2,
-   position: 'fixed',
-
-   '&::before': {
-      content: '""',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      background: 'url(/background.jpg) no-repeat center/cover',
-      zIndex: -1,
-   },
-   '& .MuiButtonBase-root': {
-      textTransform: 'lowercase',
-   },
+   position: 'sticky',
+   top: 0,
+   overflowY: 'auto',
 
    '& .MuiButtonBase-root': {
       textTransform: 'none',

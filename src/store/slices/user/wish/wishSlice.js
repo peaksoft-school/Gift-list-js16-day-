@@ -16,21 +16,25 @@ const wishSlice = createSlice({
       clearError: (state) => {
          state.error = null
       },
+
       clearSelectedWish: (state) => {
          state.selectedWish = null
       },
    },
+
    extraReducers: (builder) => {
       builder
          .addCase(WISH_THUNK.addWish.pending, (state) => {
             state.isLoading = true
             state.error = null
          })
+
          .addCase(WISH_THUNK.addWish.fulfilled, (state, { payload }) => {
             state.isLoading = false
             state.wishes.push(payload)
             state.error = null
          })
+
          .addCase(WISH_THUNK.addWish.rejected, (state, { payload }) => {
             state.isLoading = false
             state.error = payload || 'Ошибка при добавлении желания'
@@ -40,11 +44,13 @@ const wishSlice = createSlice({
             state.isLoading = true
             state.error = null
          })
+
          .addCase(WISH_THUNK.getWishes.fulfilled, (state, { payload }) => {
             state.isLoading = false
             state.wishes = payload
             state.error = null
          })
+
          .addCase(WISH_THUNK.getWishes.rejected, (state, { payload }) => {
             state.isLoading = false
             state.error = payload || 'Ошибка при получении списка желаний'
@@ -54,11 +60,13 @@ const wishSlice = createSlice({
             state.isLoading = true
             state.error = null
          })
+
          .addCase(WISH_THUNK.getWishById.fulfilled, (state, { payload }) => {
             state.isLoading = false
             state.selectedWish = payload
             state.error = null
          })
+
          .addCase(WISH_THUNK.getWishById.rejected, (state, { payload }) => {
             state.isLoading = false
             state.error = payload || 'Ошибка при получении желания'
@@ -68,6 +76,7 @@ const wishSlice = createSlice({
             state.isLoading = true
             state.error = null
          })
+
          .addCase(WISH_THUNK.updateWish.fulfilled, (state, { payload }) => {
             state.isLoading = false
             state.wishes = state.wishes.map((wish) =>
@@ -76,6 +85,7 @@ const wishSlice = createSlice({
             state.selectedWish = payload
             state.error = null
          })
+
          .addCase(WISH_THUNK.updateWish.rejected, (state, { payload }) => {
             state.isLoading = false
             state.error = payload || 'Ошибка при обновлении желания'
@@ -85,6 +95,7 @@ const wishSlice = createSlice({
             state.isLoading = true
             state.error = null
          })
+
          .addCase(WISH_THUNK.deleteWish.fulfilled, (state, { payload }) => {
             state.isLoading = false
             state.wishes = state.wishes.filter((wish) => wish.id !== payload)
@@ -93,6 +104,7 @@ const wishSlice = createSlice({
             }
             state.error = null
          })
+
          .addCase(WISH_THUNK.deleteWish.rejected, (state, { payload }) => {
             state.isLoading = false
             state.error = payload || 'Ошибка при удалении желания'
@@ -102,11 +114,13 @@ const wishSlice = createSlice({
             state.isLoading = true
             state.error = null
          })
+
          .addCase(WISH_THUNK.getHolidays.fulfilled, (state, { payload }) => {
             state.isLoading = false
             state.holidays = payload
             state.error = null
          })
+
          .addCase(WISH_THUNK.getHolidays.rejected, (state, { payload }) => {
             state.isLoading = false
             state.error = payload || 'Ошибка при загрузке праздников'
@@ -115,4 +129,5 @@ const wishSlice = createSlice({
 })
 
 const WISH_ACTIONS = wishSlice.actions
+
 export { wishSlice, WISH_ACTIONS }

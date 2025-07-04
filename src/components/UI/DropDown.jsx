@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { MenuItem, Select, styled } from '@mui/material'
 import { Typography } from 'antd'
 
@@ -13,34 +13,41 @@ const Dropdown = forwardRef(
          ...rest
       },
       ref
-   ) => (
-      <DropdownContainer>
-         {labelText && <DropdownLabel>{labelText}</DropdownLabel>}
+   ) => {
+      const selectedOption = useMemo(
+         () => options.find((opt) => opt.id === value),
+         [options, value]
+      )
 
-         <StyledSelect
-            displayEmpty
-            value={value}
-            onChange={onChange}
-            ref={ref}
-            {...rest}
-            renderValue={(selected) =>
-               selected ? (
-                  selected
-               ) : (
-                  <PlaceholderText>{placeholder}</PlaceholderText>
-               )
-            }
-            label={null}
-            variant="outlined"
-         >
-            {options?.map(({ id, title }) => (
-               <StyledMenuItem key={id} value={title}>
-                  {title}
-               </StyledMenuItem>
-            ))}
-         </StyledSelect>
-      </DropdownContainer>
-   )
+      return (
+         <DropdownContainer>
+            {labelText && <DropdownLabel>{labelText}</DropdownLabel>}
+
+            <StyledSelect
+               displayEmpty
+               value={value ?? ''}
+               onChange={onChange}
+               ref={ref}
+               {...rest}
+               renderValue={(selected) =>
+                  selected && selectedOption ? (
+                     selectedOption.title
+                  ) : (
+                     <PlaceholderText>{placeholder}</PlaceholderText>
+                  )
+               }
+               label={null}
+               variant="outlined"
+            >
+               {options?.map(({ id, title }) => (
+                  <StyledMenuItem key={id} value={id}>
+                     {title}
+                  </StyledMenuItem>
+               ))}
+            </StyledSelect>
+         </DropdownContainer>
+      )
+   }
 )
 
 export default Dropdown

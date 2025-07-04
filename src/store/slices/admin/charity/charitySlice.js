@@ -17,7 +17,9 @@ const charitySlice = createSlice({
          .addCase(
             CHARITY_THUNK.getAllCharity.fulfilled,
             (state, { payload }) => {
+               console.log(state)
                state.charity = payload
+
                state.loading = false
             }
          )

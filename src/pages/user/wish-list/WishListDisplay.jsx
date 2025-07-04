@@ -1,58 +1,51 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { styled } from '@mui/material'
-import Button from '../UI/Button'
-import { WISH_THUNK } from '../../store/wish/wishThunk'
-import EditWish from './EditWish'
-import { Outlet, useNavigate } from 'react-router'
+import { Box, styled, Typography } from '@mui/material'
+import Button from '../../../components/UI/Button'
+import EditWish from '../../../components/wish/EditWish'
+import { useNavigate } from 'react-router'
+import { WISH_THUNK } from '../../../store/slices/user/wish/wishThunk'
 
 const WishListDisplay = () => {
+   const { wishes, isLoading } = useSelector((state) => state.wish)
+
    const navigate = useNavigate()
    const dispatch = useDispatch()
-   const { wishes = [], isLoading, error } = useSelector((state) => state.wish || {})
 
    const [editingWish, setEditingWish] = useState(null)
 
    useEffect(() => {
       dispatch(WISH_THUNK.getWishes())
-   }, [dispatch]) 
+   }, [dispatch])
 
-   const handleEditClick = (wish) => {
-      setEditingWish(wish)
-   }
+   const handleEditClick = (wish) => setEditingWish(wish)
 
-   const handleCloseEdit = () => {
-      setEditingWish(null)
-   }
+   const handleCloseEdit = () => setEditingWish(null)
 
    if (editingWish) {
       return <EditWish wish={editingWish} onClose={handleCloseEdit} />
    }
 
+   const handleAddWishNavigate = () => navigate('/user/wish-list/create-wish')
+
    return (
       <MainStyled>
-         <Outlet />
          <TitleRow>
-            <Title>Мои желания</Title>
-            <Button
-               variant="outlined"
-               onClick={() => navigate('/user/list/create-wish')}
-            >
+            <Typography>Мои желания</Typography>
+
+            <Button variant="outlined" onClick={handleAddWishNavigate}>
                Добавить желание
             </Button>
          </TitleRow>
 
-         {isLoading && <LoadingText>Загрузка желаний...</LoadingText>}
-         {error && <ErrorText>{error}</ErrorText>}
-
-         {!isLoading && wishes.length === 0 && (
+         {!isLoading && wishes?.length === 0 && (
             <EmptyState>
                <EmptyStateText>У вас пока нет желаний в списке</EmptyStateText>
             </EmptyState>
          )}
 
          <WishGrid>
-            {wishes.map((wish) => (
+            {wishes?.map((wish) => (
                <WishCard key={wish.id}>
                   <WishImageContainer>
                      {wish.image ? (
@@ -103,38 +96,25 @@ const WishListDisplay = () => {
 
 export default WishListDisplay
 
-// Styles
-const MainStyled = styled('div')({
-   padding: '32px',
-   background: '#fafbfc',
-   minHeight: '100vh',
+const MainStyled = styled(Box)({
+   background: '#F7F8FA',
+   width: '100%',
+   padding: '0px 20px',
+   display: 'flex',
+   flexDirection: 'column',
+   gap: '31px',
 })
 
-const TitleRow = styled('div')({
+const TitleRow = styled(Box)({
    display: 'flex',
    justifyContent: 'space-between',
    alignItems: 'center',
-   marginBottom: '24px',
-})
 
-const Title = styled('h2')({
-   fontWeight: 700,
-   fontSize: '20px',
-   margin: 0,
-})
-
-const LoadingText = styled('div')({
-   fontSize: '16px',
-   color: '#666',
-   textAlign: 'center',
-   padding: '32px 0',
-})
-
-const ErrorText = styled('span')({
-   color: 'red',
-   fontSize: '14px',
-   margin: '16px 0',
-   display: 'block',
+   '& .MuiTypography-body1': {
+      color: '#020202',
+      fontSize: '20px',
+      fontWeight: '500',
+   },
 })
 
 const EmptyState = styled('div')({
@@ -143,7 +123,6 @@ const EmptyState = styled('div')({
    alignItems: 'center',
    justifyContent: 'center',
    padding: '64px 0',
-   backgroundColor: '#f3f4f8',
    borderRadius: '12px',
    marginTop: '24px',
 })

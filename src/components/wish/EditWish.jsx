@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { styled } from '@mui/material'
 import Button from '../UI/Button'
-import { WISH_THUNK } from '../../store/wish/wishThunk'
+import { WISH_THUNK } from '../../store/slices/user/wish/wishThunk'
 
 const EditWish = ({ wish, onClose }) => {
    const dispatch = useDispatch()

@@ -1,10 +1,12 @@
-import Notification from '../assets/icons/notification.svg'
-import Input from '../components/UI/Input'
-import { AppBar, Toolbar, Box, styled, Typography } from '@mui/material'
-import MeatBalls from '../components/UI/MeetBalls'
-import { PROFILE_OPTIONS } from '../utils/helpers'
 import { useLocation } from 'react-router'
-import InputSearch from '../components/UI/Input-search/InputSearch'
+import { Box, styled, Typography } from '@mui/material'
+import Input from '../components/UI/Input'
+import MeatBalls from '../components/UI/MeetBalls'
+import SearchInput from '../components/UI/SearchInput'
+import { PROFILE_OPTIONS } from '../utils/helpers'
+import Notification from '../assets/icons/notification.svg'
+import { useDispatch, useSelector } from 'react-redux'
+import { AUTH_ACTIONS } from '../store/slices/auth/authSlice'
 
 const Header = () => {
    const { role } = useSelector((state) => state.auth)
@@ -61,9 +63,7 @@ const StyledBox = styled(Box)(() => ({
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'space-evenly',
-   height: '40px',
    top: '33px',
-   marginLeft: '270px',
    width: '100%',
 
    '& .user-name': {
@@ -71,21 +71,25 @@ const StyledBox = styled(Box)(() => ({
    },
 }))
 
-const StyledInputSearch = styled(InputSearch)(() => ({
-   width: '821px',
+const StyledInputSearch = styled(SearchInput)(() => ({
+   '& .MuiInputBase-root': {
+      width: '99%',
+   },
 }))
 
 const StyledInput = styled(Input)(() => ({
    '& .MuiInputBase-root': {
-      padding: '2px 10px',
-      width: '90%',
+      width: '99%',
+      margin: '10px 0',
    },
 }))
 
-const StyledCustomAppBar = styled(AppBar)(() => ({
-   position: 'fixed',
-   zIndex: 1,
-   marginBottom: 10,
+const StyledCustomAppBar = styled(Box)(() => ({
+   backgroundColor: 'white',
+   width: '100%',
+   boxShadow: '0 4px 10px #0000001A',
+   marginBottom: '40px',
+   padding: '5px 20px',
 }))
 
 const StyledNotificationIcon = styled('img')(() => ({

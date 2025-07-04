@@ -1,16 +1,23 @@
 import { useEffect, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
-import { styled } from '@mui/material/styles'
+import { Box, styled, TextareaAutosize } from '@mui/material'
 import Input from '../UI/Input'
 import Button from '../UI/Button'
-import { WISH_THUNK } from '../../store/wish/wishThunk'
+import { WISH_THUNK } from '../../store/slices/user/wish/wishThunk'
+import Dropdown from '../UI/Dropdown'
 
 const WishList = () => {
    const dispatch = useDispatch()
    const holidays = useSelector((state) => state.wish?.holidays ?? [])
-   const { isLoading, error } = useSelector((state) => state.wish ?? {});
+   const { isLoading, error } = useSelector((state) => state.wish ?? {})
 
+   const [customHolidays, setCustomHolidays] = useState(() => {
+      const stored = localStorage.getItem('customHolidays')
+      return stored ? JSON.parse(stored) : []
+   })
+
+   const allHolidays = [...holidays, ...customHolidays]
 
    const {
       control,
@@ -24,7 +31,7 @@ const WishList = () => {
          name: '',
          image: '',
          link: '',
-         holidayId: 1,
+         holidayId: '',
          holidayDate: '',
          description: '',
       },
@@ -34,9 +41,8 @@ const WishList = () => {
    const imageValue = watch('image')
 
    const onFileChange = (e) => {
-      const file = e.target.files[0]
+      const file = e.target.files?.[0]
       if (!file) return
-
       const reader = new FileReader()
       reader.onloadend = () => {
          setValue('image', reader.result, { shouldValidate: true })
@@ -46,14 +52,13 @@ const WishList = () => {
    }
 
    const onSubmit = async (data) => {
-      const resultAction = await dispatch(
+      const result = await dispatch(
          WISH_THUNK.addWish({
             ...data,
             holidayId: Number(data.holidayId),
          })
       )
-
-      if (WISH_THUNK.addWish.fulfilled.match(resultAction)) {
+      if (WISH_THUNK.addWish.fulfilled.match(result)) {
          reset()
          setImagePreview(null)
       }
@@ -63,18 +68,53 @@ const WishList = () => {
       dispatch(WISH_THUNK.getHolidays())
    }, [dispatch])
 
+   const handleHolidayChange = (value, field) => {
+      if (value === 'new') {
+         const name = prompt('Введите название нового праздника')
+         if (name?.trim()) {
+            const newHoliday = { id: Date.now(), name }
+            const updated = [...customHolidays, newHoliday]
+            setCustomHolidays(updated)
+            localStorage.setItem('customHolidays', JSON.stringify(updated))
+            setValue('holidayId', newHoliday.id, { shouldValidate: true })
+         } else {
+            setValue('holidayId', '', { shouldValidate: true })
+         }
+      } else {
+         field.onChange(value)
+      }
+   }
+
+   const holidayOptions = [
+      ...allHolidays.map((h) => ({ id: h.id, title: h.name })),
+      { id: 'new', title: '+ Создать новый праздник' },
+   ]
+
+   const nameValue = watch('name')
+   const holidayIdValue = watch('holidayId')
+   const holidayDateValue = watch('holidayDate')
+   const descriptionValue = watch('description')
+
+   const isSubmitDisabled =
+      !nameValue ||
+      !holidayIdValue ||
+      !holidayDateValue ||
+      !imageValue ||
+      !descriptionValue ||
+      isLoading
+
    return (
       <MainStyled>
          <Title>Список желаний</Title>
-         <FormWrapper onSubmit={handleSubmit(onSubmit)}>
+         <form onSubmit={handleSubmit(onSubmit)}>
             <ImageUpload>
                <ImageLabel htmlFor="upload-photo">
                   {imagePreview ? (
-                     <PreviewImage src={imagePreview} alt="Выбранное фото" />
+                     <PreviewImage src={imagePreview} alt="Фото" />
                   ) : (
                      <>
                         <ImageIcon>+</ImageIcon>
-                        <ImageText>Нажмите для добавления фотографии</ImageText>
+                        <ImageText>Добавить фото</ImageText>
                      </>
                   )}
                   <input
@@ -87,19 +127,19 @@ const WishList = () => {
                </ImageLabel>
             </ImageUpload>
 
-            <FormFields>
-               <FormTitle>Добавление желаемого подарка</FormTitle>
+            <Box className="content">
+               <FormTitle>Добавление подарка</FormTitle>
 
-               <Row>
+               <Box className="first-block">
                   <Controller
                      name="name"
                      control={control}
-                     rules={{ required: 'Введите название подарка' }}
+                     rules={{ required: 'Введите название' }}
                      render={({ field }) => (
                         <InputStyled
                            {...field}
-                           placeholder="Введите название подарка"
-                           label="Название подарка"
+                           placeholder="Название подарка"
+                           labelText="Название"
                            error={!!errors.name}
                            helperText={errors.name?.message}
                         />
@@ -111,28 +151,28 @@ const WishList = () => {
                      render={({ field }) => (
                         <InputStyled
                            {...field}
-                           placeholder="Вставьте ссылку на подарок"
-                           label="Ссылка на подарок"
+                           placeholder="Ссылка на подарок"
+                           labelText="Ссылка"
                         />
                      )}
                   />
-               </Row>
+               </Box>
 
-               <Row>
+               <Box className="first-block">
                   <Controller
                      name="holidayId"
                      control={control}
                      rules={{ required: 'Выберите праздник' }}
                      render={({ field }) => (
-                        <SelectStyled {...field}>
-                           <option value="">Выберите праздник</option>
-                           {holidays.map((holiday) => (
-                              <option key={holiday.id} value={holiday.id}>
-                                 {holiday.name}
-                              </option>
-                           ))}
-                           <option value="new">+ Создать новый праздник</option>
-                        </SelectStyled>
+                        <Dropdown
+                           options={holidayOptions}
+                           value={field.value}
+                           onChange={(e) =>
+                              handleHolidayChange(e.target.value, field)
+                           }
+                           placeholder="Выберите праздник"
+                           labelText="Праздник"
+                        />
                      )}
                   />
                   {errors.holidayId && (
@@ -142,18 +182,19 @@ const WishList = () => {
                   <Controller
                      name="holidayDate"
                      control={control}
-                     rules={{ required: 'Укажите дату праздника' }}
+                     rules={{ required: 'Укажите дату' }}
                      render={({ field }) => (
                         <InputStyled
                            {...field}
-                           placeholder="Укажите дату праздника"
-                           label="Дата праздника"
+                           type="date" // вот тут
+                           placeholder="Дата праздника"
+                           labelText="Дата праздника"
                            error={!!errors.holidayDate}
                            helperText={errors.holidayDate?.message}
                         />
                      )}
                   />
-               </Row>
+               </Box>
 
                <Controller
                   name="description"
@@ -161,8 +202,8 @@ const WishList = () => {
                   render={({ field }) => (
                      <DescriptionInput
                         {...field}
-                        placeholder="Введите описание подарка"
                         rows={4}
+                        placeholder="Описание подарка"
                      />
                   )}
                />
@@ -176,18 +217,21 @@ const WishList = () => {
                      onClick={() => {
                         reset()
                         setImagePreview(null)
-                        dispatch(clearError())
                      }}
                      disabled={isLoading}
                   >
                      ОТМЕНА
                   </Button>
-                  <Button variant="outlined" type="submit" disabled={isLoading}>
+                  <Button
+                     variant="outlined"
+                     type="submit"
+                     disabled={isSubmitDisabled}
+                  >
                      {isLoading ? 'СОХРАНЕНИЕ...' : 'ДОБАВИТЬ'}
                   </Button>
                </ButtonRow>
-            </FormFields>
-         </FormWrapper>
+            </Box>
+         </form>
       </MainStyled>
    )
 }
@@ -199,6 +243,22 @@ const MainStyled = styled('div')({
    padding: '32px',
    background: '#fafbfc',
    minHeight: '100vh',
+
+   '& form': {
+      display: 'flex',
+      gap: '2rem',
+
+      '& .content': {
+         display: 'flex',
+         flexDirection: 'column',
+         gap: '1rem',
+
+         '& .first-block': {
+            display: 'flex',
+            gap: '1.5rem',
+         },
+      },
+   },
 })
 
 const Title = styled('h2')({
@@ -274,6 +334,7 @@ const Row = styled('div')({
 
 const InputStyled = styled(Input)({
    flex: 1,
+   color: '#9fa0a2',
 })
 
 const SelectStyled = styled('select')({
@@ -285,14 +346,31 @@ const SelectStyled = styled('select')({
    background: '#fff',
 })
 
-const DescriptionInput = styled('textarea')({
+const DescriptionInput = styled(TextareaAutosize)({
    width: '100%',
-   padding: '12px',
+   height: '111px !important',
    borderRadius: '6px',
-   border: '1px solid #e0e3e6',
-   fontSize: '14px',
-   resize: 'vertical',
-   minHeight: '80px',
+   padding: '8px 18px',
+   border: '1px solid #BDBDBD',
+   color: '#8D949E',
+   fontSize: '16px',
+   fontWeight: 300,
+   fontFamily: 'Inter',
+
+   '&:focus': {
+      outline: 'none',
+      borderColor: '#BDBDBD',
+      boxShadow: 'none',
+   },
+
+   '&:hover': {
+      borderColor: '#BDBDBD',
+   },
+
+   '&::placeholder': {
+      color: '#8D949E',
+      fontWeight: 300,
+   },
 })
 
 const ButtonRow = styled('div')({

@@ -14,15 +14,15 @@ const Card = ({ wish }) => {
          /> */}
 
          <Box className="text-content">
-            <Box>
+            <Box className="titles">
                <Typography className="title">{name}</Typography>
+               <Typography className="status-text">{holidayName}</Typography>
+            </Box>
+
+            <Box className="details">
                <Typography className="grey-text">
                   {createdAt || date}
                </Typography>
-            </Box>
-
-            <Box>
-               <Typography className="status-text">{holidayName}</Typography>
 
                <Box className="status-content">
                   <Typography className="grey-text">{massage}</Typography>
@@ -59,11 +59,23 @@ const StyledCard = styled(Box)(() => ({
    '& .text-content': {
       display: 'flex',
       justifyContent: 'space-between',
+      flexDirection: 'column',
+
+      '& .titles': {
+         display: 'flex',
+         justifyContent: 'space-between',
+      },
+
+      '& .details': {
+         display: 'flex',
+         justifyContent: 'space-between',
+         alignItems: 'center',
+      },
 
       '& .title': {
          fontWeight: '600',
          lineHeight: '130%',
-         marginBottom: '33px',
+         marginBottom: '9px',
          overflow: 'hidden',
          textOverflow: 'ellipsis',
          whiteSpace: 'nowrap',
@@ -79,7 +91,6 @@ const StyledCard = styled(Box)(() => ({
       '& .status-content': {
          display: 'flex',
          alignItems: 'center',
-         marginTop: '1rem',
       },
 
       '& .grey-text': {
