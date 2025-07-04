@@ -3,7 +3,11 @@ import { Navigate, Route, Routes } from 'react-router'
 import { ROLES } from './routes'
 import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
+import WishList from '../components/wish/WishList'
 
+const WishListDisplay = lazy(
+   () => import('../pages/user/wish-list/WishListDisplay')
+)
 const CreateCharity = lazy(
    () => import('../pages/user/charity/create-charity/CreateCharity')
 )
@@ -192,9 +196,32 @@ const AppRouter = () => (
             }
          />
 
-         <Route path="wish-list" element={<h1>Wish list</h1>} />
+         <Route
+            path="wish-list"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <WishListDisplay />
+               </Suspense>
+            }
+         />
 
-         <Route path="bookeds" element={<Bookeds />} />
+         <Route
+            path="wish-list/create-wish"
+            element={
+               <Suspense>
+                  <WishList />
+               </Suspense>
+            }
+         />
+
+         <Route
+            path="bookeds"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <Bookeds />
+               </Suspense>
+            }
+         />
 
          <Route
             path="holidays"

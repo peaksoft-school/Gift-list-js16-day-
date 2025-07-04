@@ -11,6 +11,7 @@ import { friendsSlice } from './slices/user/friends/friendsSlice'
 import { charitySlice } from './slices/admin/charity/charitySlice'
 import { bookedsSlice } from './slices/user/bookeds/bookedsSlice'
 import { userCharitySlice } from './slices/user/charity/useCharitySlice'
+import { wishSlice } from './slices/user/wish/wishSlice'
 
 const rootReducer = combineReducers({
    [authSlice.name]: authSlice.reducer,
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
    [charitySlice.name]: charitySlice.reducer,
    [bookedsSlice.name]: bookedsSlice.reducer,
    [userCharitySlice.name]: userCharitySlice.reducer,
+   [wishSlice.name]: wishSlice.reducer,
 })
 
 const persistConfig = {
