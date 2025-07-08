@@ -138,6 +138,5 @@ const StyledInput = styled(TextField)(({ error }) => ({
 const StyledFormHelperText = styled(FormHelperText)({
    color: 'red',
    fontSize: '12px',
-   margin: '4px 0 0 0',
    textAlign: 'left',
 })

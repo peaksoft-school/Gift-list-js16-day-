@@ -181,6 +181,8 @@ const StyledContent = styled(Box)(() => ({
 
    '& .sign-up-content': {
       display: 'flex',
+      alignItems: 'center',
+      gap: '5px',
    },
 
    '& .end-content': {
@@ -198,6 +200,7 @@ const StyledForm = styled('form')(() => ({
    justifyContent: 'center',
    flexDirection: 'column',
    width: '100%',
+   gap: '10px',
 
    '& .title': {
       fontSize: '24px',

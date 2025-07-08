@@ -44,7 +44,7 @@ const CharityCard = ({ charity, onNavigate, onChangeOption }) => {
 
                <MeetBalls
                   options={CHARITY_CARD_OPTIONS}
-                  onChange={onChangeOption}
+                  onChange={(option) => onChangeOption(option, giftId)}
                />
             </StyledSmallBlock>
          </StyledUpBox>

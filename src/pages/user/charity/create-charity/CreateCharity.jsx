@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Button from '../../../../components/UI/Button'
 import BreadCrumbs from '../../../../components/UI/BreadCrumbs'
 import Input from '../../../../components/UI/Input'
-import Dropdown from '../../../../components/UI/DropDown'
+import Dropdown from '../../../../components/UI/Dropdown'
 import { USER_CHARITY_THUNK } from '../../../../store/slices/user/charity/userCharityThunk'
 import { FILES_THUNK } from '../../../../store/slices/file/filesThunk'
 import { ImageIcon } from 'lucide-react'
@@ -100,6 +100,14 @@ const CreateCharity = () => {
    ]
 
    const handleGoBack = () => navigate(-1)
+
+   const isDisabled =
+      !formData.title.trim() ||
+      !formData.description.trim() ||
+      !formData.file ||
+      !formData.category ||
+      !formData.condition ||
+      !formData.subCategory
 
    return (
       <BlockContainer>
@@ -199,7 +207,11 @@ const CreateCharity = () => {
                      ОТМЕНА
                   </Button>
 
-                  <Button variant="outlined" onClick={handleSubmit}>
+                  <Button
+                     variant="outlined"
+                     onClick={handleSubmit}
+                     disabled={isDisabled}
+                  >
                      {isLoading ? 'ЗАГРУЗКА...' : 'ДОБАВИТЬ'}
                   </Button>
                </StyledButton>
@@ -210,8 +222,6 @@ const CreateCharity = () => {
 }
 
 export default CreateCharity
-
-// Styled components
 
 const BlockContainer = styled(Box)(() => ({
    padding: '0 20px',

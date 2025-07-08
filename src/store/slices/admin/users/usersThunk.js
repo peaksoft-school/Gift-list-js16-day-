@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { axiosInstance } from '../../../../configs/axiosInstance'
-import toastifyNotify from '../../../../utils/helpers/ToastifyNotify'
+import toastifyNotify from '../../../../utils/helpers/toastifyNotify'
 
 const getAllUsers = createAsyncThunk(
    'users/getAllUsers',
@@ -27,6 +27,12 @@ const getUser = createAsyncThunk(
 
          return data
       } catch (error) {
+         toastifyNotify({
+            title: 'Ошибка',
+            type: 'error',
+            message: error.response.data.message,
+         })
+
          return rejectWithValue({ message: error.response.data.message })
       }
    }
@@ -85,30 +91,60 @@ const getUserCharity = createAsyncThunk(
 
 const deleteUser = createAsyncThunk(
    'users/deleteUser',
+<<<<<<< HEAD
    async ({ userId, handleCloseModal }, { rejectWithValue }) => {
+=======
+
+   async (
+      { userId, handleCloseModal, inner, navigate },
+      { rejectWithValue }
+   ) => {
+>>>>>>> development
       try {
          const { data } = await axiosInstance.delete(
             `/api/users/delete/${userId}`
          )
 
+<<<<<<< HEAD
+=======
+         if (handleCloseModal) {
+            handleCloseModal()
+         }
+
+>>>>>>> development
          toastifyNotify({
             title: 'Пользователь удален',
             type: 'success',
             message: data.message,
          })
 
+<<<<<<< HEAD
          handleCloseModal()
+=======
+         if (inner) {
+            navigate('/admin/users')
+
+            getAllUsers()
+         }
+>>>>>>> development
 
          return data
       } catch (error) {
          toastifyNotify({
             title: 'Ошибка',
             type: 'error',
+<<<<<<< HEAD
             message:
                error?.response?.data?.message || 'Ошибка сервера при удалении',
          })
 
          return rejectWithValue({ message: error?.response?.data?.message })
+=======
+            message: error.response.data.message,
+         })
+
+         return rejectWithValue({ message: error.response.data.message })
+>>>>>>> development
       }
    }
 )

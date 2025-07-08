@@ -223,6 +223,7 @@ const StyledInput = styled(Input)(() => ({
    '& .MuiOutlinedInput-root ': {
       width: '480px',
       borderRadius: '6px',
+      marginBottom: '20px',
    },
 }))
 

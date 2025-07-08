@@ -4,6 +4,7 @@ import CharityCard from '../../../components/UI/card/CharityCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { CHARITY_THUNK } from '../../../store/slices/admin/charity/charityThunk'
 import { useNavigate } from 'react-router'
+import NoMailings from '../../../assets/images/empty-state.png'
 
 const Charity = () => {
    const { charity } = useSelector((state) => state.charity)
@@ -19,7 +20,7 @@ const Charity = () => {
       dispatch(CHARITY_THUNK.getById({ id, navigate }))
    }
 
-   const handleChangeOption = (option) => {
+   const handleChangeOption = (option, giftId) => {
       if (option === 'Удалить') {
          dispatch(CHARITY_THUNK.deleteCharity({ id: giftId, navigate }))
       }
@@ -30,14 +31,22 @@ const Charity = () => {
          <Typography variant="h5">Благотворительность</Typography>
 
          <Box className="charity-list">
-            {charity.map((charity) => (
-               <CharityCard
-                  key={charity.giftId}
-                  charity={charity}
-                  onNavigate={handleNavigate}
-                  onChangeOption={handleChangeOption}
-               />
-            ))}
+            {charity?.length === 0 ? (
+               <StyledNotBlockBox>
+                  <img src={NoMailings} alt="icon" />
+
+                  <h2>Нет благотворительности!</h2>
+               </StyledNotBlockBox>
+            ) : (
+               charity?.map((charity) => (
+                  <CharityCard
+                     key={charity?.giftId}
+                     charity={charity}
+                     onNavigate={handleNavigate}
+                     onChangeOption={handleChangeOption}
+                  />
+               ))
+            )}
          </Box>
       </StyledBlockList>
    )
@@ -57,5 +66,17 @@ const StyledBlockList = styled(Box)(() => ({
       display: 'flex',
       flexWrap: 'wrap',
       gap: '3rem',
+   },
+}))
+
+const StyledNotBlockBox = styled(Box)(() => ({
+   display: 'flex',
+   justifyContent: 'center',
+   flexDirection: 'column',
+   alignItems: 'center',
+   margin: 'auto',
+
+   '& img': {
+      width: '300px',
    },
 }))

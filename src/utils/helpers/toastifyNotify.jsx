@@ -1,12 +1,12 @@
 import { toast } from 'react-toastify'
-import { styled, Typography } from '@mui/material'
+import { Box, styled, Typography } from '@mui/material'
 
 const toastifyNotify = ({ title, message, autoClose = 20000, type = '' }) => {
    toast[type](
-      <>
+      <StyledContainer>
          <StyledTitle>{title}</StyledTitle>
          <StyledMassege>{message}</StyledMassege>
-      </>,
+      </StyledContainer>,
 
       {
          autoClose,
@@ -15,6 +15,12 @@ const toastifyNotify = ({ title, message, autoClose = 20000, type = '' }) => {
 }
 
 export default toastifyNotify
+
+const StyledContainer = styled(Box)(() => ({
+   display: 'flex',
+   flexDirection: 'column',
+   marginBottom: '5px',
+}))
 
 const StyledTitle = styled('strong')(() => ({
    margin: '-5px 0px 7px 30px',
