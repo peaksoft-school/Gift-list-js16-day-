@@ -1,8 +1,10 @@
 import { Avatar, Box, styled, Typography } from '@mui/material'
 import MeetBalls from '../MeetBalls'
 import { CHARITY_CARD_OPTIONS } from '../../../utils/helpers'
+import { useNavigate } from 'react-router'
 
-const CharityCard = ({ charity, onNavigate, onChangeOption }) => {
+const CharityCard = ({ charity = {}, onChangeOption }) => {
+   const navigate = useNavigate()
    const {
       ownerProfilePhoto,
       ownerFullName,
@@ -15,7 +17,7 @@ const CharityCard = ({ charity, onNavigate, onChangeOption }) => {
    } = charity
 
    return (
-      <BoxCard onClick={() => onNavigate(giftId)}>
+      <BoxCard onClick={() => navigate(giftId)}>
          <StyledBoxAvatar>
             <Avatar src={ownerProfilePhoto} />
 

@@ -4,6 +4,7 @@ import { ROLES } from './routes'
 import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
 import WishList from '../components/wish/WishList'
+const Complaints = lazy(() => import('../pages/admin/complaints/Complaints'))
 
 const WishListDisplay = lazy(
    () => import('../pages/user/wish-list/WishListDisplay')
@@ -93,8 +94,6 @@ const AppRouter = () => (
          }
       />
 
-      {/* ADMIN */}
-
       <Route
          path="/admin"
          element={
@@ -147,8 +146,14 @@ const AppRouter = () => (
             }
          />
 
-         <Route path="complaints" element={<h1>complaints</h1>} />
-
+         <Route
+            path="complaints"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <Complaints />
+               </Suspense>
+            }
+         />
          <Route
             path="newsletter"
             element={
@@ -166,8 +171,6 @@ const AppRouter = () => (
             }
          />
       </Route>
-
-      {/* USER */}
 
       <Route
          path="/user"
