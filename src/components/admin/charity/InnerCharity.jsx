@@ -21,7 +21,7 @@ const InnerCharity = () => {
       condition,
       createdAt,
    } = selectedCharity
-
+   
    const { id } = useParams()
 
    const dispatch = useDispatch()

@@ -42,7 +42,7 @@ const complaintsSlice = createSlice({
             COMPLAINTS_THUNK.getAllComplaints.rejected,
             (state, action) => {
                state.loading = false
-               state.error = action.payload.message
+               state.error = action.payload?.message || action.error.message
             }
          )
 
@@ -61,7 +61,7 @@ const complaintsSlice = createSlice({
             COMPLAINTS_THUNK.getComplaintById.rejected,
             (state, action) => {
                state.loading = false
-               state.error = action.payload.message
+               state.error = action.payload?.message || action.error.message
             }
          )
 
@@ -76,7 +76,7 @@ const complaintsSlice = createSlice({
             COMPLAINTS_THUNK.createComplaint.rejected,
             (state, action) => {
                state.createLoading = false
-               state.error = action.payload.message
+               state.error = action.payload?.message || action.error.message
             }
          )
 
@@ -91,7 +91,7 @@ const complaintsSlice = createSlice({
             COMPLAINTS_THUNK.deleteComplaint.rejected,
             (state, action) => {
                state.deleteLoading = false
-               state.error = action.payload.message
+               state.error = action.payload?.message || action.error.message
             }
          )
 
@@ -106,7 +106,7 @@ const complaintsSlice = createSlice({
             COMPLAINTS_THUNK.deleteComplaintPost.rejected,
             (state, action) => {
                state.deleteLoading = false
-               state.error = action.payload.message
+               state.error = action.payload?.message || action.error.message
             }
          )
 
@@ -119,7 +119,7 @@ const complaintsSlice = createSlice({
          })
          .addCase(COMPLAINTS_THUNK.blockUser.rejected, (state, action) => {
             state.blockLoading = false
-            state.error = action.payload.message
+            state.error = action.payload?.message || action.error.message
          })
    },
 })
