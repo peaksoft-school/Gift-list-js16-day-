@@ -40,6 +40,8 @@ const deleteCharity = createAsyncThunk(
 
          navigate('/admin/charity')
 
+         getAllCharity()
+
          return data
       } catch (error) {
          return rejectWithValue({ message: error.response.data.message })

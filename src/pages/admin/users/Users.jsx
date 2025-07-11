@@ -5,6 +5,7 @@ import { Box, styled, Typography } from '@mui/material'
 import UserCard from '../../../components/UI/card/UserCard'
 import DeleteModal from '../../../components/UI/modal/DeleteModal'
 import { USERS_THUNK } from '../../../store/slices/admin/users/usersThunk'
+import NoMailings from '../../../assets/images/empty-state.png'
 
 const Users = () => {
    const { users } = useSelector((state) => state.users) || []
@@ -30,8 +31,6 @@ const Users = () => {
    }
 
    const handleDeleteUser = (id) => {
-      console.log(id)
-
       dispatch(USERS_THUNK.deleteUser({ userId: id, handleCloseModal }))
    }
 
@@ -46,15 +45,23 @@ const Users = () => {
          <Typography variant="h5">Пользователи</Typography>
 
          <Box className="users-container">
-            {users?.map((user) => (
-               <UserCard
-                  key={user.id}
-                  variant="horiz"
-                  user={user}
-                  onVisibleModal={() => handleVisibleModal(user.id)}
-                  onNavigate={handleNavigate}
-               />
-            ))}
+            {users?.length === 0 ? (
+               <StyledNotBlockBox>
+                  <img src={NoMailings} alt="icon" />
+
+                  <h1>Нет пользователей!</h1>
+               </StyledNotBlockBox>
+            ) : (
+               users?.map((user) => (
+                  <UserCard
+                     key={user.id}
+                     variant="horiz"
+                     user={user}
+                     onVisibleModal={() => handleVisibleModal(user.id)}
+                     onNavigate={handleNavigate}
+                  />
+               ))
+            )}
          </Box>
 
          <DeleteModal
@@ -82,5 +89,17 @@ const StyledBox = styled(Box)(() => ({
       display: 'flex',
       flexWrap: 'wrap',
       gap: '3rem',
+   },
+}))
+
+const StyledNotBlockBox = styled(Box)(() => ({
+   display: 'flex',
+   justifyContent: 'center',
+   flexDirection: 'column',
+   alignItems: 'center',
+   margin: 'auto',
+
+   '& img': {
+      width: '300px',
    },
 }))

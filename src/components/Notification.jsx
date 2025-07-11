@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles'
+import { styled } from '@mui/material'
 import { ToastContainer } from 'react-toastify'
 
 const Notification = () => (
@@ -18,7 +18,7 @@ const StyledToastContainer = styled(ToastContainer)({
       minWidth: '500px',
       borderRadius: '2px',
       fontFamily: 'Inter, sans-serif',
-      padding: '30px 15px',
+      // padding: '30px 15px',
       display: 'flex',
       fontSize: '14px',
       minHeight: 'auto',
@@ -27,7 +27,7 @@ const StyledToastContainer = styled(ToastContainer)({
    },
 
    '.Toastify__toast-body': {
-      padding: '16px',
+      // padding: '16px',
       fontSize: '14px',
       fontWeight: 500,
    },

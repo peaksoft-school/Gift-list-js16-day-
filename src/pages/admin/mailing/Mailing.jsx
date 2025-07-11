@@ -130,47 +130,49 @@ const Mailing = memo(() => {
                />
             </DialogContent>
 
-            <label htmlFor="newsletter-input" className="newsletter-input">
-               Тема
-            </label>
+            <StyledContent>
+               <label htmlFor="newsletter-input" className="newsletter-input">
+                  Тема
+               </label>
 
-            <StyledInput
-               id="newsletter-input"
-               placeholder="Введите тему рассылки"
-               value={subject}
-               onChange={handleSubjectChange}
-            />
+               <StyledInput
+                  id="newsletter-input"
+                  placeholder="Введите тему рассылки"
+                  value={subject}
+                  onChange={handleSubjectChange}
+               />
 
-            <label htmlFor="newsletter2-input" className="newsletter-input">
-               Текст рассылки
-            </label>
+               <label htmlFor="newsletter2-input" className="newsletter-input">
+                  Текст рассылки
+               </label>
 
-            <StyledInput
-               id="newsletter2-input"
-               placeholder="Введите текст рассылки"
-               value={message}
-               onChange={handleMessageChange}
-            />
+               <StyledInput
+                  id="newsletter2-input"
+                  placeholder="Введите текст рассылки"
+                  value={message}
+                  onChange={handleMessageChange}
+               />
 
-            <ButtonContainer>
-               <StyledButton
-                  variant="warning"
-                  type="button"
-                  onClick={handleCloseModal}
-               >
-                  ОТМЕНА
-               </StyledButton>
+               <ButtonContainer>
+                  <StyledButton
+                     variant="warning"
+                     type="button"
+                     onClick={handleCloseModal}
+                  >
+                     ОТМЕНА
+                  </StyledButton>
 
-               <StyledButton
-                  variant="outlined"
-                  color="primary"
-                  type="button"
-                  onClick={handleSubmit}
-                  disabled={isDisabled}
-               >
-                  {isLoading && loading ? 'ЗАГРУЗКА...' : 'ОТПРАВИТЬ'}
-               </StyledButton>
-            </ButtonContainer>
+                  <StyledButton
+                     variant="outlined"
+                     color="primary"
+                     type="button"
+                     onClick={handleSubmit}
+                     disabled={isDisabled}
+                  >
+                     {isLoading && loading ? 'ЗАГРУЗКА...' : 'ОТПРАВИТЬ'}
+                  </StyledButton>
+               </ButtonContainer>
+            </StyledContent>
          </Modal>
 
          <FlexContainer>
@@ -211,6 +213,15 @@ const StyledMain = styled(Box)(() => ({
    '& .newsletter-input': {
       color: '#676767',
    },
+}))
+
+const StyledContent = styled(Box)(() => ({
+   display: 'flex',
+   flexDirection: 'column',
+   justifyContent: 'center',
+   alignItems: 'start',
+   gap: '1rem',
+   marginTop: '5px',
 }))
 
 const HeaderRow = styled(Box)(() => ({
@@ -282,6 +293,7 @@ const ButtonContainer = styled(Box)(() => ({
    display: 'flex',
    justifyContent: 'center',
    gap: '16px',
+   marginTop: '10px',
 }))
 
 const StyledNotBlockBox = styled(Box)(() => ({

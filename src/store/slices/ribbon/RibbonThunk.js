@@ -6,6 +6,7 @@ const getAllFeed = createAsyncThunk(
    async (_, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get('/api/feed?page=0&size=10')
+
          return data
       } catch (error) {
          return rejectWithValue({

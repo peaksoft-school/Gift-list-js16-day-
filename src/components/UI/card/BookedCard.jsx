@@ -1,81 +1,105 @@
-import { Avatar, Box, styled, Typography } from '@mui/material'
+import { Box, styled, Typography } from '@mui/material'
 import MeatBalls from '../MeetBalls'
 import { USER_CARD_OPTIONS } from '../../../utils/helpers'
 
-const BookedCard = ({ card }) => {
-   const { fullName, event, title, date, image, avatar } = card
+const Card = ({ wish }) => {
+   const { name, image, createdAt, holidayName, massage, id, date } = wish
 
    return (
-      <StyledCard>
-         <BoxContainer>
-            <Avatar src={avatar} />
+      <StyledCard key={id}>
+         <img src={image} alt={name} />
+         {/* <img
+            src="https://i.pinimg.com/originals/ab/a8/40/aba84049818f9e61a1c7982cefa0403a.jpg"
+            alt={name}
+         /> */}
 
-            <ContainerBox>
-               <Typography>{fullName}</Typography>
+         <Box className="text-content">
+            <Box className="titles">
+               <Typography className="title">{name}</Typography>
+               <Typography className="status-text">{holidayName}</Typography>
+            </Box>
 
-               <Typography className="event">{event}</Typography>
-            </ContainerBox>
-         </BoxContainer>
+            <Box className="details">
+               <Typography className="grey-text">
+                  {createdAt || date}
+               </Typography>
 
-         <StyledTypography>{title}</StyledTypography>
+               <Box className="status-content">
+                  <Typography className="grey-text">{massage}</Typography>
 
-         <StyledImage src={image} alt={title} />
-
-         <StyledTextBox>
-            <Typography>{date}</Typography>
-
-            <MeatBalls options={USER_CARD_OPTIONS} />
-         </StyledTextBox>
+                  <MeatBalls options={USER_CARD_OPTIONS} />
+               </Box>
+            </Box>
+         </Box>
       </StyledCard>
    )
 }
 
-export default BookedCard
+export default Card
 
-const StyledCard = styled(Box)({
-   padding: '16px',
+const StyledCard = styled(Box)(() => ({
+   backgroundColor: 'white',
+   maxWidth: '349px',
+   width: '100%',
+   // maxHeight: '260px',
+   // height: '100%',
+   padding: '1rem',
    borderRadius: '8px',
-   boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
-
-   width: '349px',
-})
-
-const BoxContainer = styled(Box)({
    display: 'flex',
-   alignItems: 'center',
-   gap: '5px',
-})
+   flexDirection: 'column',
+   gap: '1rem',
+   fontSize: '14px',
 
-const StyledImage = styled('img')({
-   width: '317px',
-   height: '153px',
-   borderRadius: '8px',
-   marginTop: '12px',
-   marginBottom: '14px',
-})
-
-const ContainerBox = styled(Box)(() => ({
-   display: 'flex',
-   alignItems: 'center',
-   gap: '50px',
-   justifyContent: 'space-between',
-
-   '& .event': {
-      color: 'green',
-      fontSize: '13px',
+   '& img': {
+      width: '100%',
+      height: '147px',
+      borderRadius: '6px',
    },
-}))
 
-const StyledTypography = styled(Typography)(() => ({
-   fontFamily: 'Inter',
-   fontWeight: '400',
-   fontSize: '14px',
-   marginTop: '15px',
-}))
+   '& .text-content': {
+      display: 'flex',
+      justifyContent: 'space-between',
+      flexDirection: 'column',
 
-const StyledTextBox = styled(Box)(() => ({
-   fontSize: '14px',
-   color: 'gray',
-   display: 'flex',
-   justifyContent: 'space-between',
+      '& .titles': {
+         display: 'flex',
+         justifyContent: 'space-between',
+      },
+
+      '& .details': {
+         display: 'flex',
+         justifyContent: 'space-between',
+         alignItems: 'center',
+      },
+
+      '& .title': {
+         fontWeight: '600',
+         lineHeight: '130%',
+         marginBottom: '9px',
+         overflow: 'hidden',
+         textOverflow: 'ellipsis',
+         whiteSpace: 'nowrap',
+         width: '154px',
+      },
+
+      '& .status-text': {
+         color: status === 'new' ? 'green' : 'orange',
+         color: 'green',
+         textAlign: 'end',
+         fontSize: '13px',
+      },
+
+      '& .status-content': {
+         display: 'flex',
+         alignItems: 'center',
+      },
+
+      '& .grey-text': {
+         fontWeight: '400',
+         lineHeight: '100%',
+         marginRight: '14px',
+         color: 'grey',
+         fontSize: '13px',
+      },
+   },
 }))
