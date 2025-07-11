@@ -1,12 +1,11 @@
 import { Box, styled, Typography } from '@mui/material'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink, useNavigate } from 'react-router-dom'
-import BreadCrumbs from '../../UI/BreadCrumbs'
-import UserProfileCard from '../../UI/card/UserProfileCard'
+import { NavLink } from 'react-router-dom'
 import Card from '../../UI/card/Card'
 import { USERS_THUNK } from '../../../store/slices/admin/users/usersThunk'
-import NoMailings from '../../../assets/images/empty-state.png'
+import BreadCrumbs from '../../UI/BreadCrumbs'
+import UserProfileCard from '../../UI/card/UserProfileCard'
 
 const InnerUser = () => {
    const { user, wishList, holidays, charity } = useSelector(

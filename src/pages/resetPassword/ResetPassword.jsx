@@ -44,7 +44,7 @@ const ResetPassword = () => {
                autoClose: 3000,
                type: 'success',
             })
-            navigate('/')
+            navigate('/sign-in')
          })
          .catch((err) => {
             ToastifyNotify({
@@ -59,26 +59,26 @@ const ResetPassword = () => {
    return (
       <CenteredWrapper>
          <div>
-            <StyledMainHeaderContent>
-               <Title>Смена пароля</Title>
-               <img
-                  src={LightIcon}
-                  alt=""
-                  style={{
-                     cursor: 'pointer',
-                     marginBottom: '25px',
-                     marginLeft: '10px',
-                  }}
-                  onClick={() => navigate('/sign-in')}
-               />
-            </StyledMainHeaderContent>
             <Formik
                initialValues={{ password: '', confirmPassword: '' }}
                validationSchema={ResetPasswordSchema}
                onSubmit={handleSubmit}
             >
                {({ errors, touched }) => (
-                  <Form>
+                  <StyledFormContent>
+                     <StyledMainHeaderContent>
+                        <Title>Смена пароля</Title>
+                        <img
+                           src={LightIcon}
+                           alt=""
+                           style={{
+                              cursor: 'pointer',
+                              marginBottom: '25px',
+                              marginLeft: '10px',
+                           }}
+                           onClick={() => navigate('/sign-in')}
+                        />
+                     </StyledMainHeaderContent>
                      <FormBlock>
                         <Field name="password">
                            {({ field }) => (
@@ -125,7 +125,7 @@ const ResetPassword = () => {
                         </span>
                         одтвердить
                      </StyledButton>
-                  </Form>
+                  </StyledFormContent>
                )}
             </Formik>
          </div>
@@ -135,11 +135,18 @@ const ResetPassword = () => {
 
 export default ResetPassword
 
+const StyledFormContent = styled(Form)(() => ({
+   background: '#fff',
+   padding: '30px 30px 10px 30px',
+   borderRadius: '10px',
+}))
+
 const CenteredWrapper = styled(Box)({
    minHeight: '100vh',
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'center',
+   background: 'linear-gradient(#8639B5, #092056)',
 })
 
 const StyledMainHeaderContent = styled('div')(() => ({

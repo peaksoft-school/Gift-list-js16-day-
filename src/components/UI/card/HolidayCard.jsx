@@ -42,7 +42,7 @@ const StyledBox = styled(Box)(() => ({
 
    '& img': {
       minWidth: '317px',
-      minHeight: '149px',
+      minHeight: '299px',
       maxWidth: '317px',
       maxHeight: '149px',
       borderRadius: '6px',
@@ -62,8 +62,8 @@ const StyledText = styled(Typography)(() => ({
 
 const StyledBlock = styled(Box)(() => ({
    display: 'flex',
-   justifyContent: 'space-between',
-   paddingTop: '10px',
+   justifyContent: 'space-between', 
+   paddingTop: '0px',
    alignItems: 'center',
 
    '& .MuiTypography-body1': {

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { axiosInstance } from '../../../../configs/axiosInstance'
-import toastifyNotify from '../../../../utils/helpers/toastifyNotify'
+import toastifyNotify from '../../../../utils/helpers/ToastifyNotify'
 
 const getAllUsers = createAsyncThunk(
    'users/getAllUsers',
@@ -40,59 +40,58 @@ const getUser = createAsyncThunk(
 
 const getUserWishList = createAsyncThunk(
    'users/getUserWishList',
-
    async ({ id, getAllBoolean }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(
             `/api/users/user/wish-list/${id}?getAll=${getAllBoolean}`
          )
-
          return data
       } catch (error) {
-         return rejectWithValue({ message: error.response.data.message })
+         console.error('WishList error:', error?.response)
+         return rejectWithValue({
+            message: error?.response?.data?.message || 'Server error',
+         })
       }
    }
 )
 
 const getUserHolidays = createAsyncThunk(
    'users/getUserHolidays',
-
    async ({ id, getAllBoolean }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(
             `/api/users/user/holidays/${id}?getAll=${getAllBoolean}`
          )
-
          return data
       } catch (error) {
-         return rejectWithValue({ message: error.response.data.message })
+         console.error('Holidays error:', error?.response)
+         return rejectWithValue({
+            message: error?.response?.data?.message || 'Server error',
+         })
       }
    }
 )
 
 const getUserCharity = createAsyncThunk(
    'users/getUserCharity',
-
    async ({ id, getAllBoolean }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(
             `/api/users/user/charity/${id}?getAll=${getAllBoolean}`
          )
-
          return data
       } catch (error) {
-         return rejectWithValue({ message: error.response.data.message })
+         console.error('Charity error:', error?.response)
+         return rejectWithValue({
+            message: error?.response?.data?.message || 'Server error',
+         })
       }
    }
 )
 
 const deleteUser = createAsyncThunk(
    'users/deleteUser',
-
-   async (
-      { userId, handleCloseModal, inner, navigate },
-      { rejectWithValue }
-   ) => {
+   async ({ userId, handleCloseModal }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.delete(
             `/api/users/delete/${userId}`
@@ -119,10 +118,11 @@ const deleteUser = createAsyncThunk(
          toastifyNotify({
             title: 'Ошибка',
             type: 'error',
-            message: error.response.data.message,
+            message:
+               error?.response?.data?.message || 'Ошибка сервера при удалении',
          })
 
-         return rejectWithValue({ message: error.response.data.message })
+         return rejectWithValue({ message: error?.response?.data?.message })
       }
    }
 )

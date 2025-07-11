@@ -70,6 +70,7 @@ const StyledDeleteOutlineOutlined = styled(DeleteOutlineOutlined)(() => ({
    color: 'red',
    width: ' 45px',
    height: ' 45px',
+   marginBottom: '20px',
    gap: '10px',
    borderRadius: '35px',
    padding: '10px',
@@ -78,6 +79,7 @@ const StyledDeleteOutlineOutlined = styled(DeleteOutlineOutlined)(() => ({
 const StyledTypography = styled(Typography)(() => ({
    fontFamily: 'Inter',
    color: '#87898E',
+   marginBottom: '10px',
    fontWeight: '400',
    fontSize: '14px',
 }))
