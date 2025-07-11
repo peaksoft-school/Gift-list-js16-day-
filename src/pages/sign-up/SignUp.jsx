@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AUTH_THUNK } from '../../store/slices/auth/authThunk'
 import ToastifyNotify from '../../utils/helpers/ToastifyNotify'
 import Notification from '../../components/Notification'
+import toastifyNotify from '../../utils/helpers/ToastifyNotify'
 
 const SignUp = () => {
    const dispatch = useDispatch()
@@ -84,7 +85,7 @@ const SignUp = () => {
       try {
          await dispatch(AUTH_THUNK.signUp({ data })).unwrap()
 
-         ToastifyNotify({
+         toastifyNotify({
             title: 'Успешно',
             message: 'Вы успешно зарегистрировались',
             autoClose: 3000,
@@ -103,146 +104,160 @@ const SignUp = () => {
    }
 
    return (
-      <StyledMainSignIn>
-         <Notification />
-         <form onSubmit={handleSubmit(onSubmit)}>
+      <StyledBlock>
+         <StyledMainSignIn>
+            <Notification />
             <StyledMain>
-               <StyledMainHeader>
-                  <Typography
-                     typography="h3"
-                     style={{ fontSize: '24px', fontWeight: 500 }}
-                  >
-                     Регистрация
-                  </Typography>
-                  <img
-                     src={LightIcon}
-                     alt=""
-                     style={{ cursor: 'pointer', marginLeft: '320px' }}
-                     onClick={() => navigate('/')}
-                  />
-               </StyledMainHeader>
-
-               <div style={{ position: 'relative' }}>
-                  <StyledInput
-                     {...register('userName', { required: 'Имя обязательно' })}
-                     placeholder="Имя"
-                     type="text"
-                  />
-                  <StyledInput
-                     {...register('lastName')}
-                     placeholder="Фамилия"
-                     type="text"
-                  />
-                  <StyledInput
-                     {...register('email', {
-                        required: 'Email обязателен',
-                        pattern: {
-                           value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                           message: 'Некорректный email',
-                        },
-                     })}
-                     placeholder="Email"
-                     type="email"
-                  />
-
-                  <StyledInput
-                     {...register('password', {
-                        required: 'Пароль обязателен',
-                        minLength: {
-                           value: 6,
-                           message: 'Пароль должен быть минимум 6 символов',
-                        },
-                     })}
-                     type={showPassword ? 'text' : 'password'}
-                     placeholder="Введите пароль"
-                     value={password}
-                     onChange={(e) => setPassword(e.target.value)}
-                  />
-                  <span
-                     onClick={togglePasswordVisibility}
-                     style={{
-                        position: 'absolute',
-                        top: '66%',
-                        right: '10px',
-                        cursor: 'pointer',
-                     }}
-                  >
+               <form onSubmit={handleSubmit(onSubmit)}>
+                  <StyledMainHeader>
+                     <Typography
+                        typography="h3"
+                        style={{ fontSize: '24px', fontWeight: 500 }}
+                     >
+                        Регистрация
+                     </Typography>
                      <img
-                        src={showPassword ? EyeIcon : EyeSlash}
+                        src={LightIcon}
                         alt=""
-                        style={{ width: '20px', marginTop: 5 }}
+                        style={{ cursor: 'pointer', marginLeft: '320px' }}
+                        onClick={() => navigate('/')}
                      />
-                  </span>
+                  </StyledMainHeader>
 
-                  <StyledInput
-                     type={showPassword2 ? 'text' : 'password'}
-                     placeholder="Повторите пароль"
-                     value={password2}
-                     onChange={(e) => setPassword2(e.target.value)}
-                  />
-                  <span
-                     onClick={togglePasswordVisibility2}
-                     style={{
-                        position: 'absolute',
-                        top: '87%',
-                        right: '10px',
-                        cursor: 'pointer',
-                     }}
-                  >
-                     <img
-                        src={showPassword2 ? EyeIcon : EyeSlash}
-                        alt=""
-                        style={{ width: '20px', marginTop: 2 }}
+                  <StyledSignInInput style={{ position: 'relative' }}>
+                     <StyledInput
+                        {...register('userName', {
+                           required: 'Имя обязательно',
+                        })}
+                        placeholder="Имя"
+                        type="text"
                      />
-                  </span>
-               </div>
+                     <StyledInput
+                        {...register('lastName')}
+                        placeholder="Фамилия"
+                        type="text"
+                     />
+                     <StyledInput
+                        {...register('email', {
+                           required: 'Email обязателен',
+                           pattern: {
+                              value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                              message: 'Некорректный email',
+                           },
+                        })}
+                        placeholder="Email"
+                        type="email"
+                     />
 
-               <StyledMainCheckbox>
-                  <Checkbox {...register('subscribeMailing')} checked={true} />
-                  <span
-                     style={{
-                        fontWeight: 400,
-                        fontSize: '14px',
-                        color: '#87898E',
-                        marginLeft: '-10px',
-                     }}
-                  >
-                     Подписаться на рассылку
-                  </span>
-               </StyledMainCheckbox>
+                     <StyledInput
+                        {...register('password', {
+                           required: 'Пароль обязателен',
+                           minLength: {
+                              value: 6,
+                              message: 'Пароль должен быть минимум 6 символов',
+                           },
+                        })}
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="Введите пароль"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                     />
+                     <span
+                        onClick={togglePasswordVisibility}
+                        style={{
+                           position: 'absolute',
+                           top: '66%',
+                           right: '10px',
+                           cursor: 'pointer',
+                        }}
+                     >
+                        <img
+                           src={showPassword ? EyeIcon : EyeSlash}
+                           alt=""
+                           style={{ width: '20px', marginTop: 2 }}
+                        />
+                     </span>
+
+                     <StyledInput
+                        type={showPassword2 ? 'text' : 'password'}
+                        placeholder="Повторите пароль"
+                        value={password2}
+                        onChange={(e) => setPassword2(e.target.value)}
+                     />
+                     <span
+                        onClick={togglePasswordVisibility2}
+                        style={{
+                           position: 'absolute',
+                           top: '87%',
+                           right: '10px',
+                           cursor: 'pointer',
+                        }}
+                     >
+                        <img
+                           src={showPassword2 ? EyeIcon : EyeSlash}
+                           alt=""
+                           style={{ width: '20px' }}
+                        />
+                     </span>
+                  </StyledSignInInput>
+
+                  <StyledMainCheckbox>
+                     <Checkbox
+                        {...register('subscribeMailing')}
+                        checked={true}
+                     />
+                     <span
+                        style={{
+                           fontWeight: 400,
+                           fontSize: '14px',
+                           color: '#87898E',
+                           marginLeft: '-10px',
+                        }}
+                     >
+                        Подписаться на рассылку
+                     </span>
+                  </StyledMainCheckbox>
+
+                  <StyledButton type="submit" variant="outlined">
+                     <StyledP style={{ textTransform: 'lowercase' }}>
+                        <span style={{ textTransform: 'uppercase' }}>С</span>
+                        оздать аккаунт
+                     </StyledP>
+                  </StyledButton>
+               </form>
+
+               <StyledOrDivider>
+                  <StyledLine />
+                  <StyledText>или</StyledText>
+                  <StyledLine />
+               </StyledOrDivider>
+
+               <StyledGoogleButton onClick={handleGoogleSignIn}>
+                  <StyledGoogleImg src={GoogleIcon} alt="" />
+                  Продолжить с Google
+               </StyledGoogleButton>
+
+               <p style={{ fontWeight: 400, fontSize: '14px' }}>
+                  У вас уже есть аккаунт?
+                  <StyledNavLink to="/sign-in">Войти</StyledNavLink>
+               </p>
             </StyledMain>
-
-            <StyledButton type="submit" variant="outlined">
-               <StyledP style={{ textTransform: 'lowercase' }}>
-                  <span style={{ textTransform: 'uppercase' }}>С</span>оздать
-                  аккаунт
-               </StyledP>
-            </StyledButton>
-         </form>
-
-         <StyledOrDivider>
-            <StyledLine />
-            <StyledText>или</StyledText>
-            <StyledLine />
-         </StyledOrDivider>
-
-         <StyledGoogleButton onClick={handleGoogleSignIn}>
-            <StyledGoogleImg src={GoogleIcon} alt="" />
-            Продолжить с Google
-         </StyledGoogleButton>
-
-         <p style={{ fontWeight: 400, fontSize: '14px' }}>
-            У вас уже есть аккаунт?
-            <StyledNavLink to="/sign-in">Войти</StyledNavLink>
-         </p>
-      </StyledMainSignIn>
+         </StyledMainSignIn>
+      </StyledBlock>
    )
 }
+const StyledBlock = styled('div')(() => ({
+   background: 'linear-gradient(#8639B5, #092056)',
+   height: '100vh',
+}))
 
 const StyledMain = styled(Typography)(() => ({
    display: 'flex',
    justifyContent: 'center',
+   backgroundColor: '#fff',
    flexDirection: 'column',
+   borderRadius: '10px',
+   padding: '10px 40px',
 }))
 
 const StyledMainSignIn = styled('div')(() => ({
@@ -250,7 +265,9 @@ const StyledMainSignIn = styled('div')(() => ({
    flexDirection: 'column',
    textAlign: 'center',
    alignItems: 'center',
+   paddingTop: '20px',
    width: '100%',
+   height: '100%',
 }))
 
 const StyledMainHeader = styled('div')(() => ({
@@ -270,6 +287,7 @@ const StyledInput = styled(Input)(() => ({
       height: '35px',
       backgroundColor: 'none',
    },
+
    marginBottom: '5px',
 }))
 
@@ -311,7 +329,7 @@ const StyledGoogleButton = styled('button')(() => ({
    justifyContent: 'center',
    alignItems: 'center',
    gap: '8px',
-   width: '90%',
+   width: '100%',
    maxWidth: '482px',
    height: '39px',
    border: 'none',
@@ -332,6 +350,11 @@ const StyledNavLink = styled(NavLink)(() => ({
    fontSize: '14px',
    textDecoration: 'none',
    color: '#3772FF',
+}))
+const StyledSignInInput = styled('div')(() => ({
+   display: 'flex',
+   flexDirection: 'column',
+   gap: '5px',
 }))
 
 export default SignUp

@@ -1,12 +1,23 @@
 import { Avatar, Box, styled, Typography } from '@mui/material'
 import Button from '../../UI/Button'
 import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import BreadCrumbs from '../../UI/BreadCrumbs'
-import { CHARITY_THUNK } from '../../../store/slices/admin/charity/charityThunk'
+import { USER_CHARITY_THUNK } from '../../../store/slices/user/charity/userCharityThunk'
 
 const InnerCharity = () => {
-   const { selectedCharity } = useSelector((state) => state.charity)
+   const { id } = useParams()
+   const dispatch = useDispatch()
+   const navigate = useNavigate()
+
+   const { selectedUserCharity } = useSelector((state) => state.charity)
+
+   useEffect(() => {
+      if (id) {
+         dispatch(USER_CHARITY_THUNK.getById({ id, navigate }))
+      }
+   }, [id, dispatch, navigate])
 
    const {
       ownerProfilePhoto,
@@ -20,27 +31,22 @@ const InnerCharity = () => {
       subCategory,
       condition,
       createdAt,
-   } = selectedCharity
-
-   const { id } = useParams()
-
-   const dispatch = useDispatch()
-   const navigate = useNavigate()
+   } = selectedUserCharity || {}
 
    const handleDeleteCharity = (id) => {
-      dispatch(CHARITY_THUNK.deleteCharity({ id, navigate }))
+      dispatch(USER_CHARITY_THUNK.deleteCharity({ id, navigate }))
    }
 
    const links = [
-      { href: '/admin/charity', label: 'Благотворительность' },
-      { href: `/admin/charity/${id}`, label: `${giftName}` },
+      { href: '/user/charity', label: 'Благотворительность' },
+      { href: `/user/charity/${id}`, label: `${giftName}` },
    ]
 
    return (
       <StyledBlockList>
          <BreadCrumbs links={links} />
 
-         {selectedCharity && (
+         {selectedUserCharity && (
             <StyledContainer1>
                <StyledBlockMain>
                   <img src={ownerProfilePhoto} alt="photo" className="image" />
@@ -48,7 +54,7 @@ const InnerCharity = () => {
                   <StyledTextBlock>
                      <StyledAva>
                         <Box className="avatar-content">
-                           <Avatar src={bookedByProfilePhoto}></Avatar>
+                           <Avatar src={bookedByProfilePhoto} />
 
                            <StyledData>
                               <Typography className="full-name">
@@ -77,25 +83,17 @@ const InnerCharity = () => {
                      <StyledBlockLi>
                         <Box>
                            <Value>{category}</Value>
-
-                           <Label>Школьные</Label>
-
+                           <Label>Категория</Label>
                            <br />
-
                            <Value>{subCategory}</Value>
-
-                           <Label>Сумка</Label>
+                           <Label>Подкатегория</Label>
                         </Box>
 
                         <StyledState>
                            <Value>Состояние:</Value>
-
                            <Label>{condition}</Label>
-
                            <br />
-
                            <Value>Дата добавления:</Value>
-
                            <Label>{createdAt}</Label>
                         </StyledState>
                      </StyledBlockLi>
@@ -134,10 +132,11 @@ const StyledContainer1 = styled(Box)(() => ({
 
 const StyledBlockMain = styled(Box)(() => ({
    display: 'flex',
-
    '& .image': {
       width: '343px',
       height: '343px',
+      objectFit: 'cover',
+      borderRadius: '8px',
    },
 }))
 
@@ -147,15 +146,13 @@ const StyledTextBlock = styled(Box)(() => ({
    flexDirection: 'column',
    gap: '20px',
    margin: '30px 0 0 20px',
-
    '& .gift-name': {
       fontSize: '18px',
       fontWeight: '500',
       paddingTop: '20px',
       color: '#020202',
    },
-
-   '& .gift-description ': {
+   '& .gift-description': {
       fontSize: '16px',
       fontWeight: '400',
       lineHeight: '130%',
@@ -166,22 +163,13 @@ const StyledAva = styled(Box)(() => ({
    display: 'flex',
    alignItems: 'center',
    justifyContent: 'space-between',
-   width: '100%',
-
-   '& .MuiTypography-p': {
-      marginLeft: '400px',
-      fontSize: '14px',
-      color: '#3774D0',
-   },
-
    '& .avatar-content': {
       display: 'flex',
-      justifyContent: 'center',
       alignItems: 'center',
    },
-
    '& .status': {
       color: '#3774D0',
+      fontSize: '14px',
    },
 }))
 
@@ -189,33 +177,27 @@ const StyledData = styled(Box)(() => ({
    display: 'flex',
    flexDirection: 'column',
    marginLeft: '10px',
-   lineHeight: '30px',
    gap: '3px',
-
-   '&. full-name ': {
-      fontFamily: 'Inter',
+   '& .full-name': {
       fontWeight: '500',
-      fontSize: ' 16px',
-      lineHeight: ' 100%',
-      letterSpacing: ' 2%',
+      fontSize: '16px',
    },
-
    '& .owner-phone': {
-      fontFamily: 'Inter',
       fontWeight: '400',
-      fontSize: ' 14px',
-      lineHeight: ' 100%',
-
+      fontSize: '14px',
       color: '#5C5C5C',
    },
 }))
+
 const StyledBlockLi = styled(Box)(() => ({
    display: 'flex',
    marginTop: '30px',
+   gap: '80px',
 }))
 
 const StyledState = styled(Box)(() => ({
-   marginLeft: '200px',
+   display: 'flex',
+   flexDirection: 'column',
 }))
 
 const Label = styled(Typography)(() => ({
@@ -237,10 +219,6 @@ const ButtonContainer = styled(Box)(() => ({
 
 const StyledButton = styled(Button)(() => ({
    width: '121px',
-
-   '&.MuiButton-root': {
-      height: '37px',
-      border: 'none',
-      fontSize: '14px',
-   },
+   height: '37px',
+   fontSize: '14px',
 }))

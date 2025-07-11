@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import { Box, styled, Typography } from '@mui/material'
 import Input from '../components/UI/Input'
 import MeatBalls from '../components/UI/MeetBalls'
@@ -9,17 +9,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AUTH_ACTIONS } from '../store/slices/auth/authSlice'
 
 const Header = () => {
-   const { role } = useSelector((state) => state.auth)
-
+   const navigate = useNavigate()
+   const dispatch = useDispatch()
    const { pathname } = useLocation()
 
-   const dispatch = useDispatch()
+   // Получаем данные авторизованного пользователя
+   const { role, user } = useSelector((state) => state.auth)
 
    const handleProfileOption = (option) => {
       if (option === 'Выход') {
          dispatch(AUTH_ACTIONS.logOut())
       } else if (option === 'Профиль') {
-         console.log('Переход в профиль')
+         navigate('/user/profile')
       }
    }
 
@@ -39,10 +40,15 @@ const Header = () => {
                )}
 
                <>
-                  <StyledNotificationIcon src={Notification} alt="" />
+                  <StyledNotificationIcon
+                     src={Notification}
+                     alt="notification"
+                  />
 
                   <Typography className="user-name">
-                     {role === 'ADMIN' ? 'Adminstrator' : 'Naruto Uzumaki'}
+                     {role === 'ADMIN'
+                        ? 'Administrator'
+                        : user?.name || 'Пользователь'}
                   </Typography>
 
                   <MeatBalls
@@ -65,9 +71,9 @@ const StyledBox = styled(Box)(() => ({
    justifyContent: 'space-evenly',
    top: '33px',
    width: '100%',
-
    '& .user-name': {
       width: '140px',
+      paddingLeft: '20px',
    },
 }))
 
@@ -79,7 +85,7 @@ const StyledInputSearch = styled(SearchInput)(() => ({
 
 const StyledInput = styled(Input)(() => ({
    '& .MuiInputBase-root': {
-      width: '99%',
+      width: '91%',
       margin: '10px 0',
    },
 }))
