@@ -37,7 +37,7 @@ const Charity = () => {
                onClick={handleCreateNavigate}
             >
                <img src={Pluse} alt="icon" />
-               Добавить праздник
+               Добавить подарок
             </StyledMainButton>
          </HeaderRow>
 

@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from 'react-router'
 import { ROLES } from './routes'
 import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
-import WishList from '../components/wish/WishList'
+import Profile from '../components/profile/Profile'
 
 const WishListDisplay = lazy(
    () => import('../pages/user/wish-list/WishListDisplay')
@@ -93,8 +93,6 @@ const AppRouter = () => (
          }
       />
 
-      {/* ADMIN */}
-
       <Route
          path="/admin"
          element={
@@ -167,8 +165,6 @@ const AppRouter = () => (
          />
       </Route>
 
-      {/* USER */}
-
       <Route
          path="/user"
          element={
@@ -187,6 +183,7 @@ const AppRouter = () => (
 
          <Route path="ribbon" index element={<h1>Ribbon</h1>} />
 
+         <Route path="profile" element={<Profile />} />
          <Route
             path="friends"
             element={

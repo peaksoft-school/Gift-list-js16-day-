@@ -40,89 +40,111 @@ const getUser = createAsyncThunk(
 
 const getUserWishList = createAsyncThunk(
    'users/getUserWishList',
-
    async ({ id, getAllBoolean }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(
             `/api/users/user/wish-list/${id}?getAll=${getAllBoolean}`
          )
-
          return data
       } catch (error) {
-         return rejectWithValue({ message: error.response.data.message })
+         console.error('WishList error:', error?.response)
+         return rejectWithValue({
+            message: error?.response?.data?.message || 'Server error',
+         })
       }
    }
 )
 
 const getUserHolidays = createAsyncThunk(
    'users/getUserHolidays',
-
    async ({ id, getAllBoolean }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(
             `/api/users/user/holidays/${id}?getAll=${getAllBoolean}`
          )
-
          return data
       } catch (error) {
-         return rejectWithValue({ message: error.response.data.message })
+         console.error('Holidays error:', error?.response)
+         return rejectWithValue({
+            message: error?.response?.data?.message || 'Server error',
+         })
       }
    }
 )
 
 const getUserCharity = createAsyncThunk(
    'users/getUserCharity',
-
    async ({ id, getAllBoolean }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(
             `/api/users/user/charity/${id}?getAll=${getAllBoolean}`
          )
-
          return data
       } catch (error) {
-         return rejectWithValue({ message: error.response.data.message })
+         console.error('Charity error:', error?.response)
+         return rejectWithValue({
+            message: error?.response?.data?.message || 'Server error',
+         })
       }
    }
 )
 
 const deleteUser = createAsyncThunk(
    'users/deleteUser',
+<<<<<<< HEAD
+   async ({ userId, handleCloseModal }, { rejectWithValue }) => {
+=======
 
    async (
       { userId, handleCloseModal, inner, navigate },
       { rejectWithValue }
    ) => {
+>>>>>>> development
       try {
          const { data } = await axiosInstance.delete(
             `/api/users/delete/${userId}`
          )
 
+<<<<<<< HEAD
+=======
          if (handleCloseModal) {
             handleCloseModal()
          }
 
+>>>>>>> development
          toastifyNotify({
             title: 'Пользователь удален',
             type: 'success',
             message: data.message,
          })
 
+<<<<<<< HEAD
+         handleCloseModal()
+=======
          if (inner) {
             navigate('/admin/users')
 
             getAllUsers()
          }
+>>>>>>> development
 
          return data
       } catch (error) {
          toastifyNotify({
             title: 'Ошибка',
             type: 'error',
+<<<<<<< HEAD
+            message:
+               error?.response?.data?.message || 'Ошибка сервера при удалении',
+         })
+
+         return rejectWithValue({ message: error?.response?.data?.message })
+=======
             message: error.response.data.message,
          })
 
          return rejectWithValue({ message: error.response.data.message })
+>>>>>>> development
       }
    }
 )
