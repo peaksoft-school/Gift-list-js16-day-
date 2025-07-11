@@ -1,5 +1,5 @@
-import { toast } from 'react-toastify'
 import { Box, styled, Typography } from '@mui/material'
+import { toast } from 'react-toastify'
 
 const toastifyNotify = ({ title, message, autoClose = 20000, type = '' }) => {
    toast[type](

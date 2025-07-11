@@ -1,7 +1,10 @@
 import { Box, styled, Typography } from '@mui/material'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+
+import { NavLink, useNavigate } from 'react-router'
+import BreadCrumbs from '../../UI/BreadCrumbs'
+import UserProfileCard from '../../UI/card/UserProfileCard'
 import Card from '../../UI/card/Card'
 import { USERS_THUNK } from '../../../store/slices/admin/users/usersThunk'
 import BreadCrumbs from '../../UI/BreadCrumbs'
