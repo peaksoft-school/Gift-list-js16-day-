@@ -128,6 +128,6 @@ const wishSlice = createSlice({
    },
 })
 
-const WISH_ACTIONS = wishSlice.actions
+const WISH_ACTIONS = wishSlice.WISH_ACTIONS
 
 export { wishSlice, WISH_ACTIONS }

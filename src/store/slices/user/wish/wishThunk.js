@@ -15,14 +15,14 @@ const addWish = createAsyncThunk(
          )
       }
    }
-)
+)  
 
 const getWishes = createAsyncThunk(
    'wish/getWishes',
 
    async (_, { rejectWithValue }) => {
       try {
-         const { data } = await axiosInstance.get('/api/wish')
+         const { data } = await axiosInstance.get('/api/wish/list')
 
          return data
       } catch (error) {
