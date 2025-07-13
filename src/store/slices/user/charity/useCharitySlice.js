@@ -10,11 +10,7 @@ const initialState = {
 }
 
 const userCharitySlice = createSlice({
-<<<<<<< HEAD
    name: 'userCharity',
-=======
-   name: 'user-charity',
->>>>>>> development
    initialState,
    reducers: {
       clearCharity: (state) => {
@@ -132,6 +128,6 @@ const userCharitySlice = createSlice({
    },
 })
 
-const CHARITY_ACTIONS = userCharitySlice.actions
+const CHARITY_ACTIONS = userCharitySlice.CHARITY_ACTIONS
 
 export { userCharitySlice, CHARITY_ACTIONS }

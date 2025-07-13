@@ -13,8 +13,7 @@ const Ribbon = () => {
 
    useEffect(() => {
       dispatch(RIBBON_THUNK.getAllFeed())
-      // dispatch(RIBBON_THUNK.getFeedById(1))
-   }, [dispatch])
+   }, [])
 
    return (
       <StyledContainer>

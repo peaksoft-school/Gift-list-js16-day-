@@ -44,7 +44,7 @@ const ResetPassword = () => {
                autoClose: 3000,
                type: 'success',
             })
-            navigate('/')
+            navigate('/sign-in')
          })
          .catch((err) => {
             ToastifyNotify({

@@ -1,6 +1,9 @@
 import Aigerim from '../../assets/images/aigerim.png'
 import Nurgul from '../../assets/images/nurgul.png'
 import Nargiza from '../../assets/images/nargiza.jpg'
+import Beka from '../../assets/images/BekaPhoto.jpg'
+import Kurmanbek from '../../assets/images/Kurmanbek.jpg'
+import Enes from '../../assets/images/Enes.jpg'
 
 const conditions = [
    { value: '1', name: 'Все' },
@@ -60,7 +63,7 @@ const OUR_TEAM = [
 
    {
       id: 2,
-      img: '',
+      img: Beka,
       name: 'Бекмырза Абулвакиров',
       role: 'Frontend - Leader',
       borderRadius: '50% 0',
@@ -74,7 +77,7 @@ const OUR_TEAM = [
    },
    {
       id: 3,
-      img: '',
+      img: Kurmanbek,
       name: 'Курманбек',
       role: 'Backend developer',
       borderRadius: '0 0 50% 0',
@@ -88,9 +91,9 @@ const OUR_TEAM = [
    },
    {
       id: 7,
-      img: '',
-      name: 'Annette Black',
-      role: '',
+      img: Enes,
+      name: 'Энес Марат уулу',
+      role: 'Back-end developer',
       borderRadius: '0 50% 0 0',
    },
 ]

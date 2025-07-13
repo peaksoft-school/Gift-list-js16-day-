@@ -46,6 +46,6 @@ const ribbonSlice = createSlice({
    },
 })
 
-const RIBBON_ACTIONS = ribbonSlice.actions
+const RIBBON_ACTIONS = ribbonSlice.RIBBON_ACTIONS
 
 export { ribbonSlice, RIBBON_ACTIONS }
