@@ -1,10 +1,10 @@
 import { Avatar, Box, styled, Typography } from '@mui/material'
-import Button from '../../UI/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import BreadCrumbs from '../../UI/BreadCrumbs'
 import { USER_CHARITY_THUNK } from '../../../store/slices/user/charity/userCharityThunk'
+import Button from '../../UI/Button'
 
 const InnerCharity = () => {
    const { id } = useParams()

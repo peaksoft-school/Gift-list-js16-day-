@@ -65,7 +65,7 @@ const BoxCard = styled(Box)(() => ({
 
    '& .image': {
       width: '317px',
-      height: '293px',
+      height: '243px',
    },
 }))
 

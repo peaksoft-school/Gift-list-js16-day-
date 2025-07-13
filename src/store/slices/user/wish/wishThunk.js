@@ -15,7 +15,7 @@ const addWish = createAsyncThunk(
          )
       }
    }
-)  
+)
 
 const getWishes = createAsyncThunk(
    'wish/getWishes',
@@ -52,12 +52,9 @@ const getWishById = createAsyncThunk(
 const updateWish = createAsyncThunk(
    'wish/updateWish',
 
-   async ({ wishId, wishData }, { rejectWithValue }) => {
+   async ({ wishData }, { rejectWithValue }) => {
       try {
-         const { data } = await axiosInstance.put(
-            `/api/wish/${wishId}`,
-            wishData
-         )
+         const { data } = await axiosInstance.put('/api/wish', wishData)
 
          return data
       } catch (error) {

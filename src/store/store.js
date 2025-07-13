@@ -12,6 +12,7 @@ import { charitySlice } from './slices/admin/charity/charitySlice'
 import { bookedsSlice } from './slices/user/bookeds/bookedsSlice'
 import { userCharitySlice } from './slices/user/charity/useCharitySlice'
 import { wishSlice } from './slices/user/wish/wishSlice'
+import { ribbonSlice } from './slices/ribbon/RibbonSlice'
 
 const rootReducer = combineReducers({
    [authSlice.name]: authSlice.reducer,
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
    [bookedsSlice.name]: bookedsSlice.reducer,
    [userCharitySlice.name]: userCharitySlice.reducer,
    [wishSlice.name]: wishSlice.reducer,
-}) 
+   [ribbonSlice.name]: ribbonSlice.reducer,
+})
 
 const persistConfig = {
    key: 'GIFT-LIST',
