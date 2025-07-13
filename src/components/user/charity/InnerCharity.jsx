@@ -1,275 +1,326 @@
-import { Avatar, Box, styled, Typography } from '@mui/material'
+import { Box, styled, TextareaAutosize, Typography } from '@mui/material'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import Input from '../../UI/Input'
+import Dropdown from '../../UI/DropDown'
+import { ImageIcon } from 'lucide-react'
+import { useNavigate } from 'react-router'
 import Button from '../../UI/Button'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router'
 import BreadCrumbs from '../../UI/BreadCrumbs'
+import { FILES_THUNK } from '../../../store/slices/file/filesThunk'
 import { USER_CHARITY_THUNK } from '../../../store/slices/user/charity/userCharityThunk'
 
-const InnerCharity = () => {
-   const { selectedUserCharity } = useSelector((state) => state.charity)
+const categoryOptions = [
+   { value: '1', label: 'Одежда' },
+   { value: '2', label: 'Игрушки' },
+]
+const conditionOptions = [
+   { value: 'NEW', label: 'Новое' },
+   { value: 'USED', label: 'Б/У' },
+]
+const subCategoryOptions = [
+   { value: '10', label: 'Футболки' },
+   { value: '20', label: 'Куклы' },
+]
 
-   const {
-      ownerProfilePhoto,
-      bookedByProfilePhoto,
-      ownerFullName,
-      ownerPhone,
-      statusMessage,
-      giftName,
-      description,
-      category,
-      subCategory,
-      condition,
-      createdAt,
-   } = selectedUserCharity
-
-   const { id } = useParams()
-
+const CreateCharity = () => {
    const dispatch = useDispatch()
    const navigate = useNavigate()
 
-   const handleDeleteCharity = (id) => {
-      dispatch(USER_CHARITY_THUNK.deleteCharity({ id, navigate }))
+   const [preview, setPreview] = useState(null)
+   const [fileUrl, setFileUrl] = useState('')
+   const [isLoading, setIsLoading] = useState(false)
+
+   const [formData, setFormData] = useState({
+      name: '',
+      condition: '',
+      category: '',
+      subCategory: '',
+      description: '',
+      file: null,
+   })
+
+   const handleChange = async (e) => {
+      const { name, value, files, type } = e.target
+
+      if (type === 'file') {
+         const file = files[0]
+         if (!file) return
+
+         const reader = new FileReader()
+         reader.onloadend = () => setPreview(reader.result)
+         reader.readAsDataURL(file)
+
+         setIsLoading(true)
+         const result = await dispatch(FILES_THUNK.addFile({ file }))
+         setIsLoading(false)
+
+         if (FILES_THUNK.addFile.fulfilled.match(result)) {
+            setFileUrl(result.payload)
+            setFormData((prev) => ({ ...prev, file }))
+         } else {
+            alert('Ошибка загрузки изображения')
+         }
+      } else {
+         setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+         }))
+      }
+   }
+
+   const handleSubmit = () => {
+      if (
+         !formData.name ||
+         !formData.description ||
+         !formData.category ||
+         !formData.subCategory ||
+         !formData.condition ||
+         !fileUrl
+      ) {
+         alert('Пожалуйста, заполните все поля и загрузите изображение.')
+         return
+      }
+
+      const values = {
+         name: formData.name,
+         description: formData.description,
+         image: fileUrl,
+      }
+
+      dispatch(
+         USER_CHARITY_THUNK.createCharity({
+            values,
+            categoryById: formData.category,
+            subcategoryId: formData.subCategory,
+            status: formData.condition,
+            navigate,
+         })
+      )
    }
 
    const links = [
       { href: '/user/charity', label: 'Благотворительность' },
-      {
-         href: `/user/charity/${id}`,
-         label: selectedUserCharity?.giftName,
-      },
+      { href: '/user/charity', label: 'Добавить подарок' },
    ]
 
+   const handleGoBack = () => navigate(-1)
+
    return (
-      <StyledBlockList>
+      <BlockContainer>
          <BreadCrumbs links={links} />
+         <FormContainer>
+            <Box>
+               <label htmlFor="upload-file">
+                  <UploadBox preview={preview}>
+                     {preview ? (
+                        <Box
+                           component="img"
+                           src={preview}
+                           alt="preview"
+                           className="photo"
+                        />
+                     ) : (
+                        <>
+                           <ImageIcon />
+                           <Typography>
+                              Нажмите для добавления фотографии
+                           </Typography>
+                        </>
+                     )}
+                  </UploadBox>
+               </label>
 
-         {selectedUserCharity?.statusMessage && (
-            <StyledContainer1>
-               <StyledBlockMain>
-                  <img src={ownerProfilePhoto} alt="photo" className="image" />
+               <input
+                  type="file"
+                  id="upload-file"
+                  accept="image/*"
+                  name="file"
+                  hidden
+                  onChange={handleChange}
+               />
+            </Box>
 
-                  <StyledTextBlock>
-                     <StyledAva>
-                        <Box className="avatar-content">
-                           <Avatar src={bookedByProfilePhoto}></Avatar>
+            <Box className="content">
+               <Typography variant="h6">Добавление вещи</Typography>
 
-                           <StyledData>
-                              <Typography className="full-name">
-                                 {ownerFullName}
-                              </Typography>
+               <StyledInputGift>
+                  <Box className="input-container">
+                     <Box>
+                        <Input
+                           value={formData.name}
+                           name="name"
+                           labelText="Название подарка"
+                           placeholder="Введите название подарка"
+                           onChange={handleChange}
+                           className="drop-down"
+                        />
 
-                              <Typography className="owner-phone">
-                                 {ownerPhone}
-                              </Typography>
-                           </StyledData>
-                        </Box>
+                        <Dropdown
+                           labelText="Категория"
+                           placeholder="Выберите категорию"
+                           value={formData.category}
+                           name="category"
+                           options={categoryOptions}
+                           onChange={handleChange}
+                           className="drop-down"
+                        />
+                     </Box>
 
-                        <Typography className="status">
-                           {statusMessage}
-                        </Typography>
-                     </StyledAva>
+                     <Box>
+                        <Dropdown
+                           labelText="Состояние"
+                           placeholder="Укажите состояние"
+                           value={formData.condition}
+                           name="condition"
+                           options={conditionOptions}
+                           onChange={handleChange}
+                           className="drop-down"
+                        />
 
-                     <Typography variant="h6" className="gift-name">
-                        {giftName}
-                     </Typography>
+                        <Dropdown
+                           labelText="Подкатегория"
+                           placeholder="Выберите подкатегорию"
+                           value={formData.subCategory}
+                           name="subCategory"
+                           options={subCategoryOptions}
+                           onChange={handleChange}
+                           className="drop-down"
+                        />
+                     </Box>
+                  </Box>
+               </StyledInputGift>
 
-                     <Typography className="gift-description">
-                        {description}
-                     </Typography>
+               <StyledTextField
+                  placeholder="Введите описание подарка"
+                  value={formData.description}
+                  name="description"
+                  onChange={handleChange}
+               />
 
-                     <StyledBlockLi>
-                        <Box>
-                           <Value>{category}</Value>
+               <StyledButton>
+                  <Button variant="warning" onClick={handleGoBack}>
+                     ОТМЕНА
+                  </Button>
 
-                           <Label>Школьные</Label>
-
-                           <br />
-
-                           <Value>{subCategory}</Value>
-
-                           <Label>Сумка</Label>
-                        </Box>
-
-                        <StyledState>
-                           <Value>Состояние:</Value>
-
-                           <Label>{condition}</Label>
-
-                           <br />
-
-                           <Value>Дата добавления:</Value>
-
-                           <Label>{createdAt}</Label>
-                        </StyledState>
-                     </StyledBlockLi>
-                  </StyledTextBlock>
-               </StyledBlockMain>
-
-               {selectedUserCharity.ownerFullName === 'rabiya aiylchieva' ? (
-                  <ButtonContainer>
-                     <StyledButton
-                        variant="warning"
-                        type="button"
-                        onClick={() => handleDeleteCharity(id)}
-                     >
-                        Удалить
-                     </StyledButton>
-                     <StyledButton2
-                        variant="outlined"
-                        color="primary"
-                        type="button"
-                     >
-                        Редактировать
-                     </StyledButton2>
-                  </ButtonContainer>
-               ) : statusMessage !== 'Забронирован' ? (
-                  <ButtonContainer>
-                     <StyledButton variant="warning" type="button">
-                        Забронировать анонимно
-                     </StyledButton>
-
-                     <StyledButton2 variant="outlined" type="button">
-                        Забронировать
-                     </StyledButton2>
-                  </ButtonContainer>
-               ) : null}
-            </StyledContainer1>
-         )}
-      </StyledBlockList>
+                  <Button variant="outlined" onClick={handleSubmit}>
+                     {isLoading ? 'ЗАГРУЗКА...' : 'ДОБАВИТЬ'}
+                  </Button>
+               </StyledButton>
+            </Box>
+         </FormContainer>
+      </BlockContainer>
    )
 }
 
-export default InnerCharity
+export default CreateCharity
 
-const StyledBlockList = styled(Box)(() => ({
+const BlockContainer = styled(Box)(() => ({
    padding: '0 20px',
    display: 'flex',
    flexDirection: 'column',
+   gap: '31px',
 }))
 
-const StyledContainer1 = styled(Box)(() => ({
-   background: '#ffffff',
-   height: '100%',
+const FormContainer = styled(Box)(() => ({
+   display: 'flex',
    borderRadius: '10px',
-   marginTop: '40px',
-   padding: '20px',
-}))
-
-const StyledBlockMain = styled(Box)(() => ({
-   display: 'flex',
-
-   '& .image': {
-      width: '343px',
-      height: '343px',
-   },
-}))
-
-const StyledTextBlock = styled(Box)(() => ({
    width: '100%',
-   display: 'flex',
-   flexDirection: 'column',
+   background: '#ffffff',
    gap: '20px',
-   margin: '30px 0 0 20px',
+   padding: '30px',
 
-   '& .gift-name': {
-      fontSize: '18px',
-      fontWeight: '500',
-      paddingTop: '20px',
-      color: '#020202',
-   },
-
-   '& .gift-description ': {
-      fontSize: '16px',
-      fontWeight: '400',
-      lineHeight: '130%',
-   },
-}))
-
-const StyledAva = styled(Box)(() => ({
-   display: 'flex',
-   alignItems: 'center',
-   justifyContent: 'space-between',
-   width: '100%',
-
-   '& .MuiTypography-p': {
-      marginLeft: '400px',
-      fontSize: '14px',
-      color: '#3774D0',
-   },
-
-   '& .avatar-content': {
+   '& .content': {
       display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-   },
-
-   '& .status': {
-      color: '#3774D0',
+      flexDirection: 'column',
+      gap: '20px',
    },
 }))
 
-const StyledData = styled(Box)(() => ({
+const UploadBox = styled(Box)(({ preview }) => ({
+   border: preview !== null ? 'none' : '2px solid #DCDCE4',
+   width: '217px',
+   height: '217px',
    display: 'flex',
    flexDirection: 'column',
-   marginLeft: '10px',
-   lineHeight: '30px',
-   gap: '3px',
+   alignItems: 'center',
+   justifyContent: 'center',
+   cursor: 'pointer',
+   color: '#8E8EA9',
+   margin: 'auto',
+   backgroundColor: '#F6F6F9',
+   borderRadius: '8px',
 
-   '&. full-name ': {
-      fontFamily: 'Inter',
-      fontWeight: '500',
-      fontSize: ' 16px',
-      lineHeight: ' 100%',
-      letterSpacing: ' 2%',
+   '&:hover': {
+      backgroundColor: preview !== null ? 'none' : '#DCDCE4',
    },
 
-   '& .owner-phone': {
-      fontFamily: 'Inter',
-      fontWeight: '400',
-      fontSize: ' 14px',
-      lineHeight: ' 100%',
+   '& .MuiTypography-root': {
+      fontSize: '12px',
+      width: '150px',
+      textAlign: 'center',
+   },
 
-      color: '#5C5C5C',
+   '& .photo': {
+      width: '217px',
+      height: '217px',
+      borderRadius: '8px',
+      objectFit: 'cover',
    },
 }))
-const StyledBlockLi = styled(Box)(() => ({
+
+const StyledInputGift = styled(Box)(() => ({
    display: 'flex',
-   marginTop: '30px',
-}))
-
-const StyledState = styled(Box)(() => ({
-   marginLeft: '200px',
-}))
-
-const Label = styled(Typography)(() => ({
-   fontWeight: 400,
-   fontSize: '16px',
-}))
-
-const Value = styled(Typography)(() => ({
-   color: '#5C5C5C',
-   fontSize: '14px',
-}))
-
-const ButtonContainer = styled(Box)(() => ({
-   display: 'flex',
-   justifyContent: 'flex-end',
+   flexDirection: 'column',
    gap: '16px',
-   marginTop: '56px',
-}))
 
-const StyledButton = styled(Button)(() => ({
-   '&.MuiButton-root': {
-      height: '37px',
-      border: 'none',
-      fontSize: '14px',
+   '& .input-container': {
+      display: 'flex',
+      gap: '20px',
+
+      '& > .MuiBox-root': {
+         display: 'flex',
+         flexDirection: 'column',
+         gap: '20px',
+      },
+
+      '& .drop-down': {
+         width: '396px',
+      },
    },
 }))
 
-const StyledButton2 = styled(Button)(() => ({
-   width: '175px',
-   '&.MuiButton-root': {
-      height: '37px',
-      fontSize: '14px',
+const StyledTextField = styled(TextareaAutosize)(() => ({
+   width: '810px',
+   height: '111px !important',
+   borderRadius: '6px',
+   padding: '8px 18px',
+   border: '1px solid #BDBDBD',
+   color: '#8D949E',
+   fontSize: '16px',
+   fontWeight: 300,
+   fontFamily: 'Inter',
+
+   '&:focus': {
+      outline: 'none',
+      borderColor: '#BDBDBD',
+      boxShadow: 'none',
    },
+
+   '&:hover': {
+      borderColor: '#BDBDBD',
+   },
+
+   '&::placeholder': {
+      color: '#8D949E',
+      fontWeight: 300,
+   },
+}))
+
+const StyledButton = styled(Box)(() => ({
+   marginTop: '20px',
+   display: 'flex',
+   gap: '20px',
+   justifyContent: 'end',
+   marginRight: '78px',
 }))

@@ -9,6 +9,10 @@ const Complaints = lazy(() => import('../pages/admin/complaints/Complaints'))
 const WishListDisplay = lazy(
    () => import('../pages/user/wish-list/WishListDisplay')
 )
+
+const WishList = lazy(
+   () => import('../components/wish/WishList')
+)
 const CreateCharity = lazy(
    () => import('../pages/user/charity/create-charity/CreateCharity')
 )
@@ -41,6 +45,7 @@ const SignUp = lazy(() => import('../pages/sign-up/SignUp'))
 const Admin = lazy(() => import('../layout/admin/AdminLayout'))
 const User = lazy(() => import('../layout/user/UserLayout'))
 const InnerUser = lazy(() => import('../components/admin/users/InnerUser'))
+const Ribbon = lazy(() => import('../components/UI/lenta/Ribbon.jsx'))
 
 const AppRouter = () => (
    <Routes>
@@ -188,8 +193,16 @@ const AppRouter = () => (
       >
          <Route index element={<Navigate to="ribbon" />} />
 
-         <Route path="ribbon" index element={<h1>Ribbon</h1>} />
+         <Route
+            path="ribbon"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <Ribbon />
+               </Suspense>
+            }
+         />
 
+         <Route path="profile" element={<Profile />} />
          <Route
             path="friends"
             element={

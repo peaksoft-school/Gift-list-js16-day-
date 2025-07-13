@@ -92,9 +92,13 @@ const StyledContainer = styled(Container)(() => ({
    gap: '120px',
 }))
 
-const StyledGrid = styled(Grid)(() => ({
+const StyledGrid = styled(Box)(() => ({
    display: 'flex',
-   flexDirection: 'row-reverse',
+   flexDirection: 'row',
+   justifyContent: 'space-between',
+   gap: '3rem',
+   width: '100%',
+   alignItems: 'center',
 }))
 
 const Title = styled(Typography)(({ theme }) => ({
@@ -105,7 +109,6 @@ const Title = styled(Typography)(({ theme }) => ({
 
 const Paragraph = styled(Typography)(() => ({
    marginTop: '10px',
-   marginRight: '100px',
    lineHeight: 1.6,
 }))
 

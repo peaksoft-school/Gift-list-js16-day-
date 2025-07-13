@@ -38,7 +38,10 @@ const CharityCard = ({ charity = {}, onChangeOption }) => {
             <Typography>{createdAt}</Typography>
 
             <StyledSmallBlock>
-               <Avatar src={ownerProfilePhoto} />
+               <Avatar
+                  src={ownerProfilePhoto}
+                  style={{ width: '50px', height: '42px' }}
+               />
                <Typography>{statusMessage}</Typography>
 
                <MeetBalls
@@ -64,14 +67,14 @@ const BoxCard = styled(Box)(() => ({
 
    '& .image': {
       width: '317px',
-      height: '153px',
+      height: '243px',
    },
 }))
 
 const StyledBoxAvatar = styled(Box)(() => ({
    display: 'flex',
    alignItems: 'center',
-   paddingBottom: '10px',
+   paddingBottom: '15px',
 
    '& .MuiTypography-root': {
       fontFamily: 'Inter',

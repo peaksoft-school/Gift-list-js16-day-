@@ -1,12 +1,12 @@
 import { Box, styled, Typography } from '@mui/material'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink, useNavigate } from 'react-router-dom'
-import BreadCrumbs from '../../UI/BreadCrumbs'
+import { NavLink, useNavigate } from 'react-router'
 import UserProfileCard from '../../UI/card/UserProfileCard'
 import Card from '../../UI/card/Card'
 import { USERS_THUNK } from '../../../store/slices/admin/users/usersThunk'
-import NoMailings from '../../../assets/images/empty-state.png'
+import BreadCrumbs from '../../UI/BreadCrumbs'
+import NoMailings from '../../../assets/icons/mailings.svg'
 
 const InnerUser = () => {
    const { user, wishList, holidays, charity } = useSelector(
@@ -32,7 +32,7 @@ const InnerUser = () => {
    }, [id])
 
    const handleDeleteUser = (id) => {
-      dispatch(USERS_THUNK.deleteUser({ userId: id, navigate, inner: true }))
+      dispatch(USERS_THUNK.deleteUser({ userId: id, navigate }))
    }
 
    return (
@@ -40,7 +40,7 @@ const InnerUser = () => {
          <Box>
             <BreadCrumbs links={links} />
 
-            <UserProfileCard user={user} onDelete={handleDeleteUser} />
+            <UserProfileCard user={user} onDelete={() => handleDeleteUser(id)} />
          </Box>
 
          <Box>

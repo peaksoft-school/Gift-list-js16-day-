@@ -47,5 +47,24 @@ const createHoliday = createAsyncThunk(
       }
    }
 )
+const deleteHolidays = createAsyncThunk(
+   'holidays/deleteHolidays',
+   async ({ handleCloseModal, id }, { rejectWithValue }) => {
+      try {
+         const { data } = await axiosInstance.delete(
+            `/api/holidays/delete/${id}`
+         )
+         handleCloseModal()
+         return data
+      } catch (error) {
+         return rejectWithValue()
+      }
+   }
+)
 
-export const HOLIDAYS_THUNK = { getAllHolidays, getById, createHoliday }
+export const HOLIDAYS_THUNK = {
+   deleteHolidays,
+   getAllHolidays,
+   getById,
+   createHoliday,
+}

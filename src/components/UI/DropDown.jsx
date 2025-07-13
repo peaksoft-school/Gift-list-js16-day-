@@ -1,6 +1,5 @@
 import { forwardRef, useMemo } from 'react'
-import { MenuItem, Select, styled } from '@mui/material'
-import { Typography } from 'antd'
+import { MenuItem, Select, styled, Typography } from '@mui/material'
 
 const Dropdown = forwardRef(
    (

@@ -226,7 +226,7 @@ export default CreateCharity
 const BlockContainer = styled(Box)(() => ({
    padding: '0 20px',
    display: 'flex',
-   flexDirection: 'column',
+   flexDirection: 'column',   
    gap: '31px',
 }))
 

@@ -63,7 +63,7 @@ const WishListDisplay = () => {
                         </MetaItem>
                         <MetaItem>
                            <MetaLabel>Дата:</MetaLabel>
-                           <MetaValue>{wish.holidayDate}</MetaValue>
+                           <MetaValue>{wish.createdAt}</MetaValue>
                         </MetaItem>
                      </WishMeta>
                      {wish.description && (

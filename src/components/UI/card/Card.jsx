@@ -8,10 +8,6 @@ const Card = ({ wish }) => {
    return (
       <StyledCard key={id}>
          <img src={image} alt={name} />
-         {/* <img
-            src="https://i.pinimg.com/originals/ab/a8/40/aba84049818f9e61a1c7982cefa0403a.jpg"
-            alt={name}
-         /> */}
 
          <Box className="text-content">
             <Box className="titles">
@@ -83,7 +79,6 @@ const StyledCard = styled(Box)(() => ({
       },
 
       '& .status-text': {
-         // color: status === 'new' ? 'green' : 'orange',
          color: 'green',
          textAlign: 'end',
       },

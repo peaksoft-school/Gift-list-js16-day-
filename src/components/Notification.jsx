@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles'
+import { styled } from '@mui/material'
 import { ToastContainer } from 'react-toastify'
 
 const Notification = () => (
