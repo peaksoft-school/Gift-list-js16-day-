@@ -10,11 +10,7 @@ const initialState = {
 }
 
 const userCharitySlice = createSlice({
-<<<<<<< HEAD
    name: 'userCharity',
-=======
-   name: 'user-charity',
->>>>>>> development
    initialState,
    reducers: {
       clearCharity: (state) => {

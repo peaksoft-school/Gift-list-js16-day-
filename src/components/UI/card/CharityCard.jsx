@@ -22,12 +22,10 @@ const CharityCard = ({ charity, onNavigate, onChangeOption }) => {
             <Typography>{ownerFullName}</Typography>
          </StyledBoxAvatar>
 
-         <StyledParagraph>
+         <StyledParagraph condition={condition}>
             <Typography>{giftName}</Typography>
 
-            <Typography condition={condition} className="condition">
-               {condition}
-            </Typography>
+            <Typography className="condition">{condition}</Typography>
          </StyledParagraph>
 
          <img src={bookedByProfilePhoto} alt="book" className="image" />

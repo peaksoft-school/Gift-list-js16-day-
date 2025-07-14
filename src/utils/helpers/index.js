@@ -11,6 +11,9 @@ import Block from '../../assets/images/block.png'
 import Delete from '../../assets/images/delete.png'
 import Baran from '../../assets/images/baran.jpg'
 import Book from '../../assets/images/book.png'
+import BookIcon from '../../assets/icons/booked.svg'
+import Gift from '../../assets/icons/gift.svg'
+import compled from '../../assets/icons/compled.svg'
 
 const ROLES_SIDEBAR = {
    users: [
@@ -37,12 +40,16 @@ const PROFILE_OPTIONS = [
 
 const USER_CARD_OPTIONS = [
    {
-      title: 'Заблокировать',
-      icon: Block,
+      title: 'Забронировать',
+      icon: BookIcon,
    },
    {
-      title: 'Удалить',
-      icon: Delete,
+      title: 'Добавить в мои подарки',
+      icon: Gift,
+   },
+   {
+      title: 'Пожаловаться',
+      icon: compled,
    },
 ]
 const CHARITY_CARD_OPTIONS = [

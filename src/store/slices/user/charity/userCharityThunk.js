@@ -3,12 +3,8 @@ import { axiosInstance } from '../../../../configs/axiosInstance'
 
 // 1. Получение всех вещей
 const getAllUserCharity = createAsyncThunk(
-<<<<<<< HEAD
-   'charity/getAllUserCharity',
-=======
-   'user-charity/getAllUserCharity',
+   'userCharity/getAllUserCharity',
 
->>>>>>> development
    async (_, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(`/api/charity`)
@@ -21,12 +17,8 @@ const getAllUserCharity = createAsyncThunk(
 
 // 2. Получить вещь по ID
 const getById = createAsyncThunk(
-<<<<<<< HEAD
-   'charity/getById',
-=======
-   'user-charity/getById',
+   'userCharity/getById',
 
->>>>>>> development
    async ({ id, navigate }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(`/api/charity/${id}`)
@@ -40,12 +32,8 @@ const getById = createAsyncThunk(
 
 // 3. Удалить вещь
 const deleteCharity = createAsyncThunk(
-<<<<<<< HEAD
-   'charity/deleteCharity',
-=======
-   'user-charity/delete-charity',
+   'userCharity/delete-charity',
 
->>>>>>> development
    async ({ id, navigate }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.delete(`/api/charity/${id}`)
@@ -59,12 +47,8 @@ const deleteCharity = createAsyncThunk(
 
 // 4. Добавить новую вещь
 const createCharity = createAsyncThunk(
-<<<<<<< HEAD
-   'charity/createCharity',
-=======
-   'user-charity/create-charity',
+   'userCharity/create-charity',
 
->>>>>>> development
    async (
       { values, categoryById, subcategoryId, status, navigate },
       { rejectWithValue }
@@ -84,7 +68,7 @@ const createCharity = createAsyncThunk(
 
 // 5. Редактировать вещь
 const updateCharity = createAsyncThunk(
-   'charity/updateCharity',
+   'userCharity/updateCharity',
    async (
       { id, values, categoryById, subcategoryId, status, navigate },
       { rejectWithValue }
@@ -104,7 +88,7 @@ const updateCharity = createAsyncThunk(
 
 // 6. Добавить в список желаемых подарков
 const addGiftToMyGifts = createAsyncThunk(
-   'charity/addGiftToMyGifts',
+   'userCharity/addGiftToMyGifts',
    async (id, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.post(
@@ -119,7 +103,7 @@ const addGiftToMyGifts = createAsyncThunk(
 
 // 7. Получить список моих подарков
 const getMyCharityGifts = createAsyncThunk(
-   'charity/getMyCharityGifts',
+   'userCharity/getMyCharityGifts',
    async (_, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(`/api/charity/gifts`)

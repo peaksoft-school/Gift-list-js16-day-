@@ -10,6 +10,7 @@ const initialState = {
    error: null,
    forgotPasswordStatus: 'idle',
    resetPasswordStatus: 'idle',
+   fullName: null,
 }
 
 const authSlice = createSlice({
@@ -44,6 +45,7 @@ const authSlice = createSlice({
             state.isAuth = true
             state.isLoading = false
             state.token = payload.token
+            state.fullName = payload.fullName
          })
 
          .addCase(AUTH_THUNK.signIn.rejected, (state) => {
@@ -60,6 +62,7 @@ const authSlice = createSlice({
             state.isAuth = true
             state.isLoading = false
             state.token = payload.token
+            state.fullName = payload.fullName
          })
 
          .addCase(AUTH_THUNK.authWithGoogle.rejected, (state) => {

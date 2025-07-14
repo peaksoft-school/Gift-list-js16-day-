@@ -5,6 +5,10 @@ import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
 import Profile from '../components/profile/Profile'
 
+const WishList = lazy(() => import('../components/wish/WishList'))
+const InnerRibbon = lazy(
+   () => import('../components/user/ribbon/InnerRibbon.jsx')
+)
 const WishListDisplay = lazy(
    () => import('../pages/user/wish-list/WishListDisplay')
 )
@@ -192,6 +196,24 @@ const AppRouter = () => (
          />
 
          <Route path="profile" element={<Profile />} />
+         <Route
+            path="ribbon/:id"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <InnerRibbon />
+               </Suspense>
+            }
+         />
+
+         <Route
+            path="/user/user-profile/:id"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <InnerUser />
+               </Suspense>
+            }
+         />
+
          <Route
             path="friends"
             element={

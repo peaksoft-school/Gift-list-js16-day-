@@ -9,11 +9,14 @@ import Card from '../../UI/card/Card'
 import { USERS_THUNK } from '../../../store/slices/admin/users/usersThunk'
 import BreadCrumbs from '../../UI/BreadCrumbs'
 import UserProfileCard from '../../UI/card/UserProfileCard'
+import NoMailings from '../../../assets/images/empty-state.png'
+import { RIBBON_THUNK } from '../../../store/slices/ribbon/RibbonThunk'
 
 const InnerUser = () => {
    const { user, wishList, holidays, charity } = useSelector(
       (state) => state.users
    )
+   const { role } = useSelector((state) => state.auth)
 
    const { id, lastname } = user
 
@@ -28,9 +31,11 @@ const InnerUser = () => {
    const getAllBoolean = false
 
    useEffect(() => {
-      dispatch(USERS_THUNK.getUserWishList({ id, getAllBoolean }))
-      dispatch(USERS_THUNK.getUserHolidays({ id, getAllBoolean }))
-      dispatch(USERS_THUNK.getUserCharity({ id, getAllBoolean }))
+      if (role === 'ADMIN') {
+         dispatch(USERS_THUNK.getUserWishList({ id, getAllBoolean }))
+         dispatch(USERS_THUNK.getUserHolidays({ id, getAllBoolean }))
+         dispatch(USERS_THUNK.getUserCharity({ id, getAllBoolean }))
+      }
    }, [id])
 
    const handleDeleteUser = (id) => {

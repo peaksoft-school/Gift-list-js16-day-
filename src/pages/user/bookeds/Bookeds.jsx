@@ -33,7 +33,7 @@ const Bookeds = () => {
                </StyledNotBlockBox>
             ) : (
                wishList.map((wish) => (
-                  <BookedCard card={wish} key={wish.giftId} />
+                  <BookedCard wish={wish} key={wish.giftId} />
                ))
             )}
          </Box>
@@ -45,7 +45,7 @@ const Bookeds = () => {
             </NavLink>
          </Box>
 
-         <Box>
+         <Box className="holidays-content">
             {holidayGifts?.length === 0 ? (
                <StyledNotBlockBox>
                   <img src={NoMailings} alt="icon" />
@@ -53,7 +53,7 @@ const Bookeds = () => {
                </StyledNotBlockBox>
             ) : (
                holidayGifts.map((holiday) => (
-                  <BookedCard card={holiday} key={holiday.giftId} />
+                  <BookedCard wish={holiday} key={holiday.giftId} />
                ))
             )}
          </Box>
@@ -68,6 +68,13 @@ const StyledContainer = styled(Box)({
    display: 'flex',
    flexDirection: 'column',
    gap: '31px',
+
+   '& .holidays-content': {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '1rem',
+      alignItems: 'center',
+   },
 
    '& .MuiTypography-body1': {
       color: '#020202',

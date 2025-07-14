@@ -3,18 +3,35 @@ import { useEffect } from 'react'
 import { Box, styled, Typography } from '@mui/material'
 import { RIBBON_THUNK } from '../../../store/slices/ribbon/RibbonThunk'
 import RibbonCard from '../card/RibbonCard'
+import { useNavigate } from 'react-router'
 
 const Ribbon = () => {
    const dispatch = useDispatch()
+   const navigate = useNavigate()
 
    const { feed } = useSelector((state) => state.ribbon)
 
-   console.log(feed)
-
    useEffect(() => {
       dispatch(RIBBON_THUNK.getAllFeed())
-      // dispatch(RIBBON_THUNK.getFeedById(1))
    }, [dispatch])
+
+   const handleNavigate = (id) => {
+      dispatch(RIBBON_THUNK.getFeedById({ id, navigate }))
+   }
+
+   const handleReserve = (id) => {
+      dispatch(RIBBON_THUNK.addBook({ id }))
+   }
+
+   const handleAddToGifts = (wishId) => {
+      console.log(`Подарок с ID ${wishId} добавлен в мои подарки`)
+      dispatch(RIBBON_THUNK.addGift({ wishId }))
+   }
+
+   const handleReport = (wishId) => {
+      console.log(`Пожаловались на подарок с ID ${wishId}`)
+      // Пример: dispatch(REPORT_WISH(wishId))
+   }
 
    return (
       <StyledContainer>
@@ -22,7 +39,14 @@ const Ribbon = () => {
 
          <Box className="content">
             {feed.map((item) => (
-               <RibbonCard key={item.id} wish={item} />
+               <RibbonCard
+                  key={item.id}
+                  wish={item}
+                  onNavigate={() => handleNavigate(item.id)}
+                  handleReserve={handleReserve}
+                  handleAddToGifts={handleAddToGifts}
+                  handleReport={handleReport}
+               />
             ))}
          </Box>
       </StyledContainer>

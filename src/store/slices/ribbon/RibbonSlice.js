@@ -3,7 +3,7 @@ import { RIBBON_THUNK } from './RibbonThunk'
 
 const initialState = {
    feed: [],
-   feedById: null,
+   feedById: [],
    loading: false,
    error: null,
 }
@@ -42,6 +42,47 @@ const ribbonSlice = createSlice({
          .addCase(RIBBON_THUNK.getFeedById.rejected, (state, action) => {
             state.loading = false
             state.error = action.error.message
+         })
+
+         .addCase(
+            RIBBON_THUNK.getUserProfile.fulfilled,
+            (state, { payload }) => {
+               state.feedById = payload
+               state.loading = false
+            }
+         )
+
+         .addCase(RIBBON_THUNK.getUserProfile.pending, (state) => {
+            state.loading = true
+         })
+
+         .addCase(RIBBON_THUNK.getUserProfile.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+         })
+
+         .addCase(RIBBON_THUNK.addBook.fulfilled, (state) => {
+            state.loading = false
+         })
+
+         .addCase(RIBBON_THUNK.addBook.rejected, (state) => {
+            state.loading = false
+         })
+
+         .addCase(RIBBON_THUNK.addBook.pending, (state) => {
+            state.loading = false
+         })
+
+         .addCase(RIBBON_THUNK.addGift.fulfilled, (state) => {
+            state.loading = false
+         })
+
+         .addCase(RIBBON_THUNK.addGift.rejected, (state) => {
+            state.loading = false
+         })
+
+         .addCase(RIBBON_THUNK.addGift.pending, (state) => {
+            state.loading = false
          })
    },
 })

@@ -11,10 +11,10 @@ import { AUTH_ACTIONS } from '../store/slices/auth/authSlice'
 const Header = () => {
    const navigate = useNavigate()
    const dispatch = useDispatch()
+   const { role, fullName } = useSelector((state) => state.auth)
+
    const { pathname } = useLocation()
 
-   // Получаем данные авторизованного пользователя
-   const { role, user } = useSelector((state) => state.auth)
 
    const handleProfileOption = (option) => {
       if (option === 'Выход') {
@@ -47,8 +47,8 @@ const Header = () => {
 
                   <Typography className="user-name">
                      {role === 'ADMIN'
-                        ? 'Administrator'
-                        : user?.name || 'Пользователь'}
+                        ? 'Adminstrator'
+                        : fullName || 'Пользователь'}
                   </Typography>
 
                   <MeatBalls
