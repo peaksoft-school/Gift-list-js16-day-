@@ -66,7 +66,6 @@ const createCharity = createAsyncThunk(
    }
 )
 
-// 5. Редактировать вещь
 const updateCharity = createAsyncThunk(
    'userCharity/updateCharity',
    async (
@@ -86,7 +85,6 @@ const updateCharity = createAsyncThunk(
    }
 )
 
-// 6. Добавить в список желаемых подарков
 const addGiftToMyGifts = createAsyncThunk(
    'userCharity/addGiftToMyGifts',
    async (id, { rejectWithValue }) => {
@@ -101,7 +99,6 @@ const addGiftToMyGifts = createAsyncThunk(
    }
 )
 
-// 7. Получить список моих подарков
 const getMyCharityGifts = createAsyncThunk(
    'userCharity/getMyCharityGifts',
    async (_, { rejectWithValue }) => {

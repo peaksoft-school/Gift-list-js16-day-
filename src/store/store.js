@@ -1,4 +1,8 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import {
+   combineReducers,
+   combineSlices,
+   configureStore,
+} from '@reduxjs/toolkit'
 import persistReducer from 'redux-persist/es/persistReducer'
 import persistStore from 'redux-persist/es/persistStore'
 import storage from 'redux-persist/lib/storage'
@@ -12,7 +16,7 @@ import { charitySlice } from './slices/admin/charity/charitySlice'
 import { bookedsSlice } from './slices/user/bookeds/bookedsSlice'
 import { userCharitySlice } from './slices/user/charity/useCharitySlice'
 import { wishSlice } from './slices/user/wish/wishSlice'
-
+import { complaintsSlice } from './slices/admin/complaints/complaintsSlice'
 
 const rootReducer = combineReducers({
    [authSlice.name]: authSlice.reducer,
@@ -24,6 +28,8 @@ const rootReducer = combineReducers({
    [charitySlice.name]: charitySlice.reducer,
    [bookedsSlice.name]: bookedsSlice.reducer,
    [userCharitySlice.name]: userCharitySlice.reducer,
+   [wishSlice.name]: wishSlice.reducer,
+   [complaintsSlice.name]: complaintsSlice.reducer,
 })
 
 const persistConfig = {

@@ -5,7 +5,7 @@ const getAllFeed = createAsyncThunk(
    'ribbon/getAllFeed',
    async (_, { rejectWithValue }) => {
       try {
-         const { data } = await axiosInstance.get('/api/feed?page=0&size=10')
+         const { data } = await axiosInstance.get('/api/feed')
 
          return data
       } catch (error) {

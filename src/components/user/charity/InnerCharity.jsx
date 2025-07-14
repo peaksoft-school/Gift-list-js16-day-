@@ -1,14 +1,27 @@
 import { Box, styled, TextareaAutosize, Typography } from '@mui/material'
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import Button from '../../../../components/UI/Button'
-import BreadCrumbs from '../../../../components/UI/BreadCrumbs'
-import Input from '../../../../components/UI/Input'
-import Dropdown from '../../../../components/UI/DropDown'
-import { USER_CHARITY_THUNK } from '../../../../store/slices/user/charity/userCharityThunk'
-import { FILES_THUNK } from '../../../../store/slices/file/filesThunk'
+import { useDispatch } from 'react-redux'
+import Input from '../../UI/Input'
+import Dropdown from '../UI/DropDown'
 import { ImageIcon } from 'lucide-react'
 import { useNavigate } from 'react-router'
+import Button from '../../UI/Button'
+import BreadCrumbs from '../../UI/BreadCrumbs'
+import { FILES_THUNK } from '../../../store/slices/file/filesThunk'
+import { USER_CHARITY_THUNK } from '../../../store/slices/user/charity/userCharityThunk'
+
+const categoryOptions = [
+   { value: '1', label: 'Одежда' },
+   { value: '2', label: 'Игрушки' },
+]
+const conditionOptions = [
+   { value: 'NEW', label: 'Новое' },
+   { value: 'USED', label: 'Б/У' },
+]
+const subCategoryOptions = [
+   { value: '10', label: 'Футболки' },
+   { value: '20', label: 'Куклы' },
+]
 
 const CreateCharity = () => {
    const { fileUrl, isLoading } = useSelector((state) => state.files)
@@ -35,6 +48,9 @@ const CreateCharity = () => {
    const navigate = useNavigate()
 
    const [preview, setPreview] = useState(null)
+   // const [fileUrl, setFileUrl] = useState('')
+   // const [isLoading, setIsLoading] = useState(false)
+
    const [formData, setFormData] = useState({
       name: '',
       condition: '',
@@ -44,7 +60,7 @@ const CreateCharity = () => {
       file: null,
    })
 
-   const handleChange = (e) => {
+   const handleChange = async (e) => {
       const { name, value, files, type } = e.target
 
       if (type === 'file') {
@@ -55,12 +71,16 @@ const CreateCharity = () => {
          reader.onloadend = () => setPreview(reader.result)
          reader.readAsDataURL(file)
 
-         dispatch(FILES_THUNK.addFile({ file }))
+         setIsLoading(true)
+         const result = await dispatch(FILES_THUNK.addFile({ file }))
+         setIsLoading(false)
 
-         setFormData((prev) => ({
-            ...prev,
-            [name]: file,
-         }))
+         if (FILES_THUNK.addFile.fulfilled.match(result)) {
+            setFileUrl(result.payload)
+            setFormData((prev) => ({ ...prev, file }))
+         } else {
+            alert('Ошибка загрузки изображения')
+         }
       } else {
          setFormData((prev) => ({
             ...prev,
@@ -229,8 +249,6 @@ const CreateCharity = () => {
 }
 
 export default CreateCharity
-
-// Styled Components
 
 const BlockContainer = styled(Box)(() => ({
    padding: '0 20px',

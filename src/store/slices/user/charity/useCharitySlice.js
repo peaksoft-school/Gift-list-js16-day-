@@ -128,6 +128,6 @@ const userCharitySlice = createSlice({
    },
 })
 
-const CHARITY_ACTIONS = userCharitySlice.actions
+const CHARITY_ACTIONS = userCharitySlice.CHARITY_ACTIONS
 
 export { userCharitySlice, CHARITY_ACTIONS }

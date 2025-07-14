@@ -96,8 +96,6 @@ const StyledCard = styled(Box)(({ status }) => ({
    backgroundColor: 'white',
    maxWidth: '349px',
    width: '100%',
-   // maxHeight: '260px',
-   // height: '100%',
    padding: '16px',
    borderRadius: '8px',
    display: 'flex',
@@ -118,7 +116,7 @@ const StyledCard = styled(Box)(({ status }) => ({
 
    '& img': {
       width: '100%',
-      height: '147px',
+      height: '207px',
       borderRadius: '6px',
    },
 
