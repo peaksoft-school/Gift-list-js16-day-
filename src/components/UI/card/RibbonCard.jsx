@@ -1,8 +1,19 @@
 import { Box, styled, Tooltip, Typography } from '@mui/material'
 import MeatBalls from '../MeetBalls'
 import { USER_CARD_OPTIONS } from '../../../utils/helpers'
+import { useNavigate } from 'react-router'
+import { useDispatch, useSelector } from 'react-redux'
+import { RIBBON_THUNK } from '../../../store/slices/ribbon/RibbonThunk'
 
-const RibbonCard = ({ wish }) => {
+const RibbonCard = ({
+   wish,
+   onNavigate,
+   handleReserve,
+   handleAddToGifts,
+   handleReport,
+}) => {
+   const { role } = useSelector((state) => state.auth)
+
    const {
       fullName,
       profileImage,
@@ -13,10 +24,17 @@ const RibbonCard = ({ wish }) => {
       id,
       date,
       wishName,
+      giftName,
+      status,
    } = wish
 
+   console.log(id)
+
+   const navigate = useNavigate()
+   const dispatch = useDispatch()
+
    return (
-      <StyledCard key={id}>
+      <StyledCard key={id} onClick={onNavigate} status={status}>
          <Box className="titles">
             <Box sx={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                <img
@@ -27,16 +45,23 @@ const RibbonCard = ({ wish }) => {
                   }
                   alt="profile-image"
                   className="profile-image"
+                  onClick={(e) => {
+                     e.stopPropagation()
+
+                     dispatch(RIBBON_THUNK.getUserProfile({ id, navigate }))
+                  }}
                />
                <Typography className="title">{fullName}</Typography>
             </Box>
 
             <Tooltip title={holidayName}>
-               <Typography className="status-text">{holidayName}</Typography>
+               <Typography className="status-text">
+                  {holidayName || status}
+               </Typography>
             </Tooltip>
          </Box>
 
-         <Typography className="wish-name">{wishName}</Typography>
+         <Typography className="wish-name">{wishName || giftName}</Typography>
 
          <img src={image} alt={fullName} />
 
@@ -49,7 +74,15 @@ const RibbonCard = ({ wish }) => {
                <Box className="status-content">
                   <Typography className="grey-text">{massage}</Typography>
 
-                  <MeatBalls options={USER_CARD_OPTIONS} />
+                  <MeatBalls
+                     options={USER_CARD_OPTIONS}
+                     onChange={(title) => {
+                        if (title === 'Забронировать') handleReserve(id)
+                        if (title === 'Добавить в мои подарки')
+                           handleAddToGifts(id)
+                        if (title === 'Пожаловаться') handleReport(id)
+                     }}
+                  />
                </Box>
             </Box>
          </Box>
@@ -59,7 +92,7 @@ const RibbonCard = ({ wish }) => {
 
 export default RibbonCard
 
-const StyledCard = styled(Box)(() => ({
+const StyledCard = styled(Box)(({ status }) => ({
    backgroundColor: 'white',
    maxWidth: '349px',
    width: '100%',
@@ -115,8 +148,7 @@ const StyledCard = styled(Box)(() => ({
    },
 
    '& .status-text': {
-      color: status === 'new' ? 'green' : 'orange',
-      color: 'green',
+      color: status === 'USED' ? 'orange' : 'green',
       textAlign: 'end',
       fontSize: '13px',
 

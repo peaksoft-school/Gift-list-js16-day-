@@ -3,7 +3,8 @@ import { axiosInstance } from '../../../../configs/axiosInstance'
 
 // 1. Получение всех вещей
 const getAllUserCharity = createAsyncThunk(
-   'charity/getAllUserCharity',
+   'userCharity/getAllUserCharity',
+
    async (_, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(`/api/charity`)
@@ -16,7 +17,8 @@ const getAllUserCharity = createAsyncThunk(
 
 // 2. Получить вещь по ID
 const getById = createAsyncThunk(
-   'charity/getById',
+   'userCharity/getById',
+
    async ({ id, navigate }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(`/api/charity/${id}`)
@@ -30,7 +32,8 @@ const getById = createAsyncThunk(
 
 // 3. Удалить вещь
 const deleteCharity = createAsyncThunk(
-   'charity/deleteCharity',
+   'userCharity/delete-charity',
+
    async ({ id, navigate }, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.delete(`/api/charity/${id}`)
@@ -44,7 +47,8 @@ const deleteCharity = createAsyncThunk(
 
 // 4. Добавить новую вещь
 const createCharity = createAsyncThunk(
-   'charity/createCharity',
+   'userCharity/create-charity',
+
    async (
       { values, categoryById, subcategoryId, status, navigate },
       { rejectWithValue }
@@ -63,7 +67,7 @@ const createCharity = createAsyncThunk(
 )
 
 const updateCharity = createAsyncThunk(
-   'charity/updateCharity',
+   'userCharity/updateCharity',
    async (
       { id, values, categoryById, subcategoryId, status, navigate },
       { rejectWithValue }
@@ -82,7 +86,7 @@ const updateCharity = createAsyncThunk(
 )
 
 const addGiftToMyGifts = createAsyncThunk(
-   'charity/addGiftToMyGifts',
+   'userCharity/addGiftToMyGifts',
    async (id, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.post(
@@ -96,7 +100,7 @@ const addGiftToMyGifts = createAsyncThunk(
 )
 
 const getMyCharityGifts = createAsyncThunk(
-   'charity/getMyCharityGifts',
+   'userCharity/getMyCharityGifts',
    async (_, { rejectWithValue }) => {
       try {
          const { data } = await axiosInstance.get(`/api/charity/gifts`)

@@ -2,7 +2,7 @@ import { Box, styled, TextareaAutosize, Typography } from '@mui/material'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import Input from '../../UI/Input'
-import Dropdown from '../../UI/DropDown'
+import Dropdown from '../UI/DropDown'
 import { ImageIcon } from 'lucide-react'
 import { useNavigate } from 'react-router'
 import Button from '../../UI/Button'
@@ -24,12 +24,32 @@ const subCategoryOptions = [
 ]
 
 const CreateCharity = () => {
+   const { fileUrl, isLoading } = useSelector((state) => state.files)
+   // const InnerCharity = () => {
+   const { selectedUserCharity } = useSelector((state) => state.userCharity)
+
+   const {
+      ownerProfilePhoto,
+      bookedByProfilePhoto,
+      ownerFullName,
+      ownerPhone,
+      statusMessage,
+      giftName,
+      description,
+      category,
+      subCategory,
+      condition,
+      createdAt,
+   } = selectedUserCharity
+
+   const { id } = useParams()
+
    const dispatch = useDispatch()
    const navigate = useNavigate()
 
    const [preview, setPreview] = useState(null)
-   const [fileUrl, setFileUrl] = useState('')
-   const [isLoading, setIsLoading] = useState(false)
+   // const [fileUrl, setFileUrl] = useState('')
+   // const [isLoading, setIsLoading] = useState(false)
 
    const [formData, setFormData] = useState({
       name: '',
@@ -109,6 +129,7 @@ const CreateCharity = () => {
    return (
       <BlockContainer>
          <BreadCrumbs links={links} />
+
          <FormContainer>
             <Box>
                <label htmlFor="upload-file">
@@ -140,7 +161,21 @@ const CreateCharity = () => {
                   onChange={handleChange}
                />
             </Box>
-
+            {selectedUserCharity?.statusMessage && (
+               <StyledContainer1>
+                  <StyledBlockMain>
+                     <img
+                        src={
+                           ownerProfilePhoto === null
+                              ? 'https://as1.ftcdn.net/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg'
+                              : ownerProfilePhoto
+                        }
+                        alt="photo"
+                        className="image"
+                     />
+                  </StyledBlockMain>
+               </StyledContainer1>
+            )}
             <Box className="content">
                <Typography variant="h6">Добавление вещи</Typography>
 

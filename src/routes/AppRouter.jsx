@@ -3,16 +3,16 @@ import { Navigate, Route, Routes } from 'react-router'
 import { ROLES } from './routes'
 import PrivateRoute from './PrivateRoute'
 import Loading from '../components/Loading'
-import WishList from '../components/wish/WishList'
 const Complaints = lazy(() => import('../pages/admin/complaints/Complaints'))
 
+const InnerRibbon = lazy(
+   () => import('../components/user/ribbon/InnerRibbon.jsx')
+)
 const WishListDisplay = lazy(
    () => import('../pages/user/wish-list/WishListDisplay')
 )
 
-const WishList = lazy(
-   () => import('../components/wish/WishList')
-)
+const WishList = lazy(() => import('../components/wish/WishList'))
 const CreateCharity = lazy(
    () => import('../pages/user/charity/create-charity/CreateCharity')
 )
@@ -203,6 +203,24 @@ const AppRouter = () => (
          />
 
          <Route path="profile" element={<Profile />} />
+         <Route
+            path="ribbon/:id"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <InnerRibbon />
+               </Suspense>
+            }
+         />
+
+         <Route
+            path="/user/user-profile/:id"
+            element={
+               <Suspense fallback={<Loading />}>
+                  <InnerUser />
+               </Suspense>
+            }
+         />
+
          <Route
             path="friends"
             element={

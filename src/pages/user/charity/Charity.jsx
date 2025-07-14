@@ -8,7 +8,9 @@ import CharityCard from '../../../components/UI/card/CharityCard'
 import { USER_CHARITY_THUNK } from '../../../store/slices/user/charity/userCharityThunk'
 
 const Charity = () => {
-   const { charity } = useSelector((state) => state.charity)
+   const { charity } = useSelector((state) => state.userCharity)
+
+   console.log(charity)
 
    const dispatch = useDispatch()
    const navigate = useNavigate()
